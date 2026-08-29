@@ -43,6 +43,9 @@ infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commit
   conflictos ahí; checklist previa `npm run lint` · `npm run build` · `npm run test`
   (una vez que existan esos scripts).
 - Push/merge SOLO con aprobación explícita del usuario.
+- Al cerrar cada fase: commits atómicos + tag anotado con versión semver y nombre
+  acorde a la fase, y push siempre previa pregunta (regla dura:
+  `.opencode/rules/versionado-fases.md`).
 
 ## Arquitectura frontend (contrato: `.opencode/skills/fe-architect-scaffold/SKILL.md`)
 
