@@ -4,6 +4,11 @@
 Documento unificado: stack del frontend (según skill `fe-architect-scaffold`) + infraestructura
 del Plan B (VPS independiente del Moodle).
 
+> **Estado (cierre Fase 5, 30/08/2026):** las Fases 1-4 están implementadas y mergeadas a
+> `develop` (tags `v1.0.0`…`v1.3.0`). Este documento refleja el estado real del código: stack,
+> estructura de carpetas y componentes efectivamente creados, además de la propuesta de
+> infraestructura del Plan B (pendiente de decisión de Dirección/Infra).
+
 Fuentes de verdad:
 - `docs/driveFrontend/Plan_B_Infraestructura_VPS_IFTS12_2026.docx` (relevamiento 28/08/2026).
 - Skill `fe-architect-scaffold` (`.opencode/skills/fe-architect-scaffold/SKILL.md`).
@@ -26,7 +31,7 @@ Fuentes de verdad:
 
 La decisión se coordina con Backend e Infraestructura para no complicar el despliegue.
 
-## 2. Estructura de carpetas
+## 2. Estructura de carpetas (implementada)
 
 ```
 src/
@@ -35,39 +40,44 @@ src/
 │   ├── endpoints.ts        # Constantes de URLs del backend (sin endpoints inventados)
 │   └── services/           # Servicios por dominio (a crear cuando haya contratos)
 ├── components/
-│   ├── ui/                 # Button, CardCarrera, CardNoticia, FaqAcordeón, AccesosRapidos
-│   └── layout/             # Header, Nav, Footer, portada
-├── pages/                  # Home, Carreras, Ingresantes, Estudiantes, Docentes,
-│                           # Tutorías, Institucional, Noticias, FAQ, Contacto
-├── hooks/                  # Lógica reutilizable (delegación de datos/API)
-├── contexts/               # AuthContext (vacío), ThemeContext
+│   ├── ui/                 # Button, CardCarrera, CardNoticia, FaqAcordeon, AccesosRapidos,
+│   │                       # SliderNoticias, Comunidades
+│   └── layout/             # Header, NavMenu, Footer, Portada
+├── pages/                  # Home, Carreras, Ingresantes, Estudiantes, Docentes, Tutorías,
+│                           # Institucional, Noticias, FAQ, Contacto, PaginaPlaceholder, 404
+├── hooks/                  # Lógica reutilizable (vacío; se completa con los contratos)
+├── contexts/               # AuthContext (vacío/preparado), ThemeContext
 ├── routes/                 # AppRouter.tsx, ProtectedRoute.tsx (preparado)
 ├── types/
-│   ├── api/                # Espejo de los esquemas del backend (vacío hasta contratos)
-│   └── domain/
-├── utils/                  # Helpers sin lógica de negocio
-├── constants/              # mock-data.ts, enlaces (Moodle/inscripción con placeholders)
-├── styles/                 # Tema Tailwind, variables
+│   ├── api/                # error.types.ts (espejo del backend; resto vacío hasta contratos)
+│   └── domain/             # sitio.types.ts (Carrera, Noticia, FaqItem, AccesoRapido, Comunidad)
+├── utils/                  # cn.ts (helper de clases condicionales)
+├── constants/              # navegacion.ts, mock-data.ts, enlaces.ts (placeholders)
+├── styles/                 # index.css (tokens @theme, regla 90/10)
+├── __tests__/              # Suites de Vitest + React Testing Library
 └── App.tsx
 ```
 
-## 3. Componentes reutilizables previstos
+## 3. Componentes reutilizables (implementados)
 
 ### Layout (`components/layout/`)
-- `Header` + `Nav` — encabezado y menú (máx. 4-5 items, logo enlazado a Home).
-- `Footer` — pie institucional.
-- Portada/hero — bloque visual inicial (referencia 1680×900).
+- `Header` + `NavMenu` — encabezado y menú (máx. 5 items, logo enlazado a Home, menú fijo y
+  hamburguesa mobile).
+- `Footer` — pie institucional con secciones, enlaces y bloque de conexiones (campus/inscripción).
+- `Portada` — bloque visual inicial parametrizable (titular, subtítulo, acciones).
 
 ### UI (`components/ui/`)
-- `Button` — variantes tipadas.
+- `Button` — variantes tipadas y soporte de enlaces internos/externos.
 - `CardCarrera` — tarjeta de carrera.
-- `CardNoticia` — tarjeta de novedad (para el slider).
-- `FaqAcordeón` — preguntas frecuentes.
-- `AccesosRapidos` — accesos directos en Home (campus virtual, tutorías, becas, constancias,
-  mesas de examen, calendario).
+- `CardNoticia` — tarjeta de novedad.
+- `SliderNoticias` — carrusel accesible de novedades (indicador de posición, anterior/siguiente,
+  ARIA; sin librerías externas).
+- `FaqAcordeon` — preguntas frecuentes accesibles (un ítem abierto a la vez).
+- `AccesosRapidos` — accesos directos en Home, con ítems pendientes deshabilitados.
+- `Comunidades` — grilla de cards enlazadas (tutoría, alumnos, docentes).
 
 Todos son **presentacionales**: solo reciben props tipadas, no hacen llamadas HTTP ni manejan
-estado global.
+estado global. La única excepción es el estado local de UI (menú móvil, acordeón y slider).
 
 ## 4. Reglas de implementación (anti-alucinación)
 
@@ -79,13 +89,15 @@ estado global.
   (`AuthContext`, `ProtectedRoute`) preparada.
 - La Home se arma con datos simulados y sin afirmaciones institucionales definitivas.
 
-## 5. Scripts
+## 5. Scripts (implementados)
 
-- `npm run lint` — Biome.
-- `npm run build` — compilación de producción (build estático para el VPS).
+- `npm run dev` — servidor de desarrollo (Vite).
+- `npm run build` — TypeScript + build estático de producción (para servir desde Nginx).
+- `npm run lint` — Biome (check sobre `src`).
+- `npm run lint:fix` — Biome con auto-formateo.
 - `npm run test` — Vitest + React Testing Library.
 
-No existen todavía; se agregan al andamiar el proyecto.
+Checklist previa a mergear: `npm run lint` · `npm run build` · `npm run test` (en verde).
 
 ## 6. Infraestructura del Plan B (VPS)
 
@@ -195,8 +207,11 @@ DigitalOcean, Akamai/Linode y Hetzner como referencia técnico-económica.
 - Definir presupuesto anual (dominio + VPS + renovación).
 - Confirmar región/datacenter y posible latencia.
 
-## 8. Responsive y accesibilidad
+## 8. Responsive y accesibilidad (estado)
 
-- Estrategia mobile-first con breakpoints móvil/tablet/desktop.
-- Revisión de ARIA, navegación por teclado y textos alternativos.
-- Coordinación con UX/UI para wireframes y criterios visuales (regla 90/10 de color).
+- Estrategia mobile-first con breakpoints móvil/tablet/desktop (grids `sm:`/`lg:` en la Home y en
+  los componentes de grilla).
+- ARIA, navegación por teclado (foco visible en botones y enlaces), `alt`/textos alternativos y
+  `aria-live` en el slider de novedades.
+- Menú con hamburguesa mobile y enlaces accesibles por teclado.
+- Coordinación con UX/UI para wireframes y criterios visuales definitivos (regla 90/10 de color).

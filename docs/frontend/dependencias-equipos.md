@@ -94,7 +94,7 @@ Del informe del Plan B (sección 17), para transmitir a los proveedores:
 | URLs definitivas del sitio (dominio .com.ar) | Dependen de la aprobación de Dirección y del registro en NIC Argentina. | Bloqueado (Dirección) |
 | URLs oficiales de Moodle e inscripción | Placeholders hasta recibir las oficiales. | Pendiente de IFTS |
 | Integración con la API del backend | Depende de los contratos de Backend; no se consume API real aún. | Bloqueado (Backend) |
-| Stack definitivo | React 19 + Vite + TS strict + Tailwind v4 propuesto y alineado con el skill; a validar el lunes 31/08. | A validar |
+| Stack definitivo | React 19 + Vite + TS strict + Tailwind v4 propuesto y alineado con el skill; fases 1-4 implementadas con él. A validar en la reunión del lunes 31/08. | A validar |
 
 ## 9. Riesgos y mitigaciones (transversal)
 
@@ -108,13 +108,19 @@ Del informe del Plan B (sección 17), para transmitir a los proveedores:
 | Falla de despliegue | Una versión puede afectar producción. | Testing previo y proceso de promoción controlado. |
 | Latencia internacional | Proveedores europeos responden más lento desde Argentina. | Medir latencia y priorizar región cercana si es requisito. |
 
-## 10. Qué puede avanzar hoy sin bloquearse
+## 10. Qué se avanzó al cierre de la Fase 5 (30/08/2026)
 
-- Estructura del proyecto y propuesta tecnológica documentada.
-- Home con datos simulados (mocks marcados como provisorios).
-- Componentes reutilizables presentacionales.
-- Rutas de las secciones ya identificadas.
-- Accesos visibles a Moodle e inscripción con placeholders.
+- Estructura del proyecto y propuesta tecnológica documentada (válida y alineada con el skill).
+- **Home navegable con datos simulados** (mocks marcados como provisorios en `mock-data.ts`).
+- Componentes reutilizables presentacionales (incluye `SliderNoticias` y `Comunidades`),
+  con accesibilidad y responsive implementado.
+- Rutas de las secciones ya identificadas y navegables (`AppRouter`).
+- Accesos a Moodle e inscripción con placeholders; enlaces externos visibles solo con URL.
 - Documentación del contexto del Plan B (consolidada en `docs/frontend/`).
 - Listado de preguntas para proveedores y para Dirección.
-- Accesibilidad y responsive.
+- Checklist `lint` · `build` · `test` en verde (7 suites, 11 pruebas).
+- Roles de equipo registrados en `rol_equipo.md`.
+
+**Pendiente que no se resuelve unilateralmente:** validación del stack/paleta con UX/UI y el
+equipo (reunión del lunes), contratos de API con Backend, VPS con Infra/Dirección y URLs
+oficiales de Moodle/inscripción con IFTS.
