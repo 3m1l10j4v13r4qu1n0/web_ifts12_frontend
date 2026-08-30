@@ -43,6 +43,9 @@ infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commit
   conflictos ahí; checklist previa `npm run lint` · `npm run build` · `npm run test`
   (una vez que existan esos scripts).
 - Push/merge SOLO con aprobación explícita del usuario.
+- Al cerrar cada fase: commits atómicos + tag anotado con versión semver y nombre
+  acorde a la fase, y push siempre previa pregunta (regla dura:
+  `.opencode/rules/versionado-fases.md`).
 
 ## Arquitectura frontend (contrato: `.opencode/skills/fe-architect-scaffold/SKILL.md`)
 
@@ -64,3 +67,13 @@ infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commit
   definen los criterios visuales del sitio (regla 90/10 de color, máx. 4-5 items
   de menú, logo enlazado a home, portada 1680×900, etc.). Se activan a pedido
   del usuario (en su mayoría están `disable-model-invocation`).
+
+
+## Memoria del proyecto (docs/estado_actual_proyecto.md y docs/vitacora_agentica.md)
+
+- Antes de tocar código, leer `docs/estado_actual_proyecto.md` completo para tener el contexto actual del proyecto.
+- Al terminar una implementación, eliminación o edición relevante (nueva entidad, caso de uso, endpoint, refactor de arquitectura, dependencia core):
+  1. Actualizar la sección correspondiente de `docs/estado_actual_proyecto.md` (editar in-place, no reescribir todo el archivo).
+  2. Agregar una entrada nueva al final de `docs/vitacora_agentica.md` con: fecha, qué se hizo, decisiones tomadas, archivos tocados, estado resultante. Nunca editar entradas previas de la vitácora.
+- No generar entradas de vitácora por cambios triviales (typos, formateo, renames cosméticos).
+- Si el código real contradice lo que dice `estado_actual_proyecto.md`, avisar antes de asumir cuál es la fuente de verdad.
