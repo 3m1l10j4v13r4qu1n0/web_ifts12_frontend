@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+/* Tokens de diseno provisionales: un unico color de acento + neutros (regla 90/10).
+   La paleta oficial se valida con el equipo de UX/UI; reemplazar este bloque. */
+@theme {
+  --color-acento-50: #eff6ff;
+  --color-acento-100: #dbeafe;
+  --color-acento-200: #bfdbfe;
+  --color-acento-500: #3b82f6;
+  --color-acento-600: #2563eb;
+  --color-acento-700: #1d4ed8;
+  --color-acento-800: #1e40af;
+}
