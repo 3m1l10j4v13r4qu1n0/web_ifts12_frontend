@@ -80,3 +80,44 @@ afirmaciones institucionales definitivas. El acceso "campus virtual" toma `ENLAC
 **Estado resultante:** `develop` contiene la Fase 1; `feature/fase-2-base` tiene la Fase 2 con
 `lint`·`build`·`test` en verde; tag `v1.1.0` creado sin pushear. Falta pushear merge de develop,
 rama y tag (requiere aprobación). Próximo paso: Fase 3 (componentes reutilizables).
+
+---
+
+## 2026-08-30 — Fase 3 (Componentes reutilizables)
+
+**Qué se hizo:** se mergeó la Fase 2 a `develop` (merge commit `dc968a7`) y desde ahí se creó
+`feature/fase-3-componentes`. Se completó la Fase 3: componentes `ui/` (Button con variantes y
+soporte de enlaces internos/externos, CardCarrera, CardNoticia, FaqAcordeon accesible con un ítem
+abierto a la vez, AccesosRapidos con ítems pendientes deshabilitados), componentes `layout/`
+(NavMenu, Header con logo a la home, menú sticky y hamburguesa mobile, Footer, Portada genérica)
+integrados al layout base de la app (App.tsx). Se agregaron tokens de color de acento en
+`styles/index.css` vía `@theme` (regla 90/10, paleta provisional UX/UI), el helper `cn` en
+`utils/`, constantes de navegación (`constants/navegacion.ts`: menú principal de 5 ítems sin
+"Inicio", footer), pruebas unitarias de Button, FaqAcordeon, AccesosRapidos y Header, y se habilitó
+`tailwindDirectives: true` en Biome para parsear `@theme`. Se taggeó **v1.2.0** ("Fase 3 -
+Componentes reutilizables").
+
+**Decisiones de arquitectura:** componentes presentacionales que solo reciben props tipadas, sin
+HTTP ni estado global; el único estado local está en Header (menú móvil) y FaqAcordeon (ítem
+abierto). El menú principal apunta a Carreras, Ingresantes, Estudiantes, Docentes y Noticias;
+Institucional, Tutorías, FAQ y Contacto quedan en el footer (máximo 5 ítems por regla de
+navegación). El logo del instituto enlaza a la home (sin ítem "Inicio"). Paleta de acento azul
+provisional hasta validar con UX/UI; no se inventaron URLs ni contenido institucional. El panel del
+acordeón se renderiza condicionalmente (jsdom no respeta el atributo `hidden` en `<section>`).
+Footer y botones externos usan `ENLACES` blank cuando estén disponibles.
+
+**Archivos/módulos tocados:**
+- `src/components/ui/{Button,CardCarrera,CardNoticia,FaqAcordeon,AccesosRapidos}.tsx` (se remueve `.gitkeep`).
+- `src/components/layout/{NavMenu,Header,Footer,Portada}.tsx` (se remueve `.gitkeep`).
+- `src/App.tsx` — Header + Footer en el layout base.
+- `src/constants/navegacion.ts`, `src/utils/cn.ts` — nav y helper de clases.
+- `src/styles/index.css` — tokens `@theme` de acento (90/10).
+- `biome.json` — `tailwindDirectives: true`.
+- `src/__tests__/{button,faq-acordeon,accesos-rapidos,header}.test.tsx` — 4 suites nuevas.
+- Git: merge `dc968a7` de la Fase 2 a `develop`; rama `feature/fase-3-componentes` con 16 commits
+  atómicos; tag anotado `v1.2.0`.
+
+**Estado resultante:** `develop` contiene Fases 1 y 2; `feature/fase-3-componentes` tiene la Fase 3
+con `lint`·`build`·`test` en verde (5 archivos de test, 7 pruebas). Push del merge de develop, de
+la rama y del tag `v1.2.0` pendiente de aprobación. Próximo paso: Fase 4 (Home navegable con
+mocks).

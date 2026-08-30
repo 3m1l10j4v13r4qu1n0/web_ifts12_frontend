@@ -11,8 +11,11 @@ strict + Tailwind CSS v4**, alineado al contrato `fe-architect-scaffold`. Se com
 **Fase 1 (Andamiaje)**: estructura base del proyecto, scripts `lint`/`build`/`test` en verde,
 tag **v1.0.0**, mergeada a `develop`. Se completó la **Fase 2 (Base)**: `api/client.ts` con
 interceptor, AuthContext/ProtectedRoute preparados, `constants/mock-data.ts` con mocks
-provisionales y placeholders de Moodle/inscripción, tag **v1.1.0**. La Home aún usa
-placeholders; no hay consumo de API real.
+provisionales y placeholders de Moodle/inscripción, tag **v1.1.0**. Se completó la
+**Fase 3 (Componentes reutilizables)**: `components/ui/` (Button, CardCarrera, CardNoticia,
+FaqAcordeon, AccesosRapidos), `components/layout/` (Header+Nav, Footer, Portada) integrados en el
+layout base, tokens de color 90/10 y helper `cn`, tag **v1.2.0**. La Home aún usa placeholders;
+no hay consumo de API real.
 
 ## 2. Arquitectura
 
@@ -41,6 +44,8 @@ No hay más entidades: tipos de dominio pendientes de contratos del backend.
 - [x] AuthContext y ProtectedRoute **preparados** (sin login real; el backend no lo soporta).
 - [x] `constants/mock-data.ts` — mocks provisionales tipados (carreras, noticias, FAQ,
   accesos rápidos, comunidades) marcados para validar con Análisis.
+- [x] Componentes reutilizables presentacionales: Header+Nav, Footer, Portada, CardCarrera,
+  CardNoticia, FaqAcordeon, AccesosRapidos, Button (con tests).
 - [ ] Carreras, noticias, FAQ, etc. con contenido real — bloqueado por contratos de Análisis/Backend.
 
 ## 5. Endpoints / Interfaces expuestas
@@ -61,8 +66,8 @@ No hay más entidades: tipos de dominio pendientes de contratos del backend.
 
 - **Fase 2** — Base **completada** en `feature/fase-2-base` (types de dominio + mocks);
   falta crear rama y trabajar la Fase 3.
-- **Fase 3** — Componentes reutilizables: Header + Nav, Footer, portada, CardCarrera,
-  CardNoticia, FaqAcordeon, AccesosRapidos, Button.
+- **Fase 3** — Componentes reutilizables **completada** en `feature/fase-3-componentes`; falta
+  crear rama y trabajar la Fase 4.
 - **Fase 4** — Home navegable con mocks, accesibilidad y responsive.
 - **Fase 5** — Cierre: documentación, checklist en verde, decisión de merge a `develop`.
 - Dependencias bloqueadas: minuta V2 de Análisis, wireframes UX/UI, contratos de API Backend,
