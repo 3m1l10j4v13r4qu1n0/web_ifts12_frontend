@@ -1,6 +1,6 @@
 # Estado Actual del Proyecto
 
-> Última actualización: 2026-08-29
+> Última actualización: 2026-08-30
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `vitacora_agentica.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.
 
@@ -9,7 +9,10 @@
 Sitio web institucional del IFTS N.º 12 (2026). Frontend en **React 19 + Vite + TypeScript
 strict + Tailwind CSS v4**, alineado al contrato `fe-architect-scaffold`. Se completó la
 **Fase 1 (Andamiaje)**: estructura base del proyecto, scripts `lint`/`build`/`test` en verde,
-tag **v1.0.0**. La Home aún usa placeholders; no hay consumo de API real.
+tag **v1.0.0**, mergeada a `develop`. Se completó la **Fase 2 (Base)**: `api/client.ts` con
+interceptor, AuthContext/ProtectedRoute preparados, `constants/mock-data.ts` con mocks
+provisionales y placeholders de Moodle/inscripción, tag **v1.1.0**. La Home aún usa
+placeholders; no hay consumo de API real.
 
 ## 2. Arquitectura
 
@@ -36,6 +39,8 @@ No hay más entidades: tipos de dominio pendientes de contratos del backend.
 
 - [x] Navegación entre secciones placeholder (AppRouter).
 - [x] AuthContext y ProtectedRoute **preparados** (sin login real; el backend no lo soporta).
+- [x] `constants/mock-data.ts` — mocks provisionales tipados (carreras, noticias, FAQ,
+  accesos rápidos, comunidades) marcados para validar con Análisis.
 - [ ] Carreras, noticias, FAQ, etc. con contenido real — bloqueado por contratos de Análisis/Backend.
 
 ## 5. Endpoints / Interfaces expuestas
@@ -54,8 +59,8 @@ No hay más entidades: tipos de dominio pendientes de contratos del backend.
 
 ## 7. Pendientes / TODO conocidos
 
-- **Fase 2** — Base: `api/client.ts` interceptor a full, AuthContext/ProtectedRoute integrados,
-  `constants/mock-data.ts` (mocks provisorios), placeholders Moodle/inscripción.
+- **Fase 2** — Base **completada** en `feature/fase-2-base` (types de dominio + mocks);
+  falta crear rama y trabajar la Fase 3.
 - **Fase 3** — Componentes reutilizables: Header + Nav, Footer, portada, CardCarrera,
   CardNoticia, FaqAcordeon, AccesosRapidos, Button.
 - **Fase 4** — Home navegable con mocks, accesibilidad y responsive.
