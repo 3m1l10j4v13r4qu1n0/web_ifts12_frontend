@@ -46,3 +46,37 @@ menor (v1.0.0 → Fase 1, v1.1.0 → Fase 2…), major solo por decisión del eq
 pushiada (último commit `2ab4c12`), `lint`·`build`·`test` en verde. Sin cambios pendientes en el
 working tree. Próximos pasos: Fase 2 (base/mocks), Fase 3 (componentes reutilizables), Fase 4
 (Home navegable). Recordar: reiniciar opencode para que cargue la nueva regla.
+
+---
+
+## 2026-08-30 — Merge de la Fase 1 (Andamiaje) a develop y Fase 2 (Base)
+
+**Qué se hizo:** se integró `origin/develop` en `feature/tarea-inicial-frontend` (sin conflictos:
+develop era ancestro), checklist en verde (`lint`·`build`·`test`) y se mergeó la Fase 1 a
+`develop` con merge commit. Desde `develop` se creó `feature/fase-2-base`. Se completó la Fase 2
+(Base): se crearon los tipos de dominio del sitio (`types/domain/sitio.types.ts`: Carrera,
+Noticia, FaqItem, AccesoRapido, Comunidad, FaqCategoria) y `constants/mock-data.ts` con mocks
+provisionales (carreras, noticias, FAQ, accesos rápidos, comunidades) marcados para validar con
+Análisis. Se taggeó **v1.1.0** ("Fase 2 - Base"). Los demás entregables de la Fase 2 (AppRouter,
+`api/client.ts` con interceptor, AuthContext/ProtectedRoute, placeholders Moodle/inscripción) ya
+venían implementados desde la Fase 1.
+
+**Decisiones de arquitectura:** los mocks solo usan contenido verificado en la minuta de
+relevamiento del 27/08/2026 (carreras nombradas: gestión parlamentaria, administración y gestión
+de políticas culturales, administración pública; accesos rápidos de la minuta; comunidades de
+tutoría/alumnos/docentes). Descripciones y respuestas quedan como "pendiente de validación" sin
+afirmaciones institucionales definitivas. El acceso "campus virtual" toma `ENLACES.moodle`
+(placeholder vacío) y "becas" queda sin ruta hasta definir su página en UX/UI. Tipos de dominio en
+`types/domain/` (no en `types/api/`) porque son datos de UI provisionales, no esquemas del backend.
+
+**Archivos/módulos tocados:**
+- `src/types/domain/sitio.types.ts` — nuevos tipos de dominio del sitio (se reemplaza el `.gitkeep`).
+- `src/constants/mock-data.ts` — mocks provisionales tipados para la Home.
+- `docs/estado_actual_proyecto.md` — Fase 2 completada, pendientes actualizados.
+- `docs/vitacora_agentica.md` — esta entrada.
+- Git: merge `f4726cf` de la Fase 1 a `develop`; rama `feature/fase-2-base` (commits `f98fed2`,
+  `e275b5a`); tag anotado `v1.1.0`.
+
+**Estado resultante:** `develop` contiene la Fase 1; `feature/fase-2-base` tiene la Fase 2 con
+`lint`·`build`·`test` en verde; tag `v1.1.0` creado sin pushear. Falta pushear merge de develop,
+rama y tag (requiere aprobación). Próximo paso: Fase 3 (componentes reutilizables).
