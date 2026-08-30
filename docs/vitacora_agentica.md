@@ -121,3 +121,36 @@ Footer y botones externos usan `ENLACES` blank cuando estén disponibles.
 con `lint`·`build`·`test` en verde (5 archivos de test, 7 pruebas). Push del merge de develop, de
 la rama y del tag `v1.2.0` pendiente de aprobación. Próximo paso: Fase 4 (Home navegable con
 mocks).
+---
+
+## 2026-08-30 — Fase 4 (Home navegable)
+
+**Qué se hizo:** desde `develop` se creó `feature/fase-4-home` y se completó la Fase 4: Home
+navegable con mocks provisorios (sin consumo de API real). Se agregaron dos componentes `ui/`
+nuevos: `SliderNoticias` (carrusel accesible con indicador de posición y botones anterior/
+siguiente, `aria-live`/`aria-roledescription="carrusel"`, sin librerías extra) y `Comunidades`
+(grilla de cards enlazadas a tutoria/estudiantes/docentes). Se reemplazó el placeholder de
+`HomePage` por secciones completas: portada (reutilizando `Portada`), CTA de campus virtual e
+inscripción, accesos rápidos, carreras, novedades (slider), comunidades y FAQ. Los CTA de Moodle
+e inscripción se renderizan **solo cuando existe URL oficial** (`ENLACES` placeholder vacío por
+ahora), consistente con el comportamiento del Footer. Se agregaron tests de `SliderNoticias` y
+`Comunidades`. `lint` · `build` · `test` en verde (7 archivos de test, 11 pruebas). Tag anotado
+**v1.3.0**.
+
+**Decisiones de arquitectura:** el slider se resuelve con estado local (`useState`) y navegación
+circular, sin librerías (YAGNI, por falta de wireframes de UX/UI). Dado que las URLs oficiales de
+Moodle/inscripción aún son placeholders vacíos, la Home oculta esos bloques hasta recibir las
+URLs, evitando enlaces rotos. Los componentes nuevos son presentacionales (solo props tipadas) y
+los textos de la Home siguen siendo provisorios, sin afirmaciones institucionales definitivas.
+
+**Archivos/módulos tocados:**
+- `src/components/ui/SliderNoticias.tsx` (+ test) — carrusel accesible de novedades.
+- `src/components/ui/Comunidades.tsx` (+ test) — grilla de comunidades enlazadas.
+- `src/pages/HomePage.tsx` — reemplaza el placeholder por la Home navegable completa.
+- Docs: `estado_actual_proyecto.md` (Fase 4 marcada completada).
+- Git: rama `feature/fase-4-home` con 3 commits atómicos; tag anotado `v1.3.0`.
+
+**Estado resultante:** `feature/fase-4-home` contiene la Fase 4 con `lint`·`build`·`test` en
+verde. Push de la rama, del merge a `develop` y del tag `v1.3.0` pendiente de aprobación. Próximo
+paso: Fase 5 (cierre y documentación). Dependencias bloqueadas siguen: minuta V2 de Análisis,
+wireframes UX/UI, contratos de API Backend, URLs oficiales de Moodle/inscripción.

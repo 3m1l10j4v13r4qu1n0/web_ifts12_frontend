@@ -1,6 +1,6 @@
 # Estado Actual del Proyecto
 
-> Última actualización: 2026-08-30
+> Última actualización: 2026-08-30 (cierre Fase 4)
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `vitacora_agentica.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.
 
@@ -15,7 +15,11 @@ provisionales y placeholders de Moodle/inscripción, tag **v1.1.0**. Se complet�
 **Fase 3 (Componentes reutilizables)**: `components/ui/` (Button, CardCarrera, CardNoticia,
 FaqAcordeon, AccesosRapidos), `components/layout/` (Header+Nav, Footer, Portada) integrados en el
 layout base, tokens de color 90/10 y helper `cn`, tag **v1.2.0**. La Home aún usa placeholders;
-no hay consumo de API real.
+no hay consumo de API real. Se completó la **Fase 4 (Home navegable)**: HomePage con portada,
+accesos rápidos, carreras, slider de novedades, comunidades y FAQ usando los mocks provisorios;
+se sumaron los componentes `ui/SliderNoticias` (carrusel accesible, sin librerías) y
+`ui/Comunidades`; CTA de Moodle e inscripción visibles solo cuando exista URL oficial; tag
+**v1.3.0**. Sigue sin consumo de API real.
 
 ## 2. Arquitectura
 
@@ -46,6 +50,9 @@ No hay más entidades: tipos de dominio pendientes de contratos del backend.
   accesos rápidos, comunidades) marcados para validar con Análisis.
 - [x] Componentes reutilizables presentacionales: Header+Nav, Footer, Portada, CardCarrera,
   CardNoticia, FaqAcordeon, AccesosRapidos, Button (con tests).
+- [x] Home navegable (HomePage): portada, CTA de campus/inscripción (visible solo con URL),
+  accesos rápidos, carreras, slider de novedades, comunidades, FAQ. Con `SliderNoticias`
+  (carrusel accesible) y `Comunidades` (con tests).
 - [ ] Carreras, noticias, FAQ, etc. con contenido real — bloqueado por contratos de Análisis/Backend.
 
 ## 5. Endpoints / Interfaces expuestas
@@ -66,9 +73,9 @@ No hay más entidades: tipos de dominio pendientes de contratos del backend.
 
 - **Fase 2** — Base **completada** en `feature/fase-2-base` (types de dominio + mocks);
   falta crear rama y trabajar la Fase 3.
-- **Fase 3** — Componentes reutilizables **completada** en `feature/fase-3-componentes`; falta
-  crear rama y trabajar la Fase 4.
-- **Fase 4** — Home navegable con mocks, accesibilidad y responsive.
+- **Fase 3** — Componentes reutilizables **completada** en `feature/fase-3-componentes`.
+- **Fase 4** — Home navegable **completada** en `feature/fase-4-home` (slider accesible,
+  comunidades, secciones de Home con mocks); falta decidir merge a `develop` (push pendiente).
 - **Fase 5** — Cierre: documentación, checklist en verde, decisión de merge a `develop`.
 - Dependencias bloqueadas: minuta V2 de Análisis, wireframes UX/UI, contratos de API Backend,
   confirmaciones de Infra y URLs oficiales de Moodle/inscripción
