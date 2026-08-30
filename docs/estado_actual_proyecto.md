@@ -1,6 +1,6 @@
 # Estado Actual del Proyecto
 
-> Última actualización: 2026-08-30 (cierre Fase 4)
+> Última actualización: 2026-08-30 (cierre Fase 5)
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `vitacora_agentica.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.
 
@@ -19,7 +19,10 @@ no hay consumo de API real. Se completó la **Fase 4 (Home navegable)**: HomePag
 accesos rápidos, carreras, slider de novedades, comunidades y FAQ usando los mocks provisorios;
 se sumaron los componentes `ui/SliderNoticias` (carrusel accesible, sin librerías) y
 `ui/Comunidades`; CTA de Moodle e inscripción visibles solo cuando exista URL oficial; tag
-**v1.3.0**. Sigue sin consumo de API real.
+**v1.3.0**. Sigue sin consumo de API real. Se completó la **Fase 5 (Cierre y documentación)**:
+checklist final en verde, actualización de la propuesta tecnológica al estado real, acta de
+decisiones, agenda de la reunión del lunes 31/08 y dependencias por equipo; tag **v1.4.0**.
+Las 5 fases del plan inicial están cerradas; quedan bloqueos multi-equipo y la reunión del lunes.
 
 ## 2. Arquitectura
 
@@ -71,15 +74,17 @@ No hay más entidades: tipos de dominio pendientes de contratos del backend.
 
 ## 7. Pendientes / TODO conocidos
 
-- **Fase 2** — Base **completada** en `feature/fase-2-base` (types de dominio + mocks);
-  falta crear rama y trabajar la Fase 3.
+- **Fase 2** — Base **completada** en `feature/fase-2-base` (types de dominio + mocks).
 - **Fase 3** — Componentes reutilizables **completada** en `feature/fase-3-componentes`.
 - **Fase 4** — Home navegable **completada** en `feature/fase-4-home` (slider accesible,
-  comunidades, secciones de Home con mocks); falta decidir merge a `develop` (push pendiente).
-- **Fase 5** — Cierre: documentación, checklist en verde, decisión de merge a `develop`.
-- Dependencias bloqueadas: minuta V2 de Análisis, wireframes UX/UI, contratos de API Backend,
-  confirmaciones de Infra y URLs oficiales de Moodle/inscripción
-  (`docs/frontend/dependencias-equipos.md`).
+  comunidades, secciones de Home con mocks); mergeada a `develop` (`5afc13d`) y tag `v1.3.0`
+  pusheado.
+- **Fase 5** — Cierre y documentación **completada** en `feature/fase-5-cierre` (propuesta
+  tecnológica al día, acta de decisiones, agenda de reunión del lunes, dependencias). Falta
+  decidir merge a `develop`.
+- Pendientes multi-equipo para la reunión del lunes 31/08: minuta V2 de Análisis, wireframes
+  UX/UI, contratos de API Backend, confirmaciones de Infra/Dirección y URLs oficiales de
+  Moodle/inscripción (`docs/frontend/dependencias-equipos.md`).
 
 ## 8. Decisiones y convenciones vigentes
 

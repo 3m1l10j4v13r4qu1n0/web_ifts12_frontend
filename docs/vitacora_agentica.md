@@ -154,3 +154,40 @@ los textos de la Home siguen siendo provisorios, sin afirmaciones institucionale
 verde. Push de la rama, del merge a `develop` y del tag `v1.3.0` pendiente de aprobación. Próximo
 paso: Fase 5 (cierre y documentación). Dependencias bloqueadas siguen: minuta V2 de Análisis,
 wireframes UX/UI, contratos de API Backend, URLs oficiales de Moodle/inscripción.
+
+---
+
+## 2026-08-30 — Fase 5 (Cierre y documentación)
+
+**Qué se hizo:** desde `develop` se creó `feature/fase-5-cierre` y se completó la Fase 5 de
+cierre del plan inicial del frontend. Se actualizó `docs/frontend/propuesta-tecnologica.md` al
+estado real del código (estructura de carpetas y componentes efectivamente implementados,
+scripts existentes, responsive/accesibilidad del estado actual, nota de cierre de fases). Se
+crearon dos documentos nuevos: `docs/frontend/acta-decisiones.md` (decisiones de las fases 1-5:
+stack, flujo git, menú de 5 ítems, paleta provisional, mocks, placeholders, sin API real, slider
+sin librerías, auth sin implementar, Plan B) y `docs/frontend/agenda-reunion-lunes.md` (agenda de
+la reunión del lunes 31/08: propuesta tecnológica, decisiones, dependencias por equipo,
+coordinación con Infra/Dirección/Backend y próximos pasos). Se actualizó
+`docs/frontend/dependencias-equipos.md` (estado del stack y sección 10 "qué se avanzó al cierre
+de la Fase 5"). Checklist final `lint` · `build` · `test` en verde (7 suites, 11 pruebas). Tag
+anotado **v1.4.0**.
+
+**Decisiones de arquitectura / administrativas:** los documentos de cierre reflejan únicamente lo
+ya verificado en el repo; no se inventaron datos ni se adelantaron decisiones ajenas al equipo. El
+stack sigue marcado como "a validar" en la reunión del lunes (no se auto-aprueba). El acta de
+decisiones queda como documento vivo para registrar futuras decisiones.
+
+**Archivos/módulos tocados:**
+- `docs/frontend/propuesta-tecnologica.md` — actualizado al estado real de las fases 1-5.
+- `docs/frontend/acta-decisiones.md` — nuevo: decisiones de las fases 1-5.
+- `docs/frontend/agenda-reunion-lunes.md` — nuevo: agenda de la reunión del 31/08.
+- `docs/frontend/dependencias-equipos.md` — estado del stack y sección de avance.
+- Docs: `estado_actual_proyecto.md` (Fase 5 marcada completada).
+- Git: rama `feature/fase-5-cierre` con 4 commits atómicos de documentación; tag anotado
+  `v1.4.0`.
+
+**Estado resultante:** `feature/fase-5-cierre` contiene la documentación de cierre con
+`lint`·`build`·`test` en verde. Push de la rama, del merge a `develop` y del tag `v1.4.0`
+pendiente de aprobación. Con esto quedan cerradas las 5 fases del plan inicial del frontend;
+sigue la reunión del lunes 31/08 y los pendientes multi-equipo (minuta V2, wireframes UX/UI,
+contratos de API, VPS/Infra, URLs oficiales).
