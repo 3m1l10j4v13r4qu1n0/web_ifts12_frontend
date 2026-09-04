@@ -1,6 +1,6 @@
 # Estado Actual del Proyecto
 
-> Última actualización: 2026-08-30 (cierre Fase 5)
+> Última actualización: 2026-09-04 (documentos de dependencias por grupo)
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `vitacora_agentica.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.
 
@@ -86,7 +86,36 @@ No hay más entidades: tipos de dominio pendientes de contratos del backend.
   UX/UI, contratos de API Backend, confirmaciones de Infra/Dirección y URLs oficiales de
   Moodle/inscripción (`docs/frontend/dependencias-equipos.md`).
 
-## 8. Decisiones y convenciones vigentes
+## 8. Documentos de referencia (relevamiento)
+
+- `docs/driveFrontend/mapa_inicial_sitio_web_ifts12_2026.md` — Mapa inicial del sitio web,
+  resultado del relevamiento del 27/08/2026. Define la estructura preliminar del sitio (secciones,
+  botones/menú, accesos rápidos, comunidades) y qué debe verificar cada área (Análisis, UX/UI,
+  Frontend, Backend, Infra, QA). Documento vivo; Análisis Funcional debe validar contenidos y
+  prioridades; UX/UI debe proponer mapa definitivo, menú, wireframes. **Este mapa es la base
+  técnica para Frontend y Backend** una vez validado por Análisis/UX.
+- Secciones del mapa: Home, Carreras, Ingresantes, Estudiantes, Tutorías, Docentes, Institucional,
+  Noticias, 3 comunidades (tutoría/alumnos/docentes), 9 accesos rápidos.
+- Posibles botones de menú (11 posibles): Inicio, Carreras, Ingresantes, Estudiantes, Tutorías,
+  Docentes, Institucional, Noticias, Campus Virtual Moodle, Inscripción, Contacto. UX/UI debe
+  definir cuáles van a menú principal, submenús, bloques de Home o accesos rápidos.
+
+## 9. Documentos de dependencias por grupo
+
+- `docs/driveFrontend/grupo_1_analisis_funcional.md` — Qué pedirle a Análisis Funcional
+  (contenidos, mapa validado, URLs oficiales, logos). **Grupo que más bloquea al resto.**
+- `docs/driveFrontend/grupo_2_ux_ui.md` — Qué pedirle a UX/UI (wireframes, paleta definitiva,
+  tipografía, mapa de navegación, flujos de usuario, componentes visuales).
+- `docs/driveFrontend/grupo_3_frontend.md` — Estado de Frontend, qué ya entregamos, qué
+  necesitamos de otros, y qué les entregamos a ellos.
+- `docs/driveFrontend/grupo_4_backend.md` — Qué pedirle a Backend (tabla de endpoints, esquemas
+  de datos, códigos de error, autenticación, datos de prueba, tecnología confirmada).
+- `docs/driveFrontend/grupo_5_infraestructura.md` — Qué pedirle a Infra (VPS, dominio, Nginx,
+  variables de entorno, backups, monitoreo, estrategia de ambientes).
+- `docs/driveFrontend/grupo_6_qa.md` — Qué pedirle a QA (ambiente de testing, plan de testing,
+  casos de prueba, checklist pre-despliegue, recorridos de usuario).
+
+## 10. Decisiones y convenciones vigentes
 
 - Responder y commiteár **siempre en español rioplatense**; Conventional Commits con scope en
   minúscula; commits atómicos.
@@ -98,4 +127,4 @@ No hay más entidades: tipos de dominio pendientes de contratos del backend.
   como provisorios.
 - Stack fijado y documentado en `docs/frontend/propuesta-tecnologica.md`; backend de referencia
   Python/Flask + Gunicorn + Nginx + PostgreSQL (Plan B).
-- `docs/driveFrontend/` no se versiona (gitignored).
+- `docs/driveFrontend/` no se versiona (gitignored), pero su contenido es fuente de verdad.

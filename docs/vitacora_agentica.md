@@ -191,3 +191,79 @@ decisiones queda como documento vivo para registrar futuras decisiones.
 pendiente de aprobación. Con esto quedan cerradas las 5 fases del plan inicial del frontend;
 sigue la reunión del lunes 31/08 y los pendientes multi-equipo (minuta V2, wireframes UX/UI,
 contratos de API, VPS/Infra, URLs oficiales).
+
+---
+
+## 2026-09-04 — Incorporación del Mapa Inicial del Sitio Web (relevamiento 27/08)
+
+**Qué se hizo:** se incorporó como contexto al proyecto el archivo
+`docs/driveFrontend/mapa_inicial_sitio_web_ifts12_2026.md`, que reúne la estructura y los
+posibles botones/menú resultantes del relevamiento del 27/08/2026 con las autoridades del IFTS
+N.º 12. El mapa define: secciones del sitio (Home, Carreras, Ingresantes, Estudiantes, Tutorías,
+Docentes, Institucional, Noticias), 3 comunidades destacadas (tutoría, alumnos, docentes), 9
+accesos rápidos para la Home, y 11 posibles botones de menú. Se actualizó
+`docs/estado_actual_proyecto.md` con una nueva sección "Documentos de referencia" que detalla
+estas secciones y el criterio de trabajo del mapa (Análisis valida contenido, UX/UI define
+experiencia, Frontend/Backend implementan sobre definiciones acordadas).
+
+**Decisiones:** el mapa es preliminar y no definitivo; Frontend lo toma como base técnica pero
+no implementa a partir de él hasta que Análisis/UX lo validen. Los textos del mapa marcan
+claramente que UX/UI debe definir qué elementos van al menú principal, submenús, bloques de
+Home o accesos rápidos. Se mantiene la regla de no inventar contenido.
+
+**Archivos tocados:**
+- `docs/driveFrontend/mapa_inicial_sitio_web_ifts12_2026.md` — nuevo, leído y añadido como
+  contexto.
+- `docs/estado_actual_proyecto.md` — nueva sección 8 (Documentos de referencia), se renumeró
+  Decisiones a sección 9.
+- `docs/vitacora_agentica.md` — esta entrada.
+
+**Estado resultante:** el mapa queda documentado como fuente de referencia en el proyecto.
+Frontend tiene claridad sobre la estructura esperada del sitio. Pendiente: validación de
+Análisis/UX sobre el mapa, wireframes UX/UI, y decenas de dependencias multi-equipo que
+quedaron abiertas tras el cierre de la Fase 5.
+
+---
+
+## 2026-09-04 — Documentos de dependencias por grupo (fuentes de verdad)
+
+**Qué se hizo:** se crearon 6 documentos markdown en `docs/driveFrontend/`, uno por cada
+grupo de trabajo del proyecto, que detallan qué hay que pedirle a cada equipo para que
+el proyecto avance. Cada archivo es una fuente de verdad viva sobre las dependencias,
+bloqueos y entregables esperados de cada grupo:
+
+1. `grupo_1_analisis_funcional.md` — Contenidos institucionales, mapa validado, URLs
+   oficiales, logos. **Grupo que más bloquea al resto.**
+2. `grupo_2_ux_ui.md` — Wireframes, paleta definitiva, tipografía, mapa de navegación,
+   flujos de usuario, componentes visuales.
+3. `grupo_3_frontend.md` — Estado actual de Frontend, qué ya entregamos, qué necesitamos
+   de otros, qué les entregamos a ellos.
+4. `grupo_4_backend.md` — Tabla de endpoints, esquemas de datos, códigos de error,
+   autenticación, datos de prueba, confirmación de tecnología.
+5. `grupo_5_infraestructura.md` — VPS, dominio, Nginx, variables de entorno, backups,
+   monitoreo, estrategia de ambientes, flujo de despliegue.
+6. `grupo_6_qa.md` — Ambiente de testing, plan de testing, casos de prueba por sección,
+   checklist pre-despliegue, recorridos de usuario.
+
+Se actualizó `docs/estado_actual_proyecto.md` con la nueva sección 9 que referencia estos
+archivos.
+
+**Decisiones:** se optó por crear un archivo por grupo (no uno solo) para que cada equipo
+tenga un documento claro y acotado de qué se espera de ellos. Los archivos están en
+`docs/driveFrontend/` (gitignored) como el resto de la documentación de Drive. Cada
+archivo incluye: qué se necesita, por qué, estado actual, preguntas a responder, y
+cronograma sugerido de entregas.
+
+**Archivos tocados:**
+- `docs/driveFrontend/grupo_1_analisis_funcional.md` — nuevo.
+- `docs/driveFrontend/grupo_2_ux_ui.md` — nuevo.
+- `docs/driveFrontend/grupo_3_frontend.md` — nuevo.
+- `docs/driveFrontend/grupo_4_backend.md` — nuevo.
+- `docs/driveFrontend/grupo_5_infraestructura.md` — nuevo.
+- `docs/driveFrontend/grupo_6_qa.md` — nuevo.
+- `docs/estado_actual_proyecto.md` — nueva sección 9, fecha actualizada.
+- `docs/vitacora_agentica.md` — esta entrada.
+
+**Estado resultante:** los 6 documentos quedan como fuente de verdad para coordinar
+dependencias entre grupos. Frontend puede usar estos archivos para comunicar bloqueos
+y pedidos a los demás equipos de manera clara y estructurada.
