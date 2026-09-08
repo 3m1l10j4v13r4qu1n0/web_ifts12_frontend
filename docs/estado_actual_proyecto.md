@@ -1,6 +1,6 @@
 # Estado Actual del Proyecto
 
-> Última actualización: 2026-09-04 (documentos de dependencias por grupo)
+> Última actualización: 2026-09-08 (auditoría contra el documento unificado de Análisis)
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `vitacora_agentica.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.
 
@@ -85,9 +85,22 @@ No hay más entidades: tipos de dominio pendientes de contratos del backend.
 - Pendientes multi-equipo para la reunión del lunes 31/08: minuta V2 de Análisis, wireframes
   UX/UI, contratos de API Backend, confirmaciones de Infra/Dirección y URLs oficiales de
   Moodle/inscripción (`docs/frontend/dependencias-equipos.md`).
+- **Auditoría** contra `Analisis funcional todo unificado IFTS 12.pdf` **completada**
+  (`docs/frontend/auditoria-analisis-unificado.md`, rama `feature/auditoria-analisis-unificado`):
+  RF-01…RF-34 auditados; mayoría 🟡/❌/🔵. Pendiente **aprobación del plan de implementación**
+  de lo accionable sin dependencias (contacto/dirección RF-22, accesos rápidos faltantes,
+  `Carrera` con modalidad/horarios, FAQ del documento, fechas en novedades).
 
 ## 8. Documentos de referencia (relevamiento)
 
+- `docs/driveFrontend/Analisis funcional todo unificado IFTS 12.pdf` — **Documento unificado
+  del equipo de Análisis Funcional** (08/09/2026): minuta definitiva, requisitos funcionales
+  v1 (RF-01…RF-34), mapa de contenidos y prioridades, matriz fijo vs. administrable, propuesta
+  de alcance/menú y Plan B VPS. Nueva fuente de verdad para auditar el cumplimiento del
+  frontend. Ver `docs/frontend/auditoria-analisis-unificado.md`.
+- `docs/frontend/auditoria-analisis-unificado.md` — Auditoría de cumplimiento del frontend
+  contra el documento unificado de Análisis (matriz RF-01…RF-34, comparativas de menú/accesos,
+  accionable sin dependencias, bloqueos externos). Documento vivo.
 - `docs/driveFrontend/mapa_inicial_sitio_web_ifts12_2026.md` — Mapa inicial del sitio web,
   resultado del relevamiento del 27/08/2026. Define la estructura preliminar del sitio (secciones,
   botones/menú, accesos rápidos, comunidades) y qué debe verificar cada área (Análisis, UX/UI,

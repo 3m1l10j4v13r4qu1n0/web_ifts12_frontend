@@ -267,3 +267,43 @@ cronograma sugerido de entregas.
 **Estado resultante:** los 6 documentos quedan como fuente de verdad para coordinar
 dependencias entre grupos. Frontend puede usar estos archivos para comunicar bloqueos
 y pedidos a los demás equipos de manera clara y estructurada.
+
+---
+
+## 2026-09-08 — Auditoría de cumplimiento contra el análisis funcional unificado
+
+**Qué se hizo:** se leyó el documento nuevo del equipo de Análisis Funcional
+(`docs/driveFrontend/Analisis funcional todo unificado IFTS 12.pdf`, extraído con
+`pdftotext`) y se auditó el frontend contra sus 34 requisitos funcionales (RF-01…RF-34),
+el mapa de contenidos (Parte IV) y la propuesta consolidada menú/accesos (Parte VI). Se
+materializó el resultado en `docs/frontend/auditoria-analisis-unificado.md` con: resumen
+ejecutivo por categoría, matriz de cumplimiento completa, comparativa de accesos rápidos,
+menú y comunidades, cumplimientos positivos, desvíos, lista de "accionable sin dependencias
+externas" y bloqueos externos por equipo.
+
+**Decisiones:**
+- Solo materializar el informe, **sin tocar código** (no se implementó nada de lo accionable
+  todavía; queda pendiente de aprobación el plan de implementación).
+- Trabajar en rama nueva `feature/auditoria-analisis-unificado` desde `develop` (no se
+  mergea ni pushea sin pregunta).
+- El `.gitignore` está modificado en el working tree (comentada la línea
+  `docs/driveFrontend/`); se respeta la regla de no versionar `docs/driveFrontend/` y no se
+  commiteará esa carpeta.
+- Hallazgos principales: RF-22 (dirección/horario, contenido fijo confirmado) y accesos
+  rápidos faltantes (SIU, inscripción GCBA, constancias, mesas, calendario) son lo más
+  accionable; `Carrera` sin `modalidad`/`horarios`; menú propuesto por Análisis (9 items)
+  excede el límite de 5 del proyecto → coordinar UX/UI; CRUD/login/panel y noticias con
+  fecha/imagen quedan bloqueados por Backend y contenido del Drive.
+
+**Archivos tocados:**
+- `docs/driveFrontend/Analisis funcional todo unificado IFTS 12.pdf` — nuevo, leído como
+  fuente de verdad (no versionado).
+- `docs/frontend/auditoria-analisis-unificado.md` — nuevo, informe de la auditoría.
+- `docs/estado_actual_proyecto.md` — fecha actualizada, nueva sección 8 con el documento
+  unificado y la auditoría, pendiente de implementación registrado en la sección 7.
+- `docs/vitacora_agentica.md` — esta entrada.
+
+**Estado resultante:** el frontend queda auditado contra el documento unificado de Análisis.
+El informe documenta qué se cumple, qué falta y qué se puede implementar sin esperar a otros
+equipos. Pendiente: aprobar el plan de lo accionable y re-auditar cuando lleguen Drive,
+URLs oficiales y contratos de Backend.
