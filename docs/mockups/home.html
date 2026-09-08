@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mockup — Home · IFTS N.º 12</title>
+  <!--
+    ============================================================
+    MOCKUP DE LA HOME — IFTS N.º 12
+    ---------------------------------
+    Pegá este archivo completo en https://play.tailwindcss.com/
+    para verlo renderizado al instante.
+    Replica fiel del componente src/pages/HomePage.tsx + layout
+    (Header, Footer) usando los colores reales del token 'acento'
+    y el layout 90/10 (blanco/neutros + acento como único color).
+    Los textos son los MOCKS provisorios (pendientes de validación
+    por Análisis Funcional), igual que en el código real.
+    ============================================================
+  -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            acento: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+            },
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-white text-slate-900 antialiased">
+  <!-- ===================== HEADER ===================== -->
+  <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+    <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+      <a href="#" class="text-lg font-semibold text-slate-900">IFTS N.º 12</a>
+      <nav aria-label="Navegación principal" class="hidden lg:block">
+        <ul class="flex items-center gap-2">
+          <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900">Carreras</a></li>
+          <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900">Ingresantes</a></li>
+          <!-- Estado activo: item actual de la seccion -->
+          <li><a href="#" class="block rounded-md bg-acento-100 px-3 py-2 text-sm font-medium text-acento-800">Estudiantes</a></li>
+          <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900">Docentes</a></li>
+          <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900">Noticias</a></li>
+        </ul>
+      </nav>
+      <!-- Boton hamburguesa: visible solo en pantallas chicas (lg:hidden) -->
+      <button type="button" class="rounded-md p-2 text-slate-700 hover:bg-slate-100 lg:hidden" aria-label="Abrir menú">
+        <svg aria-hidden="true" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== PORTADA ===================== -->
+  <section class="bg-gradient-to-br from-slate-50 via-slate-100 to-acento-100">
+    <div class="mx-auto flex min-h-[70vh] max-w-6xl flex-col items-center justify-center px-4 py-24 text-center">
+      <h1 class="max-w-3xl text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+        Instituto de Formación Técnica Superior N.º 12
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg text-slate-600">
+        Formación técnica superior, pública y de calidad. Contenidos provisorios pendientes de validación.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <a href="#" class="inline-flex items-center justify-center rounded-lg bg-acento-600 px-6 py-3 text-base font-medium text-white transition-colors hover:bg-acento-700">Ver carreras</a>
+        <!--
+          Estado comentado: el CTA de "Inscripcion" solo se muestra si existe
+          URL oficial (ENLACES.inscripcion !== ''). Hoy el placeholder esta
+          vacio, por eso NO aparece. Al recibir la URL descomentar:
+        <a href="#" class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-6 py-3 text-base font-medium text-slate-700 transition-colors hover:border-acento-600 hover:text-acento-700">Inscripción</a>
+        -->
+      </div>
+    </div>
+  </section>
+
+  <!--
+    Estado comentado: banda de acceso al campus virtual. Solo se muestra si
+    existe URL oficial de Moodle (ENLACES.moodle !== ''). Hoy NO aparece.
+    ============================================================
+    <section aria-label="Acceso al campus virtual" class="border-y border-slate-200 bg-acento-100">
+      <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-6 sm:flex-row">
+        <p class="text-center text-slate-800 sm:text-left">Accedé al campus virtual para iniciar o continuar tu cursada.</p>
+        <a href="#" class="inline-flex shrink-0 items-center justify-center rounded-lg bg-acento-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-acento-700">Ingresar al campus virtual</a>
+      </div>
+    </section>
+    ============================================================
+  -->
+
+  <!-- ===================== ACCESOS RAPIDOS ===================== -->
+  <section aria-labelledby="titulo-accesos" class="mx-auto max-w-6xl px-4 py-16">
+    <h2 id="titulo-accesos" class="text-2xl font-bold text-slate-900">Accesos rápidos</h2>
+    <ul class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <li>
+        <a href="#" class="group flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-colors hover:border-acento-600">
+          <h3 class="text-base font-semibold text-slate-900">Preguntas frecuentes</h3>
+          <p class="mt-1 text-sm text-slate-600">Respuestas sobre ingreso, cursada y trámites.</p>
+          <span aria-hidden="true" class="mt-3 text-sm font-medium text-acento-700">Ver más →</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="group flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-colors hover:border-acento-600">
+          <h3 class="text-base font-semibold text-slate-900">Campus virtual</h3>
+          <p class="mt-1 text-sm text-slate-600">Acceso al aula virtual del instituto.</p>
+          <span aria-hidden="true" class="mt-3 text-sm font-medium text-acento-700">Ver más →</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="group flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-colors hover:border-acento-600">
+          <h3 class="text-base font-semibold text-slate-900">Tutorías</h3>
+          <p class="mt-1 text-sm text-slate-600">Acompañamiento y orientación para estudiantes.</p>
+          <span aria-hidden="true" class="mt-3 text-sm font-medium text-acento-700">Ver más →</span>
+        </a>
+      </li>
+      <!-- Estado deshabilitado: items con href vacio (aun sin destino) se muestran opacos y no-clicables -->
+      <li aria-disabled="true" class="flex flex-col rounded-xl border border-slate-200 bg-slate-50 p-6 opacity-60">
+        <h3 class="text-base font-semibold text-slate-900">Becas</h3>
+        <p class="mt-1 text-sm text-slate-600">Información sobre requisitos y solicitud de becas.</p>
+      </li>
+      <li>
+        <a href="#" class="group flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-colors hover:border-acento-600">
+          <h3 class="text-base font-semibold text-slate-900">Carreras</h3>
+          <p class="mt-1 text-sm text-slate-600">Ofertas académicas del instituto.</p>
+          <span aria-hidden="true" class="mt-3 text-sm font-medium text-acento-700">Ver más →</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="group flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-colors hover:border-acento-600">
+          <h3 class="text-base font-semibold text-slate-900">Contacto</h3>
+          <p class="mt-1 text-sm text-slate-600">Vías de contacto con el instituto.</p>
+          <span aria-hidden="true" class="mt-3 text-sm font-medium text-acento-700">Ver más →</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ===================== CARRERAS ===================== -->
+  <section aria-labelledby="titulo-carreras" class="border-y border-slate-200 bg-slate-50">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <h2 id="titulo-carreras" class="text-2xl font-bold text-slate-900">Carreras</h2>
+      <p class="mt-2 text-slate-600">Conocé la oferta académica del instituto.</p>
+      <ul class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <li>
+          <article class="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h3 class="text-lg font-semibold text-slate-900">Gestión parlamentaria</h3>
+            <p class="mt-2 text-sm text-slate-600">Descripción oficial pendiente de validación.</p>
+          </article>
+        </li>
+        <li>
+          <article class="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h3 class="text-lg font-semibold text-slate-900">Administración y gestión de políticas culturales</h3>
+            <p class="mt-2 text-sm text-slate-600">Descripción oficial pendiente de validación.</p>
+          </article>
+        </li>
+        <li>
+          <article class="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h3 class="text-lg font-semibold text-slate-900">Administración pública</h3>
+            <p class="mt-2 text-sm text-slate-600">Descripción oficial pendiente de validación.</p>
+          </article>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== NOVEDADES (SLIDER) ===================== -->
+  <section aria-labelledby="titulo-novedades" class="mx-auto max-w-6xl px-4 py-16">
+    <h2 id="titulo-novedades" class="text-2xl font-bold text-slate-900">Novedades</h2>
+    <div class="mt-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <!-- Controles del carrusel: cambian el item visible -->
+          <button type="button" aria-label="Noticia anterior" class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-700 hover:border-acento-600 hover:text-acento-700">←</button>
+          <span aria-live="polite" class="text-sm font-medium text-slate-500">1 / 3</span>
+          <button type="button" aria-label="Noticia siguiente" class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-700 hover:border-acento-600 hover:text-acento-700">→</button>
+        </div>
+      </div>
+      <article class="mt-6">
+        <h3 class="text-xl font-semibold text-slate-900">Novedad pendiente de validación</h3>
+        <p class="mt-2 text-slate-600">El contenido oficial de esta novedad se publicará cuando el instituto lo confirme.</p>
+      </article>
+      <!-- Indicadores del carrusel: el punto activo es azul, el resto gris -->
+      <div class="mt-6 flex justify-center gap-2" aria-hidden="true">
+        <span class="h-2 w-2 rounded-full bg-acento-600"></span>
+        <span class="h-2 w-2 rounded-full bg-slate-300"></span>
+        <span class="h-2 w-2 rounded-full bg-slate-300"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COMUNIDADES ===================== -->
+  <section aria-labelledby="titulo-comunidades" class="border-y border-slate-200 bg-slate-50">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <h2 id="titulo-comunidades" class="text-2xl font-bold text-slate-900">Comunidades</h2>
+      <p class="mt-2 text-slate-600">Espacios de acompañamiento, recursos y novedades según tu vínculo con el instituto.</p>
+      <ul class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <li>
+          <a href="#" class="group flex h-full flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-colors hover:border-acento-600">
+            <h3 class="text-lg font-semibold text-slate-900">Comunidad de tutoría</h3>
+            <p class="mt-2 text-sm text-slate-600">Espacio de acompañamiento para estudiantes.</p>
+            <span aria-hidden="true" class="mt-3 text-sm font-medium text-acento-700">Conocer más →</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="group flex h-full flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-colors hover:border-acento-600">
+            <h3 class="text-lg font-semibold text-slate-900">Comunidad de alumnos</h3>
+            <p class="mt-2 text-sm text-slate-600">Servicios y novedades para estudiantes cursantes.</p>
+            <span aria-hidden="true" class="mt-3 text-sm font-medium text-acento-700">Conocer más →</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="group flex h-full flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-colors hover:border-acento-600">
+            <h3 class="text-lg font-semibold text-slate-900">Comunidad docente</h3>
+            <p class="mt-2 text-sm text-slate-600">Recursos y novedades para el equipo docente.</p>
+            <span aria-hidden="true" class="mt-3 text-sm font-medium text-acento-700">Conocer más →</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== PREGUNTAS FRECUENTES (ACORDEON) ===================== -->
+  <section aria-labelledby="titulo-faq" class="mx-auto max-w-3xl px-4 py-16">
+    <h2 id="titulo-faq" class="text-2xl font-bold text-slate-900">Preguntas frecuentes</h2>
+    <p class="mt-2 text-slate-600">Respuestas sobre ingreso, cursada y trámites.</p>
+    <div class="mt-6 divide-y divide-slate-200 rounded-xl border border-slate-200 bg-white">
+      <!-- Item cerrado -->
+      <div>
+        <h3>
+          <button type="button" class="flex w-full items-center justify-between gap-4 px-6 py-4 text-left">
+            <span class="flex flex-col gap-1">
+              <span class="text-xs font-medium uppercase tracking-wide text-acento-700">Ingresantes</span>
+              <span class="font-medium text-slate-900">Pregunta para ingresantes pendiente de validación</span>
+            </span>
+            <span aria-hidden="true" class="text-slate-400">+</span>
+          </button>
+        </h3>
+      </div>
+      <!-- Item abierto: muestra la respuesta (solo un item abierto a la vez) -->
+      <div>
+        <h3>
+          <button type="button" class="flex w-full items-center justify-between gap-4 px-6 py-4 text-left">
+            <span class="flex flex-col gap-1">
+              <span class="text-xs font-medium uppercase tracking-wide text-acento-700">Estudiantes</span>
+              <span class="font-medium text-slate-900">Pregunta para estudiantes pendiente de validación</span>
+            </span>
+            <span aria-hidden="true" class="text-slate-400">−</span>
+          </button>
+        </h3>
+        <p class="px-6 pb-4 text-sm text-slate-600">La respuesta oficial se completará cuando Análisis valide los contenidos.</p>
+      </div>
+      <div>
+        <h3>
+          <button type="button" class="flex w-full items-center justify-between gap-4 px-6 py-4 text-left">
+            <span class="flex flex-col gap-1">
+              <span class="text-xs font-medium uppercase tracking-wide text-acento-700">Docentes</span>
+              <span class="font-medium text-slate-900">Pregunta para docentes pendiente de validación</span>
+            </span>
+            <span aria-hidden="true" class="text-slate-400">+</span>
+          </button>
+        </h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="bg-slate-900 text-slate-300">
+    <div class="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <p class="text-lg font-semibold text-white">IFTS N.º 12</p>
+        <p class="mt-2 text-sm">Instituto de Formación Técnica Superior N.º 12.</p>
+      </div>
+      <nav aria-label="Enlaces institucionales">
+        <h3 class="text-sm font-semibold uppercase tracking-wide text-white">Institucional</h3>
+        <ul class="mt-3 space-y-2">
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Institucional</a></li>
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Tutorías</a></li>
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Preguntas frecuentes</a></li>
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Contacto</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Secciones del sitio">
+        <h3 class="text-sm font-semibold uppercase tracking-wide text-white">Secciones</h3>
+        <ul class="mt-3 space-y-2">
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Carreras</a></li>
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Ingresantes</a></li>
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Estudiantes</a></li>
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Docentes</a></li>
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Noticias</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wide text-white">Conexiones</h3>
+        <!--
+          Estado actual: no hay URLs oficiales de Moodle/inscripcion, por eso se
+          muestra este aviso. Al recibir las URLs descomentar la lista de abajo
+          y comentar el parrafo.
+        -->
+        <p class="mt-3 text-sm">Los enlaces oficiales al campus virtual y a la inscripción se publicarán cuando estén disponibles.</p>
+        <!--
+        <ul class="mt-3 space-y-2">
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Campus virtual</a></li>
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Inscripción</a></li>
+        </ul>
+        -->
+      </div>
+    </div>
+    <div class="border-t border-slate-800">
+      <p class="mx-auto max-w-6xl px-4 py-4 text-xs text-slate-400">© 2026 IFTS N.º 12 — Instituto de Formación Técnica Superior.</p>
+    </div>
+  </footer>
+</body>
+</html>

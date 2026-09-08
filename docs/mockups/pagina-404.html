@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mockup — Página 404 · IFTS N.º 12</title>
+  <!--
+    ============================================================
+    MOCKUP DE PAGINA NO ENCONTRADA (404) — IFTS N.º 12
+    ---------------------------------
+    Pegá este archivo completo en https://play.tailwindcss.com/
+    para verlo renderizado al instante.
+
+    Replica fiel de src/pages/PaginaNoEncontrada.tsx: el enlace
+    azul "Volver a la home" es el unico acento en una pagina
+    neutra. Se muestra cuando ninguna ruta coincide con el mapa
+    (AppRouter, ruta fallback '*').
+    ============================================================
+  -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            acento: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+            },
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-white text-slate-900 antialiased">
+  <!-- ===================== HEADER ===================== -->
+  <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+    <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+      <a href="#" class="text-lg font-semibold text-slate-900">IFTS N.º 12</a>
+      <nav aria-label="Navegación principal" class="hidden lg:block">
+        <ul class="flex items-center gap-2">
+          <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900">Carreras</a></li>
+          <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900">Ingresantes</a></li>
+          <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900">Estudiantes</a></li>
+          <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900">Docentes</a></li>
+          <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900">Noticias</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="rounded-md p-2 text-slate-700 hover:bg-slate-100 lg:hidden" aria-label="Abrir menú">
+        <svg aria-hidden="true" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== CONTENIDO 404 ===================== -->
+  <main class="min-h-screen p-8">
+    <h1 class="text-2xl font-bold">Página no encontrada</h1>
+    <a href="#" class="mt-4 inline-block text-blue-600 underline">Volver a la home</a>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="bg-slate-900 text-slate-300">
+    <div class="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <p class="text-lg font-semibold text-white">IFTS N.º 12</p>
+        <p class="mt-2 text-sm">Instituto de Formación Técnica Superior N.º 12.</p>
+      </div>
+      <nav aria-label="Enlaces institucionales">
+        <h3 class="text-sm font-semibold uppercase tracking-wide text-white">Institucional</h3>
+        <ul class="mt-3 space-y-2">
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Institucional</a></li>
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Tutorías</a></li>
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Preguntas frecuentes</a></li>
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Contacto</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Secciones del sitio">
+        <h3 class="text-sm font-semibold uppercase tracking-wide text-white">Secciones</h3>
+        <ul class="mt-3 space-y-2">
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Carreras</a></li>
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Ingresantes</a></li>
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Estudiantes</a></li>
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Docentes</a></li>
+          <li><a href="#" class="text-sm transition-colors hover:text-white">Noticias</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wide text-white">Conexiones</h3>
+        <p class="mt-3 text-sm">Los enlaces oficiales al campus virtual y a la inscripción se publicarán cuando estén disponibles.</p>
+      </div>
+    </div>
+    <div class="border-t border-slate-800">
+      <p class="mx-auto max-w-6xl px-4 py-4 text-xs text-slate-400">© 2026 IFTS N.º 12 — Instituto de Formación Técnica Superior.</p>
+    </div>
+  </footer>
+</body>
+</html>
