@@ -491,3 +491,44 @@ skill `.agents/skills/auditoria-documentacion/SKILL.md` (paso de push + `gh pr c
 **Estado resultante:** primer PR del repo creado (#1) con `gh pr create` de
 `feature/requerimientos-infraestructura` → `develop`. El uso de `gh` queda documentado en las
 reglas del proyecto.
+
+---
+
+## 2026-09-09 — Implementación de brechas de auditoría de infraestructura (rama `feature/implementacion-infra`)
+
+**Qué se hizo:** se creó la rama `feature/implementacion-infra` desde `develop` y se ejecutaron
+las porciones de la auditoría de infraestructura que el Frontend puede resolver sin esperar a
+Infra/Dirección:
+
+- **`docs/frontend/propuesta-tecnologica.md`:**
+  - §6.3: versiones mínimas de software alineadas con la especificación técnica (Ubuntu
+    22.04/24.04, Python 3.10+, Nginx ≥ 1.18, PostgreSQL 14+, MySQL 8/MariaDB 10.6+, Docker
+    Engine 24.0+ y Compose v2.x) — INF-B1.
+  - §6.4: tabla de dimensionamiento con columna de ancho de banda (1 TB/100 Mbps, 4 TB/1 Gbps,
+    8 TB/1 Gbps) y rangos de disco unificados (mínimo 25-30 GB, ideal 100-160 GB) — INF-A1/A2.
+  - §6.5: subdominios `test.ifts12.edu.ar` y `campus.ifts12.edu.ar` + requisitos TLS 1.2/1.3 y
+    HSTS — INF-D2.
+  - §9 (nueva): política de optimización de imágenes WebP/SVG ≤ 500 KB — INF-C1.
+- **`README.md`:** nueva sección "Build de producción" (`npm run build` → `dist/` estático +
+  nota de fallback SPA y env vars pendientes) — checklist §5.1.
+- **`docs/estado_actual_proyecto.md`:** §6 actualizado con el estado de la alineación y los
+  pendientes de Infra (INF-G1/G2).
+
+**Decisiones:**
+- Quedan **bloqueadas por Infra/Dirección** las variables `VITE_*` (¿3, 6 o 7?): se espera el
+  acuerdo sobre la lista final antes de crear `.env.example` y migrar `enlaces.ts`/`API_BASE_URL`
+  a `import.meta.env` (INF-G1/G2).
+- La corrección del typo `iffts12.edu.ar` y las cabeceras Nginx quedan a cargo de Infra
+  (INF-D1/E1/E2), ya aplicadas en el doc de Drive del grupo 5 en la auditoría previa.
+- La política de imágenes se documenta con reglas manuales de equipo; la automatización en CI
+  queda como opcional a coordinar con Infra.
+
+**Archivos tocados:**
+- `docs/frontend/propuesta-tecnologica.md` — §6.3, §6.4, §6.5 y nueva §9.
+- `README.md` — sección "Build de producción".
+- `docs/estado_actual_proyecto.md` — §6 y cabecera de "última actualización".
+- `docs/vitacora_agentica.md` — esta entrada.
+
+**Estado resultante:** 4 de las 5 brechas internas del Frontend resueltas en documentación
+(INF-A1, INF-A2, INF-B1, INF-D2, INF-C1) y el checklist §5.1 completo. Sin cambios de código en
+`src/`; las tareas de env vars (INF-G1/G2) siguen a la espera de la decisión de Infra/Dirección.

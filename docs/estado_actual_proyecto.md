@@ -1,6 +1,6 @@
 # Estado Actual del Proyecto
 
-> Última actualización: 2026-09-09 (Auditoría de infraestructura)
+> Última actualización: 2026-09-09 (Rama `feature/implementacion-infra` — alineación propuesta tecnológica §6 + política de imágenes)
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `vitacora_agentica.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.
 
@@ -85,6 +85,15 @@ reciente→antigua en Home.
 - URLs de Moodle e inscripción en `src/constants/enlaces.ts` como **placeholders vacíos** hasta
   recibir las oficiales de IFTS/Dirección.
 - Variables de entorno: ninguna aún (por definir `API_BASE_URL` con Backend/Infra).
+- `docs/frontend/propuesta-tecnologica.md` §6 alineado con la especificación técnica de
+  Infraestructura (09/09/2026): versiones mínimas (Python 3.10+, PostgreSQL 14+, Docker 24.0+,
+  Nginx ≥ 1.18), ancho de banda en la tabla de dimensionamiento (1 TB/4 TB/8 TB) y rangos de
+  disco unificados (INF-A1/A2/B1); subdominios `test`/`campus`, TLS 1.2/1.3 y HSTS en §6.5
+  (INF-D2). Nueva sección §9 con la política de optimización de imágenes (WebP/SVG ≤ 500 KB,
+  INF-C1). README con sección "Build de producción" (comando + nota de env vars).
+- Pendiente de Infra/Dirección: definición de variables `VITE_*` (¿3, 6 o 7?), URLs oficiales
+  y resultado de la reunión con Oscar (Moodle). Al definirse, se crea `.env.example`, se migra
+  `enlaces.ts` y `API_BASE_URL` a `import.meta.env` (INF-G1/G2).
 
 ## 7. Pendientes / TODO conocidos
 
