@@ -363,3 +363,71 @@ lint ✅, build ✅, tests ✅ (11/11). El frontend ahora tiene: dirección/hora
 Footer, 11 accesos rápidos en Home (5 atenuados), 6 carreras con modalidad, 12 FAQs por 4
 categorías, noticias con fechas y ordenamiento reciente→antigua. Pendientes: contenido real de
 Análisis/Edith, endpoints y auth de Backend, wireframes de UX/UI, URLs oficiales.
+
+---
+
+## 2026-09-09 — Auditoría de infraestructura: requerimientos vs. proyecto
+
+**Qué se hizo:** desde `develop` se creó la rama `feature/requerimientos-infraestructura`. Se
+auditaron los 3 documentos de `docs/driveFrontend/05_infraestructura/` (especificación técnica
+de requerimientos, cuestionario Moodle/hosting y checklist del grupo 5) contra la documentación
+interna del frontend (`docs/frontend/propuesta-tecnologica.md`,
+`dependencias-equipos.md`, `estado_actual_proyecto.md`) y el código real (vite.config.ts,
+package.json, `src/api/endpoints.ts`, `src/constants/enlaces.ts`). Se generó el informe
+`docs/frontend/auditoria-infraestructura.md` con tabla de consistencia por área, 10 brechas
+codificadas (INF-A1…INF-J1) y checklist accionable para Frontend.
+
+**Decisiones/des cubrimientos clave:**
+- El proyecto está esencialmente alineado con los requerimientos de Infra: build estático, SPA
+  fallback, stack Python/Flask/PostgreSQL/Docker, ambientes y backups coinciden.
+- Brecha severa: typo `iffts12.edu.ar` (doble f) en `grupo_5_infraestructura.md` — riesgo de
+  propagarse a config real de Nginx/DNS.
+- El código no usa `import.meta.env` ni `VITE_*`: las URLs viven como constantes vacías en
+  `enlaces.ts` y `endpoints.ts`. No existe `.env.example`.
+- D3 define solo 3 variables de entorno pero el frontend tiene 6 placeholders de URLs
+  (moodle, inscripción, SIU, constancias, mesas, calendario) → brecha de coordinación.
+- Cabeceras de seguridad Nginx y `client_max_body_size 15m` de la especificación no están en
+  el bloque Nginx propuesto por el grupo 5.
+
+**Archivos tocados:**
+- `docs/frontend/auditoria-infraestructura.md` — nuevo, informe completo de la auditoría.
+- `docs/vitacora_agentica.md` — esta entrada.
+
+**Estado resultante:** auditoría de infraestructura documentada en la rama
+`feature/requerimientos-infraestructura`. No se tocó código de aplicación. Pendientes: revisar
+las brechas con Infra (typo de dominio, cabeceras Nginx, variables de entorno), alinear la
+propuesta tecnológica y migrar enlaces a variables de entorno cuando haya URLs oficiales.
+
+---
+
+## 2026-09-09 — Aplicación de hallazgos al doc del grupo 5 de Infraestructura
+
+**Qué se hizo:** sobre la base de la auditoría de infraestructura, se actualizó el documento
+`docs/driveFrontend/05_infraestructura/grupo_5_infraestructura.md` (fuente de verdad no
+versionada) para marcar lo ya cubierto por el Frontend y corregir brechas:
+
+- **Marcado como ✅:** build estático listo (`npm run build` en verde el 09/09/2026), ambiente
+  de desarrollo operativo (`npm run dev`), pasos 1-2 del flujo de despliegue (push a feature +
+  integración en develop).
+- **INF-D1:** corregido el typo `iffts12.edu.ar` → `ifts12.edu.ar` (dominio con doble "f") en
+  el CNAME y el subdominio de testing.
+- **INF-E1/INF-E2:** bloque Nginx del grupo 5 completado con cabeceras de seguridad
+  (X-Frame-Options, X-Content-Type-Options, X-XSS-Protection, Content-Security-Policy) y
+  `client_max_body_size 15m`, con nota de validar la CSP con Frontend/QA.
+- **INF-G2:** tabla de variables de entorno ampliada de 3 a 7 (`VITE_*` sumando SIU,
+  constancias, mesas de examen y calendario), con nota del estado real del código.
+- **Sección 13 nueva:** "Estado de avance según auditoría INF" clasificando lo cubierto por
+  Frontend, lo corregido en el documento y lo pendiente de Infra/Dirección/Backend.
+
+**Decisiones:** se trabajó solo sobre el documento fuente del Drive (no versionado), como
+pidió el usuario; los cambios versionados de memoria ya estaban registrados en la entrada de
+auditoría previa. No se repitió validación de código porque no se tocó `src/`.
+
+**Archivos tocados:**
+- `docs/driveFrontend/05_infraestructura/grupo_5_infraestructura.md` — actualizado (gitignored).
+- `docs/frontend/auditoria-infraestructura.md` — referenciado como marco (ya commitado en la
+  entrada previa).
+
+**Estado resultante:** el documento del grupo 5 refleja el estado real del Frontend y las
+correcciones de la auditoría. Pendientes de Infra/Dirección/Backend: VPS, dominio, Nginx real,
+URLs oficiales, contratos de API y presupuesto de testing.
