@@ -532,3 +532,42 @@ Infra/Dirección:
 **Estado resultante:** 4 de las 5 brechas internas del Frontend resueltas en documentación
 (INF-A1, INF-A2, INF-B1, INF-D2, INF-C1) y el checklist §5.1 completo. Sin cambios de código en
 `src/`; las tareas de env vars (INF-G1/G2) siguen a la espera de la decisión de Infra/Dirección.
+
+---
+
+## 2026-09-09 — Conversión de entregas a Markdown + actualización al estado actual
+
+**Qué se hizo:** se convirtieron los 6 entregables de `docs/entregas/` de `.docx` a Markdown
+(pandoc `-t gfm --wrap=none`), manteniendo los `.docx` fuente. Se verificó qué documentos
+estaban desactualizados respecto de las implementaciones de hoy (auditoría de infraestructura
+y rama `feature/implementacion-infra`) y se actualizaron 3:
+
+- **Matriz de Dependencias:** se agregaron dependencias nuevas de la auditoría (lista final de
+  variables `VITE_*` INF-G2, cabeceras Nginx + `client_max_body_size 15m` INF-E1/E2, resultado
+  de la reunión con Oscar INF-J1, URL definitiva de la API con Backend, URLs oficiales de las 6
+  integraciones) y se marcaron Listo los entregables resueltos (propuesta §6, política de
+  imágenes, bloque Nginx de ejemplo).
+- **Registro de Decisiones:** se agregaron DEC-011 (env vars a `import.meta.env`), DEC-012
+  (política de imágenes WebP/SVG ≤ 500 KB), DEC-013 (alineación de propuesta §6 con especif.),
+  DEC-014 (entregas en Markdown).
+- **Reporte Semanal:** se agregó la semana 09/09/2026 (auditoría de infraestructura + rama
+  `feature/implementacion-infra` + PR #2), conservando el reporte de la semana 31/08.
+
+**No se tocaron:** Acta de Roles, Inventario Técnico y Minuta (documentos históricos/snapshot,
+sin cambios por infra).
+
+**Decisiones:**
+- Los `.docx` fuente se conservan; los `.md` generados son la versión versionable/diffable.
+- Solo 3 entregables necesitaban actualización al estado real; el resto queda como registro
+  histórico de la fecha de emisión.
+
+**Archivos tocados:**
+- `docs/entregas/*.md` — 6 archivos nuevos (conversión pandoc).
+- `docs/entregas/2026-08-31__Matriz_Dependencias_Frontend_v0.1.md` — actualizado (nuevas deps).
+- `docs/entregas/2026-08-31__Registro_Decisiones_Frontend_v0.1.md` — actualizado (DEC-011…014).
+- `docs/entregas/2026-08-31__Reporte_Semanal_Frontend_v0.1.md` — actualizado (semana 09/09).
+- `docs/estado_actual_proyecto.md` — §8 con referencias a entregas Markdown.
+- `docs/vitacora_agentica.md` — esta entrada.
+
+**Estado resultante:** las entregas reflejan el estado real del frontend (infra auditada y
+alineada). Los pendientes (INF-G1/G2, VPS, URLs) siguen bloqueados por Infra/Dirección.

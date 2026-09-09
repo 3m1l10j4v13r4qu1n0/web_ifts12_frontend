@@ -1,6 +1,6 @@
 # Estado Actual del Proyecto
 
-> Última actualización: 2026-09-09 (Rama `feature/implementacion-infra` — alineación propuesta tecnológica §6 + política de imágenes)
+> Última actualización: 2026-09-09 (Entregas de `docs/entregas/` en Markdown + alineación propuesta tecnológica §6)
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `vitacora_agentica.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.
 
@@ -136,6 +136,11 @@ reciente→antigua en Home.
   requerimientos de infraestructura (`docs/driveFrontend/05_infraestructura/`: especificación
   técnica, cuestionario Moodle y grupo 5) y el estado real del frontend. 10 brechas
   codificadas (INF-A1…INF-J1) + checklist accionable. Documento vivo.
+- `docs/entregas/` — entregables de cierre de fases (acta de roles, inventario técnico,
+  matriz de dependencias, registro de decisiones, reporte semanal, minuta). Disponibles en
+  **Markdown** (pandoc, 09/09/2026) además del `.docx` fuente; matriz, registro y reporte
+  actualizados con la auditoría de infraestructura. Recordatorio de pendientes de Infra en
+  `docs/driveFrontend/05_infraestructura/bloqueo_infra.md` (no versionado).
 - `docs/driveFrontend/mapa_inicial_sitio_web_ifts12_2026.md` — Mapa inicial del sitio web,
   resultado del relevamiento del 27/08/2026. Define la estructura preliminar del sitio (secciones,
   botones/menú, accesos rápidos, comunidades) y qué debe verificar cada área (Análisis, UX/UI,
