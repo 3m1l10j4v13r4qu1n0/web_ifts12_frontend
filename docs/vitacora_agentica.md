@@ -304,6 +304,62 @@ externas" y bloqueos externos por equipo.
 - `docs/vitacora_agentica.md` — esta entrada.
 
 **Estado resultante:** el frontend queda auditado contra el documento unificado de Análisis.
-El informe documenta qué se cumple, qué falta y qué se puede implementar sin esperar a otros
+El informa documenta qué se cumple, qué falta y qué se puede implementar sin esperar a otros
 equipos. Pendiente: aprobar el plan de lo accionable y re-auditar cuando lleguen Drive,
 URLs oficiales y contratos de Backend.
+
+---
+
+## 2026-09-09 — Fase 6: Brechas de auditoría sin dependencias externas
+
+**Qué se hizo:**
+Implementación de los 5 puntos "accionables sin dependencias externas" de la auditoría contra
+el análisis funcional unificado (docs/frontend/auditoria-analisis-unificado.md). Se ejecutaron
+5 sub-fases en secuencia:
+
+- **Fase 6a (RF-22):** ContactoPage con dirección "Misiones 26, C1083 ABB, CABA", horario
+  nocturno y correo placeholder. Footer actualizado con dirección y horario en la columna 1.
+- **Fase 6b:** 5 accesos rápidos faltantes (SIU, Inscripción GCBA, Constancias, Mesas de
+  examen, Calendario académico) agregados a `mockAccesosRapidos` como placeholders atenuados
+  (href vacío → deshabilitados). `ENLACES` extendido con las 4 nuevas keys vacías.
+- **Fase 6c:** Tipos `Carrera` y `Noticia` extendidos: `Carrera` con `modalidad` (obligatoria)
+  y `horarios?` (opcional); `Noticia` con `imagenUrl?` y `enlace?` (opcionales). Mocks de
+  carreras ampliados a 6 (como indica el documento) con modalidad "Presencial" y horarios.
+  CardCarrera muestra modalidad; CardNoticia y SliderNoticias muestran imagen condicional.
+- **Fase 6d:** `FaqCategoria` extendida con `'institucional'`. 12 FAQs descriptivas: 3
+  ingresantes (inscripción, equivalencias, requisitos), 4 estudiantes (regularidad, constancias,
+  mesas), 2 docentes (concursos, acceso), 3 institucional (bedeles, SIU, títulos, traspasos).
+- **Fase 6e:** Noticias mock con fechas ISO (2026-09-01, 2026-08-15, 2026-07-20). Ordenamiento
+  reciente→antigua implementado en HomePage antes de pasar al slider. Posibilidad de destacar
+  "último mes" preparada.
+
+**Decisiones:**
+- Todos los textos son placeholders descriptivos, no contenido definitivo del análisis funcional.
+- `Carrera.modalidad` es `string` (no enum) para no inventar valores; se mapea cuando lleguen
+  datos reales del backend.
+- `Noticia.imagenUrl` y `Noticia.enlace` son opcionales para retrocompatibilidad con mocks
+  existentes.
+- La categoría `institucional` en FAQ agrupa bedeles, SIU, títulos y traspasos (RF-29/30/31/32).
+- El ordenamiento de noticias se hace en HomePage (presentacional), no en el componente slider.
+- Se usó `npm run lint:fix` para corregir formato de Biome en 2 archivos.
+
+**Archivos tocados:**
+- `src/types/domain/sitio.types.ts` — `Carrera` (+modalidad, +horarios), `Noticia` (+imagenUrl, +enlace), `FaqCategoria` (+institucional)
+- `src/constants/enlaces.ts` — +4 keys: siu, constancias, mesasExamen, calendario
+- `src/constants/mock-data.ts` — 6 carreras con modalidad/horarios, 12 FAQs por 4 categorías, 3 noticias con fechas, 11 accesos rápidos
+- `src/pages/ContactoPage.tsx` — reemplazado placeholder con contenido real (RF-22)
+- `src/pages/HomePage.tsx` — agregado ordenamiento de noticias por fecha
+- `src/components/layout/Footer.tsx` — agregada dirección y horario
+- `src/components/ui/CardCarrera.tsx` — muestra modalidad y horarios
+- `src/components/ui/CardNoticia.tsx` — muestra imagenUrl condicional
+- `src/components/ui/SliderNoticias.tsx` — muestra imagenUrl condicional
+- `src/components/ui/FaqAcordeon.tsx` — agregada categoría "Institucional"
+- `docs/estado_actual_proyecto.md` — actualizado resumen, entidades, casos de uso, pendientes
+- `docs/vitacora_agentica.md` — esta entrada
+
+**Estado resultante:**
+Las 5 brechas de auditoría accionables sin dependencias externas quedan cerradas. Verificación:
+lint ✅, build ✅, tests ✅ (11/11). El frontend ahora tiene: dirección/horario en Contacto y
+Footer, 11 accesos rápidos en Home (5 atenuados), 6 carreras con modalidad, 12 FAQs por 4
+categorías, noticias con fechas y ordenamiento reciente→antigua. Pendientes: contenido real de
+Análisis/Edith, endpoints y auth de Backend, wireframes de UX/UI, URLs oficiales.

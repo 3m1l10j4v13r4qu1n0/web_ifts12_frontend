@@ -1,6 +1,6 @@
 # Estado Actual del Proyecto
 
-> Última actualización: 2026-09-08 (auditoría contra el documento unificado de Análisis)
+> Última actualización: 2026-09-09 (Fase 6 — brechas de auditoría sin dependencias)
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `vitacora_agentica.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.
 
@@ -23,6 +23,12 @@ se sumaron los componentes `ui/SliderNoticias` (carrusel accesible, sin librerí
 checklist final en verde, actualización de la propuesta tecnológica al estado real, acta de
 decisiones, agenda de la reunión del lunes 31/08 y dependencias por equipo; tag **v1.4.0**.
 Las 5 fases del plan inicial están cerradas; quedan bloqueos multi-equipo y la reunión del lunes.
+Se completó la **Fase 6 (Brechas de auditoría sin dependencias)**: RF-22 contacto/pie de
+página con dirección y horario, 5 accesos rápidos faltantes (SIU, Inscripción, Constancias,
+Mesas, Calendario) como placeholders atenuados, tipos `Carrera` y `Noticia` extendidos con
+`modalidad`/`horarios`/`imagenUrl`/`enlace`, 12 FAQs descriptivas por 4 categorías
+(ingresantes/estudiantes/docentes/institucional), noticias con fechas ISO y ordenamiento
+reciente→antigua en Home.
 
 ## 2. Arquitectura
 
@@ -42,8 +48,15 @@ Las 5 fases del plan inicial están cerradas; quedan bloqueos multi-equipo y la 
 - `UsuarioSesion` (`contexts/AuthContext.tsx`) — estructura de sesión preparada para auth futura.
 - `ApiErrorResponse` (`types/api/error.types.ts`) — forma estándar de error del backend
   (`error`, `mensaje`, `usuario_id?`).
-
-No hay más entidades: tipos de dominio pendientes de contratos del backend.
+- `Carrera` (`types/domain/sitio.types.ts`) — `id`, `nombre`, `descripcionBreve`, `modalidad`,
+  `horarios?`. 6 mocks con modalidad "Presencial" y horarios.
+- `Noticia` (`types/domain/sitio.types.ts`) — `id`, `titulo`, `resumen`, `fecha`,
+  `imagenUrl?`, `enlace?`. 3 mocks con fechas ISO (2026-09-01, 2026-08-15, 2026-07-20).
+- `FaqItem` (`types/domain/sitio.types.ts`) — 4 categorías: `ingresantes`, `estudiantes`,
+  `docentes`, `institucional`. 12 mocks con textos descriptivos.
+- `AccesoRapido` (`types/domain/sitio.types.ts`) — 11 accesos en Home (6 internos + 5
+  atenuados pendientes de URLs oficiales).
+- `Comunidad` (`types/domain/sitio.types.ts`) — 3 comunidades (tutoría, alumnos, docentes).
 
 ## 4. Casos de uso / Servicios implementados
 
@@ -54,8 +67,9 @@ No hay más entidades: tipos de dominio pendientes de contratos del backend.
 - [x] Componentes reutilizables presentacionales: Header+Nav, Footer, Portada, CardCarrera,
   CardNoticia, FaqAcordeon, AccesosRapidos, Button (con tests).
 - [x] Home navegable (HomePage): portada, CTA de campus/inscripción (visible solo con URL),
-  accesos rápidos, carreras, slider de novedades, comunidades, FAQ. Con `SliderNoticias`
-  (carrusel accesible) y `Comunidades` (con tests).
+  accesos rápidos (11 items, 5 atenuados), carreras (6 con modalidad), slider de novedades
+  (con fechas y orden reciente→antigua), comunidades, FAQ (12 items, 4 categorías).
+- [x] ContactoPage con dirección, horario y correo (RF-22); Footer con dirección y horario.
 - [ ] Carreras, noticias, FAQ, etc. con contenido real — bloqueado por contratos de Análisis/Backend.
 
 ## 5. Endpoints / Interfaces expuestas
@@ -87,9 +101,10 @@ No hay más entidades: tipos de dominio pendientes de contratos del backend.
   Moodle/inscripción (`docs/frontend/dependencias-equipos.md`).
 - **Auditoría** contra `Analisis funcional todo unificado IFTS 12.pdf` **completada**
   (`docs/frontend/auditoria-analisis-unificado.md`, rama `feature/auditoria-analisis-unificado`):
-  RF-01…RF-34 auditados; mayoría 🟡/❌/🔵. Pendiente **aprobación del plan de implementación**
-  de lo accionable sin dependencias (contacto/dirección RF-22, accesos rápidos faltantes,
-  `Carrera` con modalidad/horarios, FAQ del documento, fechas en novedades).
+  RF-01…RF-34 auditados; mayoría 🟡/❌/🔵. **Plan de implementación aprobado y ejecutado** en
+  Fase 6: RF-22 (contacto/pie), accesos rápidos faltantes, `Carrera` con modalidad/horarios,
+  FAQ descriptiva por segmento, fechas en novedades. Quedan pendientes los 🔵 (bloqueados por
+  Backend) y los ❌ que requieren contenidos oficiales de Análisis/Edith.
 
 ## 8. Documentos de referencia (relevamiento)
 
