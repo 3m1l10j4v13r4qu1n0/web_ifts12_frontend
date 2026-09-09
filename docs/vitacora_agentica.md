@@ -464,3 +464,30 @@ infraestructura como patrón.
 **Estado resultante:** el patrón ya aplicado en la auditoría de infraestructura queda
 institucionalizado para futuras auditorías (grupo_1…grupo_6). No se tocó ningún doc de
 `docs/driveFrontend/` en esta tarea.
+
+---
+
+## 2026-09-09 — Integración de `gh` (CLI de GitHub) al flujo de git
+
+**Qué se hizo:** se instaló el binario de `gh` v2.100.0 en `~/.local/bin/gh` (sin root, entorno
+Arch sin snap/apt) y el usuario completó `gh auth login`. Se actualizó la regla dura
+`.opencode/rules/flujo-git.md` con una sección "Pull Requests con `gh`" (crear PR hacia
+`develop` con `gh pr create`, listar/ver con `gh pr list`/`view`, checkout, y merge ORIGINAL
+`gh pr merge --merge` solo con aprobación). También se actualizó `AGENTS.md` (sección Git) y el
+skill `.agents/skills/auditoria-documentacion/SKILL.md` (paso de push + `gh pr create`).
+
+**Decisiones:**
+- `gh` no reemplaza a git: es la capa de GitHub para gestionar PRs. El push sigue siendo git.
+- Queda explícito que el agente NO crea/mergea/cierra PRs sin aprobación del usuario.
+- El flujo merge a `develop` queda preferentemente vía PR aprobado (no merge directo local).
+
+**Archivos tocados:**
+- `.opencode/rules/flujo-git.md` — nueva sección PRs con `gh` + pasos de merge vía PR.
+- `AGENTS.md` — sección Git con uso de `gh` e instalación en `~/.local/bin/gh`.
+- `.agents/skills/auditoria-documentacion/SKILL.md` — sección "Commits y PR" con `gh pr create`.
+- `docs/estado_actual_proyecto.md` — ítem en decisiones vigentes.
+- `docs/vitacora_agentica.md` — esta entrada.
+
+**Estado resultante:** primer PR del repo creado (#1) con `gh pr create` de
+`feature/requerimientos-infraestructura` → `develop`. El uso de `gh` queda documentado en las
+reglas del proyecto.

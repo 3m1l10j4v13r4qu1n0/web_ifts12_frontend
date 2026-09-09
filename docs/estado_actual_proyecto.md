@@ -159,6 +159,9 @@ reciente→antigua en Home.
 - Responder y commiteár **siempre en español rioplatense**; Conventional Commits con scope en
   minúscula; commits atómicos.
 - Prohibido trabajar sobre `main`/`develop`; ramas `feature/` desde `develop`.
+- PRs con `gh` (`~/.local/bin/gh`): tras el push aprobado, `gh pr create --base develop`; el
+  merge (`gh pr merge --merge`) solo con aprobación del usuario. Definido en
+  `.opencode/rules/flujo-git.md`.
 - Regla **dura** de versionado por fases: al cerrar fase, commits atómicos + tag anotado semver
   (menor por fase, `v1.0.0` → Fase 1) y **push solo con aprobación explícita**
   (`.opencode/rules/versionado-fases.md`).
