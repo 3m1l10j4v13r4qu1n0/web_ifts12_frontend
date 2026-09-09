@@ -1,6 +1,6 @@
 # Estado Actual del Proyecto
 
-> Última actualización: 2026-09-09 (Fase 6 — brechas de auditoría sin dependencias)
+> Última actualización: 2026-09-09 (Auditoría de infraestructura)
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `vitacora_agentica.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.
 
@@ -105,6 +105,13 @@ reciente→antigua en Home.
   Fase 6: RF-22 (contacto/pie), accesos rápidos faltantes, `Carrera` con modalidad/horarios,
   FAQ descriptiva por segmento, fechas en novedades. Quedan pendientes los 🔵 (bloqueados por
   Backend) y los ❌ que requieren contenidos oficiales de Análisis/Edith.
+- **Auditoría de infraestructura** contra los 3 documentos de `docs/driveFrontend/05_infraestructura/`
+  **completada** (`docs/frontend/auditoria-infraestructura.md`, rama
+  `feature/requerimientos-infraestructura`): arquitectura Plan B, build estático, stack y
+  ambientes consistentes. 10 brechas detectadas (INF-A1…INF-J1), la única severa es un typo
+  `iffts12.edu.ar` (doble f) en el doc del grupo 5 que puede propagarse a config real. El
+  frontend no usa `import.meta.env` todavía; falta `.env.example` y migrar enlaces a variables
+  de entorno cuando haya URLs oficiales.
 
 ## 8. Documentos de referencia (relevamiento)
 
@@ -116,6 +123,10 @@ reciente→antigua en Home.
 - `docs/frontend/auditoria-analisis-unificado.md` — Auditoría de cumplimiento del frontend
   contra el documento unificado de Análisis (matriz RF-01…RF-34, comparativas de menú/accesos,
   accionable sin dependencias, bloqueos externos). Documento vivo.
+- `docs/frontend/auditoria-infraestructura.md` — Auditoría de consistencia entre los
+  requerimientos de infraestructura (`docs/driveFrontend/05_infraestructura/`: especificación
+  técnica, cuestionario Moodle y grupo 5) y el estado real del frontend. 10 brechas
+  codificadas (INF-A1…INF-J1) + checklist accionable. Documento vivo.
 - `docs/driveFrontend/mapa_inicial_sitio_web_ifts12_2026.md` — Mapa inicial del sitio web,
   resultado del relevamiento del 27/08/2026. Define la estructura preliminar del sitio (secciones,
   botones/menú, accesos rápidos, comunidades) y qué debe verificar cada área (Análisis, UX/UI,
@@ -148,6 +159,9 @@ reciente→antigua en Home.
 - Responder y commiteár **siempre en español rioplatense**; Conventional Commits con scope en
   minúscula; commits atómicos.
 - Prohibido trabajar sobre `main`/`develop`; ramas `feature/` desde `develop`.
+- PRs con `gh` (`~/.local/bin/gh`): tras el push aprobado, `gh pr create --base develop`; el
+  merge (`gh pr merge --merge`) solo con aprobación del usuario. Definido en
+  `.opencode/rules/flujo-git.md`.
 - Regla **dura** de versionado por fases: al cerrar fase, commits atómicos + tag anotado semver
   (menor por fase, `v1.0.0` → Fase 1) y **push solo con aprobación explícita**
   (`.opencode/rules/versionado-fases.md`).
@@ -156,3 +170,7 @@ reciente→antigua en Home.
 - Stack fijado y documentado en `docs/frontend/propuesta-tecnologica.md`; backend de referencia
   Python/Flask + Gunicorn + Nginx + PostgreSQL (Plan B).
 - `docs/driveFrontend/` no se versiona (gitignored), pero su contenido es fuente de verdad.
+- Al auditar documentación, además del informe, actualizar siempre el archivo del grupo
+  correspondiente (`grupo_X_*.md`) — regla dura
+  `.agents/rules/auditoria-documentacion.md` y skill
+  `.agents/skills/auditoria-documentacion/SKILL.md`.

@@ -42,6 +42,10 @@ infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commit
 - Antes de mergear: integrar `origin/develop` en la rama feature y resolver
   conflictos ahí; checklist previa `npm run lint` · `npm run build` · `npm run test`
   (una vez que existan esos scripts).
+- **PRs con `gh`:** instalado en `~/.local/bin/gh` (autenticación la maneja el usuario,
+  `gh auth login`). Tras pushear la rama (con aprobación), abrir PR hacia `develop` con
+  `gh pr create --base develop --head <rama> ...`. Merge ORIGINAL (`gh pr merge --merge`) solo
+  con aprobación del usuario; el agente NO crea/mergea/cierra PRs por cuenta propia.
 - Push/merge SOLO con aprobación explícita del usuario.
 - Al cerrar cada fase: commits atómicos + tag anotado con versión semver y nombre
   acorde a la fase, y push siempre previa pregunta (regla dura:
@@ -68,6 +72,19 @@ infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commit
   de menú, logo enlazado a home, portada 1680×900, etc.). Se activan a pedido
   del usuario (en su mayoría están `disable-model-invocation`).
 
+
+## Auditoría de documentación (regla + skill: `.agents/`)
+
+- **Regla dura:** `.agents/rules/auditoria-documentacion.md` — al auditar documentación
+  (requerimientos, especificaciones en `docs/driveFrontend/` u otra que afecte a un grupo),
+  el agente DEBE actualizar también el archivo del grupo correspondiente (`grupo_X_*.md`),
+  no quedarse solo con el informe versionado.
+- **Skill:** `.agents/skills/auditoria-documentacion/SKILL.md` — flujo completo: identificar
+  grupo → relevar estado real → leer el doc del grupo → marcar ✅/🟡/🔵/⏳ → aplicar
+  correcciones verificadas → informe `docs/frontend/auditoria-*.md` → memoria → commits
+  (los cambios de `docs/driveFrontend/` NO se commitean).
+- Ejemplo de referencia: auditoría de infraestructura (09/09/2026), que además del informe
+  actualizó `grupo_5_infraestructura.md`.
 
 ## Memoria del proyecto (docs/estado_actual_proyecto.md y docs/vitacora_agentica.md)
 

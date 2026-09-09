@@ -363,3 +363,131 @@ lint ✅, build ✅, tests ✅ (11/11). El frontend ahora tiene: dirección/hora
 Footer, 11 accesos rápidos en Home (5 atenuados), 6 carreras con modalidad, 12 FAQs por 4
 categorías, noticias con fechas y ordenamiento reciente→antigua. Pendientes: contenido real de
 Análisis/Edith, endpoints y auth de Backend, wireframes de UX/UI, URLs oficiales.
+
+---
+
+## 2026-09-09 — Auditoría de infraestructura: requerimientos vs. proyecto
+
+**Qué se hizo:** desde `develop` se creó la rama `feature/requerimientos-infraestructura`. Se
+auditaron los 3 documentos de `docs/driveFrontend/05_infraestructura/` (especificación técnica
+de requerimientos, cuestionario Moodle/hosting y checklist del grupo 5) contra la documentación
+interna del frontend (`docs/frontend/propuesta-tecnologica.md`,
+`dependencias-equipos.md`, `estado_actual_proyecto.md`) y el código real (vite.config.ts,
+package.json, `src/api/endpoints.ts`, `src/constants/enlaces.ts`). Se generó el informe
+`docs/frontend/auditoria-infraestructura.md` con tabla de consistencia por área, 10 brechas
+codificadas (INF-A1…INF-J1) y checklist accionable para Frontend.
+
+**Decisiones/des cubrimientos clave:**
+- El proyecto está esencialmente alineado con los requerimientos de Infra: build estático, SPA
+  fallback, stack Python/Flask/PostgreSQL/Docker, ambientes y backups coinciden.
+- Brecha severa: typo `iffts12.edu.ar` (doble f) en `grupo_5_infraestructura.md` — riesgo de
+  propagarse a config real de Nginx/DNS.
+- El código no usa `import.meta.env` ni `VITE_*`: las URLs viven como constantes vacías en
+  `enlaces.ts` y `endpoints.ts`. No existe `.env.example`.
+- D3 define solo 3 variables de entorno pero el frontend tiene 6 placeholders de URLs
+  (moodle, inscripción, SIU, constancias, mesas, calendario) → brecha de coordinación.
+- Cabeceras de seguridad Nginx y `client_max_body_size 15m` de la especificación no están en
+  el bloque Nginx propuesto por el grupo 5.
+
+**Archivos tocados:**
+- `docs/frontend/auditoria-infraestructura.md` — nuevo, informe completo de la auditoría.
+- `docs/vitacora_agentica.md` — esta entrada.
+
+**Estado resultante:** auditoría de infraestructura documentada en la rama
+`feature/requerimientos-infraestructura`. No se tocó código de aplicación. Pendientes: revisar
+las brechas con Infra (typo de dominio, cabeceras Nginx, variables de entorno), alinear la
+propuesta tecnológica y migrar enlaces a variables de entorno cuando haya URLs oficiales.
+
+---
+
+## 2026-09-09 — Aplicación de hallazgos al doc del grupo 5 de Infraestructura
+
+**Qué se hizo:** sobre la base de la auditoría de infraestructura, se actualizó el documento
+`docs/driveFrontend/05_infraestructura/grupo_5_infraestructura.md` (fuente de verdad no
+versionada) para marcar lo ya cubierto por el Frontend y corregir brechas:
+
+- **Marcado como ✅:** build estático listo (`npm run build` en verde el 09/09/2026), ambiente
+  de desarrollo operativo (`npm run dev`), pasos 1-2 del flujo de despliegue (push a feature +
+  integración en develop).
+- **INF-D1:** corregido el typo `iffts12.edu.ar` → `ifts12.edu.ar` (dominio con doble "f") en
+  el CNAME y el subdominio de testing.
+- **INF-E1/INF-E2:** bloque Nginx del grupo 5 completado con cabeceras de seguridad
+  (X-Frame-Options, X-Content-Type-Options, X-XSS-Protection, Content-Security-Policy) y
+  `client_max_body_size 15m`, con nota de validar la CSP con Frontend/QA.
+- **INF-G2:** tabla de variables de entorno ampliada de 3 a 7 (`VITE_*` sumando SIU,
+  constancias, mesas de examen y calendario), con nota del estado real del código.
+- **Sección 13 nueva:** "Estado de avance según auditoría INF" clasificando lo cubierto por
+  Frontend, lo corregido en el documento y lo pendiente de Infra/Dirección/Backend.
+
+**Decisiones:** se trabajó solo sobre el documento fuente del Drive (no versionado), como
+pidió el usuario; los cambios versionados de memoria ya estaban registrados en la entrada de
+auditoría previa. No se repitió validación de código porque no se tocó `src/`.
+
+**Archivos tocados:**
+- `docs/driveFrontend/05_infraestructura/grupo_5_infraestructura.md` — actualizado (gitignored).
+- `docs/frontend/auditoria-infraestructura.md` — referenciado como marco (ya commitado en la
+  entrada previa).
+
+**Estado resultante:** el documento del grupo 5 refleja el estado real del Frontend y las
+correcciones de la auditoría. Pendientes de Infra/Dirección/Backend: VPS, dominio, Nginx real,
+URLs oficiales, contratos de API y presupuesto de testing.
+
+---
+
+## 2026-09-09 — Regla + skill de auditoría de documentación (.agents/)
+
+**Qué se hizo:** se creó la regla dura `.agents/rules/auditoria-documentacion.md` y el skill
+`.agents/skills/auditoria-documentacion/SKILL.md` para que toda auditoría de documentación
+también actualice el archivo del grupo correspondiente (`docs/driveFrontend/0X_*/grupo_X_*.md`),
+no solo el informe versionado. Se editó `AGENTS.md` con la sección "Auditoría de documentación
+(regla + skill: `.agents/`)" que referencias ambos y el ejemplo de la auditoría de
+infraestructura como patrón.
+
+**Decisiones:**
+- La regla vive en `.agents/rules/` (nueva subcarpeta, mismo patrón que `.opencode/rules/`);
+  el skill en `.agents/skills/auditoria-documentacion/` siguiendo el formato de frontmatter
+  YAML de los skills existentes.
+- Los estados de checklist son estables y consistentes con las auditorías previas:
+  ✅ listo / 🟡 parcial / 🔵 pendiente externo / ⏳ en proceso.
+- Queda explícito que los cambios a `docs/driveFrontend/**` NO se commitean (gitignored);
+  solo se versiona el informe (`docs/frontend/auditoria-*.md`) y la memoria.
+- Anti-alucinación: ✅ solo se marca con evidencia verificada en la sesión actual; no se
+  cambian estados que dependan de decisiones externas no confirmadas.
+
+**Archivos tocados:**
+- `.agents/rules/auditoria-documentacion.md` — nueva regla dura (nueva subcarpeta `rules/`).
+- `.agents/skills/auditoria-documentacion/SKILL.md` — nuevo skill con workflow completo.
+- `AGENTS.md` — nueva sección "Auditoría de documentación (regla + skill: `.agents/`)".
+- `docs/estado_actual_proyecto.md` — ítem en "Decisiones y convenciones vigentes".
+- `docs/vitacora_agentica.md` — esta entrada.
+
+**Estado resultante:** el patrón ya aplicado en la auditoría de infraestructura queda
+institucionalizado para futuras auditorías (grupo_1…grupo_6). No se tocó ningún doc de
+`docs/driveFrontend/` en esta tarea.
+
+---
+
+## 2026-09-09 — Integración de `gh` (CLI de GitHub) al flujo de git
+
+**Qué se hizo:** se instaló el binario de `gh` v2.100.0 en `~/.local/bin/gh` (sin root, entorno
+Arch sin snap/apt) y el usuario completó `gh auth login`. Se actualizó la regla dura
+`.opencode/rules/flujo-git.md` con una sección "Pull Requests con `gh`" (crear PR hacia
+`develop` con `gh pr create`, listar/ver con `gh pr list`/`view`, checkout, y merge ORIGINAL
+`gh pr merge --merge` solo con aprobación). También se actualizó `AGENTS.md` (sección Git) y el
+skill `.agents/skills/auditoria-documentacion/SKILL.md` (paso de push + `gh pr create`).
+
+**Decisiones:**
+- `gh` no reemplaza a git: es la capa de GitHub para gestionar PRs. El push sigue siendo git.
+- Queda explícito que el agente NO crea/mergea/cierra PRs sin aprobación del usuario.
+- El flujo merge a `develop` queda preferentemente vía PR aprobado (no merge directo local).
+
+**Archivos tocados:**
+- `.opencode/rules/flujo-git.md` — nueva sección PRs con `gh` + pasos de merge vía PR.
+- `AGENTS.md` — sección Git con uso de `gh` e instalación en `~/.local/bin/gh`.
+- `.agents/skills/auditoria-documentacion/SKILL.md` — sección "Commits y PR" con `gh pr create`.
+- `docs/estado_actual_proyecto.md` — ítem en decisiones vigentes.
+- `docs/vitacora_agentica.md` — esta entrada.
+
+**Estado resultante:** primer PR del repo creado (#1) con `gh pr create` de
+`feature/requerimientos-infraestructura` → `develop`. El uso de `gh` queda documentado en las
+reglas del proyecto.
