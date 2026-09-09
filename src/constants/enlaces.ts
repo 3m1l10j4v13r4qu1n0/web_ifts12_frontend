@@ -3,4 +3,8 @@
 export const ENLACES = {
   moodle: '',
   inscripcion: '',
+  siu: '',
+  constancias: '',
+  mesasExamen: '',
+  calendario: '',
 } as const;

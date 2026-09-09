@@ -7,6 +7,9 @@ interface CardNoticiaProps {
 function CardNoticia({ noticia }: CardNoticiaProps) {
   return (
     <article className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+      {noticia.imagenUrl && (
+        <img src={noticia.imagenUrl} alt="" className="mb-4 h-40 w-full rounded-lg object-cover" />
+      )}
       {noticia.fecha !== '' && (
         <p className="text-xs font-medium uppercase tracking-wide text-acento-700">
           {noticia.fecha}

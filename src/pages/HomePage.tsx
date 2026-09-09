@@ -13,6 +13,13 @@ import {
   mockNoticias,
 } from '../constants/mock-data';
 
+const noticiasOrdenadas = [...mockNoticias].sort((a, b) => {
+  if (a.fecha === '' && b.fecha === '') return 0;
+  if (a.fecha === '') return 1;
+  if (b.fecha === '') return -1;
+  return new Date(b.fecha).getTime() - new Date(a.fecha).getTime();
+});
+
 function HomePage() {
   const accionesPortada: {
     etiqueta: string;
@@ -82,7 +89,7 @@ function HomePage() {
           Novedades
         </h2>
         <div className="mt-6">
-          <SliderNoticias noticias={mockNoticias} titulo="Novedades" />
+          <SliderNoticias noticias={noticiasOrdenadas} titulo="Novedades" />
         </div>
       </section>
 

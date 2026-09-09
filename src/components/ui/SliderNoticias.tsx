@@ -56,6 +56,13 @@ function SliderNoticias({ noticias, titulo = 'Novedades' }: SliderNoticiasProps)
       </div>
 
       <article aria-live="polite" className="mt-6">
+        {noticiaActual.imagenUrl && (
+          <img
+            src={noticiaActual.imagenUrl}
+            alt=""
+            className="mb-4 h-48 w-full rounded-lg object-cover"
+          />
+        )}
         {noticiaActual.fecha !== '' && (
           <p className="text-xs font-medium uppercase tracking-wide text-acento-700">
             {noticiaActual.fecha}

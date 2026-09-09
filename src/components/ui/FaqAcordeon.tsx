@@ -5,6 +5,7 @@ const etiquetasCategoria: Record<FaqItem['categoria'], string> = {
   ingresantes: 'Ingresantes',
   estudiantes: 'Estudiantes',
   docentes: 'Docentes',
+  institucional: 'Institucional',
 };
 
 interface FaqAcordeonProps {
