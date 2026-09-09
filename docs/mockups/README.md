@@ -49,13 +49,14 @@ levantar el proyecto.
 
 | Archivo | Vista | Replica de | Cambios para explorar |
 |---|---|---|---|
-| `home.html` | Home completa | `src/pages/HomePage.tsx` + layout | CTA de inscripción, banda de Moodle, estado "deshabilitado" de accesos (Becas), FAQ abierto/cerrado, slider |
-| `pagina-seccion.html` | Sección placeholder | `src/pages/PaginaPlaceholder.tsx` | Título de cada sección + item activo del menú |
-| `pagina-404.html` | Página no encontrada | `src/pages/PaginaNoEncontrada.tsx` | — |
+| `home.html` | Home completa | `src/pages/HomePage.tsx` + layout | CTA de inscripción, banda de Moodle, 11 accesos rápidos (5 deshabilitados), 6 carreras con modalidad, slider con fechas, 12 FAQs por 4 categorías, footer con dirección |
+| `pagina-seccion.html` | Sección placeholder | `src/pages/PaginaPlaceholder.tsx` | Título de cada sección + item activo del menú + footer con dirección |
+| `pagina-404.html` | Página no encontrada | `src/pages/PaginaNoEncontrada.tsx` | — + footer con dirección |
 
 ## Vistas cubiertas
 
-- **Home** (portada, accesos rápidos, carreras, novedades/slider, comunidades, FAQ).
+- **Home** (portada, accesos rápidos con 5 deshabilitados, 6 carreras con modalidad,
+  novedades/slider con fechas, comunidades, 12 FAQs por 4 categorías).
 - **Secciones placeholder**: Carreras, Ingresantes, Estudiantes, Docentes, Tutorías,
   Institucional, Noticias, Contacto, Preguntas frecuentes — una misma estructura con
   distinto título.
@@ -67,8 +68,10 @@ levantar el proyecto.
   oficiales (`ENLACES.moodle` / `ENLACES.inscripcion`). Hoy son placeholders vacíos, así que
   están comentados. Al recibir las URLs, descomentar para verlos.
 - **Enlaces "Campus virtual" / "Inscripción"** del footer: idem, se muestran recién con URLs.
-- **Acceso "Becas"**: se muestra atenuado porque su `href` está vacío (sin destino aún).
+- **Accesos deshabilitados**: Becas, Inscripción, SIU, Constancias, Mesas de examen, Calendario
+  se muestran atenuados (opacity-60) porque sus `href` están vacíos (sin destino aún).
 
-> Nota: estos mockups son una foto del estado actual (Fase 4, Home navegable con mocks).
+> Nota: estos mockups reflejan el estado Fase 6 (brechas de auditoría sin dependencias).
+> Los textos son placeholders descriptivos pendientes de validación por Análisis Funcional.
 > Las secciones placeholder se completan cuando lleguen los wireframes de UX/UI y los
 > contratos de Backend.

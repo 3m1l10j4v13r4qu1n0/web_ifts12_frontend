@@ -47,13 +47,11 @@
         <ul class="flex items-center gap-2">
           <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900">Carreras</a></li>
           <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900">Ingresantes</a></li>
-          <!-- Estado activo: item actual de la seccion -->
           <li><a href="#" class="block rounded-md bg-acento-100 px-3 py-2 text-sm font-medium text-acento-800">Estudiantes</a></li>
           <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900">Docentes</a></li>
           <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900">Noticias</a></li>
         </ul>
       </nav>
-      <!-- Boton hamburguesa: visible solo en pantallas chicas (lg:hidden) -->
       <button type="button" class="rounded-md p-2 text-slate-700 hover:bg-slate-100 lg:hidden" aria-label="Abrir menú">
         <svg aria-hidden="true" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -126,6 +124,26 @@
         <h3 class="text-base font-semibold text-slate-900">Becas</h3>
         <p class="mt-1 text-sm text-slate-600">Información sobre requisitos y solicitud de becas.</p>
       </li>
+      <li aria-disabled="true" class="flex flex-col rounded-xl border border-slate-200 bg-slate-50 p-6 opacity-60">
+        <h3 class="text-base font-semibold text-slate-900">Inscripción oficial</h3>
+        <p class="mt-1 text-sm text-slate-600">Inscripción a carreras a través del GCBA.</p>
+      </li>
+      <li aria-disabled="true" class="flex flex-col rounded-xl border border-slate-200 bg-slate-50 p-6 opacity-60">
+        <h3 class="text-base font-semibold text-slate-900">SIU</h3>
+        <p class="mt-1 text-sm text-slate-600">Sistema de Gestión Académica del instituto.</p>
+      </li>
+      <li aria-disabled="true" class="flex flex-col rounded-xl border border-slate-200 bg-slate-50 p-6 opacity-60">
+        <h3 class="text-base font-semibold text-slate-900">Constancias</h3>
+        <p class="mt-1 text-sm text-slate-600">Solicitud de constancias de cursada y título.</p>
+      </li>
+      <li aria-disabled="true" class="flex flex-col rounded-xl border border-slate-200 bg-slate-50 p-6 opacity-60">
+        <h3 class="text-base font-semibold text-slate-900">Mesas de examen</h3>
+        <p class="mt-1 text-sm text-slate-600">Fechas y convocatorias de mesas de examen.</p>
+      </li>
+      <li aria-disabled="true" class="flex flex-col rounded-xl border border-slate-200 bg-slate-50 p-6 opacity-60">
+        <h3 class="text-base font-semibold text-slate-900">Calendario académico</h3>
+        <p class="mt-1 text-sm text-slate-600">Fechas del ciclo lectivo, vacaciones y eventos.</p>
+      </li>
       <li>
         <a href="#" class="group flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-colors hover:border-acento-600">
           <h3 class="text-base font-semibold text-slate-900">Carreras</h3>
@@ -152,19 +170,43 @@
         <li>
           <article class="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
             <h3 class="text-lg font-semibold text-slate-900">Gestión parlamentaria</h3>
-            <p class="mt-2 text-sm text-slate-600">Descripción oficial pendiente de validación.</p>
+            <p class="mt-1 text-xs font-medium uppercase tracking-wide text-acento-700">Presencial · Turno nocturno</p>
+            <p class="mt-2 text-sm text-slate-600">Formación en procedimientos legislativos y gestión parlamentaria.</p>
           </article>
         </li>
         <li>
           <article class="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
             <h3 class="text-lg font-semibold text-slate-900">Administración y gestión de políticas culturales</h3>
-            <p class="mt-2 text-sm text-slate-600">Descripción oficial pendiente de validación.</p>
+            <p class="mt-1 text-xs font-medium uppercase tracking-wide text-acento-700">Presencial · Turno nocturno</p>
+            <p class="mt-2 text-sm text-slate-600">Gestión cultural, gestión de proyectos y políticas públicas en cultura.</p>
           </article>
         </li>
         <li>
           <article class="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
             <h3 class="text-lg font-semibold text-slate-900">Administración pública</h3>
-            <p class="mt-2 text-sm text-slate-600">Descripción oficial pendiente de validación.</p>
+            <p class="mt-1 text-xs font-medium uppercase tracking-wide text-acento-700">Presencial · Turno nocturno</p>
+            <p class="mt-2 text-sm text-slate-600">Gestión de organismos públicos, políticas públicas y administración estatal.</p>
+          </article>
+        </li>
+        <li>
+          <article class="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h3 class="text-lg font-semibold text-slate-900">Desarrollo comunitario</h3>
+            <p class="mt-1 text-xs font-medium uppercase tracking-wide text-acento-700">Presencial · Turno nocturno</p>
+            <p class="mt-2 text-sm text-slate-600">Intervención social, gestión comunitaria y desarrollo local.</p>
+          </article>
+        </li>
+        <li>
+          <article class="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h3 class="text-lg font-semibold text-slate-900">Intervención en salud mental comunitaria</h3>
+            <p class="mt-1 text-xs font-medium uppercase tracking-wide text-acento-700">Presencial · Turno nocturno</p>
+            <p class="mt-2 text-sm text-slate-600">Abordaje interdisciplinario de la salud mental en contextos comunitarios.</p>
+          </article>
+        </li>
+        <li>
+          <article class="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h3 class="text-lg font-semibold text-slate-900">Educación popular y comunitaria</h3>
+            <p class="mt-1 text-xs font-medium uppercase tracking-wide text-acento-700">Presencial · Turno nocturno</p>
+            <p class="mt-2 text-sm text-slate-600">Metodologías de educación popular, inclusión y mediación cultural.</p>
           </article>
         </li>
       </ul>
@@ -184,8 +226,9 @@
         </div>
       </div>
       <article class="mt-6">
-        <h3 class="text-xl font-semibold text-slate-900">Novedad pendiente de validación</h3>
-        <p class="mt-2 text-slate-600">El contenido oficial de esta novedad se publicará cuando el instituto lo confirme.</p>
+        <p class="text-xs font-medium uppercase tracking-wide text-acento-700">2026-09-01</p>
+        <h3 class="mt-2 text-xl font-semibold text-slate-900">Inicio del ciclo lectivo 2026</h3>
+        <p class="mt-2 text-slate-600">El instituto informa las fechas de inicio y los requisitos para el ciclo lectivo 2026.</p>
       </article>
       <!-- Indicadores del carrusel: el punto activo es azul, el resto gris -->
       <div class="mt-6 flex justify-center gap-2" aria-hidden="true">
@@ -232,37 +275,139 @@
     <h2 id="titulo-faq" class="text-2xl font-bold text-slate-900">Preguntas frecuentes</h2>
     <p class="mt-2 text-slate-600">Respuestas sobre ingreso, cursada y trámites.</p>
     <div class="mt-6 divide-y divide-slate-200 rounded-xl border border-slate-200 bg-white">
-      <!-- Item cerrado -->
+      <!-- Ingresantes -->
       <div>
         <h3>
           <button type="button" class="flex w-full items-center justify-between gap-4 px-6 py-4 text-left">
             <span class="flex flex-col gap-1">
               <span class="text-xs font-medium uppercase tracking-wide text-acento-700">Ingresantes</span>
-              <span class="font-medium text-slate-900">Pregunta para ingresantes pendiente de validación</span>
+              <span class="font-medium text-slate-900">¿Cómo me inscribo en una carrera?</span>
             </span>
             <span aria-hidden="true" class="text-slate-400">+</span>
           </button>
         </h3>
       </div>
-      <!-- Item abierto: muestra la respuesta (solo un item abierto a la vez) -->
+      <div>
+        <h3>
+          <button type="button" class="flex w-full items-center justify-between gap-4 px-6 py-4 text-left">
+            <span class="flex flex-col gap-1">
+              <span class="text-xs font-medium uppercase tracking-wide text-acento-700">Ingresantes</span>
+              <span class="font-medium text-slate-900">¿Se pueden reconocer estudios previos o equivalencias?</span>
+            </span>
+            <span aria-hidden="true" class="text-slate-400">+</span>
+          </button>
+        </h3>
+      </div>
+      <div>
+        <h3>
+          <button type="button" class="flex w-full items-center justify-between gap-4 px-6 py-4 text-left">
+            <span class="flex flex-col gap-1">
+              <span class="text-xs font-medium uppercase tracking-wide text-acento-700">Ingresantes</span>
+              <span class="font-medium text-slate-900">¿Qué requisitos necesito para anotarme?</span>
+            </span>
+            <span aria-hidden="true" class="text-slate-400">+</span>
+          </button>
+        </h3>
+      </div>
+      <!-- Estudiantes -->
       <div>
         <h3>
           <button type="button" class="flex w-full items-center justify-between gap-4 px-6 py-4 text-left">
             <span class="flex flex-col gap-1">
               <span class="text-xs font-medium uppercase tracking-wide text-acento-700">Estudiantes</span>
-              <span class="font-medium text-slate-900">Pregunta para estudiantes pendiente de validación</span>
+              <span class="font-medium text-slate-900">¿Cómo mantengo mi regularidad?</span>
+            </span>
+            <span aria-hidden="true" class="text-slate-400">+</span>
+          </button>
+        </h3>
+      </div>
+      <!-- Item abierto: muestra la respuesta -->
+      <div>
+        <h3>
+          <button type="button" class="flex w-full items-center justify-between gap-4 px-6 py-4 text-left">
+            <span class="flex flex-col gap-1">
+              <span class="text-xs font-medium uppercase tracking-wide text-acento-700">Estudiantes</span>
+              <span class="font-medium text-slate-900">¿Cómo solicito constancias de cursada o título?</span>
             </span>
             <span aria-hidden="true" class="text-slate-400">−</span>
           </button>
         </h3>
-        <p class="px-6 pb-4 text-sm text-slate-600">La respuesta oficial se completará cuando Análisis valide los contenidos.</p>
+        <p class="px-6 pb-4 text-sm text-slate-600">Las constancias se solicitan en la secretaría del instituto. Próximamente se habilitará el trámite en línea a través del SIU.</p>
+      </div>
+      <div>
+        <h3>
+          <button type="button" class="flex w-full items-center justify-between gap-4 px-6 py-4 text-left">
+            <span class="flex flex-col gap-1">
+              <span class="text-xs font-medium uppercase tracking-wide text-acento-700">Estudiantes</span>
+              <span class="font-medium text-slate-900">¿Cuándo son las mesas de examen?</span>
+            </span>
+            <span aria-hidden="true" class="text-slate-400">+</span>
+          </button>
+        </h3>
+      </div>
+      <!-- Docentes -->
+      <div>
+        <h3>
+          <button type="button" class="flex w-full items-center justify-between gap-4 px-6 py-4 text-left">
+            <span class="flex flex-col gap-1">
+              <span class="text-xs font-medium uppercase tracking-wide text-acento-700">Docentes</span>
+              <span class="font-medium text-slate-900">¿Cómo accedo a los concursos docentes?</span>
+            </span>
+            <span aria-hidden="true" class="text-slate-400">+</span>
+          </button>
+        </h3>
       </div>
       <div>
         <h3>
           <button type="button" class="flex w-full items-center justify-between gap-4 px-6 py-4 text-left">
             <span class="flex flex-col gap-1">
               <span class="text-xs font-medium uppercase tracking-wide text-acento-700">Docentes</span>
-              <span class="font-medium text-slate-900">Pregunta para docentes pendiente de validación</span>
+              <span class="font-medium text-slate-900">¿Qué accesos tengo como docente del instituto?</span>
+            </span>
+            <span aria-hidden="true" class="text-slate-400">+</span>
+          </button>
+        </h3>
+      </div>
+      <!-- Institucional -->
+      <div>
+        <h3>
+          <button type="button" class="flex w-full items-center justify-between gap-4 px-6 py-4 text-left">
+            <span class="flex flex-col gap-1">
+              <span class="text-xs font-medium uppercase tracking-wide text-acento-700">Institucional</span>
+              <span class="font-medium text-slate-900">¿Quiénes son los bedeles y cómo los contacto?</span>
+            </span>
+            <span aria-hidden="true" class="text-slate-400">+</span>
+          </button>
+        </h3>
+      </div>
+      <div>
+        <h3>
+          <button type="button" class="flex w-full items-center justify-between gap-4 px-6 py-4 text-left">
+            <span class="flex flex-col gap-1">
+              <span class="text-xs font-medium uppercase tracking-wide text-acento-700">Institucional</span>
+              <span class="font-medium text-slate-900">¿Qué es el SIU?</span>
+            </span>
+            <span aria-hidden="true" class="text-slate-400">+</span>
+          </button>
+        </h3>
+      </div>
+      <div>
+        <h3>
+          <button type="button" class="flex w-full items-center justify-between gap-4 px-6 py-4 text-left">
+            <span class="flex flex-col gap-1">
+              <span class="text-xs font-medium uppercase tracking-wide text-acento-700">Institucional</span>
+              <span class="font-medium text-slate-900">¿Cómo solicito mi título?</span>
+            </span>
+            <span aria-hidden="true" class="text-slate-400">+</span>
+          </button>
+        </h3>
+      </div>
+      <div>
+        <h3>
+          <button type="button" class="flex w-full items-center justify-between gap-4 px-6 py-4 text-left">
+            <span class="flex flex-col gap-1">
+              <span class="text-xs font-medium uppercase tracking-wide text-acento-700">Institucional</span>
+              <span class="font-medium text-slate-900">¿Se pueden hacer traspasos desde otros institutos?</span>
             </span>
             <span aria-hidden="true" class="text-slate-400">+</span>
           </button>
@@ -277,6 +422,12 @@
       <div>
         <p class="text-lg font-semibold text-white">IFTS N.º 12</p>
         <p class="mt-2 text-sm">Instituto de Formación Técnica Superior N.º 12.</p>
+        <address class="mt-4 not-italic text-sm leading-relaxed">
+          Misiones 26, C1083 ABB
+          <br />
+          Ciudad Autónoma de Buenos Aires
+        </address>
+        <p class="mt-2 text-sm">Horario de atención: turno nocturno</p>
       </div>
       <nav aria-label="Enlaces institucionales">
         <h3 class="text-sm font-semibold uppercase tracking-wide text-white">Institucional</h3>
