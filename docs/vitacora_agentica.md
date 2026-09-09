@@ -431,3 +431,36 @@ auditoría previa. No se repitió validación de código porque no se tocó `src
 **Estado resultante:** el documento del grupo 5 refleja el estado real del Frontend y las
 correcciones de la auditoría. Pendientes de Infra/Dirección/Backend: VPS, dominio, Nginx real,
 URLs oficiales, contratos de API y presupuesto de testing.
+
+---
+
+## 2026-09-09 — Regla + skill de auditoría de documentación (.agents/)
+
+**Qué se hizo:** se creó la regla dura `.agents/rules/auditoria-documentacion.md` y el skill
+`.agents/skills/auditoria-documentacion/SKILL.md` para que toda auditoría de documentación
+también actualice el archivo del grupo correspondiente (`docs/driveFrontend/0X_*/grupo_X_*.md`),
+no solo el informe versionado. Se editó `AGENTS.md` con la sección "Auditoría de documentación
+(regla + skill: `.agents/`)" que referencias ambos y el ejemplo de la auditoría de
+infraestructura como patrón.
+
+**Decisiones:**
+- La regla vive en `.agents/rules/` (nueva subcarpeta, mismo patrón que `.opencode/rules/`);
+  el skill en `.agents/skills/auditoria-documentacion/` siguiendo el formato de frontmatter
+  YAML de los skills existentes.
+- Los estados de checklist son estables y consistentes con las auditorías previas:
+  ✅ listo / 🟡 parcial / 🔵 pendiente externo / ⏳ en proceso.
+- Queda explícito que los cambios a `docs/driveFrontend/**` NO se commitean (gitignored);
+  solo se versiona el informe (`docs/frontend/auditoria-*.md`) y la memoria.
+- Anti-alucinación: ✅ solo se marca con evidencia verificada en la sesión actual; no se
+  cambian estados que dependan de decisiones externas no confirmadas.
+
+**Archivos tocados:**
+- `.agents/rules/auditoria-documentacion.md` — nueva regla dura (nueva subcarpeta `rules/`).
+- `.agents/skills/auditoria-documentacion/SKILL.md` — nuevo skill con workflow completo.
+- `AGENTS.md` — nueva sección "Auditoría de documentación (regla + skill: `.agents/`)".
+- `docs/estado_actual_proyecto.md` — ítem en "Decisiones y convenciones vigentes".
+- `docs/vitacora_agentica.md` — esta entrada.
+
+**Estado resultante:** el patrón ya aplicado en la auditoría de infraestructura queda
+institucionalizado para futuras auditorías (grupo_1…grupo_6). No se tocó ningún doc de
+`docs/driveFrontend/` en esta tarea.

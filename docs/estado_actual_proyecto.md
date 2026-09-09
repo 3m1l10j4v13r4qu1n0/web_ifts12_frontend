@@ -167,3 +167,7 @@ reciente→antigua en Home.
 - Stack fijado y documentado en `docs/frontend/propuesta-tecnologica.md`; backend de referencia
   Python/Flask + Gunicorn + Nginx + PostgreSQL (Plan B).
 - `docs/driveFrontend/` no se versiona (gitignored), pero su contenido es fuente de verdad.
+- Al auditar documentación, además del informe, actualizar siempre el archivo del grupo
+  correspondiente (`grupo_X_*.md`) — regla dura
+  `.agents/rules/auditoria-documentacion.md` y skill
+  `.agents/skills/auditoria-documentacion/SKILL.md`.
