@@ -84,14 +84,15 @@ Crear/actualizar `docs/frontend/auditoria-<area>.md`:
 - `docs/estado_actual_proyecto.md`: actualizar la sección correspondiente (in-place).
 - `docs/vitacora_agentica.md`: entrada nueva al final (append-only), nunca editar previas.
 
-### 8. Commits
+### 8. Commits y PR
 
 - Commitear SOLO el informe y la memoria (`docs/frontend/auditoria-*.md`,
   `docs/estado_actual_proyecto.md`, `docs/vitacora_agentica.md`).
 - NO commitear `docs/driveFrontend/**` (gitignored).
 - Commits atómicos, Conventional Commits en español, scope en minúscula
   (ej. `docs(infra): se auditan requerimientos de infraestructura vs proyecto`).
-- Push solo con aprobación explícita del usuario.
+- Push y PR solo con aprobación explícita del usuario: `git push origin <rama>` y luego
+  `gh pr create --base develop --head <rama> ...` (ver `.opencode/rules/flujo-git.md`).
 
 ## Ejemplo aplicado (patrón de referencia)
 

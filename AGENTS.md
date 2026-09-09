@@ -42,6 +42,10 @@ infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commit
 - Antes de mergear: integrar `origin/develop` en la rama feature y resolver
   conflictos ahí; checklist previa `npm run lint` · `npm run build` · `npm run test`
   (una vez que existan esos scripts).
+- **PRs con `gh`:** instalado en `~/.local/bin/gh` (autenticación la maneja el usuario,
+  `gh auth login`). Tras pushear la rama (con aprobación), abrir PR hacia `develop` con
+  `gh pr create --base develop --head <rama> ...`. Merge ORIGINAL (`gh pr merge --merge`) solo
+  con aprobación del usuario; el agente NO crea/mergea/cierra PRs por cuenta propia.
 - Push/merge SOLO con aprobación explícita del usuario.
 - Al cerrar cada fase: commits atómicos + tag anotado con versión semver y nombre
   acorde a la fase, y push siempre previa pregunta (regla dura:
