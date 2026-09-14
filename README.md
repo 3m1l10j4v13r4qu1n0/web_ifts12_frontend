@@ -38,6 +38,17 @@ Scripts disponibles:
 
 Checklist previa a mergear: `npm run lint` · `npm run build` · `npm run test` en verde.
 
+## Build de producción
+
+```bash
+npm install
+npm run build    # produce dist/ listo para servir desde Nginx
+```
+
+El `dist/` resultante es estático: requiere la regla de fallback SPA (`try_files ... /index.html`)
+en Nginx. Las variables de entorno del build (`VITE_*`) se están coordinando con Infra; al
+cerrarse esa definición se documentarán acá los valores y el `.env.example` correspondiente.
+
 ## Estructura del proyecto
 
 ```

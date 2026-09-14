@@ -124,22 +124,22 @@ Internet
 ```
 
 ### 6.3. Requisitos técnicos mínimos del VPS
-- Ubuntu Server LTS o distribución equivalente soportada.
+- Ubuntu Server 22.04/24.04 LTS (o distribución equivalente soportada).
 - SSH completo y privilegios administrativos (root o sudo).
-- Python 3.x + Flask/REST (u otra alternativa acordada por Backend) con Gunicorn.
-- Nginx como reverse proxy y terminación HTTPS (Let's Encrypt/Certbot).
-- PostgreSQL (recomendado) / MySQL-MariaDB como alternativa.
-- Docker + Docker Compose opcionales pero recomendables (confirmar metodología).
-- Firewall, SSH con claves, root deshabilitado cuando corresponda, actualizaciones.
+- Python 3.10+ (ideal 3.11/3.12) + Flask/REST (u otra alternativa acordada por Backend) con Gunicorn.
+- Nginx ≥ 1.18 como reverse proxy y terminación HTTPS (Let's Encrypt/Certbot).
+- PostgreSQL 14+ (recomendado) / MySQL 8+ / MariaDB 10.6+ como alternativa.
+- Docker Engine 24.0+ y Docker Compose v2.x (opcionales pero recomendables; confirmar metodología).
+- Firewall, SSH con claves (RSA 4096/Ed25519), root deshabilitado cuando corresponda, actualizaciones.
 - Backups automáticos y snapshot del VPS si el proveedor lo permite.
 - Escalabilidad de RAM/CPU/disco sin migración compleja.
 
 ### 6.4. Dimensionamiento
-| Escenario | CPU | RAM | Disco | Uso |
-|---|---|---|---|---|
-| Desarrollo / pruebas | 1-2 vCPU | 2 GB | 25-50 GB | Prototipos, integración, baja concurrencia. |
-| **Recomendado (producción inicial)** | **2 vCPU** | **4 GB** | **50-80 GB** | Flask + PostgreSQL + Nginx + tráfico moderado. |
-| Con margen de crecimiento | 4 vCPU | 8 GB | 80-160 GB | Mayor concurrencia y margen operativo. |
+| Escenario | CPU | RAM | Disco | Ancho de banda | Uso |
+|---|---|---|---|---|---|
+| Desarrollo / pruebas | 1 vCPU | 2 GB | 25-30 GB | 1 TB / 100 Mbps | Prototipos, integración, baja concurrencia. |
+| **Recomendado (producción inicial)** | **2 vCPU** | **4 GB** | **50-80 GB** | **4 TB / 1 Gbps** | Flask + PostgreSQL + Nginx + tráfico moderado. |
+| Con margen de crecimiento | 4 vCPU | 8 GB | 100-160 GB | 8 TB / 1 Gbps | Mayor concurrencia y margen operativo. |
 
 Baseline para evaluar: **2 vCPU / 4 GB RAM**. No se dimensiona para Moodle.
 
@@ -148,6 +148,9 @@ Baseline para evaluar: **2 vCPU / 4 GB RAM**. No se dimensiona para Moodle.
 - Registro directo en NIC Argentina: ARS 8.500/año (alta, 28/08/2026).
 - Renovación anual presupuestada; dominio a nombre del IFTS.
 - DNS del dominio apuntando a la IP pública del VPS (A/AAAA y, si corresponde, CNAME).
+- Subdominios planificados: QA/test en `test.ifts12.edu.ar` y Moodle en `campus.ifts12.edu.ar`
+  (este último solo si se decide que la web mantenga el enlace directo al Moodle).
+- HTTPS obligatorio con Let's Encrypt/Certbot, redirección 80 → 443, TLS 1.2/1.3 y HSTS.
 
 ### 6.6. Proveedores relevados (fecha 28/08/2026)
 Rangos de precios mensuales (promo/renovación donde aplica y equivalencias aproximadas).
@@ -215,3 +218,22 @@ DigitalOcean, Akamai/Linode y Hetzner como referencia técnico-económica.
   `aria-live` en el slider de novedades.
 - Menú con hamburguesa mobile y enlaces accesibles por teclado.
 - Coordinación con UX/UI para wireframes y criterios visuales definitivos (regla 90/10 de color).
+
+## 9. Política de optimización de imágenes (INF-C1)
+
+Requisito de la especificación técnica de Infraestructura (D1 §3.3): el sitio debe servirse con
+assets optimizados. Criterio adoptado por el Frontend:
+
+- **Formatos:** SVG para logotipos, íconos e ilustraciones simples; WebP para fotografías y
+  gráficos raster (con fallback `png`/`jpg` vía `<picture>` cuando el navegador no soporte WebP).
+- **Peso máximo:** 500 KB por imagen (de referencia para el build; ningún asset debe superarlo
+  en producción).
+- **Practicas:** comprimir antes de subir al repo (`public/` o importado), preferir
+  `loading="lazy"` + `decoding="async"` para imágenes fuera del primer viewport, y dimensionar
+  el asset al tamaño real de visualización (sin escalar con CSS).
+- **Optimización en build:** el build de Vite minifica HTML/CSS/JS; la optimización de imágenes
+  se hace en origen (optimización de assets), no en el CI, salvo que se agregue un pipeline de
+  Vite (p. ej. `vite-plugin-imagemin`).
+
+> Pendiente de coordinación con Infra/UX para validar si este criterio entra en el CI o queda
+> como regla manual de equipo.

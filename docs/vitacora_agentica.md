@@ -491,3 +491,83 @@ skill `.agents/skills/auditoria-documentacion/SKILL.md` (paso de push + `gh pr c
 **Estado resultante:** primer PR del repo creado (#1) con `gh pr create` de
 `feature/requerimientos-infraestructura` → `develop`. El uso de `gh` queda documentado en las
 reglas del proyecto.
+
+---
+
+## 2026-09-09 — Implementación de brechas de auditoría de infraestructura (rama `feature/implementacion-infra`)
+
+**Qué se hizo:** se creó la rama `feature/implementacion-infra` desde `develop` y se ejecutaron
+las porciones de la auditoría de infraestructura que el Frontend puede resolver sin esperar a
+Infra/Dirección:
+
+- **`docs/frontend/propuesta-tecnologica.md`:**
+  - §6.3: versiones mínimas de software alineadas con la especificación técnica (Ubuntu
+    22.04/24.04, Python 3.10+, Nginx ≥ 1.18, PostgreSQL 14+, MySQL 8/MariaDB 10.6+, Docker
+    Engine 24.0+ y Compose v2.x) — INF-B1.
+  - §6.4: tabla de dimensionamiento con columna de ancho de banda (1 TB/100 Mbps, 4 TB/1 Gbps,
+    8 TB/1 Gbps) y rangos de disco unificados (mínimo 25-30 GB, ideal 100-160 GB) — INF-A1/A2.
+  - §6.5: subdominios `test.ifts12.edu.ar` y `campus.ifts12.edu.ar` + requisitos TLS 1.2/1.3 y
+    HSTS — INF-D2.
+  - §9 (nueva): política de optimización de imágenes WebP/SVG ≤ 500 KB — INF-C1.
+- **`README.md`:** nueva sección "Build de producción" (`npm run build` → `dist/` estático +
+  nota de fallback SPA y env vars pendientes) — checklist §5.1.
+- **`docs/estado_actual_proyecto.md`:** §6 actualizado con el estado de la alineación y los
+  pendientes de Infra (INF-G1/G2).
+
+**Decisiones:**
+- Quedan **bloqueadas por Infra/Dirección** las variables `VITE_*` (¿3, 6 o 7?): se espera el
+  acuerdo sobre la lista final antes de crear `.env.example` y migrar `enlaces.ts`/`API_BASE_URL`
+  a `import.meta.env` (INF-G1/G2).
+- La corrección del typo `iffts12.edu.ar` y las cabeceras Nginx quedan a cargo de Infra
+  (INF-D1/E1/E2), ya aplicadas en el doc de Drive del grupo 5 en la auditoría previa.
+- La política de imágenes se documenta con reglas manuales de equipo; la automatización en CI
+  queda como opcional a coordinar con Infra.
+
+**Archivos tocados:**
+- `docs/frontend/propuesta-tecnologica.md` — §6.3, §6.4, §6.5 y nueva §9.
+- `README.md` — sección "Build de producción".
+- `docs/estado_actual_proyecto.md` — §6 y cabecera de "última actualización".
+- `docs/vitacora_agentica.md` — esta entrada.
+
+**Estado resultante:** 4 de las 5 brechas internas del Frontend resueltas en documentación
+(INF-A1, INF-A2, INF-B1, INF-D2, INF-C1) y el checklist §5.1 completo. Sin cambios de código en
+`src/`; las tareas de env vars (INF-G1/G2) siguen a la espera de la decisión de Infra/Dirección.
+
+---
+
+## 2026-09-09 — Conversión de entregas a Markdown + actualización al estado actual
+
+**Qué se hizo:** se convirtieron los 6 entregables de `docs/entregas/` de `.docx` a Markdown
+(pandoc `-t gfm --wrap=none`), manteniendo los `.docx` fuente. Se verificó qué documentos
+estaban desactualizados respecto de las implementaciones de hoy (auditoría de infraestructura
+y rama `feature/implementacion-infra`) y se actualizaron 3:
+
+- **Matriz de Dependencias:** se agregaron dependencias nuevas de la auditoría (lista final de
+  variables `VITE_*` INF-G2, cabeceras Nginx + `client_max_body_size 15m` INF-E1/E2, resultado
+  de la reunión con Oscar INF-J1, URL definitiva de la API con Backend, URLs oficiales de las 6
+  integraciones) y se marcaron Listo los entregables resueltos (propuesta §6, política de
+  imágenes, bloque Nginx de ejemplo).
+- **Registro de Decisiones:** se agregaron DEC-011 (env vars a `import.meta.env`), DEC-012
+  (política de imágenes WebP/SVG ≤ 500 KB), DEC-013 (alineación de propuesta §6 con especif.),
+  DEC-014 (entregas en Markdown).
+- **Reporte Semanal:** se agregó la semana 09/09/2026 (auditoría de infraestructura + rama
+  `feature/implementacion-infra` + PR #2), conservando el reporte de la semana 31/08.
+
+**No se tocaron:** Acta de Roles, Inventario Técnico y Minuta (documentos históricos/snapshot,
+sin cambios por infra).
+
+**Decisiones:**
+- Los `.docx` fuente se conservan; los `.md` generados son la versión versionable/diffable.
+- Solo 3 entregables necesitaban actualización al estado real; el resto queda como registro
+  histórico de la fecha de emisión.
+
+**Archivos tocados:**
+- `docs/entregas/*.md` — 6 archivos nuevos (conversión pandoc).
+- `docs/entregas/2026-08-31__Matriz_Dependencias_Frontend_v0.1.md` — actualizado (nuevas deps).
+- `docs/entregas/2026-08-31__Registro_Decisiones_Frontend_v0.1.md` — actualizado (DEC-011…014).
+- `docs/entregas/2026-08-31__Reporte_Semanal_Frontend_v0.1.md` — actualizado (semana 09/09).
+- `docs/estado_actual_proyecto.md` — §8 con referencias a entregas Markdown.
+- `docs/vitacora_agentica.md` — esta entrada.
+
+**Estado resultante:** las entregas reflejan el estado real del frontend (infra auditada y
+alineada). Los pendientes (INF-G1/G2, VPS, URLs) siguen bloqueados por Infra/Dirección.
