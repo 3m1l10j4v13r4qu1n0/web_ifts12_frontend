@@ -28,7 +28,13 @@ página con dirección y horario, 5 accesos rápidos faltantes (SIU, Inscripció
 Mesas, Calendario) como placeholders atenuados, tipos `Carrera` y `Noticia` extendidos con
 `modalidad`/`horarios`/`imagenUrl`/`enlace`, 12 FAQs descriptivas por 4 categorías
 (ingresantes/estudiantes/docentes/institucional), noticias con fechas ISO y ordenamiento
-reciente→antigua en Home.
+reciente→antigua en Home. Se completó el **Refactor Mapa Sitio V2** (15/09/2026): la nueva
+fuente de verdad de navegación es `docs/driveFrontend/02_ux_ui/mapa_inicial_sitio_web_ifts12_2026_v2.md`
+(mapa V1 eliminado). El menú principal pasó a **9 items** (Inicio, Carreras, Ingresantes,
+Estudiantes, Tutorías, Docentes, Institucional, Novedades, Contacto), se agregó un **buscador
+global** persistente en el header (`BuscadorGlobal`, filtra contenido local de mocks) y la Home
+separa **accesos destacados** (Moodle, Inscripción, Carreras) de los **accesos rápidos**
+(Tutorías, Becas, Constancias, Mesas, Calendario, Contacto).
 
 ## 2. Arquitectura
 
@@ -42,6 +48,9 @@ reciente→antigua en Home.
 - Estado global: Context API (no Redux); datos de API futuros con TanStack Query v5.
 - Páginas placeholder por sección: Home, Carreras, Ingresantes, Estudiantes, Docentes,
   Tutorías, Institucional, Noticias, FAQ, Contacto + 404.
+- Navegación según el Mapa del Sitio V2 (UX/UI, 15/09/2026): menú principal de 9 items +
+  buscador global persistente en el header (`BuscadorGlobal`, índice local de mocks) +
+  accesos destacados y rápidos separados en la Home.
 
 ## 3. Entidades / Modelos de dominio
 
@@ -141,17 +150,11 @@ reciente→antigua en Home.
   **Markdown** (pandoc, 09/09/2026) además del `.docx` fuente; matriz, registro y reporte
   actualizados con la auditoría de infraestructura. Recordatorio de pendientes de Infra en
   `docs/driveFrontend/05_infraestructura/bloqueo_infra.md` (no versionado).
-- `docs/driveFrontend/mapa_inicial_sitio_web_ifts12_2026.md` — Mapa inicial del sitio web,
-  resultado del relevamiento del 27/08/2026. Define la estructura preliminar del sitio (secciones,
-  botones/menú, accesos rápidos, comunidades) y qué debe verificar cada área (Análisis, UX/UI,
-  Frontend, Backend, Infra, QA). Documento vivo; Análisis Funcional debe validar contenidos y
-  prioridades; UX/UI debe proponer mapa definitivo, menú, wireframes. **Este mapa es la base
-  técnica para Frontend y Backend** una vez validado por Análisis/UX.
-- Secciones del mapa: Home, Carreras, Ingresantes, Estudiantes, Tutorías, Docentes, Institucional,
-  Noticias, 3 comunidades (tutoría/alumnos/docentes), 9 accesos rápidos.
-- Posibles botones de menú (11 posibles): Inicio, Carreras, Ingresantes, Estudiantes, Tutorías,
-  Docentes, Institucional, Noticias, Campus Virtual Moodle, Inscripción, Contacto. UX/UI debe
-  definir cuáles van a menú principal, submenús, bloques de Home o accesos rápidos.
+- `docs/driveFrontend/02_ux_ui/mapa_inicial_sitio_web_ifts12_2026_v2.md` — **Mapa del Sitio V2**,
+  propuesta de UX/UI y Arquitectura de Información (15/09/2026): buscador global, menú de 9 items,
+  accesos destacados/rápidos, contacto y jerarquía general. **Nueva fuente de verdad de
+  navegación**, reemplaza al mapa V1 (relevamiento 27/08/2026, eliminado). Pendiente de
+  validación de Análisis Funcional y de wireframes/prototipos de UX/UI.
 
 ## 9. Documentos de dependencias por grupo
 

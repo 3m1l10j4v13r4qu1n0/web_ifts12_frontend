@@ -68,8 +68,9 @@ infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commit
 - Los skills de `.opencode/skills/` (`crear-portada-sitio-web`,
   `crear-sitio-web-completo`, `aplicar-estilos-disenio-web`,
   `mejorar-navegacion-web`, `storytelling-dijital`) y las `.opencode/rules/reglas-*.md`
-  definen los criterios visuales del sitio (regla 90/10 de color, máx. 4-5 items
-  de menú, logo enlazado a home, portada 1680×900, etc.). Se activan a pedido
+  definen los criterios visuales del sitio (regla 90/10 de color, menú según el Mapa del Sitio
+  V2 de UX/UI — 9 items aprobados el 15/09/2026 —, logo enlazado a home, portada 1680×900, etc.).
+  Se activan a pedido
   del usuario (en su mayoría están `disable-model-invocation`).
 
 

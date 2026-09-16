@@ -571,3 +571,53 @@ sin cambios por infra).
 
 **Estado resultante:** las entregas reflejan el estado real del frontend (infra auditada y
 alineada). Los pendientes (INF-G1/G2, VPS, URLs) siguen bloqueados por Infra/Dirección.
+
+---
+
+## 2026-09-15 — Refactor Mapa Sitio V2 (nueva fuente de verdad de UX/UI)
+
+**Qué se hizo:** se creó la rama `refactor/mapa-sitio` desde `develop` (previo commit de la
+auditoría de backend en `feature/auditoria-backend` según aprobación del usuario). Se eliminó el
+mapa desactualizado `docs/driveFrontend/02_ux_ui/mapa_inicial_sitio_web_ifts12_2026.md` y se
+implementó la **nueva fuente de verdad** `mapa_inicial_sitio_web_ifts12_2026_v2.md` de UX/UI
+(15/09/2026) en el código:
+
+- **Menú principal de 9 items** (`constants/navegacion.ts`): Inicio, Carreras, Ingresantes,
+  Estudiantes, Tutorías, Docentes, Institucional, Novedades, Contacto. Reemplaza la regla previa
+  de máx. 4-5 items (aprobado por el usuario).
+- **Buscador global** (`components/layout/BuscadorGlobal.tsx` + `utils/busqueda.ts`): persistente
+  en el header, filtra contenido local (secciones del menú, carreras, novedades y FAQs) con
+  normalización de tildes, `combobox` accesible y navegación con Enter/click. Sin endpoint de
+  Backend todavía.
+- **Accesos de la Home separados** según V2: `ui/AccesosDestacados` (Campus Virtual Moodle,
+  Inscripción oficial, Carreras) + `AccesosRapidos` (Tutorías, Becas, Constancias, Mesas de
+  examen, Calendario académico, Contacto). `mock-data.ts` reorganizado (3 destacados + 6 rápidos).
+- **Header** con dos filas: logo + buscador (+ hamburguesa mobile) arriba y NavMenu de 9 items
+  abajo en desktop. Footer con `NAV_FOOTER` reducido a Preguntas frecuentes (evita duplicar el
+  menú).
+
+**Decisiones:**
+- La V2 es la fuente de verdad de navegación; se actualizaron las reglas internas que decían
+  "máx. 4-5 items" (`AGENTS.md`, `reglas-navegacion.md`, `reglas-guia-sitio-web.md`,
+  skills `crear-sitio-web-completo` y `mejorar-navegacion-web`) y `propuesta-tecnologica.md`.
+- El buscador indexa solo contenido local de mocks: la indexación real (incl. PDFs) queda
+  pendiente de un endpoint de búsqueda de Backend (no confirmado) — no se alucina endpoint.
+- Slider de novedades se mantiene como "noticias y novedades destacadas" (V2 no lo prohíbe y el
+  backend confirmó `/api/slider`).
+- El rol `combobox` en el input reemplazó a `role="search"` del form (Biome a11y); evitó el tag
+  `<search>` (desconocido en jsdom).
+
+**Archivos tocados:**
+- Código: `src/constants/navegacion.ts`, `src/constants/mock-data.ts`, `src/utils/busqueda.ts`,
+  `src/components/layout/{BuscadorGlobal,Header}.tsx`, `src/components/ui/AccesosDestacados.tsx`,
+  `src/pages/HomePage.tsx`.
+- Tests: `src/__tests__/{busqueda.test.ts,buscador-global.test.tsx,accesos-destacados.test.tsx}` (3 suites nuevas).
+- Reglas/docs: `AGENTS.md`, `.opencode/rules/{reglas-navegacion,reglas-guia-sitio-web}.md`,
+  `.opencode/skills/{crear-sitio-web-completo,mejorar-navegacion-web}/SKILL.md`,
+  `docs/frontend/{propuesta-tecnologica,acta-decisiones}.md`, `docs/estado_actual_proyecto.md`.
+- Drive (gitignored): eliminado el mapa V1; queda solo la V2.
+
+**Estado resultante:** `refactor/mapa-sitio` con navegación, buscador global y accesos V2
+implementados. Verificación: lint ✅, build ✅, tests ✅ (19/19, 10 archivos). Pendientes: validar
+la V2 con Análisis Funcional, wireframes de UX/UI, endpoint de búsqueda de Backend, URLs oficiales
+de Moodle/inscripción. Commit/push de la rama pendientes de aprobación.
