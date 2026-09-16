@@ -3,20 +3,18 @@ export interface ItemNavegacion {
   href: string;
 }
 
-// Menu principal: maximo 5 items segun reglas de navegacion. El logo enlaza a la
-// home, por eso no se incluye el item "Inicio".
 export const MENU_PRINCIPAL: readonly ItemNavegacion[] = [
+  { etiqueta: 'Inicio', href: '/' },
   { etiqueta: 'Carreras', href: '/carreras' },
   { etiqueta: 'Ingresantes', href: '/ingresantes' },
   { etiqueta: 'Estudiantes', href: '/estudiantes' },
+  { etiqueta: 'Tutorías', href: '/tutorias' },
   { etiqueta: 'Docentes', href: '/docentes' },
-  { etiqueta: 'Noticias', href: '/noticias' },
+  { etiqueta: 'Institucional', href: '/institucional' },
+  { etiqueta: 'Novedades', href: '/noticias' },
+  { etiqueta: 'Contacto', href: '/contacto' },
 ];
 
-// Enlaces complementarios del pie de pagina.
 export const NAV_FOOTER: readonly ItemNavegacion[] = [
-  { etiqueta: 'Institucional', href: '/institucional' },
-  { etiqueta: 'Tutorías', href: '/tutorias' },
   { etiqueta: 'Preguntas frecuentes', href: '/faq' },
-  { etiqueta: 'Contacto', href: '/contacto' },
 ];
