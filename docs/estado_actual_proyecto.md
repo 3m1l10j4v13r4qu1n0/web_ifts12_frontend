@@ -1,6 +1,6 @@
 # Estado Actual del Proyecto
 
-> Última actualización: 2026-09-09 (Entregas de `docs/entregas/` en Markdown + alineación propuesta tecnológica §6)
+> Última actualización: 2026-09-15 (Auditoría de la respuesta del backend + correcciones de contrato)
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `vitacora_agentica.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.
 
@@ -83,9 +83,16 @@ separa **accesos destacados** (Moodle, Inscripción, Carreras) de los **accesos 
 
 ## 5. Endpoints / Interfaces expuestas
 
+El 15/09/2026 el equipo de Backend respondió con definiciones técnicas formales
+(`docs/driveFrontend/04_backend/respuesta.md`): **prefijo `/api/`**, rutas públicas GET
+confirmadas (`/api/carreras[/:id]`, `/api/noticias[/:id]`, `/api/faqs?segmento=X`, `/api/slider`,
+`/api/calendario`, `/api/horarios`, `/api/docentes`, `/api/autoridades`, `/api/bedeles`,
+`/api/becas`, `/api/tutorias`), auth JWT (`/api/auth/login|logout|me`) y CRUD admin directo
+sobre rutas administrables. La tabla oficial (Swagger/OpenAPI) llega como entrega 2 (1 semana).
+
 | Método | Ruta | Descripción | Estado |
 |---|---|---|---|
-| — | — | Tabla oficial de endpoints vacía; **prohibido inventar**. Ningún consumo de API. | ⛔ bloqueado (Backend) |
+| — | — | Mapa de rutas **confirmado** por Backend; falta Swagger y DTOs. `src/api/endpoints.ts` sigue vacío; ningún consumo de API todavía. | 🟡 contrato confirmado — integración pendiente de entregas 2-3 |
 
 ## 6. Infraestructura / Integraciones
 
@@ -93,7 +100,10 @@ separa **accesos destacados** (Moodle, Inscripción, Carreras) de los **accesos 
   independiente del Moodle (Plan B). Detalle en `docs/frontend/propuesta-tecnologica.md`.
 - URLs de Moodle e inscripción en `src/constants/enlaces.ts` como **placeholders vacíos** hasta
   recibir las oficiales de IFTS/Dirección.
-- Variables de entorno: ninguna aún (por definir `API_BASE_URL` con Backend/Infra).
+- Variables de entorno (15/09/2026): Backend confirmó **3** (`API_BASE_URL`, `VITE_MOODLE_URL`,
+  `VITE_INSCRIPCION_URL`), resolviendo la duda INF-G2 ("¿3, 6 o 7?"). `API_BASE_URL` la proveerá
+  Backend (URL de testing local en Docker); Moodle/inscripción siguen 🔵 IFTS con fallback en
+  `.env`. Falta crear `.env.example` y migrar `enlaces.ts`/`API_BASE_URL` a `import.meta.env`.
 - `docs/frontend/propuesta-tecnologica.md` §6 alineado con la especificación técnica de
   Infraestructura (09/09/2026): versiones mínimas (Python 3.10+, PostgreSQL 14+, Docker 24.0+,
   Nginx ≥ 1.18), ancho de banda en la tabla de dimensionamiento (1 TB/4 TB/8 TB) y rangos de
@@ -130,6 +140,12 @@ separa **accesos destacados** (Moodle, Inscripción, Carreras) de los **accesos 
   `iffts12.edu.ar` (doble f) en el doc del grupo 5 que puede propagarse a config real. El
   frontend no usa `import.meta.env` todavía; falta `.env.example` y migrar enlaces a variables
   de entorno cuando haya URLs oficiales.
+- **Auditoría de backend** contra `docs/driveFrontend/04_backend/respuesta.md` **completada**
+  (`docs/frontend/auditoria-backend.md`, rama `feature/auditoria-backend`): rutas `/api/`
+  confirmadas (doc del grupo 4 decía `/api/v1/`, corregido), 8 rutas públicas nuevas registradas,
+  FAQ `?segmento=X`, CRUD admin directo (sin `/api/admin/`). Hallazgo de código corregido:
+  `ApiErrorResponse` ahora refleja `{ error: { code, message, details } }` (BE-A5). Pendientes:
+  confirmar `/api/contacto` POST, ORM y rate limiting; validar roles con Grupo 1.
 
 ## 8. Documentos de referencia (relevamiento)
 
@@ -145,6 +161,10 @@ separa **accesos destacados** (Moodle, Inscripción, Carreras) de los **accesos 
   requerimientos de infraestructura (`docs/driveFrontend/05_infraestructura/`: especificación
   técnica, cuestionario Moodle y grupo 5) y el estado real del frontend. 10 brechas
   codificadas (INF-A1…INF-J1) + checklist accionable. Documento vivo.
+- `docs/frontend/auditoria-backend.md` — Auditoría de la respuesta de Backend
+  (`docs/driveFrontend/04_backend/respuesta.md`) contra el estado real del frontend. 14
+  hallazgos (BE-A1…BE-A14), tabla de consistencia por área, correcciones al doc del grupo 4 y
+  al tipo `ApiErrorResponse`, y checklist accionable. Documento vivo.
 - `docs/entregas/` — entregables de cierre de fases (acta de roles, inventario técnico,
   matriz de dependencias, registro de decisiones, reporte semanal, minuta). Disponibles en
   **Markdown** (pandoc, 09/09/2026) además del `.docx` fuente; matriz, registro y reporte
