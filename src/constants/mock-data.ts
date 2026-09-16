@@ -171,22 +171,33 @@ export const mockFaqs: FaqItem[] = [
   },
 ];
 
-// Accesos rapidos solicitados en la minuta. Campus virtual toma la URL oficial
-// de Moodle cuando este disponible (ENLACES.moodle). Las rutas internas siguen
-// el mapa del sitio del AppRouter; las pendientes quedan vacias (deshabilitadas).
-export const mockAccesosRapidos: AccesoRapido[] = [
-  {
-    id: 'preguntas-frecuentes',
-    titulo: 'Preguntas frecuentes',
-    descripcion: 'Respuestas sobre ingreso, cursada y trámites.',
-    href: '/faq',
-  },
+// Accesos destacados de la Home segun el Mapa del Sitio V2 (UX/UI): Campus
+// Virtual Moodle, Inscripcion oficial y Carreras. Las dos primeras usan la URL
+// oficial cuando exista; quedan deshabilitadas mientras sea placeholder.
+export const mockAccesosDestacados: AccesoRapido[] = [
   {
     id: 'campus-virtual',
     titulo: 'Campus virtual',
-    descripcion: 'Acceso al aula virtual del instituto.',
+    descripcion: 'Acceso al aula virtual y a la cursada.',
     href: ENLACES.moodle,
   },
+  {
+    id: 'inscripcion',
+    titulo: 'Inscripción oficial',
+    descripcion: 'Inscripción a carreras a través del GCBA.',
+    href: ENLACES.inscripcion,
+  },
+  {
+    id: 'carreras',
+    titulo: 'Carreras',
+    descripcion: 'Oferta académica del instituto.',
+    href: '/carreras',
+  },
+];
+
+// Accesos rapidos de la Home segun el Mapa del Sitio V2 (UX/UI): las rutas
+// internas siguen el AppRouter; las pendientes de URL oficial quedan vacias.
+export const mockAccesosRapidos: AccesoRapido[] = [
   {
     id: 'tutorias',
     titulo: 'Tutorías',
@@ -198,18 +209,6 @@ export const mockAccesosRapidos: AccesoRapido[] = [
     titulo: 'Becas',
     descripcion: 'Información sobre requisitos y solicitud de becas.',
     href: '',
-  },
-  {
-    id: 'inscripcion',
-    titulo: 'Inscripción oficial',
-    descripcion: 'Inscripción a carreras a través del GCBA.',
-    href: ENLACES.inscripcion,
-  },
-  {
-    id: 'siu',
-    titulo: 'SIU',
-    descripcion: 'Sistema de Gestión Académica del instituto.',
-    href: ENLACES.siu,
   },
   {
     id: 'constancias',
@@ -228,12 +227,6 @@ export const mockAccesosRapidos: AccesoRapido[] = [
     titulo: 'Calendario académico',
     descripcion: 'Fechas del ciclo lectivo, vacaciones y eventos.',
     href: ENLACES.calendario,
-  },
-  {
-    id: 'carreras',
-    titulo: 'Carreras',
-    descripcion: 'Ofertas académicas del instituto.',
-    href: '/carreras',
   },
   {
     id: 'contacto',

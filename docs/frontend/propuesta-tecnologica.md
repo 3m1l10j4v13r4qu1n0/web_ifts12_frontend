@@ -61,8 +61,10 @@ src/
 ## 3. Componentes reutilizables (implementados)
 
 ### Layout (`components/layout/`)
-- `Header` + `NavMenu` — encabezado y menú (máx. 5 items, logo enlazado a Home, menú fijo y
-  hamburguesa mobile).
+- `Header` + `NavMenu` — encabezado y menú según Mapa V2 de UX/UI (9 items aprobados 15/09/2026)
+  con hamburguesa mobile.
+- `BuscadorGlobal` — buscador persistente en el header (filtra contenido local de mocks y
+  secciones; pendiente de endpoint de búsqueda de Backend).
 - `Footer` — pie institucional con secciones, enlaces y bloque de conexiones (campus/inscripción).
 - `Portada` — bloque visual inicial parametrizable (titular, subtítulo, acciones).
 
@@ -73,7 +75,9 @@ src/
 - `SliderNoticias` — carrusel accesible de novedades (indicador de posición, anterior/siguiente,
   ARIA; sin librerías externas).
 - `FaqAcordeon` — preguntas frecuentes accesibles (un ítem abierto a la vez).
-- `AccesosRapidos` — accesos directos en Home, con ítems pendientes deshabilitados.
+- `AccesosDestacados` — accesos destacados de la Home (campus, inscripción, carreras), ítems
+  pendientes deshabilitados.
+- `AccesosRapidos` — accesos directos de la Home, con ítems pendientes deshabilitados.
 - `Comunidades` — grilla de cards enlazadas (tutoría, alumnos, docentes).
 
 Todos son **presentacionales**: solo reciben props tipadas, no hacen llamadas HTTP ni manejan
