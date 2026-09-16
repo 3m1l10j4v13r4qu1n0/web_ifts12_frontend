@@ -28,14 +28,17 @@ Nota: Frontend informa rápido si una propuesta visual presenta dificultades de 
 
 ## 3. Backend, datos y APIs
 
+> Actualizado 15/09/2026: Backend respondió con definiciones técnicas formales
+> (`docs/driveFrontend/04_backend/respuesta.md`). Ver informe `docs/frontend/auditoria-backend.md`.
+
 | Pedido | Por qué lo necesita Frontend | Estado |
 |---|---|---|
-| Contratos de API (tabla oficial de endpoints) | La tabla de `fe-architect-scaffold` está vacía; prohibido inventar endpoints. | Bloqueado |
-| Esquemas de datos | Los tipos de `types/api` deben reflejar exactamente los esquemas del backend. | Bloqueado |
-| Códigos de error y mensajes | Manejo en interceptor global de Axios. | Bloqueado |
-| Autenticación y permisos | No se implementa auth real hasta que el backend la soporte. | Bloqueado |
-| Datos de prueba | Para etapas posteriores de integración. | Bloqueado |
-| Confirmar tecnología de backend en el VPS | Plan B recomienda Python/Flask con Gunicorn; de ello depende Nginx y el build estático. | A confirmar con Backend |
+| Contratos de API (tabla oficial de endpoints) | Mapa de rutas confirmado; falta la tabla oficial con parámetros/body/esquemas (Swagger/OpenAPI, entrega 2: 1 semana). | Parcial — 1 semana |
+| Esquemas de datos | Tipos `types/api` a alinear con los DTOs exactos (entrega 3: 2 semanas). | Parcial — 2 semanas |
+| Códigos de error y mensajes | Estructura `{ error: { code, message, details } }` confirmada; falta tabla de códigos. Tipo `ApiErrorResponse` ya corregido. | Parcial — 3 semanas |
+| Autenticación y permisos | JWT + token `{ sub, email, rol, exp }` confirmados; roles a validar con Grupo 1; login real en entrega 3. | Parcial — 2 semanas |
+| Datos de prueba | Seeders comprometidos en la entrega 4. | Comprometido — 3 semanas |
+| Confirmar tecnología de backend en el VPS | Confirmado: Python/Flask + PostgreSQL + Gunicorn + Docker Compose; host final a cargo de Infra. | ✅ Confirmado |
 
 ## 4. Infraestructura / DevOps (Plan B)
 
