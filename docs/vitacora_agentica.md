@@ -571,3 +571,47 @@ sin cambios por infra).
 
 **Estado resultante:** las entregas reflejan el estado real del frontend (infra auditada y
 alineada). Los pendientes (INF-G1/G2, VPS, URLs) siguen bloqueados por Infra/Dirección.
+
+---
+
+## 2026-09-15 — Auditoría de la respuesta de Backend (contratos de API)
+
+**Qué se hizo:** desde `develop` se creó la rama `feature/auditoria-backend`. Se leyó
+`docs/driveFrontend/04_backend/respuesta.md` (definiciones técnicas formales del equipo de
+Backend) y se auditó contra el estado real del frontend: `src/api/client.ts`,
+`src/api/endpoints.ts`, `src/types/api/error.types.ts`, `src/constants/enlaces.ts` y la
+documentación interna (`estado_actual_proyecto.md`, `dependencias-equipos.md`). Se generó el
+informe `docs/frontend/auditoria-backend.md` con tabla de consistencia por área y 14 hallazgos
+codificados (BE-A1…BE-A14), y se actualizó el documento fuente del grupo 4.
+
+**Decisiones / descubrimientos clave:**
+- **BE-A1:** Backend confirmó prefijo `/api/` **sin** `/api/v1/`; el doc del grupo 4 usaba
+  `/api/v1/` → corregido para no propagar rutas equivocadas a `endpoints.ts`.
+- **BE-A2/A3/A4:** rutas públicas confirmadas (8 nuevas: slider, calendario, horarios, docentes,
+  autoridades, bedeles, becas, tutorías); materias integradas en `/api/carreras/:id`; FAQ pasó a
+  `/api/faqs?segmento=X` (el doc decía `?categoria=X`).
+- **BE-A8:** CRUD admin directo sobre rutas administrables, sin el prefijo `/api/admin/` que
+  proponía el doc.
+- **BE-A5 (código):** se corrigió `src/types/api/error.types.ts` para reflejar la estructura de
+  error confirmada `{ error: { code, message, details } }`; el tipo previo
+  (`{ error: string; mensaje; usuario_id? }`) era incompatible. Tipo sin uso previo → cambio de
+  bajo riesgo.
+- **BE-A7/A9:** JWT + estructura de token `{ sub, email, rol, exp }` confirmados; roles
+  ADMIN/EDITOR/EDITOR_NOTICIAS sujetos a validación con Grupo 1; variables de entorno quedan en
+  **3** (`API_BASE_URL`, `VITE_MOODLE_URL`, `VITE_INSCRIPCION_URL`), resolviendo la duda INF-G2.
+- **Pendientes de Backend:** confirmar `/api/contacto` POST (BE-A6), ORM y rate limiting
+  (BE-A14). Cronograma comprometido: Swagger 1 sem, DTOs+Auth+GETs 2 sem, seeders+errores 3 sem,
+  CRUD admin 4 sem (BE-A13).
+
+**Archivos tocados:**
+- `docs/driveFrontend/04_backend/grupo_4_backend.md` — actualizado (gitignored, no se commitea).
+- `docs/frontend/auditoria-backend.md` — nuevo, informe de la auditoría.
+- `src/types/api/error.types.ts` — `ApiErrorResponse` alineado al contrato confirmado (BE-A5).
+- `docs/frontend/dependencias-equipos.md` — §3 (dependencias de Backend) actualizada.
+- `docs/estado_actual_proyecto.md` — cabecera, §5 (endpoints), §6 (env vars) y §7/§8 actualizados.
+- `docs/vitacora_agentica.md` — esta entrada.
+
+**Estado resultante:** contratos de Backend auditados y doc del grupo 4 corregido. Se destraba
+parcialmente el bloqueo de integración: hay rutas confirmadas, pero el consumo real de API
+depende de la entrega 3 (DTOs/Auth/GETs, ~2 semanas). No se pobló `endpoints.ts` ni se
+implementó consumo. `lint`·`build`·`test` a verificar tras el cambio de tipo.

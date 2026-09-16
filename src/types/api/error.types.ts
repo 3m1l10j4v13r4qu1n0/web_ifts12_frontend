@@ -1,5 +1,9 @@
+export interface ApiErrorBody {
+  code: string;
+  message: string;
+  details: unknown[];
+}
+
 export interface ApiErrorResponse {
-  error: string;
-  mensaje: string;
-  usuario_id?: string;
+  error: ApiErrorBody;
 }
