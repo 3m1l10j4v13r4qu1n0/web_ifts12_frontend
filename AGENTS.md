@@ -42,6 +42,10 @@ infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commit
 - Antes de mergear: integrar `origin/develop` en la rama feature y resolver
   conflictos ahí; checklist previa `npm run lint` · `npm run build` · `npm run test`
   (una vez que existan esos scripts).
+- **PRs con `gh`:** instalado en `~/.local/bin/gh` (autenticación la maneja el usuario,
+  `gh auth login`). Tras pushear la rama (con aprobación), abrir PR hacia `develop` con
+  `gh pr create --base develop --head <rama> ...`. Merge ORIGINAL (`gh pr merge --merge`) solo
+  con aprobación del usuario; el agente NO crea/mergea/cierra PRs por cuenta propia.
 - Push/merge SOLO con aprobación explícita del usuario.
 - Al cerrar cada fase: commits atómicos + tag anotado con versión semver y nombre
   acorde a la fase, y push siempre previa pregunta (regla dura:
@@ -64,16 +68,30 @@ infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commit
 - Los skills de `.opencode/skills/` (`crear-portada-sitio-web`,
   `crear-sitio-web-completo`, `aplicar-estilos-disenio-web`,
   `mejorar-navegacion-web`, `storytelling-dijital`) y las `.opencode/rules/reglas-*.md`
-  definen los criterios visuales del sitio (regla 90/10 de color, máx. 4-5 items
-  de menú, logo enlazado a home, portada 1680×900, etc.). Se activan a pedido
+  definen los criterios visuales del sitio (regla 90/10 de color, menú según el Mapa del Sitio
+  V2 de UX/UI — 9 items aprobados el 15/09/2026 —, logo enlazado a home, portada 1680×900, etc.).
+  Se activan a pedido
   del usuario (en su mayoría están `disable-model-invocation`).
 
 
-## Memoria del proyecto (docs/estado_actual_proyecto.md y docs/vitacora_agentica.md)
+## Auditoría de documentación (regla + skill: `.agents/`)
+
+- **Regla dura:** `.agents/rules/auditoria-documentacion.md` — al auditar documentación
+  (requerimientos, especificaciones en `docs/driveFrontend/` u otra que afecte a un grupo),
+  el agente DEBE actualizar también el archivo del grupo correspondiente (`grupo_X_*.md`),
+  no quedarse solo con el informe versionado.
+- **Skill:** `.agents/skills/auditoria-documentacion/SKILL.md` — flujo completo: identificar
+  grupo → relevar estado real → leer el doc del grupo → marcar ✅/🟡/🔵/⏳ → aplicar
+  correcciones verificadas → informe `docs/frontend/auditoria-*.md` → memoria → commits
+  (los cambios de `docs/driveFrontend/` NO se commitean).
+- Ejemplo de referencia: auditoría de infraestructura (09/09/2026), que además del informe
+  actualizó `grupo_5_infraestructura.md`.
+
+## Memoria del proyecto (docs/estado_actual_proyecto.md y docs/bitacora_agentica.md)
 
 - Antes de tocar código, leer `docs/estado_actual_proyecto.md` completo para tener el contexto actual del proyecto.
 - Al terminar una implementación, eliminación o edición relevante (nueva entidad, caso de uso, endpoint, refactor de arquitectura, dependencia core):
   1. Actualizar la sección correspondiente de `docs/estado_actual_proyecto.md` (editar in-place, no reescribir todo el archivo).
-  2. Agregar una entrada nueva al final de `docs/vitacora_agentica.md` con: fecha, qué se hizo, decisiones tomadas, archivos tocados, estado resultante. Nunca editar entradas previas de la vitácora.
-- No generar entradas de vitácora por cambios triviales (typos, formateo, renames cosméticos).
+  2. Agregar una entrada nueva al final de `docs/bitacora_agentica.md` con: fecha, qué se hizo, decisiones tomadas, archivos tocados, estado resultante. Nunca editar entradas previas de la bitácora.
+- No generar entradas de bitácora por cambios triviales (typos, formateo, renames cosméticos).
 - Si el código real contradice lo que dice `estado_actual_proyecto.md`, avisar antes de asumir cuál es la fuente de verdad.

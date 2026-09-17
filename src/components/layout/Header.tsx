@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MENU_PRINCIPAL } from '../../constants/navegacion';
+import BuscadorGlobal from './BuscadorGlobal';
 import NavMenu from './NavMenu';
 
 function Header() {
@@ -8,21 +9,21 @@ function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-        <Link to="/" className="text-lg font-semibold text-slate-900">
+      <div className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-4">
+        <Link to="/" className="shrink-0 text-lg font-semibold text-slate-900">
           IFTS N.º 12
         </Link>
 
-        <nav aria-label="Navegación principal" className="hidden lg:block">
-          <NavMenu items={MENU_PRINCIPAL} />
-        </nav>
+        <div className="ml-auto w-full max-w-xs sm:max-w-sm lg:w-72">
+          <BuscadorGlobal />
+        </div>
 
         <button
           type="button"
           aria-expanded={menuAbierto}
           aria-controls="menu-principal-mobile"
           onClick={() => setMenuAbierto((vista) => !vista)}
-          className="rounded-md p-2 text-slate-700 hover:bg-slate-100 lg:hidden"
+          className="shrink-0 rounded-md p-2 text-slate-700 hover:bg-slate-100 lg:hidden"
         >
           <span className="sr-only">{menuAbierto ? 'Cerrar menú' : 'Abrir menú'}</span>
           <svg
@@ -40,6 +41,12 @@ function Header() {
           </svg>
         </button>
       </div>
+
+      <nav aria-label="Navegación principal" className="hidden border-t border-slate-100 lg:block">
+        <div className="mx-auto max-w-6xl px-4">
+          <NavMenu items={MENU_PRINCIPAL} />
+        </div>
+      </nav>
 
       {menuAbierto && (
         <nav

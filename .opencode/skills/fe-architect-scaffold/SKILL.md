@@ -121,21 +121,48 @@ Seguir este orden y **esperar confirmación explícita antes de avanzar al sigui
 
 > ⚠️ **Mantenimiento**: esta tabla debe actualizarse en el mismo commit que agrega un endpoint nuevo al backend antes de asumir que un endpoint no existe.
 
+> Rutas confirmadas por Backend el 15/09/2026 (`docs/driveFrontend/04_backend/respuesta.md`,
+> auditoría `docs/frontend/auditoria-backend.md`). Prefijo `/api/` (sin `/api/v1/`). La tabla
+> oficial con parámetros, bodies y esquemas (Swagger/OpenAPI) llega como entrega 2 de Backend.
+
 | Método | Endpoint | Propósito | HU asociada |
 | :--- | :--- | :--- | :--- |
-|  | | |  |
+| GET | `/api/carreras` | Listado de carreras | — |
+| GET | `/api/carreras/:id` | Detalle, plan y materias | — |
+| GET | `/api/noticias` | Listado de noticias/novedades | — |
+| GET | `/api/noticias/:id` | Detalle de noticia | — |
+| GET | `/api/faqs?segmento=X` | FAQ filtradas por segmento | — |
+| GET | `/api/slider` | Carrusel activo de la Home | — |
+| GET | `/api/calendario` | Calendario académico | — |
+| GET | `/api/horarios` | Horarios | — |
+| GET | `/api/docentes` | Docentes | — |
+| GET | `/api/autoridades` | Autoridades | — |
+| GET | `/api/bedeles` | Bedeles | — |
+| GET | `/api/becas` | Becas | — |
+| GET | `/api/tutorias` | Tutorías | — |
+| POST | `/api/auth/login` | Iniciar sesión (JWT) | — |
+| POST | `/api/auth/logout` | Cerrar sesión | — |
+| GET | `/api/auth/me` | Sesión actual | — |
+| POST/PUT/DELETE | rutas administrables (`/api/noticias`, `/api/carreras`, `/api/faqs`, etc.) | CRUD admin con token | — |
 
-> Nota: el health check real del backend es `GET /` (no existe `/health`).
+> Nota: `/api/contacto` (POST) no fue confirmado por Backend (BE-A6); el endpoint de búsqueda
+> global para el buscador de la V2 tampoco (pendiente de Backend — el buscador actual filtra
+> contenido local).
 
 ### Estructura de respuestas de error del backend
 
+Contrato confirmado 15/09/2026: error JSON estandarizado para 4xx/5xx.
+
 ```typescript
 // src/types/api/error.types.ts
+export interface ApiErrorBody {
+  code: string;          // Codigo de error (ej. BAD_REQUEST)
+  message: string;       // Mensaje amigable para el usuario
+  details: unknown[];    // Detalles opcionales del error
+}
+
 export interface ApiErrorResponse {
-  error: string;          // Código de error 
-  mensaje: string;        // Mensaje descriptivo
-  usuario_id?: string;   // Campo contextual (puede variar)
-  
+  error: ApiErrorBody;
 }
 ```
 

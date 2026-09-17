@@ -37,7 +37,8 @@ Fuente: "How To Make a Website. Step-by-Step Guide"
 
 - **90% blanco y negro, 10% color de acento** (uno solo por página)
 - Logo horizontal, no vertical; idealmente en el menú y recortado para ocupar poco
-- **Máximo 5 items** en menú; títulos de sección cortos y skim-friendly
+- **Menú según el Mapa del Sitio V2 de UX/UI** (9 items aprobados 15/09/2026); títulos de
+  sección cortos y skim-friendly
 - Menú no debe dominar la página
 - La portada (first screen) merece atención especial: foto de calidad + titular atractivo
 - No usar clip-art ni imagenes genéricas 

@@ -1,4 +1,5 @@
 import Portada from '../components/layout/Portada';
+import AccesosDestacados from '../components/ui/AccesosDestacados';
 import AccesosRapidos from '../components/ui/AccesosRapidos';
 import CardCarrera from '../components/ui/CardCarrera';
 import Comunidades from '../components/ui/Comunidades';
@@ -6,12 +7,20 @@ import FaqAcordeon from '../components/ui/FaqAcordeon';
 import SliderNoticias from '../components/ui/SliderNoticias';
 import { ENLACES } from '../constants/enlaces';
 import {
+  mockAccesosDestacados,
   mockAccesosRapidos,
   mockCarreras,
   mockComunidades,
   mockFaqs,
   mockNoticias,
 } from '../constants/mock-data';
+
+const noticiasOrdenadas = [...mockNoticias].sort((a, b) => {
+  if (a.fecha === '' && b.fecha === '') return 0;
+  if (a.fecha === '') return 1;
+  if (b.fecha === '') return -1;
+  return new Date(b.fecha).getTime() - new Date(a.fecha).getTime();
+});
 
 function HomePage() {
   const accionesPortada: {
@@ -52,6 +61,15 @@ function HomePage() {
         </section>
       )}
 
+      <section aria-labelledby="titulo-destacados" className="mx-auto max-w-6xl px-4 pt-16">
+        <h2 id="titulo-destacados" className="text-2xl font-bold text-slate-900">
+          Accesos destacados
+        </h2>
+        <div className="mt-6">
+          <AccesosDestacados items={mockAccesosDestacados} />
+        </div>
+      </section>
+
       <section aria-labelledby="titulo-accesos" className="mx-auto max-w-6xl px-4 py-16">
         <h2 id="titulo-accesos" className="text-2xl font-bold text-slate-900">
           Accesos rápidos
@@ -82,7 +100,7 @@ function HomePage() {
           Novedades
         </h2>
         <div className="mt-6">
-          <SliderNoticias noticias={mockNoticias} titulo="Novedades" />
+          <SliderNoticias noticias={noticiasOrdenadas} titulo="Novedades" />
         </div>
       </section>
 

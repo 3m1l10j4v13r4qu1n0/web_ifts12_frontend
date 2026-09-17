@@ -38,6 +38,17 @@ Scripts disponibles:
 
 Checklist previa a mergear: `npm run lint` · `npm run build` · `npm run test` en verde.
 
+## Build de producción
+
+```bash
+npm install
+npm run build    # produce dist/ listo para servir desde Nginx
+```
+
+El `dist/` resultante es estático: requiere la regla de fallback SPA (`try_files ... /index.html`)
+en Nginx. Las variables de entorno del build (`VITE_*`) se están coordinando con Infra; al
+cerrarse esa definición se documentarán acá los valores y el `.env.example` correspondiente.
+
 ## Estructura del proyecto
 
 ```
@@ -57,7 +68,24 @@ src/
 ├── constants/               # navegacion, mock-data (provisorios), enlaces (placeholders)
 ├── hooks/, utils/, styles/  # helpers y tema Tailwind
 └── __tests__/               # suites de pruebas
+
+docs/
+├── estado_actual_proyecto.md  # foto del estado actual del proyecto
+├── bitacora_agentica.md       # historial cronológico de decisiones
+├── frontend/                  # plan, propuesta tecnológica, actas, dependencias
+├── entregas/                  # entregables de cierre de fases (docs, actas)
+├── driveFrontend/             # requisitos fuente de verdad (no versionado, en .gitignore)
+└── mockups/                   # mockups HTML de las vistas (para ver en Tailwind Play)
 ```
+
+## Mockups de las vistas
+
+En `docs/mockups/` hay mockups HTML autocontenidos que replican el diseño real de las
+vistas (Home, secciones placeholder y página 404) para verlos renderizados al instante
+en Tailwind Play sin levantar el proyecto.
+
+Las instrucciones completas de cómo abrirlos, pegarlos y experimentar con los estados
+comentados están en el [instructivo de mockups](docs/mockups/README.md).
 
 ## Estado del frontend
 

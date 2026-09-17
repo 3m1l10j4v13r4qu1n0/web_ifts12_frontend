@@ -16,6 +16,12 @@ function Footer() {
         <div>
           <p className="text-lg font-semibold text-white">IFTS N.º 12</p>
           <p className="mt-2 text-sm">Instituto de Formación Técnica Superior N.º 12.</p>
+          <address className="mt-4 not-italic text-sm leading-relaxed">
+            Misiones 26, C1083 ABB
+            <br />
+            Ciudad Autónoma de Buenos Aires
+          </address>
+          <p className="mt-2 text-sm">Horario de atención: turno nocturno</p>
         </div>
 
         <nav aria-label="Enlaces institucionales">

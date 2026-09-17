@@ -4,7 +4,7 @@
 Documento vivo: registra las decisiones tomadas en las fases 1-5 (30/08/2026) y las que
 deban validarse con otros equipos. Cada entrada indica fecha, contexto, decisión y estado.
 
-> Referencia: las decisiones se consolidan de `docs/vitacora_agentica.md`,
+> Referencia: las decisiones se consolidan de `docs/bitacora_agentica.md`,
 > `docs/frontend/{plan,propuesta-tecnologica,dependencias-equipos}.md` y del skill
 > `fe-architect-scaffold`.
 
@@ -88,3 +88,22 @@ deban validarse con otros equipos. Cada entrada indica fecha, contexto, decisió
   build estático servido por Nginx. Detalle, dimensionamiento y proveedores en
   `propuesta-tecnologica.md` secciones 6-7.
 - **Estado:** propuesta documentada; pendiente de aprobación de Dirección y contrato con Infra.
+
+## 11. Mapa del Sitio V2 como fuente de verdad de navegación (refactor 15/09/2026)
+
+- **Fecha:** 15/09/2026.
+- **Contexto:** UX/UI entregó el Mapa del Sitio V2 (`02_ux_ui/mapa_inicial_sitio_web_ifts12_2026_v2.md`),
+  propuesta de arquitectura de información con buscador global, accesos destacados/rápidos y menú de 9
+  items; reemplaza al mapa V1 (relevamiento 27/08), que fue eliminado.
+- **Decisión 1 (menú principal):** adoptar el menú de 9 items de la V2 (Inicio, Carreras, Ingresantes,
+  Estudiantes, Tutorías, Docentes, Institucional, Novedades, Contacto), con "Inicio" además del logo
+  enlazado a la Home. Reemplaza la regla previa de "máx. 4-5 items".
+- **Decisión 2 (buscador global):** `BuscadorGlobal` persistente en el header que filtra contenido
+  local (secciones del menú, carreras, novedades y FAQs de los mocks) con normalización de tildes. La
+  indexación real y el rastreo de PDFs quedan pendientes de un endpoint de búsqueda de Backend.
+- **Decisión 3 (accesos de la Home):** separar **accesos destacados** (Campus Virtual Moodle,
+  Inscripción oficial, Carreras) de los **accesos rápidos** (Tutorías, Becas, Constancias, Mesas de
+  examen, Calendario académico, Contacto), según la V2. Moodle/inscripción siguen deshabilitados como
+  placeholders hasta tener URL oficial.
+- **Estado:** implementada en `refactor/mapa-sitio` (15/09/2026). Pendiente: endpoint de búsqueda
+  de Backend y wireframes definitivos de UX/UI.
