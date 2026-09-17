@@ -2,7 +2,7 @@
 
 Área: Frontend · Proyecto Sitio Web Institucional IFTS N.º 12 — 2026 Documento vivo: consolida las decisiones tomadas en las fases 1-5 y las pendientes de validación.
 
-> Referencia: `docs/frontend/acta-decisiones.md`, `docs/vitacora_agentica.md`, `docs/frontend/{plan,propuesta-tecnologica,dependencias-equipos}.md` y el skill `fe-architect-scaffold`.
+> Referencia: `docs/frontend/acta-decisiones.md`, `docs/bitacora_agentica.md`, `docs/frontend/{plan,propuesta-tecnologica,dependencias-equipos}.md` y el skill `fe-architect-scaffold`.
 
 ## Convenciones
 

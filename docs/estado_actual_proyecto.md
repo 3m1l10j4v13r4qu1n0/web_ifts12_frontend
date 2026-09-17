@@ -1,7 +1,7 @@
 # Estado Actual del Proyecto
 
 > Última actualización: 2026-09-15 (Auditoría de la respuesta del backend + correcciones de contrato)
-> Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `vitacora_agentica.md`.
+> Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `bitacora_agentica.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.
 
 ## 1. Resumen del proyecto

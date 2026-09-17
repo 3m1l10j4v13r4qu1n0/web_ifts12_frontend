@@ -1,8 +1,8 @@
-# Vitácora Agéntica
+# Bitácora Agéntica
 
 > Historial cronológico y append-only. NUNCA se borra ni se reescribe una entrada pasada.
 > Cada entrada corresponde a una sesión/tarea significativa de trabajo del agente sobre el proyecto.
-> Cuando este archivo crezca demasiado, archivar entradas viejas en `vitacora_YYYY-QX.md` y dejar acá solo un índice + las últimas entradas.
+> Cuando este archivo crezca demasiado, archivar entradas viejas en `bitacora_YYYY-QX.md` y dejar acá solo un índice + las últimas entradas.
 
 ---
 
@@ -40,7 +40,7 @@ menor (v1.0.0 → Fase 1, v1.1.0 → Fase 2…), major solo por decisión del eq
 - `src/App.tsx`, `src/main.tsx`, `src/styles/index.css`, `src/setup-tests.ts`, `src/__tests__/pagina-placeholder.test.tsx`.
 - `.opencode/rules/versionado-fases.md` — nueva regla dura de commits + tags por fase.
 - `AGENTS.md` — referencia a la nueva regla.
-- `docs/estado_actual_proyecto.md`, `docs/vitacora_agentica.md` — memoria del proyecto creada en esta sesión.
+- `docs/estado_actual_proyecto.md`, `docs/bitacora_agentica.md` — memoria del proyecto creada en esta sesión.
 
 **Estado resultante:** Fase 1 cerrada y taggeada (`v1.0.0`); rama `feature/tarea-inicial-frontend`
 pushiada (último commit `2ab4c12`), `lint`·`build`·`test` en verde. Sin cambios pendientes en el
@@ -73,7 +73,7 @@ afirmaciones institucionales definitivas. El acceso "campus virtual" toma `ENLAC
 - `src/types/domain/sitio.types.ts` — nuevos tipos de dominio del sitio (se reemplaza el `.gitkeep`).
 - `src/constants/mock-data.ts` — mocks provisionales tipados para la Home.
 - `docs/estado_actual_proyecto.md` — Fase 2 completada, pendientes actualizados.
-- `docs/vitacora_agentica.md` — esta entrada.
+- `docs/bitacora_agentica.md` — esta entrada.
 - Git: merge `f4726cf` de la Fase 1 a `develop`; rama `feature/fase-2-base` (commits `f98fed2`,
   `e275b5a`); tag anotado `v1.1.0`.
 
@@ -216,7 +216,7 @@ Home o accesos rápidos. Se mantiene la regla de no inventar contenido.
   contexto.
 - `docs/estado_actual_proyecto.md` — nueva sección 8 (Documentos de referencia), se renumeró
   Decisiones a sección 9.
-- `docs/vitacora_agentica.md` — esta entrada.
+- `docs/bitacora_agentica.md` — esta entrada.
 
 **Estado resultante:** el mapa queda documentado como fuente de referencia en el proyecto.
 Frontend tiene claridad sobre la estructura esperada del sitio. Pendiente: validación de
@@ -262,7 +262,7 @@ cronograma sugerido de entregas.
 - `docs/driveFrontend/grupo_5_infraestructura.md` — nuevo.
 - `docs/driveFrontend/grupo_6_qa.md` — nuevo.
 - `docs/estado_actual_proyecto.md` — nueva sección 9, fecha actualizada.
-- `docs/vitacora_agentica.md` — esta entrada.
+- `docs/bitacora_agentica.md` — esta entrada.
 
 **Estado resultante:** los 6 documentos quedan como fuente de verdad para coordinar
 dependencias entre grupos. Frontend puede usar estos archivos para comunicar bloqueos
@@ -301,7 +301,7 @@ externas" y bloqueos externos por equipo.
 - `docs/frontend/auditoria-analisis-unificado.md` — nuevo, informe de la auditoría.
 - `docs/estado_actual_proyecto.md` — fecha actualizada, nueva sección 8 con el documento
   unificado y la auditoría, pendiente de implementación registrado en la sección 7.
-- `docs/vitacora_agentica.md` — esta entrada.
+- `docs/bitacora_agentica.md` — esta entrada.
 
 **Estado resultante:** el frontend queda auditado contra el documento unificado de Análisis.
 El informa documenta qué se cumple, qué falta y qué se puede implementar sin esperar a otros
@@ -355,7 +355,7 @@ el análisis funcional unificado (docs/frontend/auditoria-analisis-unificado.md)
 - `src/components/ui/SliderNoticias.tsx` — muestra imagenUrl condicional
 - `src/components/ui/FaqAcordeon.tsx` — agregada categoría "Institucional"
 - `docs/estado_actual_proyecto.md` — actualizado resumen, entidades, casos de uso, pendientes
-- `docs/vitacora_agentica.md` — esta entrada
+- `docs/bitacora_agentica.md` — esta entrada
 
 **Estado resultante:**
 Las 5 brechas de auditoría accionables sin dependencias externas quedan cerradas. Verificación:
@@ -391,7 +391,7 @@ codificadas (INF-A1…INF-J1) y checklist accionable para Frontend.
 
 **Archivos tocados:**
 - `docs/frontend/auditoria-infraestructura.md` — nuevo, informe completo de la auditoría.
-- `docs/vitacora_agentica.md` — esta entrada.
+- `docs/bitacora_agentica.md` — esta entrada.
 
 **Estado resultante:** auditoría de infraestructura documentada en la rama
 `feature/requerimientos-infraestructura`. No se tocó código de aplicación. Pendientes: revisar
@@ -459,7 +459,7 @@ infraestructura como patrón.
 - `.agents/skills/auditoria-documentacion/SKILL.md` — nuevo skill con workflow completo.
 - `AGENTS.md` — nueva sección "Auditoría de documentación (regla + skill: `.agents/`)".
 - `docs/estado_actual_proyecto.md` — ítem en "Decisiones y convenciones vigentes".
-- `docs/vitacora_agentica.md` — esta entrada.
+- `docs/bitacora_agentica.md` — esta entrada.
 
 **Estado resultante:** el patrón ya aplicado en la auditoría de infraestructura queda
 institucionalizado para futuras auditorías (grupo_1…grupo_6). No se tocó ningún doc de
@@ -486,7 +486,7 @@ skill `.agents/skills/auditoria-documentacion/SKILL.md` (paso de push + `gh pr c
 - `AGENTS.md` — sección Git con uso de `gh` e instalación en `~/.local/bin/gh`.
 - `.agents/skills/auditoria-documentacion/SKILL.md` — sección "Commits y PR" con `gh pr create`.
 - `docs/estado_actual_proyecto.md` — ítem en decisiones vigentes.
-- `docs/vitacora_agentica.md` — esta entrada.
+- `docs/bitacora_agentica.md` — esta entrada.
 
 **Estado resultante:** primer PR del repo creado (#1) con `gh pr create` de
 `feature/requerimientos-infraestructura` → `develop`. El uso de `gh` queda documentado en las
@@ -527,7 +527,7 @@ Infra/Dirección:
 - `docs/frontend/propuesta-tecnologica.md` — §6.3, §6.4, §6.5 y nueva §9.
 - `README.md` — sección "Build de producción".
 - `docs/estado_actual_proyecto.md` — §6 y cabecera de "última actualización".
-- `docs/vitacora_agentica.md` — esta entrada.
+- `docs/bitacora_agentica.md` — esta entrada.
 
 **Estado resultante:** 4 de las 5 brechas internas del Frontend resueltas en documentación
 (INF-A1, INF-A2, INF-B1, INF-D2, INF-C1) y el checklist §5.1 completo. Sin cambios de código en
@@ -567,7 +567,7 @@ sin cambios por infra).
 - `docs/entregas/2026-08-31__Registro_Decisiones_Frontend_v0.1.md` — actualizado (DEC-011…014).
 - `docs/entregas/2026-08-31__Reporte_Semanal_Frontend_v0.1.md` — actualizado (semana 09/09).
 - `docs/estado_actual_proyecto.md` — §8 con referencias a entregas Markdown.
-- `docs/vitacora_agentica.md` — esta entrada.
+- `docs/bitacora_agentica.md` — esta entrada.
 
 **Estado resultante:** las entregas reflejan el estado real del frontend (infra auditada y
 alineada). Los pendientes (INF-G1/G2, VPS, URLs) siguen bloqueados por Infra/Dirección.
@@ -609,7 +609,7 @@ codificados (BE-A1…BE-A14), y se actualizó el documento fuente del grupo 4.
 - `src/types/api/error.types.ts` — `ApiErrorResponse` alineado al contrato confirmado (BE-A5).
 - `docs/frontend/dependencias-equipos.md` — §3 (dependencias de Backend) actualizada.
 - `docs/estado_actual_proyecto.md` — cabecera, §5 (endpoints), §6 (env vars) y §7/§8 actualizados.
-- `docs/vitacora_agentica.md` — esta entrada.
+- `docs/bitacora_agentica.md` — esta entrada.
 
 **Estado resultante:** contratos de Backend auditados y doc del grupo 4 corregido. Se destraba
 parcialmente el bloqueo de integración: hay rutas confirmadas, pero el consumo real de API
