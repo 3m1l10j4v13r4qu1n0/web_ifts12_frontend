@@ -71,7 +71,7 @@ src/
 
 docs/
 ├── estado_actual_proyecto.md  # foto del estado actual del proyecto
-├── vitacora_agentica.md       # historial cronológico de decisiones
+├── bitacora_agentica.md       # historial cronológico de decisiones
 ├── frontend/                  # plan, propuesta tecnológica, actas, dependencias
 ├── entregas/                  # entregables de cierre de fases (docs, actas)
 ├── driveFrontend/             # requisitos fuente de verdad (no versionado, en .gitignore)
