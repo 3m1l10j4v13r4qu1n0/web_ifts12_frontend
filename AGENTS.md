@@ -80,6 +80,10 @@ infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commit
   (requerimientos, especificaciones en `docs/driveFrontend/` u otra que afecte a un grupo),
   el agente DEBE actualizar también el archivo del grupo correspondiente (`grupo_X_*.md`),
   no quedarse solo con el informe versionado.
+- **Fuente única de verdad de análisis funcional:** `docs/frontend/analisis_funcional_validado.md`
+  (18/09/2026) — síntesis de los 3 PDFs aprobados en `docs/driveFrontend/01_analisis_funcional/`.
+  Al auditar `grupo_1_analisis_funcional.md` u otra doc de análisis, comparar contra ese resumen
+  validado + los PDFs aprobados, nunca contra suposiciones.
 - **Skill:** `.agents/skills/auditoria-documentacion/SKILL.md` — flujo completo: identificar
   grupo → relevar estado real → leer el doc del grupo → marcar ✅/🟡/🔵/⏳ → aplicar
   correcciones verificadas → informe `docs/frontend/auditoria-*.md` → memoria → commits
