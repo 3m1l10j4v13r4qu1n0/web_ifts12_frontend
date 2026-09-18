@@ -66,6 +66,6 @@ aprobados, nunca contra suposiciones.
 
 1. Generar o actualizar el informe versionado en `docs/frontend/auditoria-*.md`, referenciando
    el archivo del grupo modificado.
-2. Actualizar `docs/estado_actual_proyecto.md` (sección correspondiente, in-place).
-3. Agregar entrada en `docs/bitacora_agentica.md` (append-only) con fecha, qué se hizo,
+2. Actualizar `docs/sdd/estado_actual_proyecto.md` (sección correspondiente, in-place).
+3. Agregar entrada en `docs/sdd/bitacora_agentica.md` (append-only) con fecha, qué se hizo,
    decisiones, archivos tocados y estado resultante.

@@ -236,7 +236,7 @@ No es un requerimiento directo del frontend, pero sus resultados condicionan:
       especificación (INF-A1, INF-A2).
 - [ ] Agregar versiones mínimas de software a `propuesta-tecnologica.md` §6.3 (INF-B1).
 - [ ] Agregar subdominio `campus` + TLS/HSTS a `propuesta-tecnologica.md` §6.5 (INF-D2).
-- [ ] Actualizar `docs/estado_actual_proyecto.md` §6 con los hallazgos de esta auditoría.
+- [ ] Actualizar `docs/sdd/estado_actual_proyecto.md` §6 con los hallazgos de esta auditoría.
 
 ## 6. Conclusión
 

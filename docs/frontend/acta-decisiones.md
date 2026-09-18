@@ -4,7 +4,7 @@
 Documento vivo: registra las decisiones tomadas en las fases 1-5 (30/08/2026) y las que
 deban validarse con otros equipos. Cada entrada indica fecha, contexto, decisión y estado.
 
-> Referencia: las decisiones se consolidan de `docs/bitacora_agentica.md`,
+> Referencia: las decisiones se consolidan de `docs/sdd/bitacora_agentica.md`,
 > `docs/frontend/{plan,propuesta-tecnologica,dependencias-equipos}.md` y del skill
 > `fe-architect-scaffold`.
 

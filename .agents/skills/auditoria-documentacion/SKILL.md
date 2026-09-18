@@ -38,7 +38,7 @@ Mapear el documento que se audita al grupo que le corresponde:
 
 Leer (en la sesión actual) los documentos internos y el código que evidencian lo que YA existe:
 - `docs/frontend/propuesta-tecnologica.md`, `dependencias-equipos.md`.
-- `docs/estado_actual_proyecto.md` (completo).
+- `docs/sdd/estado_actual_proyecto.md` (completo).
 - Código afectado: `src/**`, `vite.config.ts`, `package.json`, etc.
 - Solo marcar ✅ lo que se pueda verificar con un archivo leído o un comando corrido.
 
@@ -81,13 +81,13 @@ Crear/actualizar `docs/frontend/auditoria-<area>.md`:
 
 ### 7. Registrar en memoria
 
-- `docs/estado_actual_proyecto.md`: actualizar la sección correspondiente (in-place).
-- `docs/bitacora_agentica.md`: entrada nueva al final (append-only), nunca editar previas.
+- `docs/sdd/estado_actual_proyecto.md`: actualizar la sección correspondiente (in-place).
+- `docs/sdd/bitacora_agentica.md`: entrada nueva al final (append-only), nunca editar previas.
 
 ### 8. Commits y PR
 
 - Commitear SOLO el informe y la memoria (`docs/frontend/auditoria-*.md`,
-  `docs/estado_actual_proyecto.md`, `docs/bitacora_agentica.md`).
+  `docs/sdd/estado_actual_proyecto.md`, `docs/sdd/bitacora_agentica.md`).
 - NO commitear `docs/driveFrontend/**` (gitignored).
 - Commits atómicos, Conventional Commits en español, scope en minúscula
   (ej. `docs(infra): se auditan requerimientos de infraestructura vs proyecto`).
@@ -109,4 +109,4 @@ Auditoría de infraestructura (09/09/2026):
 - [ ] Cada corrección del archivo del grupo tiene un ID de hallazgo trazable.
 - [ ] El informe versionado referencia el archivo del grupo modificado.
 - [ ] No se commiteó nada de `docs/driveFrontend/`.
-- [ ] `docs/estado_actual_proyecto.md` y `bitacora_agentica.md` quedaron al día.
+- [ ] `docs/sdd/estado_actual_proyecto.md` y `docs/sdd/bitacora_agentica.md` quedaron al día.
