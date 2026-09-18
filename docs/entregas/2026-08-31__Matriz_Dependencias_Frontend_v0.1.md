@@ -1,6 +1,6 @@
 # Matriz de Dependencias - Equipo Frontend
 
-Área: Frontend (enlace transversal: Emilio Aquino) · Proyecto Sitio Web Institucional IFTS N.º 12 — 2026 Consolidación de las dependencias de la Tarea Inicial y del Plan B de Infraestructura. Fuentes: `docs/frontend/dependencias-equipos.md`, `docs/driveFrontend/` (minuta 27/08, Tarea Inicial, Plan B, PAUTAS), `docs/frontend/auditoria-infraestructura.md` (09/09/2026), `docs/entregas/bloqueo_infra.md`.
+Área: Frontend (enlace transversal: Emilio Aquino) · Proyecto Sitio Web Institucional IFTS N.º 12 — 2026 Consolidación de las dependencias de la Tarea Inicial y del Plan B de Infraestructura. Fuentes: `docs/frontend/dependencias-equipos.md`, `docs/driveFrontend/` (minuta 27/08, Tarea Inicial, Plan B, PAUTAS), `docs/sdd/06_auditorias/auditoria-infraestructura.md` (09/09/2026), `docs/entregas/bloqueo_infra.md`.
 
 > Regla: los bloqueos se comunican al enlace del área correspondiente; **no se resuelven unilateralmente**.
 

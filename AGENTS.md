@@ -89,14 +89,15 @@ infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commit
 - **Regla dura:** `.agents/rules/auditoria-documentacion.md` — al auditar documentación
   (requerimientos, especificaciones en `docs/driveFrontend/` u otra que afecte a un grupo),
   el agente DEBE actualizar también el archivo del grupo correspondiente (`grupo_X_*.md`),
-  no quedarse solo con el informe versionado.
+  no quedarse solo con el informe versionado, y generar el informe en
+  `docs/sdd/06_auditorias/auditoria-*.md`.
 - **Fuente única de verdad de análisis funcional:** `docs/frontend/analisis_funcional_validado.md`
   (18/09/2026) — síntesis de los 3 PDFs aprobados en `docs/driveFrontend/01_analisis_funcional/`.
   Al auditar `grupo_1_analisis_funcional.md` u otra doc de análisis, comparar contra ese resumen
   validado + los PDFs aprobados, nunca contra suposiciones.
 - **Skill:** `.agents/skills/auditoria-documentacion/SKILL.md` — flujo completo: identificar
   grupo → relevar estado real → leer el doc del grupo → marcar ✅/🟡/🔵/⏳ → aplicar
-  correcciones verificadas → informe `docs/frontend/auditoria-*.md` → memoria → commits
+  correcciones verificadas → informe `docs/sdd/06_auditorias/auditoria-*.md` → memoria → commits
   (los cambios de `docs/driveFrontend/` NO se commitean).
 - Ejemplo de referencia: auditoría de infraestructura (09/09/2026), que además del informe
   actualizó `grupo_5_infraestructura.md`.

@@ -70,8 +70,8 @@ src/
 └── __tests__/               # suites de pruebas
 
 docs/
-├── sdd/                          # memoria: estado_actual_proyecto.md, bitacora_agentica.md, SSD
-├── frontend/                     # plan, propuesta tecnológica, actas, dependencias, auditorías
+├── sdd/                          # memoria: estado_actual_proyecto.md, bitacora_agentica.md, SSD, auditorías (06_auditorias/)
+├── frontend/                     # plan, propuesta tecnológica, actas, dependencias
 ├── entregas/                  # entregables de cierre de fases (docs, actas)
 ├── driveFrontend/             # requisitos fuente de verdad (no versionado, en .gitignore)
 └── mockups/                   # mockups HTML de las vistas (para ver en Tailwind Play)

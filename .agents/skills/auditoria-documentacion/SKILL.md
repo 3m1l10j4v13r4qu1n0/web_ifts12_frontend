@@ -15,7 +15,7 @@ Complementa la regla dura `.agents/rules/auditoria-documentacion.md`.
 
 Toda auditoría de documentación debe terminar con **dos entregables**:
 
-1. El informe de auditoría versionado (`docs/frontend/auditoria-*.md`).
+1. El informe de auditoría versionado (`docs/sdd/06_auditorias/auditoria-*.md`).
 2. El archivo del grupo correspondiente **actualizado** (`docs/driveFrontend/0X_*/grupo_X_*.md`),
    con sus checklists marcados y las correcciones aplicadas.
 
@@ -72,7 +72,7 @@ Sobre el archivo del grupo:
 
 ### 6. Generar el informe versionado
 
-Crear/actualizar `docs/frontend/auditoria-<area>.md`:
+Crear/actualizar `docs/sdd/06_auditorias/auditoria-<area>.md`:
 - Tabla de consistencia por área (✅ / 🟡 / ❌ / 🔵).
 - Hallazgos con IDs (prefijo del área, ej. `INF-`, `RF-`).
 - Brechas resumidas con severidad y responsable.
@@ -86,7 +86,7 @@ Crear/actualizar `docs/frontend/auditoria-<area>.md`:
 
 ### 8. Commits y PR
 
-- Commitear SOLO el informe y la memoria (`docs/frontend/auditoria-*.md`,
+- Commitear SOLO el informe y la memoria (`docs/sdd/06_auditorias/auditoria-*.md`,
   `docs/sdd/estado_actual_proyecto.md`, `docs/sdd/bitacora_agentica.md`).
 - NO commitear `docs/driveFrontend/**` (gitignored).
 - Commits atómicos, Conventional Commits en español, scope en minúscula
@@ -97,7 +97,7 @@ Crear/actualizar `docs/frontend/auditoria-<area>.md`:
 ## Ejemplo aplicado (patrón de referencia)
 
 Auditoría de infraestructura (09/09/2026):
-- Informe: `docs/frontend/auditoria-infraestructura.md`.
+- Informe: `docs/sdd/06_auditorias/auditoria-infraestructura.md`.
 - Grupo actualizado: `docs/driveFrontend/05_infraestructura/grupo_5_infraestructura.md`
   (build ✅, ambientes ✅, typo de dominio corregido INF-D1, bloque Nginx completado
   INF-E1/INF-E2, variables ampliadas INF-G2, sección 13 de estado de avance).

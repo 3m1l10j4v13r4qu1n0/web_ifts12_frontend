@@ -128,20 +128,20 @@ sobre rutas administrables. La tabla oficial (Swagger/OpenAPI) llega como entreg
   UX/UI, contratos de API Backend, confirmaciones de Infra/Dirección y URLs oficiales de
   Moodle/inscripción (`docs/frontend/dependencias-equipos.md`).
 - **Auditoría** contra `Analisis funcional todo unificado IFTS 12.pdf` **completada**
-  (`docs/frontend/auditoria-analisis-unificado.md`, rama `feature/auditoria-analisis-unificado`):
+  (`docs/sdd/06_auditorias/auditoria-analisis-unificado.md`, rama `feature/auditoria-analisis-unificado`):
   RF-01…RF-34 auditados; mayoría 🟡/❌/🔵. **Plan de implementación aprobado y ejecutado** en
   Fase 6: RF-22 (contacto/pie), accesos rápidos faltantes, `Carrera` con modalidad/horarios,
   FAQ descriptiva por segmento, fechas en novedades. Quedan pendientes los 🔵 (bloqueados por
   Backend) y los ❌ que requieren contenidos oficiales de Análisis/Edith.
 - **Auditoría de infraestructura** contra los 3 documentos de `docs/driveFrontend/05_infraestructura/`
-  **completada** (`docs/frontend/auditoria-infraestructura.md`, rama
+  **completada** (`docs/sdd/06_auditorias/auditoria-infraestructura.md`, rama
   `feature/requerimientos-infraestructura`): arquitectura Plan B, build estático, stack y
   ambientes consistentes. 10 brechas detectadas (INF-A1…INF-J1), la única severa es un typo
   `iffts12.edu.ar` (doble f) en el doc del grupo 5 que puede propagarse a config real. El
   frontend no usa `import.meta.env` todavía; falta `.env.example` y migrar enlaces a variables
   de entorno cuando haya URLs oficiales.
 - **Auditoría de backend** contra `docs/driveFrontend/04_backend/respuesta.md` **completada**
-  (`docs/frontend/auditoria-backend.md`, rama `feature/auditoria-backend`): rutas `/api/`
+  (`docs/sdd/06_auditorias/auditoria-backend.md`, rama `feature/auditoria-backend`): rutas `/api/`
   confirmadas (doc del grupo 4 decía `/api/v1/`, corregido), 8 rutas públicas nuevas registradas,
   FAQ `?segmento=X`, CRUD admin directo (sin `/api/admin/`). Hallazgo de código corregido:
   `ApiErrorResponse` ahora refleja `{ error: { code, message, details } }` (BE-A5). Pendientes:
@@ -153,15 +153,15 @@ sobre rutas administrables. La tabla oficial (Swagger/OpenAPI) llega como entreg
   del equipo de Análisis Funcional** (08/09/2026): minuta definitiva, requisitos funcionales
   v1 (RF-01…RF-34), mapa de contenidos y prioridades, matriz fijo vs. administrable, propuesta
   de alcance/menú y Plan B VPS. Nueva fuente de verdad para auditar el cumplimiento del
-  frontend. Ver `docs/frontend/auditoria-analisis-unificado.md`.
-- `docs/frontend/auditoria-analisis-unificado.md` — Auditoría de cumplimiento del frontend
+  frontend. Ver `docs/sdd/06_auditorias/auditoria-analisis-unificado.md`.
+- `docs/sdd/06_auditorias/auditoria-analisis-unificado.md` — Auditoría de cumplimiento del frontend
   contra el documento unificado de Análisis (matriz RF-01…RF-34, comparativas de menú/accesos,
   accionable sin dependencias, bloqueos externos). Documento vivo.
-- `docs/frontend/auditoria-infraestructura.md` — Auditoría de consistencia entre los
+- `docs/sdd/06_auditorias/auditoria-infraestructura.md` — Auditoría de consistencia entre los
   requerimientos de infraestructura (`docs/driveFrontend/05_infraestructura/`: especificación
   técnica, cuestionario Moodle y grupo 5) y el estado real del frontend. 10 brechas
   codificadas (INF-A1…INF-J1) + checklist accionable. Documento vivo.
-- `docs/frontend/auditoria-backend.md` — Auditoría de la respuesta de Backend
+- `docs/sdd/06_auditorias/auditoria-backend.md` — Auditoría de la respuesta de Backend
   (`docs/driveFrontend/04_backend/respuesta.md`) contra el estado real del frontend. 14
   hallazgos (BE-A1…BE-A14), tabla de consistencia por área, correcciones al doc del grupo 4 y
   al tipo `ApiErrorResponse`, y checklist accionable. Documento vivo.
