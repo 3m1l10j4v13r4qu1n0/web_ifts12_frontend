@@ -49,6 +49,8 @@ parts/
 sdist/
 var/
 wheels/
+# Excepción: scripts/lib/ del skill pdf-to-markdown no es la lib/ de Python.
+!.opencode/skills/pdf-to-markdown/scripts/lib/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
