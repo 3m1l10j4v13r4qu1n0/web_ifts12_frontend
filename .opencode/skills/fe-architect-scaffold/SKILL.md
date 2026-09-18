@@ -122,7 +122,7 @@ Seguir este orden y **esperar confirmación explícita antes de avanzar al sigui
 > ⚠️ **Mantenimiento**: esta tabla debe actualizarse en el mismo commit que agrega un endpoint nuevo al backend antes de asumir que un endpoint no existe.
 
 > Rutas confirmadas por Backend el 15/09/2026 (`docs/driveFrontend/04_backend/respuesta.md`,
-> auditoría `docs/frontend/auditoria-backend.md`). Prefijo `/api/` (sin `/api/v1/`). La tabla
+> auditoría `docs/sdd/06_auditorias/auditoria-backend.md`). Prefijo `/api/` (sin `/api/v1/`). La tabla
 > oficial con parámetros, bodies y esquemas (Swagger/OpenAPI) llega como entrega 2 de Backend.
 
 | Método | Endpoint | Propósito | HU asociada |

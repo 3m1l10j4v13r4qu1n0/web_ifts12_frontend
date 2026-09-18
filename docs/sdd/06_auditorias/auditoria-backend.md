@@ -5,7 +5,7 @@
 > Fuente auditada: `docs/driveFrontend/04_backend/respuesta.md` (definiciones técnicas
 > formales del equipo de Backend)
 > Estado real relevado: código actual en `develop` (rama `feature/auditoria-backend`),
-> `src/`, `docs/frontend/` y `docs/estado_actual_proyecto.md`.
+> `src/`, `docs/frontend/` y `docs/sdd/estado_actual_proyecto.md`.
 
 ## 1. Resumen ejecutivo
 
@@ -105,4 +105,4 @@ la confirmada), ya corregido en esta auditoría.
 - `docs/driveFrontend/04_backend/grupo_4_backend.md` — doc del grupo actualizado en esta auditoría.
 - `src/api/client.ts`, `src/api/endpoints.ts`, `src/types/api/error.types.ts` — estado real del código.
 - `docs/frontend/dependencias-equipos.md` §3 — dependencias de Backend (actualizado).
-- `docs/estado_actual_proyecto.md` — foto de estado (actualizada en esta auditoría).
+- `docs/sdd/estado_actual_proyecto.md` — foto de estado (actualizada en esta auditoría).

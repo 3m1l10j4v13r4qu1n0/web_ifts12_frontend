@@ -17,8 +17,7 @@ infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commit
   en `docs/driveFrontend/`).
 - No existen comandos `npm run lint/build/test` hasta que se andamie el proyecto.
   Verificar siempre que exista `package.json` antes de ejecutarlos.
-- Solo existe `main`/`origin/main`; `develop` no se creó aún. Antes de crear
-  ramas `feature/`/`fix/` hay que decidir y crear `develop` (preguntar primero).
+- Ramas `feature/`/`fix/` se crean siempre desde `develop` (una rama = una tarea).
 
 ## Fuente de verdad y anti-alucinación
 
@@ -74,24 +73,40 @@ infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commit
   del usuario (en su mayoría están `disable-model-invocation`).
 
 
+## Documentación con formato APA (regla + skill: `.agents/`)
+
+- **Reglas APA adaptadas:** `.agents/rules/apa-formato.md` (formato Markdown, estructura,
+  títulos, citas y referencias) y `.agents/rules/apa-software.md` (código, figuras, tablas,
+  referencias técnicas, checklist). Toda documentación nueva generada en el repo debe
+  seguirlas.
+- **Skill de plantilla:** `.agents/skills/apa-software-doc/SKILL.md` ofrece la plantilla de
+  documento y ejemplos de citas/referencias.
+- Aplican a informes de auditoría, minutas, SSD (`docs/sdd/`), memoria y cualquier doc que se
+  genere. Se adapta al formato Markdown real del proyecto; no aplican pautas físicas de papel.
+
 ## Auditoría de documentación (regla + skill: `.agents/`)
 
 - **Regla dura:** `.agents/rules/auditoria-documentacion.md` — al auditar documentación
   (requerimientos, especificaciones en `docs/driveFrontend/` u otra que afecte a un grupo),
   el agente DEBE actualizar también el archivo del grupo correspondiente (`grupo_X_*.md`),
-  no quedarse solo con el informe versionado.
+  no quedarse solo con el informe versionado, y generar el informe en
+  `docs/sdd/06_auditorias/auditoria-*.md`.
+- **Fuente única de verdad de análisis funcional:** `docs/frontend/analisis_funcional_validado.md`
+  (18/09/2026) — síntesis de los 3 PDFs aprobados en `docs/driveFrontend/01_analisis_funcional/`.
+  Al auditar `grupo_1_analisis_funcional.md` u otra doc de análisis, comparar contra ese resumen
+  validado + los PDFs aprobados, nunca contra suposiciones.
 - **Skill:** `.agents/skills/auditoria-documentacion/SKILL.md` — flujo completo: identificar
   grupo → relevar estado real → leer el doc del grupo → marcar ✅/🟡/🔵/⏳ → aplicar
-  correcciones verificadas → informe `docs/frontend/auditoria-*.md` → memoria → commits
+  correcciones verificadas → informe `docs/sdd/06_auditorias/auditoria-*.md` → memoria → commits
   (los cambios de `docs/driveFrontend/` NO se commitean).
 - Ejemplo de referencia: auditoría de infraestructura (09/09/2026), que además del informe
   actualizó `grupo_5_infraestructura.md`.
 
-## Memoria del proyecto (docs/estado_actual_proyecto.md y docs/bitacora_agentica.md)
+## Memoria del proyecto (docs/sdd/estado_actual_proyecto.md y docs/sdd/bitacora_agentica.md)
 
-- Antes de tocar código, leer `docs/estado_actual_proyecto.md` completo para tener el contexto actual del proyecto.
+- Antes de tocar código, leer `docs/sdd/estado_actual_proyecto.md` completo para tener el contexto actual del proyecto.
 - Al terminar una implementación, eliminación o edición relevante (nueva entidad, caso de uso, endpoint, refactor de arquitectura, dependencia core):
-  1. Actualizar la sección correspondiente de `docs/estado_actual_proyecto.md` (editar in-place, no reescribir todo el archivo).
-  2. Agregar una entrada nueva al final de `docs/bitacora_agentica.md` con: fecha, qué se hizo, decisiones tomadas, archivos tocados, estado resultante. Nunca editar entradas previas de la bitácora.
+  1. Actualizar la sección correspondiente de `docs/sdd/estado_actual_proyecto.md` (editar in-place, no reescribir todo el archivo).
+  2. Agregar una entrada nueva al final de `docs/sdd/bitacora_agentica.md` con: fecha, qué se hizo, decisiones tomadas, archivos tocados, estado resultante. Nunca editar entradas previas de la bitácora.
 - No generar entradas de bitácora por cambios triviales (typos, formateo, renames cosméticos).
 - Si el código real contradice lo que dice `estado_actual_proyecto.md`, avisar antes de asumir cuál es la fuente de verdad.

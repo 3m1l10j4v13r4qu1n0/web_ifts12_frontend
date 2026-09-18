@@ -29,7 +29,7 @@ Nota: Frontend informa rápido si una propuesta visual presenta dificultades de 
 ## 3. Backend, datos y APIs
 
 > Actualizado 15/09/2026: Backend respondió con definiciones técnicas formales
-> (`docs/driveFrontend/04_backend/respuesta.md`). Ver informe `docs/frontend/auditoria-backend.md`.
+> (`docs/driveFrontend/04_backend/respuesta.md`). Ver informe `docs/sdd/06_auditorias/auditoria-backend.md`.
 
 | Pedido | Por qué lo necesita Frontend | Estado |
 |---|---|---|
