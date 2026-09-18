@@ -73,6 +73,17 @@ infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commit
   del usuario (en su mayoría están `disable-model-invocation`).
 
 
+## Documentación con formato APA (regla + skill: `.agents/`)
+
+- **Reglas APA adaptadas:** `.agents/rules/apa-formato.md` (formato Markdown, estructura,
+  títulos, citas y referencias) y `.agents/rules/apa-software.md` (código, figuras, tablas,
+  referencias técnicas, checklist). Toda documentación nueva generada en el repo debe
+  seguirlas.
+- **Skill de plantilla:** `.agents/skills/apa-software-doc/SKILL.md` ofrece la plantilla de
+  documento y ejemplos de citas/referencias.
+- Aplican a informes de auditoría, minutas, SSD (`docs/sdd/`), memoria y cualquier doc que se
+  genere. Se adapta al formato Markdown real del proyecto; no aplican pautas físicas de papel.
+
 ## Auditoría de documentación (regla + skill: `.agents/`)
 
 - **Regla dura:** `.agents/rules/auditoria-documentacion.md` — al auditar documentación
