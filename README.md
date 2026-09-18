@@ -6,8 +6,12 @@ Reemplaza el espacio actual alojado en Moodle por un sitio web institucional acc
 claro y fácilmente administrable por el propio instituto. El backend se integra luego
 con APIs y la web se despliega como build estático en un VPS independiente del Moodle.
 
-> **Estado:** completadas las 5 fases del plan inicial del frontend (tags `v1.0.0`…`v1.4.0` en
-> `develop`). La Home es navegable con datos simulados; aún no hay consumo de API real.
+> **Estado:** completadas las 5 fases del plan inicial del frontend (tags `v1.0.0`…`v1.4.0`),
+> la Fase 6 de brechas de auditoría (`v1.5.0`) y el refactor del Mapa del Sitio V2
+> (menú de 9 ítems + buscador global, `v1.6.0`). La Home es navegable con datos
+> simulados; aún no hay consumo de API real. Base de documentación SDD completada
+> el 18/09/2026 (`docs/sdd/`: `01_global`, `02_tecnico`, `03_procesos`,
+> `04_historias_usuario/HU-01`).
 
 ## Tecnología
 
@@ -70,11 +74,12 @@ src/
 └── __tests__/               # suites de pruebas
 
 docs/
-├── sdd/                          # memoria: estado_actual_proyecto.md, bitacora_agentica.md, SSD, auditorías (06_auditorias/)
-├── frontend/                     # plan, propuesta tecnológica, actas, dependencias
-├── entregas/                  # entregables de cierre de fases (docs, actas)
-├── driveFrontend/             # requisitos fuente de verdad (no versionado, en .gitignore)
-└── mockups/                   # mockups HTML de las vistas (para ver en Tailwind Play)
+├── sdd/                      # memoria (estado_actual, bitácora), SSD base (01_global, 02_tecnico,
+│                            # 03_procesos, 04_historias_usuario/HU-01), metodología (05_), auditorías (06_)
+├── frontend/                 # plan, propuesta tecnológica, actas, dependencias, análisis funcional validado
+├── entregas/                 # entregables de cierre de fases (docs, actas)
+├── driveFrontend/            # requisitos fuente de verdad (no versionado, en .gitignore)
+└── mockups/                  # mockups HTML de las vistas (para ver en Tailwind Play)
 ```
 
 ## Mockups de las vistas
@@ -91,8 +96,9 @@ comentados están en el [instructivo de mockups](docs/mockups/README.md).
 - Home navegable con datos simulados en `constants/mock-data.ts` (marcados como provisorios).
 - URLs de Moodle e inscripción como placeholders en `constants/enlaces.ts`; los enlaces externos
   se muestran solo cuando existe URL oficial.
-- Sin consumo de API real todavía: la tabla oficial de endpoints del backend está vacía
-  (regla anti-alucinación).
+- Sin consumo de API real todavía: los endpoints se documentan por historia de
+  usuario (`docs/sdd/04_historias_usuario/HU-XX/hu_xx_api.md`, regla anti-alucinación);
+  la HU-01 Home ya tiene su `hu_01_api.md` con los endpoints GET públicos.
 - Componentes presentacionales, accesibles y responsive (mobile-first).
 
 ## Equipo y roles
@@ -115,5 +121,9 @@ En `docs/frontend/`:
 - `acta-decisiones.md` — decisiones tomadas en las fases 1-5.
 - `dependencias-equipos.md` — bloqueos y dependencias por equipo.
 - `agenda-reunion-lunes.md` — agenda de la reunión de revisión del 31/08/2026.
+- `analisis_funcional_validado.md` — **fuente única de verdad** del análisis funcional (18/09/2026).
 
-Memoria del proyecto y vitácora del agente en `docs/`.
+Documentación SDD (base, historia de usuarios y auditorías) en `docs/sdd/`:
+`01_global`, `02_tecnico`, `03_procesos`, `04_historias_usuario/HU-01`,
+`05_metodologia_agil`, `06_auditorias`. Memoria del proyecto y bitácora del agente
+en `docs/sdd/`.
