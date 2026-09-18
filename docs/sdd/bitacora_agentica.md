@@ -705,3 +705,50 @@ fuente y se corrigieron afirmaciones viejas (rama `feature/auditoria-fuente-anal
 afectados (solo docs). Pendientes que no se resuelven unilateralmente: coordinar con UX/UI los
 accesos de Home (AF-A6); contenidos del instituto (Drive de Edith), URLs oficiales y logos siguen
 🔵. Commit del informe + memoria pendiente de aprobación del usuario.
+
+---
+
+## 2026-09-18 — Base de documentación SDD (01_global, 02_tecnico, 03_procesos y HU-01)
+
+**Qué se hizo:** se completó la base de documentación SDD del proyecto tomando como guía la
+estructura de otro proyecto del equipo (`api_normalizacion_afiliados/docs/`) y deduciendo el
+contenido como analista funcional desde las fuentes de verdad del repo. Rama
+`feature/sdd-documentacion-base` creada desde `develop`. Se integró mediante cherry-pick el
+commit de la auditoría contra la fuente única (`6792cfb`, de
+`feature/auditoria-fuente-analisis`) para que la memoria quede al día.
+
+**Documentación generada:**
+- **01_global:** `vision.md` (nuevo), `actores.md` (6 perfiles + roles de acceso), `alcance.md`
+  (funcionalidades por sección con RF, fuera de alcance, límites, criterios de aceptación) y
+  `reglas_negocio.md` (RN-01…RN-14 transversales ligadas a RF).
+- **02_tecnico:** `decisiones_tecnicas.md` (stack real, estructura de carpetas, contrato de API,
+  despliegue Plan B, variables de entorno) y `modelo_datos_global.md` (entidades base espejo del
+  backend con estado 🟡/⏳).
+- **03_procesos:** `definicion_listo.md` — renombrado desde el typo `definicio_listo.md`
+  (`git mv`) y completado con el DoR adaptado al proyecto (formato HU, Gherkin, TDD, endpoints,
+  entidades).
+- **04_historias_usuario/HU-01 (Home institucional pública):** `hu_01.md` (historia estándar,
+  reemplaza un template genérico de UX/UI mal copiado), `hu_01_caso_uso_expandido.md`,
+  `hu_01_modelos_datos.md` (campos deducidos de `src/types/domain/sitio.types.ts`),
+  `hu_01_api.md` (endpoints `GET /api/slider`, `/api/noticias`, `/api/carreras`,
+  `/api/faqs?segmento=X`) y `hu_01_pruevas.md` (escenarios Gherkin + checklist TDD).
+- **Skill `fe-architect-scaffold`** (`.opencode/skills/`): la tabla de endpoints dejó de
+  hardcodearse; la fuente de verdad pasó a ser `docs/sdd/04_historias_usuario/HU-XX/hu_xx_api.md`
+  y crece automáticamente con cada HU nueva. Se actualizó la regla de oro, el flujo de consulta y
+  la checklist anti-alucinación.
+
+**Decisiones aprobadas por el usuario:** HU-01 = Home institucional pública; sí a `vision.md`,
+no a `diagramas/` por ahora; renombrar `definicio_listo.md` → `definicion_listo.md`.
+
+**Archivos/módulos tocados:**
+- `docs/sdd/01_global/{vision,actores,alcance,reglas_negocio}.md`
+- `docs/sdd/02_tecnico/{decisiones_tecnicas,modelo_datos_global}.md`
+- `docs/sdd/03_procesos/definicion_listo.md` (rename + contenido)
+- `docs/sdd/04_historias_usuario/HU-01/hu_01*.md` (5 archivos)
+- `.opencode/skills/fe-architect-scaffold/SKILL.md`
+- `docs/sdd/estado_actual_proyecto.md` (cabecera, §8 y §10)
+
+**Estado resultante:** base de documentación SDD lista para que las próximas historias de usuario
+sigan su estructura (los endpooints viven en cada `hu_XX_api.md`). No se tocó código de aplicación;
+`lint`/`build`/`test` no afectados. Pendiente: push de la rama y PR hacia `develop` con aprobación
+del usuario.

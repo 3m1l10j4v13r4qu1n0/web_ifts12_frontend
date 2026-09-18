@@ -1,6 +1,6 @@
 # Estado Actual del Proyecto
 
-> Última actualización: 2026-09-18 (Auditoría contra la fuente única de verdad de Análisis validada + actualización de documentación)
+> Última actualización: 2026-09-18 (Base de documentación SDD completada: `01_global`, `02_tecnico`, `03_procesos` y `HU-01`; skill `fe-architect-scaffold` con endpoints genéricos por historia de usuario)
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `docs/sdd/bitacora_agentica.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.
 
@@ -186,6 +186,16 @@ sobre rutas administrables. La tabla oficial (Swagger/OpenAPI) llega como entreg
   accesos destacados/rápidos, contacto y jerarquía general. **Nueva fuente de verdad de
   navegación**, reemplaza al mapa V1 (relevamiento 27/08/2026, eliminado). Pendiente de
   validación de Análisis Funcional y de wireframes/prototipos de UX/UI.
+- `docs/sdd/01_global/`, `docs/sdd/02_tecnico/`, `docs/sdd/03_procesos/` y
+  `docs/sdd/04_historias_usuario/HU-01/` — **base de documentación SDD completada (18/09/2026)**:
+  `vision.md`, `actores.md`, `alcance.md` y `reglas_negocio.md` (RN-01…RN-14 transversales);
+  `decisiones_tecnicas.md` y `modelo_datos_global.md`; `definicion_listo.md` (DoR, renombrado
+  desde el typo `definicio_listo`); y la **HU-01 Home institucional pública** con sus 5 archivos
+  (`hu_01.md`, caso de uso expandido, modelos de datos, `hu_01_api.md` con endpoints `GET` de la
+  Home y plan de pruebas). Base para nuevas historias de usuario.
+- `.opencode/skills/fe-architect-scaffold/SKILL.md` — **actualizado 18/09/2026**: la lista de
+  endpoints ya no se hardcodea en el skill; la fuente de verdad es por historia de usuario
+  (`docs/sdd/04_historias_usuario/HU-XX/hu_xx_api.md`) y crece automáticamente con cada HU nueva.
 
 ## 9. Documentos de dependencias por grupo
 
@@ -224,3 +234,7 @@ sobre rutas administrables. La tabla oficial (Swagger/OpenAPI) llega como entreg
   correspondiente (`grupo_X_*.md`) — regla dura
   `.agents/rules/auditoria-documentacion.md` y skill
   `.agents/skills/auditoria-documentacion/SKILL.md`.
+- La fuente de verdad de endpoints del frontend es **por historia de usuario**:
+  `docs/sdd/04_historias_usuario/HU-XX/hu_xx_api.md` (skill `fe-architect-scaffold` actualizado
+  el 18/09/2026). Cada HU nueva con su `hu_xx_api.md` amplía esa fuente **sin editar el skill**;
+  un endpoint que no está en ninguna HU se trata como inexistente.
