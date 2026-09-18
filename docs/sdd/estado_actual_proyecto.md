@@ -1,6 +1,6 @@
 # Estado Actual del Proyecto
 
-> Última actualización: 2026-09-15 (Auditoría de la respuesta del backend + correcciones de contrato)
+> Última actualización: 2026-09-18 (Base de documentación SDD completada: `01_global`, `02_tecnico`, `03_procesos` y `HU-01`; skill `fe-architect-scaffold` con endpoints genéricos por historia de usuario)
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `docs/sdd/bitacora_agentica.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.
 
@@ -133,6 +133,12 @@ sobre rutas administrables. La tabla oficial (Swagger/OpenAPI) llega como entreg
   Fase 6: RF-22 (contacto/pie), accesos rápidos faltantes, `Carrera` con modalidad/horarios,
   FAQ descriptiva por segmento, fechas en novedades. Quedan pendientes los 🔵 (bloqueados por
   Backend) y los ❌ que requieren contenidos oficiales de Análisis/Edith.
+- **Auditoría de análisis funcional contra la fuente única de verdad validada** (18/09/2026)
+  **completada** (`docs/sdd/06_auditorias/auditoria-analisis-unificado.md` v2, rama
+  `feature/auditoria-fuente-analisis`): se actualizaron `grupo_1_analisis_funcional.md`,
+  `grupo_3_frontend.md`, `docs/frontend/{dependencias-equipos,acta-decisiones}.md`. Pendiente
+  transversal: resolver con UX/UI la tensión de accesos de Home (**7 confirmados por Análisis**
+  vs. **9 del Mapa V2**, sin SIU) — hallazgo AF-A6.
 - **Auditoría de infraestructura** contra los 3 documentos de `docs/driveFrontend/05_infraestructura/`
   **completada** (`docs/sdd/06_auditorias/auditoria-infraestructura.md`, rama
   `feature/requerimientos-infraestructura`): arquitectura Plan B, build estático, stack y
@@ -149,14 +155,19 @@ sobre rutas administrables. La tabla oficial (Swagger/OpenAPI) llega como entreg
 
 ## 8. Documentos de referencia (relevamiento)
 
-- `docs/driveFrontend/Analisis funcional todo unificado IFTS 12.pdf` — **Documento unificado
-  del equipo de Análisis Funcional** (08/09/2026): minuta definitiva, requisitos funcionales
-  v1 (RF-01…RF-34), mapa de contenidos y prioridades, matriz fijo vs. administrable, propuesta
-  de alcance/menú y Plan B VPS. Nueva fuente de verdad para auditar el cumplimiento del
-  frontend. Ver `docs/sdd/06_auditorias/auditoria-analisis-unificado.md`.
-- `docs/sdd/06_auditorias/auditoria-analisis-unificado.md` — Auditoría de cumplimiento del frontend
-  contra el documento unificado de Análisis (matriz RF-01…RF-34, comparativas de menú/accesos,
-  accionable sin dependencias, bloqueos externos). Documento vivo.
+- `docs/frontend/analisis_funcional_validado.md` — **Fuente única de verdad de Análisis
+  Funcional, validada por el cliente el 18/09/2026**: síntesis de los 3 PDFs aprobados en
+  `docs/driveFrontend/01_analisis_funcional/` (Documento Consolidado, Respuesta a Frontend, PP
+  Análisis). Fija: accesos rápidos de Home **7 (no 9)**, dirección confirmada (Misiones 26,
+  C1083 ABB, CABA — nocturno), login solo para administradores de contenido, 6 carreras, bot
+  fuera de v1, alcance por etapas A→B→C y RF-01…RF-34. Ante contradicción con documentación
+  vieja, manda esta fuente (y los PDFs antes que todo).
+- `docs/sdd/06_auditorias/auditoria-analisis-unificado.md` — **Auditoría v2 (18/09/2026)** contra
+  la fuente única validada y el estado real (Fase 6 + refactor Mapa V2). Hallazgos AF-A1…AF-A10,
+  matriz RF-01…RF-34, accesos 7 confirmados y tensión 🟡 Mapa V2 (9 accesos sin SIU). Reemplaza a
+  la v1 (08/09/2026, pre–Fase 6). Documento vivo.
+- `docs/driveFrontend/Analisis funcional todo unificado IFTS 12 (2).pdf` — PDF fuente del
+  Consolidado (8 partes), entre los 3 aprobados. Los PDFs mandan ante contradicción.
 - `docs/sdd/06_auditorias/auditoria-infraestructura.md` — Auditoría de consistencia entre los
   requerimientos de infraestructura (`docs/driveFrontend/05_infraestructura/`: especificación
   técnica, cuestionario Moodle y grupo 5) y el estado real del frontend. 10 brechas
@@ -175,11 +186,23 @@ sobre rutas administrables. La tabla oficial (Swagger/OpenAPI) llega como entreg
   accesos destacados/rápidos, contacto y jerarquía general. **Nueva fuente de verdad de
   navegación**, reemplaza al mapa V1 (relevamiento 27/08/2026, eliminado). Pendiente de
   validación de Análisis Funcional y de wireframes/prototipos de UX/UI.
+- `docs/sdd/01_global/`, `docs/sdd/02_tecnico/`, `docs/sdd/03_procesos/` y
+  `docs/sdd/04_historias_usuario/HU-01/` — **base de documentación SDD completada (18/09/2026)**:
+  `vision.md`, `actores.md`, `alcance.md` y `reglas_negocio.md` (RN-01…RN-14 transversales);
+  `decisiones_tecnicas.md` y `modelo_datos_global.md`; `definicion_listo.md` (DoR, renombrado
+  desde el typo `definicio_listo`); y la **HU-01 Home institucional pública** con sus 5 archivos
+  (`hu_01.md`, caso de uso expandido, modelos de datos, `hu_01_api.md` con endpoints `GET` de la
+  Home y plan de pruebas). Base para nuevas historias de usuario.
+- `.opencode/skills/fe-architect-scaffold/SKILL.md` — **actualizado 18/09/2026**: la lista de
+  endpoints ya no se hardcodea en el skill; la fuente de verdad es por historia de usuario
+  (`docs/sdd/04_historias_usuario/HU-XX/hu_xx_api.md`) y crece automáticamente con cada HU nueva.
 
 ## 9. Documentos de dependencias por grupo
 
-- `docs/driveFrontend/grupo_1_analisis_funcional.md` — Qué pedirle a Análisis Funcional
-  (contenidos, mapa validado, URLs oficiales, logos). **Grupo que más bloquea al resto.**
+- `docs/driveFrontend/01_analisis_funcional/grupo_1_analisis_funcional.md` — Qué pedirle a Análisis
+  Funcional. **Actualizado 18/09/2026:** minuta V2 y mapa validado ✅ entregados (Partes I y IV del
+  Consolidado); accesos rápidos 7 confirmados; dirección/horario confirmados. Quedan 🔵 los
+  contenidos reales, URLs oficiales, logos y datos de SIU/bedeles/títulos/traspasos (Drive de Edith).
 - `docs/driveFrontend/grupo_2_ux_ui.md` — Qué pedirle a UX/UI (wireframes, paleta definitiva,
   tipografía, mapa de navegación, flujos de usuario, componentes visuales).
 - `docs/driveFrontend/grupo_3_frontend.md` — Estado de Frontend, qué ya entregamos, qué
@@ -211,3 +234,7 @@ sobre rutas administrables. La tabla oficial (Swagger/OpenAPI) llega como entreg
   correspondiente (`grupo_X_*.md`) — regla dura
   `.agents/rules/auditoria-documentacion.md` y skill
   `.agents/skills/auditoria-documentacion/SKILL.md`.
+- La fuente de verdad de endpoints del frontend es **por historia de usuario**:
+  `docs/sdd/04_historias_usuario/HU-XX/hu_xx_api.md` (skill `fe-architect-scaffold` actualizado
+  el 18/09/2026). Cada HU nueva con su `hu_xx_api.md` amplía esa fuente **sin editar el skill**;
+  un endpoint que no está en ninguna HU se trata como inexistente.

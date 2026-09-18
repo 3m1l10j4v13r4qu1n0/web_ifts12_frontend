@@ -665,3 +665,90 @@ implementó la **nueva fuente de verdad** `mapa_inicial_sitio_web_ifts12_2026_v2
 implementados. Verificación: lint ✅, build ✅, tests ✅ (19/19, 10 archivos). Pendientes: validar
 la V2 con Análisis Funcional, wireframes de UX/UI, endpoint de búsqueda de Backend, URLs oficiales
 de Moodle/inscripción. Commit/push de la rama pendientes de aprobación.
+
+---
+
+## 2026-09-18 — Auditoría contra la fuente única de verdad de Análisis validada
+
+**Qué se hizo:** el cliente validó `docs/frontend/analisis_funcional_validado.md` como fuente
+única de verdad de Análisis Funcional (síntesis de los 3 PDFs aprobados en
+`docs/driveFrontend/01_analisis_funcional/`). Se auditó la documentación existente contra esa
+fuente y se corrigieron afirmaciones viejas (rama `feature/auditoria-fuente-analisis` desde
+`develop`), además de regenerar el informe de auditoría de análisis como documento vivo.
+
+**Hallazgos corregidos (IDs AF-A1…AF-A10 en el informe):**
+- **Minuta V2 "bloqueada"** → ✅ resuelta: unificada en la Parte I del Consolidado.
+- **Mapa del sitio "pendiente de validación"** → ✅ resuelto: Parte IV del Consolidado.
+- **"Confirmar los 9 accesos rápidos"** → ✅ corregido a **7 confirmados** (Moodle, SIU,
+  Inscripción GCBA, Becas, Constancias, Mesas, Calendario).
+- **Menú de 5 ítems como vigente** → los docs de grupo actualizados al **Mapa V2 (9 ítems +
+  buscador, 15/09/2026)**; la decisión 3 del acta quedó marcada como reemplazada.
+- **Dirección/horario "pendientes"** → ✅ confirmados: Misiones 26, C1083 ABB, CABA — nocturno.
+- **Login ambiguo** → confirmado: **solo personal que administra contenidos**; resto público.
+- **Tensión de accesos (7 de Análisis vs. 9 del Mapa V2, sin SIU)** → queda **🟡 documentada**
+  (AF-A6): la fuente no la resuelve y la navegación la define UX/UI. No se sobrescribió nada.
+
+**Decisiones registradas:**
+- Se adoptó la fuente validada como referencia para auditar (mandan los PDFs ante contradicción).
+- Se actualizó el archivo del grupo 1 (`grupo_1_analisis_funcional.md`) y el del grupo 3
+  (`grupo_3_frontend.md`) con ✅/🟡/🔵 según la fuente, y se documentó la nueva dependencia de
+  coordinar con UX/UI la cantidad de accesos de la Home.
+
+**Archivos tocados:**
+- Memoria/análisis (versionado): `docs/frontend/analisis_funcional_validado.md` (creado por el
+  cliente), `docs/frontend/{dependencias-equipos,acta-decisiones}.md`,
+  `docs/sdd/06_auditorias/auditoria-analisis-unificado.md` (v2), `docs/sdd/estado_actual_proyecto.md`.
+- Drive (gitignored, no se commitea): `docs/driveFrontend/01_analisis_funcional/grupo_1_analisis_funcional.md`,
+  `docs/driveFrontend/03_frontend/grupo_3_frontend.md`.
+
+**Estado resultante:** documentación alineada a la fuente única válida. `lint`/`build`/`test` no
+afectados (solo docs). Pendientes que no se resuelven unilateralmente: coordinar con UX/UI los
+accesos de Home (AF-A6); contenidos del instituto (Drive de Edith), URLs oficiales y logos siguen
+🔵. Commit del informe + memoria pendiente de aprobación del usuario.
+
+---
+
+## 2026-09-18 — Base de documentación SDD (01_global, 02_tecnico, 03_procesos y HU-01)
+
+**Qué se hizo:** se completó la base de documentación SDD del proyecto tomando como guía la
+estructura de otro proyecto del equipo (`api_normalizacion_afiliados/docs/`) y deduciendo el
+contenido como analista funcional desde las fuentes de verdad del repo. Rama
+`feature/sdd-documentacion-base` creada desde `develop`. Se integró mediante cherry-pick el
+commit de la auditoría contra la fuente única (`6792cfb`, de
+`feature/auditoria-fuente-analisis`) para que la memoria quede al día.
+
+**Documentación generada:**
+- **01_global:** `vision.md` (nuevo), `actores.md` (6 perfiles + roles de acceso), `alcance.md`
+  (funcionalidades por sección con RF, fuera de alcance, límites, criterios de aceptación) y
+  `reglas_negocio.md` (RN-01…RN-14 transversales ligadas a RF).
+- **02_tecnico:** `decisiones_tecnicas.md` (stack real, estructura de carpetas, contrato de API,
+  despliegue Plan B, variables de entorno) y `modelo_datos_global.md` (entidades base espejo del
+  backend con estado 🟡/⏳).
+- **03_procesos:** `definicion_listo.md` — renombrado desde el typo `definicio_listo.md`
+  (`git mv`) y completado con el DoR adaptado al proyecto (formato HU, Gherkin, TDD, endpoints,
+  entidades).
+- **04_historias_usuario/HU-01 (Home institucional pública):** `hu_01.md` (historia estándar,
+  reemplaza un template genérico de UX/UI mal copiado), `hu_01_caso_uso_expandido.md`,
+  `hu_01_modelos_datos.md` (campos deducidos de `src/types/domain/sitio.types.ts`),
+  `hu_01_api.md` (endpoints `GET /api/slider`, `/api/noticias`, `/api/carreras`,
+  `/api/faqs?segmento=X`) y `hu_01_pruevas.md` (escenarios Gherkin + checklist TDD).
+- **Skill `fe-architect-scaffold`** (`.opencode/skills/`): la tabla de endpoints dejó de
+  hardcodearse; la fuente de verdad pasó a ser `docs/sdd/04_historias_usuario/HU-XX/hu_xx_api.md`
+  y crece automáticamente con cada HU nueva. Se actualizó la regla de oro, el flujo de consulta y
+  la checklist anti-alucinación.
+
+**Decisiones aprobadas por el usuario:** HU-01 = Home institucional pública; sí a `vision.md`,
+no a `diagramas/` por ahora; renombrar `definicio_listo.md` → `definicion_listo.md`.
+
+**Archivos/módulos tocados:**
+- `docs/sdd/01_global/{vision,actores,alcance,reglas_negocio}.md`
+- `docs/sdd/02_tecnico/{decisiones_tecnicas,modelo_datos_global}.md`
+- `docs/sdd/03_procesos/definicion_listo.md` (rename + contenido)
+- `docs/sdd/04_historias_usuario/HU-01/hu_01*.md` (5 archivos)
+- `.opencode/skills/fe-architect-scaffold/SKILL.md`
+- `docs/sdd/estado_actual_proyecto.md` (cabecera, §8 y §10)
+
+**Estado resultante:** base de documentación SDD lista para que las próximas historias de usuario
+sigan su estructura (los endpooints viven en cada `hu_XX_api.md`). No se tocó código de aplicación;
+`lint`/`build`/`test` no afectados. Pendiente: push de la rama y PR hacia `develop` con aprobación
+del usuario.

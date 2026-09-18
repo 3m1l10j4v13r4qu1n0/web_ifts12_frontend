@@ -11,7 +11,7 @@ Este skill actúa como un **contrato de no-alucinación**: el agente NO puede in
 ## 📜 Reglas inquebrantables del frontend
 
 ### 1. Fuente única de verdad: el backend
-- Prohibido inventar endpoints: solo se pueden consumir los documentados en la tabla oficial más abajo.
+- Prohibido inventar endpoints: solo se pueden consumir los documentados en el `hu_xx_api.md` de cada Historia de Usuario (ver «Lista oficial de endpoints» más abajo).
 - Prohibido inventar campos en las respuestas: los tipos TypeScript deben reflejar **exactamente** los esquemas del backend `caja_negra.md`.
 - Prohibido inventar códigos de error: solo se manejan los que el backend devuelve vía `caja_negra.md`.
 
@@ -117,37 +117,17 @@ Seguir este orden y **esperar confirmación explícita antes de avanzar al sigui
 
 ## 📋 Lista oficial de endpoints del backend (anti-alucinación)
 
-⚠️ **Regla de oro**: solo se pueden consumir estos endpoints. Si necesitás uno que no está acá, DETENÉ la implementación y consultá al usuario.
+⚠️ **Regla de oro**: solo se pueden consumir los endpoints documentados. Si necesitás uno que no está documentado, DETENÉ la implementación y consultá al usuario.
 
-> ⚠️ **Mantenimiento**: esta tabla debe actualizarse en el mismo commit que agrega un endpoint nuevo al backend antes de asumir que un endpoint no existe.
+Los endpoints **NO se hardcodean en este skill**: la fuente de verdad es por **Historia de Usuario**. Cada HU que consume API tiene su especificación en `docs/sdd/04_historias_usuario/HU-XX/hu_xx_api.md` (método, ruta, request/response y HU asociada).
 
-> Rutas confirmadas por Backend el 15/09/2026 (`docs/driveFrontend/04_backend/respuesta.md`,
-> auditoría `docs/sdd/06_auditorias/auditoria-backend.md`). Prefijo `/api/` (sin `/api/v1/`). La tabla
-> oficial con parámetros, bodies y esquemas (Swagger/OpenAPI) llega como entrega 2 de Backend.
+### Cómo consultar la lista oficial (flujo obligatorio antes de consumir API)
 
-| Método | Endpoint | Propósito | HU asociada |
-| :--- | :--- | :--- | :--- |
-| GET | `/api/carreras` | Listado de carreras | — |
-| GET | `/api/carreras/:id` | Detalle, plan y materias | — |
-| GET | `/api/noticias` | Listado de noticias/novedades | — |
-| GET | `/api/noticias/:id` | Detalle de noticia | — |
-| GET | `/api/faqs?segmento=X` | FAQ filtradas por segmento | — |
-| GET | `/api/slider` | Carrusel activo de la Home | — |
-| GET | `/api/calendario` | Calendario académico | — |
-| GET | `/api/horarios` | Horarios | — |
-| GET | `/api/docentes` | Docentes | — |
-| GET | `/api/autoridades` | Autoridades | — |
-| GET | `/api/bedeles` | Bedeles | — |
-| GET | `/api/becas` | Becas | — |
-| GET | `/api/tutorias` | Tutorías | — |
-| POST | `/api/auth/login` | Iniciar sesión (JWT) | — |
-| POST | `/api/auth/logout` | Cerrar sesión | — |
-| GET | `/api/auth/me` | Sesión actual | — |
-| POST/PUT/DELETE | rutas administrables (`/api/noticias`, `/api/carreras`, `/api/faqs`, etc.) | CRUD admin con token | — |
+1. Ubicar la HU de la pantalla/feature en `docs/sdd/04_historias_usuario/` y leer su `hu_xx_api.md`.
+2. Cruzar contra las rutas confirmadas por Backend el 15/09/2026 en `docs/driveFrontend/04_backend/respuesta.md` y la auditoría `docs/sdd/06_auditorias/auditoria-backend.md`. Prefijo `/api/` (sin `/api/v1/`).
+3. Los DTOs exactos (bodies, parámetros, esquemas) llegan con la tabla Swagger/OpenAPI (entrega 2 de Backend); hasta entonces, usar solo los campos documentados en el `hu_xx_api.md` y marcar ⏳ lo no confirmado.
 
-> Nota: `/api/contacto` (POST) no fue confirmado por Backend (BE-A6); el endpoint de búsqueda
-> global para el buscador de la V2 tampoco (pendiente de Backend — el buscador actual filtra
-> contenido local).
+> ⚠️ **Mantenimiento**: la lista se actualiza *automáticamente* con la documentación: cada vez que se crea una Historia de Usuario nueva se agrega su archivo `hu_xx_api.md` y esta fuente de verdad crece. No hace falta editar este skill por cada endpoint; si un endpoint no está en ninguna HU, se trata como inexistente.
 
 ### Estructura de respuestas de error del backend
 
@@ -223,7 +203,7 @@ export interface ApiErrorResponse {
 
 Antes de generar código, verificar:
 
-- [ ] ¿El endpoint que voy a consumir existe en la tabla oficial de arriba?
+- [ ] ¿El endpoint que voy a consumir está documentado en el `hu_xx_api.md` de la HU correspondiente (`docs/sdd/04_historias_usuario/HU-XX/`)?
 - [ ] ¿Los tipos TypeScript reflejan exactamente los esquemas Pydantic del backend?
 - [ ] ¿Los códigos de error HTTP que voy a manejar están documentados en `caja_negra.md` del backend?
 - [ ] ¿Estoy respetando la estructura de carpetas definida?
@@ -231,7 +211,7 @@ Antes de generar código, verificar:
 - [ ] ¿Estoy poniendo lógica de negocio en un componente presentacional? → Si es sí, DETENER y mover a hook.
 - [ ] ¿Estoy implementando autenticación real? → Si es sí, DETENER: el backend aún no la tiene.
 
-Si detectás que se necesita un endpoint que **no existe** en el backend, **DETENÉ la implementación y notificá antes de continuar.**
+Si detectás que se necesita un endpoint que **no está documentado** en ninguna HU, **DETENÉ la implementación y notificá antes de continuar.**
 
 ## 🚫 Reglas prohibidas
 
