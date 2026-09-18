@@ -6,15 +6,19 @@ Infraestructura. Los bloqueos se comunican al enlace del área correspondiente;
 **no se resuelven unilateralmente**.
 
 Fuentes de verdad: `docs/driveFrontend/` (minuta 27/08/2026, Tarea Inicial, Plan B, PAUTAS).
-Fecha de relevamiento: 28/08/2026; releído 29/08/2026.
+Fecha de relevamiento: 28/08/2026; releído 29/08/2026. **Actualizado 18/09/2026** contra
+`docs/frontend/analisis_funcional_validado.md` (fuente única de verdad de Análisis, validada por el cliente).
 
 ## 1. Análisis funcional y relevamiento
 
+> **Actualizado 18/09/2026:** la minuta V2 y el mapa del sitio validado fueron **entregados por
+> Análisis** (Documento Consolidado, Partes I y IV — ver `analisis_funcional_validado.md` §10).
+
 | Pedido | Por qué lo necesita Frontend | Estado |
 |---|---|---|
-| Minuta de Correcciones y Aclaraciones (V2) | Documento de referencia obligatorio de la tarea inicial; no está disponible. | Bloqueado |
-| Mapa inicial del sitio validado | Estructura de navegación definitiva; hoy se trabaja con las secciones identificadas. | Bloqueado |
-| Contenidos institucionales (normativa, autoridades, planes, horarios) | No se inventan afirmaciones institucionales; la Home usa mocks mientras tanto. | Bloqueado |
+| Minuta de Correcciones y Aclaraciones (V2) | Documento de referencia obligatorio de la tarea inicial; no está disponible. | ✅ **Entregada** — unificada en la Parte I del Consolidado (18/09/2026) |
+| Mapa inicial del sitio validado | Estructura de navegación definitiva; hoy se trabaja con las secciones identificadas. | ✅ **Entregado** — Parte IV del Consolidado (18/09/2026). La navegación la define UX/UI (Mapa V2) |
+| Contenidos institucionales (normativa, autoridades, planes, horarios) | No se inventan afirmaciones institucionales; la Home usa mocks mientras tanto. | 🔵 Pendiente del instituto (Drive de Edith) — ver fuente validada §8 |
 
 ## 2. UX/UI y arquitectura de información
 
