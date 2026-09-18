@@ -12,17 +12,28 @@ infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commit
 
 ## Estado actual (leer antes de tocar nada)
 
-- El repo NO tiene código de aplicación todavía: no hay `package.json`, `src/`
-  ni build al root. El andamiaje frontend está pendiente (ver "Tarea Inicial"
-  en `docs/driveFrontend/`).
-- No existen comandos `npm run lint/build/test` hasta que se andamie el proyecto.
-  Verificar siempre que exista `package.json` antes de ejecutarlos.
+- Frontend ya andamiado y operativo (Fases 1-4, tags `v1.0.0`–`v1.3.0`): hay
+  `package.json`, `src/` completo (React 19 + Vite + TypeScript strict + Tailwind
+  v4) y scripts `lint/build/test` en verde en `develop`.
+- Se completó la Fase 5 (cierre/docs, `v1.4.0`), la Fase 6 (brechas de auditoría
+  sin dependencias: contacto/pie, accesos rápidos, modalidad/horarios, FAQ por
+  segmento, fechas ISO, `v1.5.0`) y el refactor Mapa Sitio V2 (15/09/2026: menú de
+  9 items + buscador global, `v1.6.0`). La Home es navegable con datos simulados
+  (`src/constants/mock-data.ts`); **aún no hay consumo de API real**.
+- Base de documentación SDD completada (18/09/2026, mergeada a `develop`):
+  `docs/sdd/01_global`, `02_tecnico`, `03_procesos` y `04_historias_usuario/HU-01`;
+  skill `fe-architect-scaffold` con endpoints genéricos por historia de usuario.
+  Ver detalles en `docs/sdd/estado_actual_proyecto.md`.
 - Ramas `feature/`/`fix/` se crean siempre desde `develop` (una rama = una tarea).
+- Siempre ejecutar `npm run lint` · `npm run build` · `npm run test` al tocar código.
 
 ## Fuente de verdad y anti-alucinación
 
 - No inventar endpoints, campos, tipos, textos ni contenido institucional. El
   backend y los docs de `docs/driveFrontend/` son la única fuente de verdad.
+- La fuente de verdad de endpoints del frontend es **por historia de usuario**:
+  `docs/sdd/04_historias_usuario/HU-XX/hu_xx_api.md` (skill `fe-architect-scaffold`).
+  Un endpoint que no está documentado en ninguna HU se trata como inexistente.
 - Hasta validar contenidos, la Home se arma con datos simulados y sin
   afirmaciones institucionales definitivas; debe incluir acceso visible a Moodle
   y al enlace oficial de inscripción.
@@ -39,8 +50,7 @@ infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commit
   (ej. `feat(ui): se agrega componente header`). Prohibidos mensajes vagos
   ("cambios", "update", "cosas varias").
 - Antes de mergear: integrar `origin/develop` en la rama feature y resolver
-  conflictos ahí; checklist previa `npm run lint` · `npm run build` · `npm run test`
-  (una vez que existan esos scripts).
+  conflictos ahí; checklist previa `npm run lint` · `npm run build` · `npm run test`.
 - **PRs con `gh`:** instalado en `~/.local/bin/gh` (autenticación la maneja el usuario,
   `gh auth login`). Tras pushear la rama (con aprobación), abrir PR hacia `develop` con
   `gh pr create --base develop --head <rama> ...`. Merge ORIGINAL (`gh pr merge --merge`) solo
