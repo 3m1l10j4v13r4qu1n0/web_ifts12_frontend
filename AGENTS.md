@@ -17,8 +17,7 @@ infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commit
   en `docs/driveFrontend/`).
 - No existen comandos `npm run lint/build/test` hasta que se andamie el proyecto.
   Verificar siempre que exista `package.json` antes de ejecutarlos.
-- Solo existe `main`/`origin/main`; `develop` no se creó aún. Antes de crear
-  ramas `feature/`/`fix/` hay que decidir y crear `develop` (preguntar primero).
+- Ramas `feature/`/`fix/` se crean siempre desde `develop` (una rama = una tarea).
 
 ## Fuente de verdad y anti-alucinación
 
