@@ -665,3 +665,43 @@ implementó la **nueva fuente de verdad** `mapa_inicial_sitio_web_ifts12_2026_v2
 implementados. Verificación: lint ✅, build ✅, tests ✅ (19/19, 10 archivos). Pendientes: validar
 la V2 con Análisis Funcional, wireframes de UX/UI, endpoint de búsqueda de Backend, URLs oficiales
 de Moodle/inscripción. Commit/push de la rama pendientes de aprobación.
+
+---
+
+## 2026-09-18 — Auditoría contra la fuente única de verdad de Análisis validada
+
+**Qué se hizo:** el cliente validó `docs/frontend/analisis_funcional_validado.md` como fuente
+única de verdad de Análisis Funcional (síntesis de los 3 PDFs aprobados en
+`docs/driveFrontend/01_analisis_funcional/`). Se auditó la documentación existente contra esa
+fuente y se corrigieron afirmaciones viejas (rama `feature/auditoria-fuente-analisis` desde
+`develop`), además de regenerar el informe de auditoría de análisis como documento vivo.
+
+**Hallazgos corregidos (IDs AF-A1…AF-A10 en el informe):**
+- **Minuta V2 "bloqueada"** → ✅ resuelta: unificada en la Parte I del Consolidado.
+- **Mapa del sitio "pendiente de validación"** → ✅ resuelto: Parte IV del Consolidado.
+- **"Confirmar los 9 accesos rápidos"** → ✅ corregido a **7 confirmados** (Moodle, SIU,
+  Inscripción GCBA, Becas, Constancias, Mesas, Calendario).
+- **Menú de 5 ítems como vigente** → los docs de grupo actualizados al **Mapa V2 (9 ítems +
+  buscador, 15/09/2026)**; la decisión 3 del acta quedó marcada como reemplazada.
+- **Dirección/horario "pendientes"** → ✅ confirmados: Misiones 26, C1083 ABB, CABA — nocturno.
+- **Login ambiguo** → confirmado: **solo personal que administra contenidos**; resto público.
+- **Tensión de accesos (7 de Análisis vs. 9 del Mapa V2, sin SIU)** → queda **🟡 documentada**
+  (AF-A6): la fuente no la resuelve y la navegación la define UX/UI. No se sobrescribió nada.
+
+**Decisiones registradas:**
+- Se adoptó la fuente validada como referencia para auditar (mandan los PDFs ante contradicción).
+- Se actualizó el archivo del grupo 1 (`grupo_1_analisis_funcional.md`) y el del grupo 3
+  (`grupo_3_frontend.md`) con ✅/🟡/🔵 según la fuente, y se documentó la nueva dependencia de
+  coordinar con UX/UI la cantidad de accesos de la Home.
+
+**Archivos tocados:**
+- Memoria/análisis (versionado): `docs/frontend/analisis_funcional_validado.md` (creado por el
+  cliente), `docs/frontend/{dependencias-equipos,acta-decisiones}.md`,
+  `docs/sdd/06_auditorias/auditoria-analisis-unificado.md` (v2), `docs/sdd/estado_actual_proyecto.md`.
+- Drive (gitignored, no se commitea): `docs/driveFrontend/01_analisis_funcional/grupo_1_analisis_funcional.md`,
+  `docs/driveFrontend/03_frontend/grupo_3_frontend.md`.
+
+**Estado resultante:** documentación alineada a la fuente única válida. `lint`/`build`/`test` no
+afectados (solo docs). Pendientes que no se resuelven unilateralmente: coordinar con UX/UI los
+accesos de Home (AF-A6); contenidos del instituto (Drive de Edith), URLs oficiales y logos siguen
+🔵. Commit del informe + memoria pendiente de aprobación del usuario.

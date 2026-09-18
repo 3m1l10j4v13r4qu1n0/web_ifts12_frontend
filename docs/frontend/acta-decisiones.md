@@ -33,7 +33,8 @@ deban validarse con otros equipos. Cada entrada indica fecha, contexto, decisió
 - **Decisión:** el menú principal tiene 5 ítems (Carreras, Ingresantes, Estudiantes, Docentes,
   Noticias), sin ítem "Inicio" porque el logo enlaza a la Home. Institucional, Tutorías, FAQ y
   Contacto quedan en el footer.
-- **Estado:** implementada (regla de navegación máx. 5 ítems).
+- **Estado:** **REEMPLAZADA** el 15/09/2026 por la decisión 11 (Mapa del Sitio V2: menú de 9
+  ítems + buscador global). Se conserva como registro histórico.
 
 ## 4. Paleta provisional de color (Fase 3)
 
@@ -107,3 +108,25 @@ deban validarse con otros equipos. Cada entrada indica fecha, contexto, decisió
   placeholders hasta tener URL oficial.
 - **Estado:** implementada en `refactor/mapa-sitio` (15/09/2026). Pendiente: endpoint de búsqueda
   de Backend y wireframes definitivos de UX/UI.
+
+## 12. Fuente única de verdad de Análisis + 7 accesos rápidos (18/09/2026)
+
+- **Fecha:** 18/09/2026.
+- **Contexto:** el cliente validó `docs/frontend/analisis_funcional_validado.md` como síntesis de
+  los 3 PDFs aprobados de Análisis Funcional (`docs/driveFrontend/01_analisis_funcional/`). La
+  Respuesta a Frontend fija puntos que había que confirmar: accesos rápidos, dirección, login y
+  alcance por etapas.
+- **Decisión 1 (accesos rápidos):** la Home tiene **7 accesos rápidos confirmados** por Análisis
+  (Campus Moodle, SIU, Inscripción GCBA, Becas, Constancias, Mesas de examen, Calendario
+  académico) — el documento aclara explícitamente que son **7, no 9**. El Mapa V2 de UX/UI lista
+  9 accesos sin SIU: la tensión queda **🟡 documentada** y la navegación la define UX/UI (no se
+  sobrescribe).
+- **Decisión 2 (login):** el login es **exclusivo del personal que administra contenidos**; el
+  contenido informativo es público (RF-23…RF-28, RF-34).
+- **Decisión 3 (alcance):** implementación por etapas **A (v1) → B → C**, con el bot/asistente
+  virtual fuera de v1 (etapa C).
+- **Decisión 4 (Contacto):** dirección **Misiones 26, C1083 ABB, CABA** y horario **nocturno** son
+  contenido fijo confirmado (ya implementado en RF-22 desde la Fase 6).
+- **Estado:** fuente validada registrada como nueva referencia de auditoría; documentación auditada
+  contra ella (rama `feature/auditoria-fuente-analisis`, informe
+  `docs/sdd/06_auditorias/auditoria-analisis-unificado.md`).

@@ -1,195 +1,192 @@
-# Auditoría de cumplimiento — Análisis funcional todo unificado IFTS 12
+# Auditoría de cumplimiento — Análisis funcional (fuente única validada)
 
-> Fecha: 2026-09-08
-> Fuente auditada: `docs/driveFrontend/Analisis funcional todo unificado IFTS 12.pdf`
-> Objeto auditado: frontend en su estado actual (rama `develop`/Fase 5, Home navegable con
-> mocks, placeholders de URLs, sin consumo de API).
-> Alcance: verificación de cumplimiento de los Requisitos Funcionales v1 (RF-01…RF-34), el
-> mapa de contenidos y la propuesta de menú/accesos de la Parte IV/VI del documento.
-> Documento vivo: revisar al recibir Drive de Edith, URLs oficiales y contratos de Backend.
+> Fecha: 2026-09-18 (v2, regenerada contra la fuente validada por el cliente).
+> Fuente auditada: `docs/frontend/analisis_funcional_validado.md` — síntesis validada de los
+> 3 PDFs aprobados de Análisis (`docs/driveFrontend/01_analisis_funcional/`: Documento
+> Consolidado, Respuesta a Frontend y PP Análisis).
+> Objeto auditado: documentación del proyecto (archivos de grupo y `docs/frontend/`) y estado
+> del frontend (rama `develop` + Fase 6 + refactor Mapa Sitio V2).
+> Documento vivo: actualizado en cada entrega relevante del instituto (Drive de Edith, URLs
+> oficiales) o de Backend (contratos).
+> Esta v2 reemplaza a la v1 del 08/09/2026 (que auditaba el PDF unificado sin la validación y
+> reflejaba un estado pre–Fase 6 / pre–refactor V2).
 
 ## Resumen ejecutivo
 
 | Categoría | Cumplimiento |
 |---|---|
-| Arquitectura e infraestructura (build estático, VPS separado del Moodle) | ✅ Alineado |
-| Home con accesos rápidos, novedades y comunidades | 🟡 Parcial — estructura lista, faltan accesos (SIU, inscripción, constancias, mesas, calendario), imágenes y orden por fecha |
+| Complementariedad con Moodle (servicio independiente, VPS separado, acceso visible desde Home) | ✅ Alineado |
+| Home con accesos rápidos, novedades y comunidades | 🟡 Estructura lista con **7 accesos rápidos confirmados**; faltan URLs oficiales e imágenes |
 | Comunidades (tutoría / alumnos / docentes) | ✅ Implementado |
-| Página institucional (historia, autoridades, normativa, bedeles, contacto, logos) | ❌ Placeholder |
-| Carreras (modalidad, horarios, plan de estudios) | ❌ Solo 3 mocks, tipo sin modalidad |
+| Página institucional (historia, autoridades, normativa, bedeles, contacto, logos) | 🟡 Contacto con dirección/horario confirmados (RF-22) ✅; resto de secciones placeholder |
+| Carreras (modalidad, horarios, plan de estudios) | 🟡 6 carreras mock con `modalidad`/`horarios`; falta contenido real del instituto |
 | Noticias / novedades (CRUD, historial, imagen, último mes) | 🔵 Bloqueado por Backend + contenido (CRUD); slider visual sin imágenes |
-| Autenticación / roles / panel de administración | 🔵 Bloqueado por Backend (AuthContext y ProtectedRoute preparados) |
-| Enlaces externos (Moodle, inscripción GCBA, SIU) | 🟡 Preparados como placeholders vacíos (se muestran solo con URL oficial) |
+| Autenticación / roles / panel de administración | 🔵 Bloqueado por Backend; confirmado que el login es solo para administradores de contenido |
+| Enlaces externos (Moodle, inscripción GCBA, SIU) | 🟡 Placeholders vacíos hasta recibir URLs oficiales (SIU: nombre/público a confirmar) |
 
-## Matriz de cumplimiento RF-01 → RF-34
+## Alcance de esta v2
+
+- **Documentación auditada:** `grupo_1_analisis_funcional.md`, `grupo_3_frontend.md`,
+  `docs/frontend/{dependencias-equipos,acta-decisiones}.md`, `docs/entregas/`, memoria
+  (`estado_actual_proyecto.md`, `bitacora_agentica.md`).
+- **Código auditado (estado real):** Fase 6 (RF-22, accesos rápidos, tipos `Carrera`/`Noticia`,
+  FAQ, fechas) y Refactor Mapa Sitio V2 (menú 9 ítems, buscador global, accesos destacados/
+  rápidos) — ver `estado_actual_proyecto.md` §2-4.
+
+## Hallazgos de consistencia documental (IDs AF-*)
+
+| ID | Hallazgo | Fuente de verdad vs. doc viejo | Acción tomada |
+|---|---|---|---|
+| AF-A1 | "Minuta V2 bloqueada / por entregar" | Resuelta — Parte I del Consolidado (§10 fuente) | ✅ `grupo_1` §1.1, `dependencias-equipos.md` §1, `grupo_3` nota interna |
+| AF-A2 | "Mapa del sitio pendiente de validación" | Resuelto — Parte IV del Consolidado | ✅ `grupo_1` §1.2 y §5, `grupo_3` §2.1 |
+| AF-A3 | "Confirmar los 9 accesos rápidos" | **7 confirmados** (Moodle, SIU, Inscripción GCBA, Becas, Constancias, Mesas, Calendario) — Parte VI | ✅ `grupo_1` §2.1 corregido a 7 |
+| AF-A4 | Menú de 5 ítems / regla "máx. 4-5" como vigente | Reemplazado por Mapa V2 de UX/UI (9 ítems + buscador, 15/09/2026) | ✅ `grupo_3` §1/§5, `acta-decisiones.md` §3 marcada reemplazada, DEC-003 a actualizar |
+| AF-A5 | Dirección/horario de contacto "pendientes" | Confirmados (Misiones 26, C1083 ABB, CABA — nocturno), contenido fijo (RF-22) | ✅ `grupo_1` §2.8 |
+| AF-A6 | Tensión de accesos: Análisis 7 (con SIU) vs. Mapa V2 UX/UI 9 (sin SIU) | La fuente **no resuelve** la tensión: navegación la define UX/UI; ambas son fuente de verdad en su alcance (§5 nota y §11.2) | 🟡 Documentada en `grupo_1`, `grupo_3`, `acta-decisiones` §12 y este informe. **Pendiente de decisión de UX/UI** — no se sobrescribió |
+| AF-A7 | Login alcance ambiguo en docs viejos | **Login exclusivo para personal que administra contenidos**; contenido público (Parte III, §11.3) | ✅ Reflejado en `grupo_1` §4 |
+| AF-A8 | Carreras cantidad ambigua (3 mocks vs. documento) | **6 carreras** (Parte IV, RF-01/RF-04) | ✅ Ya alineado en Fase 6 (6 mocks con modalidad/horarios) |
+| AF-A9 | Bot/asistente virtual tema abierto | **Fuera de v1** (etapa C), no inventarlo | ✅ Reflejado en `grupo_1` §4 y decisiones |
+| AF-A10 | Auditoría v1 (08/09) con estados desactualizados | Reflejaba pre–Fase 6 y pre–refactor V2 (menú 5 ítems, accesos SIU/constancias/mesas/calendario "faltaban", contacto "placeholder") | ✅ Esta v2 reemplaza a la v1 |
+
+## Matriz de cumplimiento RF-01 → RF-34 (estado actual)
 
 ### Futuros ingresantes
 
-| RQ | Requisito | Estado | Detalle / archivos |
+| RF | Requisito | Estado | Detalle |
 |---|---|---|---|
-| RF-01 | Listado completo de carreras con nombre y modalidad | ❌ | `types/domain/sitio.types.ts` — `Carrera` solo tiene `nombre` + `descripcionBreve`. Mocks: 3 carreras (`constants/mock-data.ts`), el documento referencia 6. Falta campo `modalidad`. |
-| RF-02 | Requisitos y fechas de inscripción | ❌ | No existe sección ni contenido. |
-| RF-03 | Acceso directo y visible al enlace oficial de inscripción del GCBA | 🟡 | `constants/enlaces.ts` → `ENLACES.inscripcion` placeholder vacío. CTA condicional ya implementado en `pages/HomePage.tsx:31`. Se activa solo con URL. |
-| RF-04 | Horarios y modalidad de cada carrera | ❌ | No existe; el tipo `Carrera` no contempla horarios/modalidad. |
-| RF-05 | Equivalencias y pases desde otros institutos | ❌ | No existe. |
-| RF-06 | FAQ específica para futuros ingresantes | 🟡 | Categoría `ingresantes` existe en `FaqAcordeon` y `mock-data.ts`; los textos son genéricos pendientes de validación. |
+| RF-01 | Listado completo de carreras con nombre y modalidad | 🟡 | 6 mocks con `modalidad`/`horarios` (Fase 6); falta contenido real y confirmación de nombres exactos |
+| RF-02 | Requisitos y fechas de inscripción | 🔵 | Falta sección y contenido (Análisis/Dirección — Drive de Edith) |
+| RF-03 | Acceso directo y visible al enlace oficial de inscripción GCBA | 🟡 | CTA de portada condicional implementado; URL en placeholder vacío hasta recibirla |
+| RF-04 | Horarios y modalidad de cada carrera | 🟡 | Campo `modalidad`/`horarios` en tipo `Carrera` y mocks; falta vínculo con contenido real |
+| RF-05 | Equivalencias y pases desde otros institutos | 🔵 | Falta contenido (caso a confirmar en la fuente §6) |
+| RF-06 | FAQ específica para futuros ingresantes | 🟡 | Categoría `ingresantes` con 12 FAQs descriptivas; textos pendientes de validación |
 
 ### Estudiantes actuales
 
-| RQ | Requisito | Estado | Detalle |
+| RF | Requisito | Estado | Detalle |
 |---|---|---|---|
-| RF-07 | Condiciones para mantener la regularidad | ❌ | No existe. |
-| RF-08 | Cómo se solicitan constancias | ❌ | No existe (falta acceso rápido a Constancias). |
-| RF-09 | Fechas y modalidad de mesas de examen | ❌ | No existe (falta acceso rápido a Mesas de examen). |
-| RF-10 | Becas: tipos, requisitos, procedimiento | 🟡 | Solo acceso rápido "Becas" con `href: ''` (renderizado atenuado en `AccesosRapidos.tsx`). Sin contenido. |
-| RF-11 | Calendario académico actualizado | ❌ | No existe (falta acceso rápido a Calendario). |
-| RF-12 | Acceso directo y visible al Campus Virtual (Moodle) | 🟡 | `ENLACES.moodle` placeholder vacío; banda `bg-acento-100` y CTA ya implementados condicionalmente en Home. |
-| RF-13 | Boleto estudiantil | ❌ | No existe. En el documento queda como "caso a confirmar" (¿solo informativo o trámite?). |
-| RF-14 | FAQ específica para estudiantes actuales | 🟡 | Categoría `estudiantes` de mocks, textos genéricos. |
+| RF-07 | Condiciones para mantener la regularidad | 🔵 | Falta contenido real |
+| RF-08 | Cómo se solicitan constancias | 🔵 | Acceso rápido "Constancias" atenuado; falta contenido y URL (caso a confirmar: ¿solo informativo?) |
+| RF-09 | Fechas y modalidad de mesas de examen | 🔵 | Acceso rápido "Mesas" atenuado; falta contenido |
+| RF-10 | Becas: tipos, requisitos, procedimiento | 🔵 | Acceso rápido "Becas" atenuado; falta contenido |
+| RF-11 | Calendario académico actualizado | 🔵 | Acceso rápido "Calendario" atenuado; falta contenido |
+| RF-12 | Acceso directo y visible al Campus Virtual (Moodle) | 🟡 | Banda + CTA condicionales en Home; URL en placeholder vacío |
+| RF-13 | Boleto estudiantil | 🔵 | Caso a confirmar (informativo vs. trámite, fuente §6); falta contenido |
+| RF-14 | FAQ específica para estudiantes actuales | 🟡 | Categoría `estudiantes` de mocks; textos a validar |
 
 ### Docentes
 
-| RQ | Requisito | Estado | Detalle |
+| RF | Requisito | Estado | Detalle |
 |---|---|---|---|
-| RF-15 | Concursos docentes | ❌ | No existe. |
-| RF-16 | Cuerpo docente por carrera | ❌ | No existe. |
-| RF-17 | Información y accesos específicos para docentes | 🟡 | Solo "Comunidad docente" enlazada a `/docentes` (placeholder). |
+| RF-15 | Concursos docentes | 🔵 | Falta contenido |
+| RF-16 | Cuerpo docente por carrera | 🔵 | Falta contenido real |
+| RF-17 | Información y accesos específicos para docentes | 🟡 | Sección `/docentes` placeholder (mapa V2); falta contenido |
 
 ### Institucional
 
-| RQ | Requisito | Estado | Detalle |
+| RF | Requisito | Estado | Detalle |
 |---|---|---|---|
-| RF-18 | Historia del IFTS N.º 12 | ❌ | `pages/InstitucionalPage.tsx` es placeholder. |
-| RF-19 | Autoridades | ❌ | placeholder. |
-| RF-20 | Normativa (reglamento orgánico, código de convivencia) | ❌ | placeholder. |
-| RF-21 | Logos institucionales (IFTS N.º 12, GCBA, UPCN) | ❌ | No implementado (documento pide: pie de página / Home). |
-| RF-22 | Contacto: dirección Misiones 26, C1083 ABB, CABA; horario nocturno; correo | ❌ | `pages/ContactoPage.tsx` placeholder. El footer **no** incluye dirección/horario, aunque el documento los define como contenido fijo "a incluir en Contacto y pie de página" (Parte I y VII). |
-| RF-29 | Bedeles: quiénes son y cómo contactarlos | ❌ | No existe (documento: informativo v1). |
-| RF-30 | Acceso visible al sistema SIU | ❌ | No existe (enlace, nombre y público a confirmar por Edith). |
-| RF-31 | Procedimiento de solicitud de títulos | ❌ | No existe (informativo en v1). |
-| RF-32 | Procedimiento de traspasos entre IFTS | ❌ | No existe (informativo en v1). |
-| RF-33 | Enlaces de interés (Ciudad Bilingüe, Centro de Simulación) | ❌ | No existe (prioridad baja, bloque/pie de página). |
+| RF-18 | Historia del IFTS N.º 12 | 🔵 | Placeholder; falta contenido del instituto |
+| RF-19 | Autoridades | 🔵 | Placeholder; falta contenido |
+| RF-20 | Normativa (reglamento orgánico, código de convivencia) | 🔵 | Placeholder; falta contenido |
+| RF-21 | Logos institucionales (IFTS N.º 12, GCBA, UPCN) | 🔵 | Falta material oficial en alta resolución |
+| RF-22 | Contacto: dirección, horario nocturno, correo | 🟡 | Dirección y horario **confirmados e implementados** en Contacto y footer (Fase 6); falta correo real |
+| RF-29 | Bedeles: quiénes son y cómo contactarlos | 🔵 | No existe (informativo v1); falta decisión datos individuales vs. genérico |
+| RF-30 | Acceso visible al sistema SIU | 🟡 | Confirmado como acceso rápido 7; falta URL, nombre y público destinar a confirmar |
+| RF-31 | Solicitud de títulos (informativo v1) | 🔵 | No existe; falta procedimiento del instituto |
+| RF-32 | Traspasos entre IFTS (informativo v1) | 🔵 | No existe; falta procedimiento |
+| RF-33 | Enlaces de interés (Ciudad Bilingüe, Centro de Simulación) | 🔵 | No existe (baja prioridad); dependen de contenidos |
 
 ### Administración
 
-| RQ | Requisito | Estado | Detalle |
+| RF | Requisito | Estado | Detalle |
 |---|---|---|---|
-| RF-23 | Módulo de autenticación (login) para administración | 🔵 | `contexts/AuthContext.tsx` y `routes/ProtectedRoute.tsx` preparados sin uso. No hay ruta `/login` (backend no soporta auth todavía). |
-| RF-24 | Roles y permisos de edición | 🔵 | No existe; depende del modelo de Backend. |
-| RF-25 | CRUD de noticias, reciente→antigua, último mes en Home | 🔵 | `SliderNoticias` con mocks sin fechas (`mock-noticia.fecha = ''`); sin CRUD ni orden. |
-| RF-26 | Panel de administración (calendario, horarios, autoridades, carreras, concursos) | 🔵 | No existe. |
-| RF-27 | Contenidos administrables persistidos en BD | 🔵 | Backend (regla anti-alucinación: no inventar endpoints). |
-| RF-28 | Acceso directo y visible a Moodle desde Home | 🟡 | Condicional implementado (`ENLACES.moodle`, banda + CTA). |
-| RF-34 | Administrar imágenes del carrusel/slider desde panel | 🔵 | `SliderNoticias` no tiene imágenes; sin panel. |
+| RF-23 | Módulo de autenticación (login) para administración | 🔵 | `AuthContext`/`ProtectedRoute` preparados; backend no soporta auth todavía. Confirmado: login solo para administradores de contenido |
+| RF-24 | Roles y permisos de edición | 🔵 | No existe; depende del modelo de Backend (roles a validar con el Grupo 1) |
+| RF-25 | CRUD de noticias, reciente→antigua, último mes en Home | 🔵 | Noticias con fechas y orden reciente→antigua en Home (Fase 6); CRUD depende de Backend |
+| RF-26 | Panel de administración (calendario, horarios, autoridades, carreras, concursos) | 🔵 | No existe; Backend |
+| RF-27 | Contenidos administrables persistidos en BD | 🔵 | Backend; no se inventan endpoints |
+| RF-28 | Acceso directo y visible a Moodle desde Home | 🟡 | Condicional implementado (`ENLACES.moodle`, banda + CTA) |
+| RF-34 | Administrar imágenes del carrusel/slider desde panel | 🔵 | `SliderNoticias` sin imágenes y sin panel; Backend + material gráfico |
 
-## Comparativa con el mapa de contenidos (Parte IV) y propuesta consolidada (Parte VI)
+## Accesos rápidos de Home (verificación)
 
-### Accesos rápidos de Home
+Confirmados por Análisis (Parte VI): **7**.
 
-Propuestos por el documento: Campus Virtual (Moodle), SIU, Inscripción oficial (GCBA), Becas,
-Constancias, Mesas de examen, Calendario académico.
+| Acceso | Confirmado | Presente en Home |
+|---|---|---|
+| Campus Virtual (Moodle) | ✅ | ✅ CTA/banda condicional (placeholder URL) |
+| SIU | ✅ | ❌ como acceso visible (tensión V2 AF-A6); falta URL |
+| Inscripción oficial GCBA | ✅ | 🟡 CTA de portada condicional |
+| Becas | ✅ | ✅ atenuado (sin URL) |
+| Constancias | ✅ | ✅ atenuado (sin URL) |
+| Mesas de examen | ✅ | ✅ atenuado (sin URL) |
+| Calendario académico | ✅ | ✅ atenuado (sin URL) |
 
-| Acceso | Presente en Home |
-|---|---|
-| Campus virtual | ✅ (placeholder URL) |
-| Tutorías | ✅ |
-| Carreras | ✅ |
-| Contacto | ✅ |
-| Preguntas frecuentes | ✅ |
-| Becas | ✅ (atenuado) |
-| SIU | ❌ |
-| Inscripción oficial GCBA | ❌ como acceso rápido (solo CTA condicional de portada) |
-| Constancias | ❌ |
-| Mesas de examen | ❌ |
-| Calendario académico | ❌ |
+> ⚠️ Mapa V2 de UX/UI (15/09/2026) lista **9 accesos** (Campus, Tutorías, Becas, Constancias,
+> Mesas, Calendario, Inscripción, Carreras, Contacto) sin SIU. La fuente validada aclara que son
+> **7, no 9**, pero delega la navegación a UX/UI. Tensión **🟡 AF-A6**: a resolver por UX/UI.
 
-### Menú principal
+## Menú principal
 
-- **Actual (5 items, cumple regla 90/10/máx. 5)**: Carreras, Ingresantes, Estudiantes,
-  Docentes, Noticias (`constants/navegacion.ts`).
-- **Propuesto por el documento**: Home, Nosotros, Carreras, Comunidad docente, Comunidad
-  alumnos, Comunidad tutoría, Preguntas Frecuentes, Noticias, Contacto — **9 items, excede el
-  máximo de 4-5 aplicado por las reglas de navegación del proyecto**. Conflicto a resolver
-  con UX/UI (el propio documento delega la arquitectura visual/menú definitiva a UX/UI).
+- **Implementado (refactor V2, 15/09/2026):** 9 ítems (Inicio, Carreras, Ingresantes, Estudiantes,
+  Tutorías, Docentes, Institucional, Novedades, Contacto) + buscador global en header.
+- **Propuesto por Análisis (Parte VI):** Home, Nosotros, Carreras, Comunidad docente, Comunidad
+  alumnos, Comunidad tutoría, Preguntas Frecuentes, Noticias, Contacto — orden/nomenclatura
+  distinta. La fuente validada **no resuelve** la tensión (§11.2): la navegación la define UX/UI.
+  Marcado 🟡 sin sobrescribir.
 
-### Comunidades
+## Contenido fijo vs. administrable (Parte V)
 
-- Tutoría / Alumnos / Docentes: ✅ implementadas en Home (`mockComunidades` + `Comunidades.tsx`),
-  coinciden con el documento.
-
-### Novedades
-
-- El documento pide: slider/carrusel con **imagen principal**, acceso a la nota completa,
-  noticias del último mes visibles, historial, orden reciente→antigua y CRUD.
-- Actual: slider de texto accesible sin imágenes, sin detalle de noticia, sin fechas, sin
-  historial ni CRUD. 🔵.
-
-### Contenido fijo vs. administrable (Parte V)
-
-- Contenidos **fijos** que el frontend podría representar hoy: historia/normativa (falta
-  Drive), logos (falta material), enlaces oficiales (faltan URLs), **dirección y horario
-  (RF-22 — confirmados, no implementados)**.
-- Contenidos **administrables** (noticias, calendario, autoridades, carreras, etc.): todos
-  requieren Backend/CRUD → 🔵.
+- **Fijos:** dirección/horario (✅ implementado), logos, planes, normativa, enlaces oficiales —
+  en gran parte 🔵 hasta recibir material oficial.
+- **Administrables:** noticias/carrusel, calendario, autoridades, docentes, bedeles, concursos,
+  fechas, becas, tutorías, FAQ, contacto — todos 🔵 Backend (CRUD/panel).
+- **Casos a confirmar (§6 fuente):** boleto estudiantil, constancias, títulos y traspasos
+  (informativo v1 → gestionable en etapa B). No se inventan.
 
 ## Cumplimientos positivos detectados
 
-1. **Complementariedad con Moodle**: el sitio se trata como servicio independiente y el
-   acceso al Campus es un bloque condicional explícito en Home (alineado con la "aclaración
-   fundamental" del documento).
-2. **Tres comunidades** visibles al ingresar, tal como pide la minuta.
-3. **FAQ organizada por segmento** (ingresantes / estudiantes / docentes) con acordeón
-   accesible.
-4. **Slider/carrusel accesible** sin librerías (base visual para el futuro con imágenes).
-5. **Autenticación preparada** (AuthContext + ProtectedRoute) sin inventar backend.
-6. **Regla anti-alucinación respetada**: no hay URLs, textos ni endpoints inventados; todo lo
-   pendiente se muestra como placeholder o atenuado.
-7. **Arquitectura e infraestructura alineadas** con el Plan B (build estático para servir
-   desde Nginx en VPS separado; API única vía `api/client.ts` cuando existan contratos).
-8. **Navegación responsive y accesible** (menú hamburguesa, active states, aria).
-
-## Desvíos / tensiones detectadas
-
-- `Carrera` sin `modalidad` ni `horarios` (RF-01/RF-04) y solo 3 mocks cuando el documento
-  lista 6 carreras ("Carreras (6)").
-- Footer sin dirección/horario de contacto a pesar de ser contenido fijo confirmado (RF-22).
-- Falta acceso rápido a inscripción oficial GCBA como bloque de Home (hoy solo CTA de portada
-  condicional).
-- El menú propuesto por Análisis (9 items) choca con el límite de 5 del proyecto → coordinar UX/UI.
-- Slider sin imágenes ni fecha → no cumple "último mes visible" ni orden reciente→antigua.
-- Ítems de menú "Ingresantes", "Tutorías", "Docentes", "Estudiantes" son placeholder puro;
-  el documento exige contenido real para cada perfil.
-
-## Accionable sin dependencias externas (datos fijos confirmados)
-
-Estos puntos no requieren Backend, Drive ni URLs para avanzar (son contenido fijo o
-estructura):
-
-1. **RF-22 — Contacto + pie de página**: agregar dirección "Misiones 26, C1083 ABB, CABA" y
-   horario "atención nocturna" (datos confirmados en Parte VII) en `ContactoPage` y en el
-   `Footer`.
-2. **Accesos rápidos faltantes** (SIU, Inscripción, Constancias, Mesas, Calendario) como
-   placeholders atenuados en Home (mismo patrón que "Becas"), a activar cuando lleguen URLs.
-3. **Extender `Carrera`** con `modalidad` y `horarios` (RF-01/RF-04), manteniendo mocks para
-   validar con Análisis.
-4. **FAQ del documento** (preguntas priorizadas por segmento + nuevas: bedeles, SIU, títulos,
-   traspasos) para reemplazar los textos genéricos de los mocks.
-5. **Novedades con fecha** para permitir orden reciente→antigua y destacar el "último mes".
+1. **Complementariedad con Moodle** respetada (servicio independiente, acceso visible, VPS propio).
+2. **7 accesos rápidos confirmados** registrados y corregidos en la documentación (se eliminó el
+   "confirmar 9").
+3. **RF-22** dirección/horario nocturno implementado en Contacto y footer.
+4. **6 carreras** con `modalidad`/`horarios` en mocks (antes 3, sin modalidad).
+5. **Noticias con fechas** y orden reciente→antigua en Home.
+6. **Login acotado** a administradores de contenido (documentado, sin implementar hasta que Backend
+   lo soporte).
+7. **Anti-alucinación respetada:** no hay URLs, textos ni endpoints inventados; pendientes como
+   placeholder/atenuado.
+8. **Bot/asistente virtual** fuera de v1 (etapa C), no inventado.
 
 ## Bloqueos externos (dependen de otros equipos)
 
-- **Análisis / Dirección (Edith)**: Drive con contenidos, URL oficial de inscripción GCBA,
-  enlace/nombre de SIU, datos de bedeles, detalle por carrera, material gráfico del carrusel,
-  logos.
-- **Backend**: endpoints (tabla vacía), modelo de datos, login/roles, panel de administración,
-  CRUD de noticias. Sin contratos no se puede consumir API (regla anti-alucinación).
-- **UX/UI**: wireframes, paleta y mapa de navegación definitivo (incl. resolución del menú
-  de 9 items propuesto por Análisis vs. límite de 5).
-- **QA**: criterios de aceptación y ambiente de testing (Parte VIII.13).
+- **Análisis / Dirección (Edith):** Drive con contenidos, URL oficial de inscripción GCBA,
+  enlace/nombre/público de SIU, datos de bedeles, procedimientos de títulos/traspasos, material del
+  carrusel, logos en alta resolución.
+- **UX/UI:** wireframes/prototipos; resolver tensión de accesos (AF-A6, 7 vs. 9) y validar menú V2.
+- **Backend:** endpoints, DTOs, login/roles (solo administradores), panel, CRUD de noticias.
+- **IFTS N.º 12:** URL oficial del Campus Moodle y de inscripción; lugar donde se usa placeholder vacío.
 
-## Próximos pasos sugeridos
+## Checklist accionable
 
-1. Aprobar el plan de implementación de la sección "Accionable sin dependencias externas".
-2. Pedir formalmente a Análisis los pendientes de la Parte VII (SIU, bedeles, títulos,
-   traspasos, detalle de carreras) y a Backend los contratos de API.
-3. Re-auditar este documento cuando lleguen Drive, URLs y contratos.
+- [x] `grupo_1_analisis_funcional.md` actualizado con ✅/🟡/🔵 (minuta, mapa, accesos 7, dirección, priorización).
+- [x] `grupo_3_frontend.md` actualizado (Fase 6 + refactor V2, menú 9 ítems, mapa resuelto).
+- [x] `dependencias-equipos.md` §1 (minuta/mapa entregados).
+- [x] `acta-decisiones.md` §3 reemplazada + decisión 12 (fuente validada, accesos 7, login, etapas).
+- [ ] Acordar con UX/UI los accesos de Home (7 de Análisis vs. 9 del Mapa V2) — AF-A6.
+- [ ] Re-auditar cuando lleguen: Drive de Edith, URLs oficiales, contratos de Backend.
+
+## Archivo de grupo actualizado
+
+Se actualizó el archivo del grupo correspondiente:
+`docs/driveFrontend/01_analisis_funcional/grupo_1_analisis_funcional.md` (gitignored, no versionado).
+Además se actualizó `docs/driveFrontend/03_frontend/grupo_3_frontend.md`.
+
+## Referencias
+
+- Fuente auditada: `docs/frontend/analisis_funcional_validado.md` (validada 18/09/2026).
+- PDFs aprobados: `docs/driveFrontend/01_analisis_funcional/` (Documento Consolidado, Respuesta a
+  Frontend, PP Análisis).
+- Informes relacionados: `docs/sdd/06_auditorias/auditoria-infraestructura.md`,
+  `docs/sdd/06_auditorias/auditoria-backend.md`.
