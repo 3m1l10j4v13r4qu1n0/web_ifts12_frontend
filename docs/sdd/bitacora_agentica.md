@@ -752,3 +752,24 @@ no a `diagramas/` por ahora; renombrar `definicio_listo.md` → `definicion_list
 sigan su estructura (los endpooints viven en cada `hu_XX_api.md`). No se tocó código de aplicación;
 `lint`/`build`/`test` no afectados. Pendiente: push de la rama y PR hacia `develop` con aprobación
 del usuario.
+
+---
+
+## 2026-09-18 — Vitest deja de auto-descubrir tests de skills (`.opencode/`)
+
+**Qué se hizo:** se restringió el glob de Vitest al código del proyecto con
+`include: ['src/**/*.{test,spec}.?(c|m)[jt]s?(x)']` en `vite.config.ts`.
+
+**Por qué:** `vitest run` descubría `.opencode/skills/pdf-to-markdown/tests/converter.test.cjs`
+por coincidir con el glob `*.test.*`, pero ese archivo usa un mini-framework propio
+(`test-framework.cjs`, se ejecuta con `node run-tests.cjs`) y no la API de Vitest, así que
+reportaba `Error: No test suite found in file` y marcaba la suite como fallida una vez al correr
+`npm run test`. Ese fallo era preexistente, ajeno al código de aplicación.
+
+**Archivos/módulos tocados:**
+- `vite.config.ts` (config `test.include`)
+
+**Estado resultante:** checklist completa en verde: `lint` OK, `build` OK, `test` **10 archivos /
+19 tests pasando** (antes 11 archivos, 1 suite fallida). Los 12 tests del skill siguen pasando con
+su runner propio (`node .opencode/skills/pdf-to-markdown/tests/run-tests.cjs`). Cambio en la rama
+`fix/vitest-excluir-tests-skill`.
