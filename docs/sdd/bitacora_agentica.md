@@ -818,3 +818,69 @@ análisis validada y el estado real del código (rama `feature/auditoria-ux-ui` 
 **Estado resultante:** documentación de UX/UI alineada; grupo 2 marcado con ✅/🟡/🔵. Solo cambios
 de docs → `lint`/`build`/`test` no afectados. Commit del informe + memoria pendiente de
 aprobación del usuario.
+
+## 2026-09-21 — Wireframes actualizados al Mapa V2 (16 pantallas + 3 admin)
+
+**Qué se hizo:** en la rama `feature/wireframe-v2-actualizacion` (desde `develop`) se actualizaron
+los 13 wireframes de `docs/driveFrontend/02_ux_ui/wireframe/` para alinearlos al Mapa V2 del
+21/09/2026, a la Documentación de Diseño UX (V1) y a la petición QA del grupo 6, y se crearon 3
+pantallas admin (login, panel, formulario) con el CRUD Noticias/Carreras/FAQ de QA §6.4.
+
+**Cambios por pantalla (los 16 con CSS embebido, escala de grises, sin `assets/` — se ven igual al
+compartir):**
+- Transversal (13 públicas): header con accesos destacados **Campus Virtual / SIU / Inscripciones**
+  (V2 · RF-30); footer V2 con datos fijos (Misiones 26, exclusivamente nocturno), Mapa del sitio,
+  Servicios, Plataformas externas (Moodle/SIU/Inscripciones GCBA), formulario de consulta con
+  validación (CTA primario "Enviar consulta" / secundario "Limpiar" + estado error) y franja de
+  isologotipos IFTS N.º 12 / GCBA / UPCN. Nuevas clases `.wf-logos`, `.wf-footer-form`, `.wf-state`
+  (loading/empty/error/success), `.wf-addon`, `.wf-table-tools`.
+- Home: hero migrado de buscador a carrusel + botonera CTA (V2 · §2); el buscador queda solo en la
+  cabecera.
+- Carrera-detalle: badge "Turno: exclusivamente nocturno" (RF-04).
+- Estudiantes: cards "Trámites de títulos" (RF-31) y "Traspasos entre IFTS" (RF-32).
+- Docentes: card "Repositorio de normativas" (RF-20).
+- Institucional: secciones Bedelía (RF-29) y Enlaces de interés institucional (Ciudad Bilingüe,
+  Centro de Simulación — RF-33).
+- Novedades: filtro "Gacetillas", empty state y nota CRUD → panel-admin (RF-25).
+- Búsqueda global: estados loading/empty/error y referencias actualizadas (V2 §1/§4, buscador
+  interno &lt;1 s).
+- Contacto: CTA primario/secundario + errores de validación; nota del formulario del pie.
+- Nuevas: `admin-login.html`, `panel-admin.html`, `admin-form.html` (RF-23…26, RF-34) con toolbar
+  de navegación encadenado (busqueda → login → panel → form → índice).
+- `index.html`: tabla de 16 pantallas remapeada a secciones del V2, sección "Flujo de navegación
+  (Entrada → Salida)", leyenda con CTA/estados/logos, link corregido al
+  `mapa_sitio_ifts12_(V2).md` y fecha 21/09/2026.
+
+**Verificación:** script Python sobre los 16 HTML — parseo de tags sin errores, links internos
+resolviendo y CSS embebido idéntico en los 16 (los 3 admin = públicas + salto de línea final).
+
+**Archivos tocados:** 16 HTML en `docs/driveFrontend/02_ux_ui/wireframe/` (solo Drive, gitignored,
+sin commits) + entrada en esta bitácora.
+
+**Estado resultante:** wireframes del Mapa V2 completos y navegables. Pendiente para otra tarea:
+aplicar estos cambios al frontend React real (header destacados/estados/footer V2) y la
+implementación del panel admin cuando el backend lo soporte.
+
+## 2026-09-21 — Wireframes movidos a `docs/sdd/07_wireframes/` (versionables)
+
+**Qué se hizo:** se movieron los 16 HTML de los wireframes desde
+`docs/driveFrontend/02_ux_ui/wireframe/` (carpeta gitignored en `.gitignore` línea 273) a la
+nueva carpeta `docs/sdd/07_wireframes/`, dentro de la base SDD versionable, para poder
+trackearlos en git.
+
+**Cambios:**
+- `mkdir docs/sdd/07_wireframes/` + `mv` de los 16 HTML; se eliminó la carpeta vacía
+  `docs/driveFrontend/02_ux_ui/wireframe/` (gitignored, sin histórico git).
+- En `docs/sdd/07_wireframes/index.html` se corrigieron las referencias relativas a las fuentes
+  (`../mapa_sitio_ifts12_(V2).md`, `../DocumentaciónDisenoUX(V1).md`, `../grupo_2_ux_ui.md`) → ahora
+  `../../driveFrontend/02_ux_ui/...`.
+- `estado_actual_proyecto.md`: sección "docs/driveFrontend/02_ux_ui" actualizada; la referencia a
+  los wireframes ahora apunta a la nueva ubicación versionable.
+- Los enlaces relativos entre wireframes (home → carreras, toolbar, índices) no cambiaron: todos
+  los archivos se movieron juntos al mismo directorio.
+
+**Archivos tocados:** `docs/sdd/07_wireframes/*.html` (16), `docs/sdd/estado_actual_proyecto.md`,
+esta bitácora.
+
+**Estado resultante:** los wireframes quedan versionables en la SDD. Pendiente de aprobación del
+usuario para commitear (rama `feature/wireframe-v2-actualizacion`).
