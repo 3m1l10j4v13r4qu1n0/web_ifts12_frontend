@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WF 03 · Carrera detalle · Wireframes Mapa sitio ifts12</title>
+<style>
+
+:root{
+  --wf-bg:#ffffff;
+  --wf-surface:#f6f6f6;
+  --wf-surface-2:#ececec;
+  --wf-border:#b3b3b3;
+  --wf-border-strong:#6f6f6f;
+  --wf-img:#d8d8d8;
+  --wf-text:#1f1f1f;
+  --wf-muted:#7a7a7a;
+  --wf-dark:#3a3a3a;
+  --wf-black:#111111;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--wf-bg);color:var(--wf-text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:14px;line-height:1.4}
+a{color:var(--wf-text)}
+.wf-wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+.wf-meta{background:var(--wf-bg);border-bottom:1px solid var(--wf-border);font-size:11px;color:var(--wf-muted);text-transform:uppercase;letter-spacing:.06em}
+.wf-meta .wf-wrap{display:flex;justify-content:space-between;gap:16px;align-items:center;padding-top:8px;padding-bottom:8px}
+.wf-meta strong{color:var(--wf-text)}
+.wf-header{border-bottom:2px solid var(--wf-border-strong);background:var(--wf-surface)}
+.wf-header .wf-wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
+.wf-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--wf-text)}
+.wf-logo-mark{width:44px;height:44px;border:2px solid var(--wf-border-strong);background:repeating-linear-gradient(45deg,#cfcfcf 0 6px,#e3e3e3 6px 12px);display:grid;place-items:center;font-size:9px;color:var(--wf-muted);letter-spacing:.08em}
+.wf-logo-text{font-size:13px;font-weight:700;line-height:1.15;text-transform:uppercase;letter-spacing:.03em}
+.wf-logo-text small{display:block;font-weight:400;color:var(--wf-muted);font-size:10px}
+.wf-nav{display:flex;flex-wrap:wrap;gap:6px}
+.wf-nav a{color:var(--wf-text);text-decoration:none;border:1px solid var(--wf-border);padding:6px 10px;font-size:12px;font-weight:600}
+.wf-nav a.is-active,.wf-nav a:hover{background:var(--wf-dark);color:#fff;border-color:var(--wf-dark)}
+.wf-search{display:flex;align-items:stretch;margin-left:auto}
+.wf-search .wf-field{width:200px;border:1px solid var(--wf-border-strong);background:#fff;padding:0 10px;display:flex;align-items:center;color:var(--wf-muted);font-size:12px}
+.wf-search button,.wf-search a.go{border:1px solid var(--wf-border-strong);background:var(--wf-dark);color:#fff;padding:0 14px;cursor:pointer;font-weight:600;font-size:12px;text-decoration:none;display:flex;align-items:center}
+.wf-destacados{display:flex;gap:6px;flex-wrap:wrap}
+.wf-destacados a{border:2px solid var(--wf-black);background:var(--wf-surface);color:var(--wf-black);padding:6px 10px;font-size:11px;font-weight:700;text-decoration:none}
+.wf-hero{background:var(--wf-surface-2);border-bottom:1px solid var(--wf-border)}
+.wf-hero-inner{max-width:1200px;margin:0 auto;padding:56px 20px 48px;text-align:center}
+.wf-hero h1{font-size:30px;margin:0 0 8px;text-transform:uppercase;letter-spacing:.04em}
+.wf-hero p{color:var(--wf-muted);margin:0 0 24px}
+.wf-hero-search{max-width:660px;margin:0 auto;display:flex}
+.wf-hero-search .wf-field{flex:1;height:44px}
+.wf-hero-search button,.wf-hero-search a.go{height:44px;padding:0 22px}
+.wf-section{padding:32px 0;border-bottom:1px solid var(--wf-border)}
+.wf-section-title{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--wf-black);margin:0 0 4px}
+.wf-section-title .wf-num{width:22px;height:22px;border:2px solid var(--wf-black);display:grid;place-items:center;font-size:11px;flex:none}
+.wf-section-note{color:var(--wf-muted);font-size:12px;margin:0 0 20px}
+.wf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.wf-grid.cols-3{grid-template-columns:repeat(3,1fr)}
+.wf-card{border:1px solid var(--wf-border);background:var(--wf-surface);padding:12px}
+.wf-img{border:2px solid var(--wf-border-strong);background:repeating-linear-gradient(45deg,#d8d8d8 0 8px,#eaeaea 8px 16px);height:130px;display:grid;place-items:center;color:var(--wf-muted);font-size:11px;letter-spacing:.3em}
+.wf-img.sm{height:80px}
+.wf-img.xs{height:60px}
+.wf-line{height:9px;background:#c2c2c2;border-radius:3px;margin:8px 0}
+.wf-line.w-25{width:25%}
+.wf-line.w-30{width:30%}
+.wf-line.w-35{width:35%}
+.wf-line.w-40{width:40%}
+.wf-line.w-45{width:45%}
+.wf-line.w-50{width:50%}
+.wf-line.w-55{width:55%}
+.wf-line.w-60{width:60%}
+.wf-line.w-65{width:65%}
+.wf-line.w-70{width:70%}
+.wf-line.w-75{width:75%}
+.wf-line.w-80{width:80%}
+.wf-line.w-85{width:85%}
+.wf-line.w-90{width:90%}
+.wf-line.w-100{width:100%}
+.wf-line.w-wide{width:100%}
+.wf-line.w-tiny{width:35%}
+.wf-line.dark{background:var(--wf-border-strong)}
+.wf-line.thin{height:6px;margin:5px 0}
+.wf-line.wide{height:14px}
+.wf-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.wf-btn{border:1px solid var(--wf-border-strong);background:var(--wf-surface);color:var(--wf-text);padding:7px 14px;font-size:12px;font-weight:600}
+.wf-btn.dark{background:var(--wf-dark);color:#fff}
+.wf-btn.link{border-color:transparent;background:none;padding-left:0;color:var(--wf-muted)}
+.wf-badge{display:inline-block;border:1px solid var(--wf-border-strong);border-radius:2px;font-size:10px;padding:2px 6px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--wf-muted)}
+.wf-badge.dark{background:var(--wf-dark);color:#fff;border-color:var(--wf-dark)}
+.wf-raccesos{display:flex;gap:10px;flex-wrap:wrap}
+.wf-racceso{flex:1 1 150px;border:1px solid var(--wf-border);border-top:4px solid var(--wf-black);background:var(--wf-surface);padding:12px;text-align:center;font-weight:700;font-size:12px}
+.wf-flex{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap}
+.wf-main{flex:1 1 auto;min-width:0}
+.wf-aside{flex:0 0 280px}
+.wf-box{border:1px solid var(--wf-border);background:var(--wf-surface);padding:16px}
+.wf-box-title{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin:0 0 10px}
+.wf-list{border-top:1px solid var(--wf-border)}
+.wf-list a{display:block;padding:9px 2px;border-bottom:1px solid var(--wf-border);color:var(--wf-text);text-decoration:none;font-size:13px}
+.wf-list a.is-active{font-weight:800;background:var(--wf-surface-2)}
+.wf-tabs{display:flex;gap:2px;border-bottom:1px solid var(--wf-border-strong);margin-bottom:16px;flex-wrap:wrap}
+.wf-tabs a{padding:8px 14px;border:1px solid var(--wf-border);border-bottom:none;color:var(--wf-text);text-decoration:none;font-size:12px;font-weight:600;background:var(--wf-surface)}
+.wf-tabs a.is-active{background:var(--wf-dark);color:#fff}
+.wf-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.wf-filters .wf-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--wf-muted);margin-right:6px}
+.wf-tag{border:1px solid var(--wf-border);padding:5px 10px;font-size:11px;background:#fff}
+.wf-tag.is-active{background:var(--wf-black);color:#fff;border-color:var(--wf-black)}
+.wf-table{width:100%;border-collapse:collapse;font-size:12px}
+.wf-table th,.wf-table td{border:1px solid var(--wf-border);padding:8px;text-align:left}
+.wf-table th{background:var(--wf-surface-2);text-transform:uppercase;font-size:10px;letter-spacing:.06em}
+.wf-form label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin:12px 0 4px}
+.wf-input,.wf-select,.wf-textarea{width:100%;border:1px solid var(--wf-border-strong);background:#fff;padding:8px;font-family:inherit;font-size:13px}
+.wf-textarea{min-height:110px}
+.wf-check{display:flex;gap:8px;align-items:center;margin:12px 0;font-size:12px}
+.wf-check i{width:14px;height:14px;border:1px solid var(--wf-border-strong);display:block;flex:none}
+.wf-radio{display:flex;width:16px;height:16px;border:1px solid var(--wf-border-strong);border-radius:50%;flex:none}
+.wf-faq{border:1px solid var(--wf-border)}
+.wf-faq-item{padding:12px 14px;border-bottom:1px solid var(--wf-border)}
+.wf-faq-item:last-child{border-bottom:none}
+.wf-faq-q{font-weight:700;font-size:13px;display:flex;justify-content:space-between;gap:12px}
+.wf-faq-q b{color:var(--wf-muted);flex:none}
+.wf-faq-a{color:var(--wf-muted);font-size:12px;margin-top:8px}
+.wf-breadcrumb{font-size:11px;color:var(--wf-muted);padding:12px 0;text-transform:uppercase;letter-spacing:.05em}
+.wf-breadcrumb a{color:var(--wf-muted)}
+.wf-breadcrumb .sep{margin:0 6px}
+.wf-pager{display:flex;gap:6px;justify-content:center;margin-top:24px}
+.wf-pager a{border:1px solid var(--wf-border);padding:5px 10px;color:var(--wf-text);text-decoration:none;font-size:12px}
+.wf-pager a.is-active{background:var(--wf-dark);color:#fff}
+.wf-slider{border:2px solid var(--wf-border-strong);position:relative;overflow:hidden}
+.wf-slide{height:250px;display:grid;place-items:center;background:repeating-linear-gradient(45deg,#d9d9d9 0 10px,#ebebeb 10px 20px);color:var(--wf-muted);letter-spacing:.3em;font-size:12px}
+.wf-slider .wf-controls{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;padding:0 10px}
+.wf-slider .wf-controls i{background:#fff;border:1px solid var(--wf-black);width:34px;height:34px;display:grid;place-items:center;font-style:normal;font-weight:800}
+.wf-dots{display:flex;gap:6px;justify-content:center;padding:10px}
+.wf-dots i{width:10px;height:10px;border:1px solid var(--wf-border-strong);border-radius:50%}
+.wf-dots i.is-active{background:var(--wf-black)}
+.wf-footer{border-top:3px solid var(--wf-black);background:var(--wf-surface-2);margin-top:48px}
+.wf-footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:24px;padding:32px 20px}
+.wf-footer-grid h4{font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin:0 0 10px}
+.wf-footer-grid a{display:block;color:var(--wf-text);text-decoration:none;font-size:12px;margin:4px 0}
+.wf-copy{border-top:1px solid var(--wf-border);padding:14px 20px;text-align:center;font-size:11px;color:var(--wf-muted)}
+.wf-toolbar{background:var(--wf-black);color:#fff}
+.wf-toolbar .wf-wrap{display:flex;justify-content:space-between;gap:12px;align-items:center;padding-top:10px;padding-bottom:10px;font-size:12px}
+.wf-toolbar a{color:#fff}
+.wf-legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:16px}
+.wf-swatch{display:flex;gap:10px;align-items:center;border:1px solid var(--wf-border);padding:8px;font-size:11px}
+.wf-swatch i{width:34px;height:34px;border:1px solid var(--wf-border-strong);flex:none}
+.wf-swatch span{line-height:1.3}
+.wf-feature{display:flex;gap:14px;align-items:flex-start;border:1px dashed var(--wf-border-strong);padding:14px;margin-top:10px}
+.wf-feature .wf-img{width:120px;height:90px;flex:none}
+.wf-alert{display:flex;gap:12px;align-items:center;border:2px solid var(--wf-black);background:var(--wf-surface);padding:14px;margin-bottom:20px}
+.wf-alert .wf-alert-ico{width:26px;height:26px;border:2px solid var(--wf-black);display:grid;place-items:center;font-weight:800;flex:none}
+.wf-steps{display:flex;margin:16px 0;flex-wrap:wrap}
+.wf-step{flex:1;min-width:140px;border:1px solid var(--wf-border);background:var(--wf-surface);padding:12px;margin-left:-1px}
+.wf-step:first-child{margin-left:0}
+.wf-step b{display:block;font-size:18px;color:var(--wf-muted)}
+.wf-video{aspect-ratio:16/9;border:2px solid var(--wf-border-strong);background:repeating-linear-gradient(-45deg,#d6d6d6 0 10px,#e8e8e8 10px 20px);display:grid;place-items:center;color:var(--wf-muted);letter-spacing:.3em;font-size:11px}
+.wf-divider{border:0;border-top:1px dashed var(--wf-border);margin:20px 0}
+.wf-hint{font-size:11px;color:var(--wf-muted);font-style:italic}
+.wf-thumb{display:flex;flex-direction:column}
+.wf-thumb .wf-img{flex:1}
+.wf-title-lg{font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;margin:0 0 6px}
+.wf-subtitle{color:var(--wf-muted);font-size:13px;margin:0 0 16px}
+@media (max-width:820px){
+  .wf-grid.cols-3{grid-template-columns:1fr 1fr}
+  .wf-footer-grid{grid-template-columns:1fr 1fr}
+  .wf-aside{flex:1 1 100%}
+  .wf-search .wf-field{width:140px}
+}
+@media (max-width:520px){
+  .wf-grid.cols-3{grid-template-columns:1fr}
+  .wf-footer-grid{grid-template-columns:1fr}
+}
+
+.wf-logos{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:center;padding:16px 20px;border-top:1px solid var(--wf-border);background:var(--wf-surface)}
+.wf-logo-item{width:120px;height:52px;border:1px solid var(--wf-border-strong);background:repeating-linear-gradient(45deg,#d8d8d8 0 8px,#eaeaea 8px 16px);display:grid;place-items:center;font-size:10px;color:var(--wf-muted);letter-spacing:.1em}
+.wf-footer-form{max-width:1200px;margin:0 auto;padding:0 20px 6px}
+.wf-footer-form .wf-box{background:var(--wf-surface)}
+.wf-state{border:1px dashed var(--wf-border-strong);padding:10px 12px;font-size:12px;display:flex;gap:10px;align-items:center;margin:10px 0}
+.wf-state i{width:16px;height:16px;border:1px solid var(--wf-border-strong);border-radius:50%;flex:none;font-style:normal;display:grid;place-items:center;font-size:9px;font-weight:800}
+.wf-state.empty{background:var(--wf-surface)}
+.wf-state.error{border:2px solid var(--wf-black);background:var(--wf-surface-2)}
+.wf-state.success{border-style:solid;background:var(--wf-surface)}
+.wf-addon{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.wf-table-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.wf-table-tools .wf-search{margin-left:0}
+
+</style>
+</head>
+<body>
+
+<div class="wf-meta">
+  <div class="wf-wrap">
+    <span>WIREFRAME 03 · CARRERA DETALLE </span>
+    <strong>PANTALLA</strong>
+  </div>
+</div>
+
+<div class="wf-header">
+  <div class="wf-wrap">
+    <a class="wf-logo" href="home.html">
+      <span class="wf-logo-mark">LOGO</span>
+      <span class="wf-logo-text">IFTS N.º 12<small>Sede / subsede</small></span>
+    </a>
+    <nav class="wf-nav">
+      <a href="home.html">Inicio</a>
+      <a href="carreras.html" class="is-active">Carreras</a>
+      <a href="ingresantes.html">Ingresantes</a>
+      <a href="estudiantes.html">Estudiantes</a>
+      <a href="tutorias.html">Tutorías</a>
+      <a href="docentes.html">Docentes</a>
+      <a href="institucional.html">Institucional</a>
+      <a href="novedades.html">Novedades</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+    <div class="wf-search">
+      <div class="wf-field">BUSCAR EN EL SITIO...</div>
+      <a href="busqueda.html" class="go">IR</a>
+    </div>
+    <div class="wf-destacados">
+      <a href="busqueda.html">Campus Virtual</a>
+      <a href="busqueda.html">SIU</a>
+      <a href="busqueda.html">Inscripciones</a>
+    </div>
+  </div>
+</div>
+
+<div class="wf-wrap">
+  <p class="wf-breadcrumb"><a href="home.html">Inicio</a><span class="sep">/</span> <a href="carreras.html">Carreras</a><span class="sep">/</span> Carrera seleccionada</p>
+  <h1 class="wf-title-lg">Carrera seleccionada</h1>
+  <p class="wf-subtitle">Nombre de la carrera — X años de duración, título técnico (contenido placeholder).</p>
+
+  <div class="wf-flex">
+    <div class="wf-main">
+
+      <div class="wf-tabs">
+        <a href="#" class="is-active">Presentación</a>
+        <a href="#">Modalidad y horarios</a>
+        <a href="#">Plan de estudios</a>
+        <a href="#">Materias y correlatividades</a>
+        <a href="#">Programas</a>
+        <a href="#">Resoluciones</a>
+        <a href="#">Cuerpo docente</a>
+      </div>
+
+      <div class="wf-feature">
+        <div class="wf-img">IMG</div>
+        <div>
+          <p style="font-weight:800;margin:0 0 6px">Presentación</p>
+          <div class="wf-line thin w-100"></div>
+          <div class="wf-line thin w-90"></div>
+          <div class="wf-line thin w-95"></div>
+          <div class="wf-line thin w-70"></div>
+        </div>
+      </div>
+
+      <div class="wf-feature">
+        <div>
+          <p style="font-weight:800;margin:0 0 6px">Modalidad y horarios</p>
+          <div class="wf-actions" style="margin:0 0 8px"><span class="wf-badge dark">Turno: exclusivamente nocturno</span><span class="wf-badge">Modalidad: Presencial</span><span class="wf-badge">Horarios: líneas xx</span></div>
+          <div class="wf-line thin w-85"></div>
+          <div class="wf-line thin w-75"></div>
+        </div>
+      </div>
+
+      <div class="wf-feature">
+        <div>
+          <p style="font-weight:800;margin:0 0 6px">Plan de estudios</p>
+          <div class="wf-line thin w-90"></div>
+          <div class="wf-line thin w-80"></div>
+          <div class="wf-line thin w-60"></div>
+          <div class="wf-actions"><span class="wf-btn">Ver plan (PDF)</span></div>
+        </div>
+      </div>
+
+      <div class="wf-feature">
+        <div>
+          <p style="font-weight:800;margin:0 0 6px">Materias y correlatividades</p>
+          <table class="wf-table">
+            <thead>
+              <tr><th>Materia</th><th>Correlativa</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Líneas xx</td><td>Sin correlativas</td></tr>
+              <tr><td>Líneas xx</td><td>Líneas xx</td></tr>
+              <tr><td>Líneas xx</td><td>Líneas xx</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="wf-feature">
+        <div>
+          <p style="font-weight:800;margin:0 0 6px">Programas y Resoluciones</p>
+          <div class="wf-list" style="border-top:none">
+            <a href="#">Programa de la materia xx<span class="wf-badge" style="margin-left:8px">PDF</span></a>
+            <a href="#">Resolución de aprobación xx<span class="wf-badge" style="margin-left:8px">PDF</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-feature">
+        <div>
+          <p style="font-weight:800;margin:0 0 6px">Cuerpo docente por carrera</p>
+          <div class="wf-line thin w-60"></div>
+          <div class="wf-line thin w-55"></div>
+          <div class="wf-line thin w-70"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <aside class="wf-aside">
+      <div class="wf-box">
+        <p class="wf-box-title">En esta carrera</p>
+        <div class="wf-list">
+          <a href="#" class="is-active">Presentación</a>
+          <a href="#">Modalidad y horarios</a>
+          <a href="#">Plan de estudios</a>
+          <a href="#">Materias y correlatividades</a>
+          <a href="#">Programas</a>
+          <a href="#">Resoluciones</a>
+          <a href="#">Cuerpo docente</a>
+        </div>
+      </div>
+      <div class="wf-box" style="margin-top:14px">
+        <p class="wf-box-title">Acciones</p>
+        <div class="wf-actions" style="flex-direction:column;align-items:stretch;margin:0">
+          <a class="wf-btn dark" href="busqueda.html">Inscripción oficial</a>
+          <a class="wf-btn" href="contacto.html">Contactar por la carrera</a>
+        </div>
+      </div>
+      <div class="wf-box" style="margin-top:14px">
+        <p class="wf-box-title">Otras carreras</p>
+        <div class="wf-list">
+          <a href="carrera-detalle.html">Carrera xx</a>
+          <a href="carrera-detalle.html">Carrera xx</a>
+          <a href="carrera-detalle.html">Carrera xx</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<div class="wf-footer">
+  <div class="wf-footer-grid">
+    <div>
+      <h4>IFTS N.º 12</h4>
+      <p style="margin:4px 0;font-size:12px">Misiones 26, C1083 ABB, CABA</p>
+      <p style="margin:4px 0;font-size:12px">Horario: exclusivamente nocturno</p>
+      <div class="wf-line thin w-70"></div>
+      <div class="wf-line thin w-55"></div>
+    </div>
+    <div>
+      <h4>Mapa del sitio</h4>
+      <a href="carreras.html">Carreras</a>
+      <a href="ingresantes.html">Ingresantes</a>
+      <a href="estudiantes.html">Estudiantes</a>
+      <a href="institucional.html">Institucional</a>
+      <a href="novedades.html">Novedades</a>
+      <a href="contacto.html">Contacto</a>
+    </div>
+    <div>
+      <h4>Servicios</h4>
+      <a href="tutorias.html">Tutorías</a>
+      <a href="busqueda.html">Becas</a>
+      <a href="busqueda.html">Constancias</a>
+      <a href="busqueda.html">Mesas de examen</a>
+      <a href="busqueda.html">Calendario académico</a>
+    </div>
+    <div>
+      <h4>Plataformas externas</h4>
+      <a href="busqueda.html">Campus Virtual Moodle</a>
+      <a href="busqueda.html">SIU · Autogestión</a>
+      <a href="busqueda.html">Inscripciones GCBA</a>
+    </div>
+  </div>
+  <div class="wf-footer-form">
+    <div class="wf-box">
+      <p class="wf-box-title">Formulario de consulta directa (con validación de campos)</p>
+      <div class="wf-form">
+        <label>Nombre</label>
+        <div class="wf-input">campo de texto</div>
+        <label>Correo</label>
+        <div class="wf-input">campo de texto</div>
+        <label>Consulta</label>
+        <div class="wf-textarea">área de texto</div>
+        <div class="wf-state error" style="margin-top:10px"><i>!</i>Mensaje de validación: campos obligatorios</div>
+      </div>
+      <div class="wf-actions">
+        <span class="wf-btn dark">Enviar consulta</span>
+        <span class="wf-btn">Limpiar</span>
+      </div>
+    </div>
+  </div>
+  <div class="wf-logos">
+    <span class="wf-logo-item">IFTS N.º 12</span>
+    <span class="wf-logo-item">GCBA</span>
+    <span class="wf-logo-item">UPCN</span>
+  </div>
+  <div class="wf-copy">Footer V2 · Misiones 26, CABA · solo nocturno · formulario de consulta · isologotipos IFTS N.º 12, GCBA, UPCN</div>
+</div>
+<div class="wf-toolbar">
+  <div class="wf-wrap">
+    <a href="carreras.html">&lt; Carreras</a>
+    <span>WF 03 · CARRERA DETALLE</span>
+    <a href="ingresantes.html">Siguiente: Ingresantes &gt;</a>
+  </div>
+</div>
+
+</body>
+</html>
