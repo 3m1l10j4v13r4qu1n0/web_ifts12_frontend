@@ -195,9 +195,12 @@ sobre rutas administrables. La tabla oficial (Swagger/OpenAPI) llega como entreg
     `mapa_inicial_sitio_web_ifts12_2026_v2.md`): menú de 9 ítems + buscador global + **accesos
     directos a Moodle, SIU e Inscripción GCBA en la barra superior**. Ahora el V2 **incluye SIU**
     → ajusta la tensión AF-A6 (antes "V2 sin SIU"); SIU pasa a la cabecera.
-  - `wireframe/` — 13 pantallas HTML de baja fidelidad (home, carreras, carrera-detalle,
-    contacto, docentes, estudiantes, ingresantes, institucional, novedades, nota-completa,
-    tutorias, busqueda, index). **Sigue siendo la fuente de verdad de navegación** junto con el V2.
+  - **Wireframes (nueva ubicación versionable):** `docs/sdd/07_wireframes/` — 16 pantallas HTML de
+    baja fidelidad alineadas al **Mapa del Sitio V2 (21/09/2026)** (13 públicas + 3 de
+    administración: login, panel, formulario). CSS embebido autocontenido, escala de grises.
+    Movidos desde `docs/driveFrontend/02_ux_ui/wireframe/` (gitignored) para poder versionarlos;
+    los buscas en navegación local abriendo `docs/sdd/07_wireframes/index.html`. **Siguen siendo la
+    fuente de verdad de navegación** junto con el V2.
   - Auditoría: `docs/sdd/06_auditorias/auditoria-ux-ui.md` (hallazgos UX-A1…UX-A10).
 - `docs/sdd/01_global/`, `docs/sdd/02_tecnico/`, `docs/sdd/03_procesos/` y
   `docs/sdd/04_historias_usuario/HU-01/` — **base de documentación SDD completada (18/09/2026)**:
