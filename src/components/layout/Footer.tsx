@@ -78,9 +78,16 @@ function Footer() {
       </div>
 
       <div className="border-t border-slate-800">
-        <p className="mx-auto max-w-6xl px-4 py-4 text-xs text-slate-400">
-          © {new Date().getFullYear()} IFTS N.º 12 — Instituto de Formación Técnica Superior.
-        </p>
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 py-4 sm:flex-row">
+          <p className="text-xs text-slate-400">
+            © {new Date().getFullYear()} IFTS N.º 12 — Instituto de Formación Técnica Superior.
+          </p>
+          <img
+            src="/logoUpcn.png"
+            alt="Logo de UPCN, patrocinador del sitio"
+            className="h-8 w-auto rounded bg-white px-2 py-1"
+          />
+        </div>
       </div>
     </footer>
   );
