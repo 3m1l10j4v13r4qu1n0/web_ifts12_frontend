@@ -1,6 +1,6 @@
 # Estado Actual del Proyecto
 
-> Última actualización: 2026-09-18 (Base de documentación SDD completada: `01_global`, `02_tecnico`, `03_procesos` y `HU-01`; skill `fe-architect-scaffold` con endpoints genéricos por historia de usuario)
+> Última actualización: 2026-09-21 (Auditoría de la documentación UX/UI nueva: V1 y Mapa V2 + wireframes)
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `docs/sdd/bitacora_agentica.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.
 
@@ -29,8 +29,9 @@ Mesas, Calendario) como placeholders atenuados, tipos `Carrera` y `Noticia` exte
 `modalidad`/`horarios`/`imagenUrl`/`enlace`, 12 FAQs descriptivas por 4 categorías
 (ingresantes/estudiantes/docentes/institucional), noticias con fechas ISO y ordenamiento
 reciente→antigua en Home. Se completó el **Refactor Mapa Sitio V2** (15/09/2026): la nueva
-fuente de verdad de navegación es `docs/driveFrontend/02_ux_ui/mapa_inicial_sitio_web_ifts12_2026_v2.md`
-(mapa V1 eliminado). El menú principal pasó a **9 items** (Inicio, Carreras, Ingresantes,
+fuente de verdad de navegación es `docs/driveFrontend/02_ux_ui/mapa_sitio_ifts12_(V2).md`
+(actualizado 21/09/2026; el mapa V1 y el `mapa_inicial_sitio_web_ifts12_2026_v2.md` quedaron
+eliminados). El menú principal pasó a **9 items** (Inicio, Carreras, Ingresantes,
 Estudiantes, Tutorías, Docentes, Institucional, Novedades, Contacto), se agregó un **buscador
 global** persistente en el header (`BuscadorGlobal`, filtra contenido local de mocks) y la Home
 separa **accesos destacados** (Moodle, Inscripción, Carreras) de los **accesos rápidos**
@@ -127,6 +128,12 @@ sobre rutas administrables. La tabla oficial (Swagger/OpenAPI) llega como entreg
 - Pendientes multi-equipo para la reunión del lunes 31/08: minuta V2 de Análisis, wireframes
   UX/UI, contratos de API Backend, confirmaciones de Infra/Dirección y URLs oficiales de
   Moodle/inscripción (`docs/frontend/dependencias-equipos.md`).
+- **Auditoría de UX/UI** contra los documentos nuevos de `docs/driveFrontend/02_ux_ui/`
+  (V1 + Mapa V2 + wireframes) **completada** (`docs/sdd/06_auditorias/auditoria-ux-ui.md`, rama
+  `feature/auditoria-ux-ui`, 21/09/2026): wireframes de todas las secciones ✅ entregados;
+  el V2 nuevo **incluye SIU** en la barra superior (ajusta AF-A6); falta implementar los accesos
+  Moodle/SIU/Inscripción en el `Header` (UX-A1), resolver la tensión de accesos 7 vs 9 (UX-A2),
+  y quedan 🔵 formulario de consulta, paleta/tipografía y estados de UI de validación.
 - **Auditoría** contra `Analisis funcional todo unificado IFTS 12.pdf` **completada**
   (`docs/sdd/06_auditorias/auditoria-analisis-unificado.md`, rama `feature/auditoria-analisis-unificado`):
   RF-01…RF-34 auditados; mayoría 🟡/❌/🔵. **Plan de implementación aprobado y ejecutado** en
@@ -181,11 +188,17 @@ sobre rutas administrables. La tabla oficial (Swagger/OpenAPI) llega como entreg
   **Markdown** (pandoc, 09/09/2026) además del `.docx` fuente; matriz, registro y reporte
   actualizados con la auditoría de infraestructura. Recordatorio de pendientes de Infra en
   `docs/driveFrontend/05_infraestructura/bloqueo_infra.md` (no versionado).
-- `docs/driveFrontend/02_ux_ui/mapa_inicial_sitio_web_ifts12_2026_v2.md` — **Mapa del Sitio V2**,
-  propuesta de UX/UI y Arquitectura de Información (15/09/2026): buscador global, menú de 9 items,
-  accesos destacados/rápidos, contacto y jerarquía general. **Nueva fuente de verdad de
-  navegación**, reemplaza al mapa V1 (relevamiento 27/08/2026, eliminado). Pendiente de
-  validación de Análisis Funcional y de wireframes/prototipos de UX/UI.
+- `docs/driveFrontend/02_ux_ui/` — **Documentación UX/UI actualizada (21/09/2026)**:
+  - `DocumentaciónDisenoUX(V1).md` — documento técnico de diseño V1 (Home, login del Campus
+    Moodle —externo al sitio—, estructura por sección, esquema de navegación V1 superado).
+  - `mapa_sitio_ifts12_(V2).md` — **Mapa General del Sitio V2** (reemplazó a
+    `mapa_inicial_sitio_web_ifts12_2026_v2.md`): menú de 9 ítems + buscador global + **accesos
+    directos a Moodle, SIU e Inscripción GCBA en la barra superior**. Ahora el V2 **incluye SIU**
+    → ajusta la tensión AF-A6 (antes "V2 sin SIU"); SIU pasa a la cabecera.
+  - `wireframe/` — 13 pantallas HTML de baja fidelidad (home, carreras, carrera-detalle,
+    contacto, docentes, estudiantes, ingresantes, institucional, novedades, nota-completa,
+    tutorias, busqueda, index). **Sigue siendo la fuente de verdad de navegación** junto con el V2.
+  - Auditoría: `docs/sdd/06_auditorias/auditoria-ux-ui.md` (hallazgos UX-A1…UX-A10).
 - `docs/sdd/01_global/`, `docs/sdd/02_tecnico/`, `docs/sdd/03_procesos/` y
   `docs/sdd/04_historias_usuario/HU-01/` — **base de documentación SDD completada (18/09/2026)**:
   `vision.md`, `actores.md`, `alcance.md` y `reglas_negocio.md` (RN-01…RN-14 transversales);
@@ -203,8 +216,10 @@ sobre rutas administrables. La tabla oficial (Swagger/OpenAPI) llega como entreg
   Funcional. **Actualizado 18/09/2026:** minuta V2 y mapa validado ✅ entregados (Partes I y IV del
   Consolidado); accesos rápidos 7 confirmados; dirección/horario confirmados. Quedan 🔵 los
   contenidos reales, URLs oficiales, logos y datos de SIU/bedeles/títulos/traspasos (Drive de Edith).
-- `docs/driveFrontend/grupo_2_ux_ui.md` — Qué pedirle a UX/UI (wireframes, paleta definitiva,
-  tipografía, mapa de navegación, flujos de usuario, componentes visuales).
+- `docs/driveFrontend/02_ux_ui/grupo_2_ux_ui.md` — Qué pedirle a UX/UI (wireframes, paleta
+  definitiva, tipografía, mapa de navegación, flujos de usuario, componentes visuales).
+  **Actualizado 21/09/2026:** wireframes ✅ entregados (13 pantallas), mapa V2 ✅, accesos
+  destacados/rápidos 🟡 (tensión 7 vs 9), sistema visual 🔵 pendiente.
 - `docs/driveFrontend/grupo_3_frontend.md` — Estado de Frontend, qué ya entregamos, qué
   necesitamos de otros, y qué les entregamos a ellos.
 - `docs/driveFrontend/grupo_4_backend.md` — Qué pedirle a Backend (tabla de endpoints, esquemas

@@ -48,4 +48,4 @@ Equipo de Backend. (2026). Respuesta a definiciones técnicas formales. `docs/dr
 
 Equipo de Frontend. (2026). Propuesta tecnológica — Frontend e Infraestructura. `docs/frontend/propuesta-tecnologica.md`.
 
-Equipo de UX/UI. (2026). Mapa del Sitio V2. `docs/driveFrontend/02_ux_ui/mapa_inicial_sitio_web_ifts12_2026_v2.md`.
+Equipo de UX/UI. (2026). Mapa del Sitio V2. `docs/driveFrontend/02_ux_ui/mapa_sitio_ifts12_(V2).md`.

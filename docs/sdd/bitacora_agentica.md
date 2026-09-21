@@ -773,3 +773,48 @@ reportaba `Error: No test suite found in file` y marcaba la suite como fallida u
 19 tests pasando** (antes 11 archivos, 1 suite fallida). Los 12 tests del skill siguen pasando con
 su runner propio (`node .opencode/skills/pdf-to-markdown/tests/run-tests.cjs`). Cambio en la rama
 `fix/vitest-excluir-tests-skill`.
+
+---
+
+## 2026-09-21 — Auditoría de la documentación UX/UI nueva (V1 + Mapa V2 + wireframes)
+
+**Qué se hizo:** el equipo de UX/UI entregó 2 documentos nuevos en `docs/driveFrontend/02_ux_ui/`
+(`DocumentaciónDisenoUX(V1).md` y `mapa_sitio_ifts12_(V2).md`, este último reemplaza al
+`mapa_inicial_sitio_web_ifts12_2026_v2.md` que dejó de existir) y una carpeta `wireframe/` con
+13 pantallas HTML de baja fidelidad. Se auditó esa documentación contra la fuente única de
+análisis validada y el estado real del código (rama `feature/auditoria-ux-ui` desde `develop`).
+
+**Hallazgos (IDs UX-A1…UX-A10 en `docs/sdd/06_auditorias/auditoria-ux-ui.md`):**
+- **V2 con SIU:** el Mapa V2 nuevo **incluye SIU** como acceso directo a plataforma externa en
+  la barra superior → ajusta la tensión AF-A6 de la auditoría de análisis (antes "V2 sin SIU").
+  Hoy `ENLACES.siu` existe pero no se usa en ninguna UI (UX-A1).
+- **Wireframes entregados ✅:** antes "pendiente" en `grupo_2_ux_ui.md`; ahora hay wireframe por
+  sección (home, carreras, carrera-detalle, contacto, docentes, estudiantes, ingresantes,
+  institucional, novedades, nota-completa, tutorias, busqueda, index).
+- **Tensión de accesos 7 vs 9** (Análisis vs. V2 3 destacados + 6 rápidos): queda documentada
+  como UX-A2 (hereda AF-A6), pendiente de resolver entre Análisis/UX-UI.
+- **Formulario de consulta directa con validación** en el pie (V2 §1/§5): 🔵 no implementado;
+  depende de `/api/contacto` del backend.
+- **Login del Campus Moodle (V1):** es externo al sitio; el login del frontend es solo para
+  administradores (RF-23). Aclarado, no se implementa el login público del V1.
+- **Estados de UI obligatorios (V2 §5):** el buscador global ya tiene empty state ✅; loading y
+  errores de validación quedan 🔵 al llegar backend.
+- **Sistema visual** (paleta/tipografía/tokens): sigue 🔵 pendiente de UX/UI.
+
+**Decisiones:**
+- El V2 nuevo (`mapa_sitio_ifts12_(V2).md`) y `wireframe/` siguen siendo la fuente de verdad de
+  navegación. El V1 queda como referencia histórica de diseño (su esquema de menú de 7 ítems fue
+  superado).
+- No se tocó código: los hallazgos UX-A1 y UX-A3 (accesos en header, formulario en pie) quedan
+  anotados para una tarea de implementación futura, no se resuelven unilateralmente.
+
+**Archivos tocados:**
+- Informe (versionado): `docs/sdd/06_auditorias/auditoria-ux-ui.md` (nuevo),
+  `docs/sdd/06_auditorias/auditoria-analisis-unificado.md` (AF-A6 afinado),
+  `docs/sdd/estado_actual_proyecto.md`.
+- Drive (gitignored, no se commitea): `docs/driveFrontend/02_ux_ui/grupo_2_ux_ui.md` (checklists
+  actualizados). Los documentos V1/V2/wireframes son de UX/UI (gitignored).
+
+**Estado resultante:** documentación de UX/UI alineada; grupo 2 marcado con ✅/🟡/🔵. Solo cambios
+de docs → `lint`/`build`/`test` no afectados. Commit del informe + memoria pendiente de
+aprobación del usuario.

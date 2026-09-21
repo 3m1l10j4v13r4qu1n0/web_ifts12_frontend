@@ -93,7 +93,8 @@ deban validarse con otros equipos. Cada entrada indica fecha, contexto, decisió
 ## 11. Mapa del Sitio V2 como fuente de verdad de navegación (refactor 15/09/2026)
 
 - **Fecha:** 15/09/2026.
-- **Contexto:** UX/UI entregó el Mapa del Sitio V2 (`02_ux_ui/mapa_inicial_sitio_web_ifts12_2026_v2.md`),
+- **Contexto:** UX/UI entregó el Mapa del Sitio V2 (`02_ux_ui/mapa_inicial_sitio_web_ifts12_2026_v2.md`,
+  desde el 21/09/2026 `02_ux_ui/mapa_sitio_ifts12_(V2).md`),
   propuesta de arquitectura de información con buscador global, accesos destacados/rápidos y menú de 9
   items; reemplaza al mapa V1 (relevamiento 27/08), que fue eliminado.
 - **Decisión 1 (menú principal):** adoptar el menú de 9 items de la V2 (Inicio, Carreras, Ingresantes,

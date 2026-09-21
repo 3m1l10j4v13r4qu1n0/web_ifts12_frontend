@@ -42,7 +42,7 @@
 | AF-A3 | "Confirmar los 9 accesos rápidos" | **7 confirmados** (Moodle, SIU, Inscripción GCBA, Becas, Constancias, Mesas, Calendario) — Parte VI | ✅ `grupo_1` §2.1 corregido a 7 |
 | AF-A4 | Menú de 5 ítems / regla "máx. 4-5" como vigente | Reemplazado por Mapa V2 de UX/UI (9 ítems + buscador, 15/09/2026) | ✅ `grupo_3` §1/§5, `acta-decisiones.md` §3 marcada reemplazada, DEC-003 a actualizar |
 | AF-A5 | Dirección/horario de contacto "pendientes" | Confirmados (Misiones 26, C1083 ABB, CABA — nocturno), contenido fijo (RF-22) | ✅ `grupo_1` §2.8 |
-| AF-A6 | Tensión de accesos: Análisis 7 (con SIU) vs. Mapa V2 UX/UI 9 (sin SIU) | La fuente **no resuelve** la tensión: navegación la define UX/UI; ambas son fuente de verdad en su alcance (§5 nota y §11.2) | 🟡 Documentada en `grupo_1`, `grupo_3`, `acta-decisiones` §12 y este informe. **Pendiente de decisión de UX/UI** — no se sobrescribió |
+| AF-A6 | Tensión de accesos: Análisis 7 (con SIU) vs. Mapa V2 UX/UI 9 (ver nota) | La fuente **no resuelve** la tensión: navegación la define UX/UI; ambas son fuente de verdad en su alcance (§5 nota y §11.2). **Nota 21/09:** el `mapa_sitio_ifts12_(V2).md` nuevo (reemplazo del mapa V2 del 15/09) **sí incluye SIU** como acceso directo externo en la barra superior → afina el hallazgo (ver `auditoria-ux-ui.md` UX-A1/UX-A2) | 🟡 Documentada en `grupo_1`, `grupo_3`, `acta-decisiones` §12, `auditoria-ux-ui.md` y este informe. **Pendiente de decisión de UX/UI** — no se sobrescribió |
 | AF-A7 | Login alcance ambiguo en docs viejos | **Login exclusivo para personal que administra contenidos**; contenido público (Parte III, §11.3) | ✅ Reflejado en `grupo_1` §4 |
 | AF-A8 | Carreras cantidad ambigua (3 mocks vs. documento) | **6 carreras** (Parte IV, RF-01/RF-04) | ✅ Ya alineado en Fase 6 (6 mocks con modalidad/horarios) |
 | AF-A9 | Bot/asistente virtual tema abierto | **Fuera de v1** (etapa C), no inventarlo | ✅ Reflejado en `grupo_1` §4 y decisiones |
@@ -124,8 +124,10 @@ Confirmados por Análisis (Parte VI): **7**.
 | Calendario académico | ✅ | ✅ atenuado (sin URL) |
 
 > ⚠️ Mapa V2 de UX/UI (15/09/2026) lista **9 accesos** (Campus, Tutorías, Becas, Constancias,
-> Mesas, Calendario, Inscripción, Carreras, Contacto) sin SIU. La fuente validada aclara que son
-> **7, no 9**, pero delega la navegación a UX/UI. Tensión **🟡 AF-A6**: a resolver por UX/UI.
+> Mesas, Calendario, Inscripción, Carreras, Contacto) sin SIU. El Mapa V2 **nuevo**
+> (`mapa_sitio_ifts12_(V2).md`, 21/09/2026) **incluye SIU** en la barra superior, lo que ajusta
+> AF-A6. La fuente validada aclara que son **7, no 9**, pero delega la navegación a UX/UI.
+> Tensión **🟡 AF-A6 / UX-A2**: a resolver por UX/UI y Análisis.
 
 ## Menú principal
 
