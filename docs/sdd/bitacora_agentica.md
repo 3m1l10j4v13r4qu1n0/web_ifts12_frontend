@@ -884,3 +884,53 @@ esta bitácora.
 
 **Estado resultante:** los wireframes quedan versionables en la SDD. Pendiente de aprobación del
 usuario para commitear (rama `feature/wireframe-v2-actualizacion`).
+
+## 2026-09-21 — Ajuste Mapa V2: header, footer V2, hero carrusel y secciones con mocks (rama `feature/ajuste-mapa-v2`)
+
+**Qué se hizo:** se ejecutó el plan aprobado para alinear el código React al Mapa del Sitio V2 y
+los 16 wireframes, en dos fases: transversal (header/footer/hero/Home) y por sección (las 8
+páginas placeholder + rutas de detalle).
+
+**Cambios (Fase A, transversal):**
+- `constants/navegacion.ts`: nuevas constantes `ACCESOS_EXTERNOS` (Campus/SIU/Inscripción,
+  ligadas a `ENLACES`), `NAV_FOOTER_MAPA`, `NAV_FOOTER_SERVICIOS`, `NAV_FOOTER_PLATAFORMAS`;
+  se eliminó `NAV_FOOTER` viejo (FAQ).
+- `layout/Header.tsx`: barra superior oscura con los 3 accesos externos, atenuados
+  (`aria-disabled`) mientras las URLs oficiales estén vacías (UX-A1).
+- `ui/FormularioConsulta.tsx` (nuevo): validación local de nombre/correo/consulta con estados
+  error/success, **sin POST** hasta confirmar `/api/contacto` (BE-A6).
+- `layout/Footer.tsx`: V2 — datos institucionales (Misiones 26, "exclusivamente nocturno"),
+  columnas Mapa del sitio / Servicios / Plataformas externas, formulario de consulta y franja de
+  isologotipos IFTS/GCBA/UPCN (`public/IFTS12.jpg`, `logoCABA.png`, `logoUpcn.png`).
+- `ui/CarruselInstitucional.tsx` (nuevo): hero carrusel accesible (region + fieldset, sin
+  librerías) que reusa `mockNoticias` con CTA a `/noticias/:id`.
+- `pages/HomePage.tsx`: hero con carrusel + grid de novedades recientes (reemplaza
+  `Portada` + `SliderNoticias`).
+
+**Cambios (Fase B, secciones con mocks + detalle):** se reemplazaron los 8 placeholders por
+estructura navegable: `CarrerasPage` (grid enlazado), `CarreraDetallePage` (`/carreras/:id`,
+badges modalidad + "Turno: exclusivamente nocturno", plan pendiente, sidebar acciones/otras),
+`IngresantesPage` (CTA inscripción atenuado, modalidad/horarios/equivalencias, pases, FAQ),
+`EstudiantesPage` (campus atenuado, 8 cards de servicios, calendario, FAQ), `TutoriasPage`
+(formulario + funcionamiento), `DocentesPage` (5 espacios), `InstitucionalPage` (5 secciones +
+enlaces de interés + isologotipos), `NoticiasPage` (buscador local por palabra clave + empty
+state), `NotaCompletaPage` (`/noticias/:id` + historial), `FaqPage` y `ContactoPage` (formulario
++ datos). `AppRouter.tsx` registró `/carreras/:id` y `/noticias/:id` (404 con
+`PaginaNoEncontrada`).
+
+**Limpieza:** se eliminaron `layout/Portada.tsx`, `pages/PaginaPlaceholder.tsx` y
+`ui/SliderNoticias.tsx` (quedaron sin uso) junto con sus tests `pagina-placeholder` y
+`slider-noticias`.
+
+**Tests:** nuevos `carrusel-institucional`, `formulario-consulta`, `carrera-detalle` y
+`noticias` (busqueda + nota completa); total 29 tests en verde. `npm run lint · build · test` OK.
+
+**Archivos tocados:** `src/constants/navegacion.ts`, `src/components/layout/{Header,Footer}.tsx`,
+`src/components/ui/{FormularioConsulta,CarruselInstitucional}.tsx` (nuevos),
+`src/pages/` (HomePage y 10 páginas editadas/creadas), `src/routes/AppRouter.tsx`, 4 archivos
+eliminados y 4 tests nuevos · `docs/sdd/estado_actual_proyecto.md`.
+
+**Estado resultante:** sitio alineado al Mapa V2 y wireframes con datos simulados. Pendientes
+para otra tarea: contenido institucional real, URLs oficiales (Moodle/SIU/Inscripción), consumo
+de API (GET /api/slider|noticias|carreras|faqs), estados de UI de búsqueda, paleta/tipografía
+definitivas y panel admin. Sin commits aún (pendiente aprobación del usuario).
