@@ -11,7 +11,8 @@ Fase 7
 
 _(Fase 7 = adopción del framework documental logsayer: `docs/` pasa a tener las 5 capas
 (Especificación, Estado, Bitácora, Verificación, Proceso). Fases 1-6 y el refactor
-Mapa Sitio V2 cerrados, hasta `v1.6.0`. El sitio en sí no consume API todavía.)_
+Mapa Sitio V2 cerrados, más la implementación de infraestructura, hasta `v1.7.0`
+(la rama `main` va por `v1.8.0`). El sitio en sí no consume API todavía.)_
 
 ## Qué está construido
 

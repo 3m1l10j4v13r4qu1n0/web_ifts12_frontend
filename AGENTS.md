@@ -56,7 +56,8 @@ compartido viven en `documentacion/`. El histórico anterior a logsayer quedó a
 - El ancla de contexto es `docs/project_state.md` (sección "Qué está construido" y
   "Bloqueos abiertos"); el detalle técnico vigente, largo, está en
   `docs/02_technical/estado_implementacion.md`.
-- Fases 1-6 y el refactor Mapa Sitio V2 cerrados (hasta `v1.6.0`). La Home es navegable
+- Fases 1-6, el refactor Mapa Sitio V2 y la implementación de infraestructura
+  cerrados (`develop` va hasta `v1.7.0`; `main` hasta `v1.8.0`). La Home es navegable
   con datos simulados (`src/constants/mock-data.ts`); **aún no hay consumo de API real**.
 - Base de documentación completada (18/09/2026): `docs/01_global`, `docs/02_technical`,
   `docs/03_process` y `docs/04_user_stories/HU-01`; skill `fe-architect-scaffold` con
