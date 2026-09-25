@@ -1,6 +1,6 @@
 ---
 name: apa-software-doc
-description: plantilla y ejemplos para documentar software del proyecto con normas APA 7.ª edición adaptadas a Markdown. Usar al generar o auditar documentación del repo (informes, minutas, SDD en docs/sdd/, memoria). Fuente: skill global ~/.config/opencode/skills/apa-software-doc/SKILL.md.
+description: plantilla y ejemplos para documentar software del proyecto con normas APA 7.ª edición adaptadas a Markdown. Usar al generar o auditar documentación del repo (informes, minutas, capas de docs/, memoria). Fuente: skill global ~/.config/opencode/skills/apa-software-doc/SKILL.md.
 ---
 
 # Skill: Documentación de Software estilo APA

@@ -10,8 +10,9 @@ con APIs y la web se despliega como build estático en un VPS independiente del 
 > la Fase 6 de brechas de auditoría (`v1.5.0`) y el refactor del Mapa del Sitio V2
 > (menú de 9 ítems + buscador global, `v1.6.0`). La Home es navegable con datos
 > simulados; aún no hay consumo de API real. Base de documentación SDD completada
-> el 18/09/2026 (`docs/sdd/`: `01_global`, `02_tecnico`, `03_procesos`,
-> `04_historias_usuario/HU-01`).
+> el 18/09/2026 (`docs/01_global/`, `docs/02_technical/`, `docs/03_process/`,
+> `docs/04_user_stories/HU-01/`), reorganizadas bajo el sistema documental
+> **logsayer** de 5 capas el 25/09/2026.
 
 ## Tecnología
 
@@ -84,12 +85,12 @@ docs/
 
 ## Mockups de las vistas
 
-En `docs/mockups/` hay mockups HTML autocontenidos que replican el diseño real de las
+En `documentacion/mockups/` hay mockups HTML autocontenidos que replican el diseño real de las
 vistas (Home, secciones placeholder y página 404) para verlos renderizados al instante
 en Tailwind Play sin levantar el proyecto.
 
 Las instrucciones completas de cómo abrirlos, pegarlos y experimentar con los estados
-comentados están en el [instructivo de mockups](docs/mockups/README.md).
+comentados están en el [instructivo de mockups](documentacion/mockups/README.md).
 
 ## Estado del frontend
 
@@ -97,7 +98,7 @@ comentados están en el [instructivo de mockups](docs/mockups/README.md).
 - URLs de Moodle e inscripción como placeholders en `constants/enlaces.ts`; los enlaces externos
   se muestran solo cuando existe URL oficial.
 - Sin consumo de API real todavía: los endpoints se documentan por historia de
-  usuario (`docs/sdd/04_historias_usuario/HU-XX/hu_xx_api.md`, regla anti-alucinación);
+  usuario (`docs/04_user_stories/HU-XX/hu_xx_api.md`, regla anti-alucinación);
   la HU-01 Home ya tiene su `hu_01_api.md` con los endpoints GET públicos.
 - Componentes presentacionales, accesibles y responsive (mobile-first).
 
@@ -114,7 +115,7 @@ comentados están en el [instructivo de mockups](docs/mockups/README.md).
 
 ## Documentación
 
-En `docs/frontend/`:
+En `documentacion/frontend/`:
 
 - `plan.md` — plan de la fase frontend (5 fases, cronograma y entregables).
 - `propuesta-tecnologica.md` — stack, estructura, componentes e infraestructura del Plan B (VPS).
@@ -123,7 +124,8 @@ En `docs/frontend/`:
 - `agenda-reunion-lunes.md` — agenda de la reunión de revisión del 31/08/2026.
 - `analisis_funcional_validado.md` — **fuente única de verdad** del análisis funcional (18/09/2026).
 
-Documentación SDD (base, historia de usuarios y auditorías) en `docs/sdd/`:
-`01_global`, `02_tecnico`, `03_procesos`, `04_historias_usuario/HU-01`,
-`05_metodologia_agil`, `06_auditorias`. Memoria del proyecto y bitácora del agente
-en `docs/sdd/`.
+Sistema documental **logsayer** (5 capas) en `docs/`: `01_global`, `02_technical`,
+`03_process`, `04_user_stories/HU-01`, `05_agile_methodology`, `06_audits` y
+`logbooks/`, con el snapshot de estado en `docs/project_state.md`. Verificación con
+`logsayer check` y `logsayer process check`. La documentación institucional y de la
+cátedra (entregas, wireframes, mockups, Drive compartido) vive en `documentacion/`.

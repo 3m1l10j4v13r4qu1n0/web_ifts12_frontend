@@ -1,6 +1,6 @@
 ---
 name: pdf-to-markdown
-description: convierte archivos PDF a Markdown con detección automática entre texto nativo y documentos escaneados (OCR). Usar cuando se necesite pasar a Markdown los PDFs de docs/driveFrontend/ (minutas, análisis funcional, especificaciones) u otro PDF del proyecto. La implementación vive en el skill global ~/.config/opencode/skills/pdf-to-markdown/.
+description: convierte archivos PDF a Markdown con detección automática entre texto nativo y documentos escaneados (OCR). Usar cuando se necesite pasar a Markdown los PDFs de documentacion/driveFrontend/ (minutas, análisis funcional, especificaciones) u otro PDF del proyecto. La implementación vive en el skill global ~/.config/opencode/skills/pdf-to-markdown/.
 ---
 
 # pdf-to-markdown

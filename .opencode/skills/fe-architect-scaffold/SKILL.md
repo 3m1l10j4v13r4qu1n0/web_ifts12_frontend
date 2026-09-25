@@ -119,12 +119,12 @@ Seguir este orden y **esperar confirmación explícita antes de avanzar al sigui
 
 ⚠️ **Regla de oro**: solo se pueden consumir los endpoints documentados. Si necesitás uno que no está documentado, DETENÉ la implementación y consultá al usuario.
 
-Los endpoints **NO se hardcodean en este skill**: la fuente de verdad es por **Historia de Usuario**. Cada HU que consume API tiene su especificación en `docs/sdd/04_historias_usuario/HU-XX/hu_xx_api.md` (método, ruta, request/response y HU asociada).
+Los endpoints **NO se hardcodean en este skill**: la fuente de verdad es por **Historia de Usuario**. Cada HU que consume API tiene su especificación en `docs/04_user_stories/HU-XX/hu_xx_api.md` (método, ruta, request/response y HU asociada).
 
 ### Cómo consultar la lista oficial (flujo obligatorio antes de consumir API)
 
-1. Ubicar la HU de la pantalla/feature en `docs/sdd/04_historias_usuario/` y leer su `hu_xx_api.md`.
-2. Cruzar contra las rutas confirmadas por Backend el 15/09/2026 en `docs/driveFrontend/04_backend/respuesta.md` y la auditoría `docs/sdd/06_auditorias/auditoria-backend.md`. Prefijo `/api/` (sin `/api/v1/`).
+1. Ubicar la HU de la pantalla/feature en `docs/04_user_stories/` y leer su `hu_xx_api.md`.
+2. Cruzar contra las rutas confirmadas por Backend el 15/09/2026 en `documentacion/driveFrontend/04_backend/respuesta.md` y la auditoría `docs/06_audits/audit_2026-09-15-backend.md`. Prefijo `/api/` (sin `/api/v1/`).
 3. Los DTOs exactos (bodies, parámetros, esquemas) llegan con la tabla Swagger/OpenAPI (entrega 2 de Backend); hasta entonces, usar solo los campos documentados en el `hu_xx_api.md` y marcar ⏳ lo no confirmado.
 
 > ⚠️ **Mantenimiento**: la lista se actualiza *automáticamente* con la documentación: cada vez que se crea una Historia de Usuario nueva se agrega su archivo `hu_xx_api.md` y esta fuente de verdad crece. No hace falta editar este skill por cada endpoint; si un endpoint no está en ninguna HU, se trata como inexistente.
@@ -203,7 +203,7 @@ export interface ApiErrorResponse {
 
 Antes de generar código, verificar:
 
-- [ ] ¿El endpoint que voy a consumir está documentado en el `hu_xx_api.md` de la HU correspondiente (`docs/sdd/04_historias_usuario/HU-XX/`)?
+- [ ] ¿El endpoint que voy a consumir está documentado en el `hu_xx_api.md` de la HU correspondiente (`docs/04_user_stories/HU-XX/`)?
 - [ ] ¿Los tipos TypeScript reflejan exactamente los esquemas Pydantic del backend?
 - [ ] ¿Los códigos de error HTTP que voy a manejar están documentados en `caja_negra.md` del backend?
 - [ ] ¿Estoy respetando la estructura de carpetas definida?

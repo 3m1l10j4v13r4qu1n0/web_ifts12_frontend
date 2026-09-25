@@ -2,45 +2,86 @@
 
 Frontend del sitio web institucional del IFTS N.º 12 (2026). Proyecto de equipo
 (Frontend + UX/UI + Backend + Infraestructura). Los requisitos viven en
-`docs/driveFrontend/` (minuta de análisis funcional, tarea inicial, plan de
-infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commitear.
+`documentacion/driveFrontend/` (minuta de análisis funcional, tarea inicial, plan de
+infraestructura VPS). Ojo: `documentacion/driveFrontend/` está en `.gitignore`, no commitear.
 
 ## Idioma y tono
 
 - Responder siempre en español rioplatense, informal ("vos"). Nunca en inglés,
   aunque el código, logs o skills estén en inglés.
 
+## Sistema documental: logsayer (5 capas)
+
+Este repo usa el CLI `logsayer` (instalado con `uv tool install logsayer`, binario en
+`~/.local/bin/logsayer`) y su sistema de 5 capas. **Rutas en inglés, contenido en
+español.** Los umbrales viven en `logsayer.toml` y este archivo los refleja.
+
+| Capa | Responde | Dónde vive | Rol |
+|---|---|---|---|
+| 1 · Especificación | ¿qué hay que construir? | `docs/01_global/`, `docs/02_technical/`, `docs/04_user_stories/`, `docs/05_agile_methodology/`, `docs/03_process/` | Mentat |
+| 2 · Estado | ¿dónde estamos ahora? | `docs/project_state.md` (snapshot) | Navegante |
+| 3 · Bitácora | ¿cómo llegamos acá y por qué? | `docs/logbooks/logbook_<fase>_NN.md` (append-only) | Reverenda Madre |
+| 4 · Verificación | ¿lo construido sigue siendo lo especificado? | `logsayer check` (mecánica) · `logsayer audit run` → `docs/06_audits/` | Suk Doctor + Decidora |
+| 5 · Proceso | ¿cómo se trabaja acá? | `logsayer process check` + reglas de este archivo | Fremen |
+
+**Flujo de sesión (obligatorio):**
+
+1. Al iniciar, leer **solo** `docs/project_state.md` (`logsayer state show`). No leer
+   `docs/logbooks/` completa: del logbook solo se consulta `docs/logbooks/00_index.md`
+   y, si hace falta, un archivo puntual.
+2. `logsayer audit status`: si el contador de HUs cerradas llega a **>= 3 HUs**, proponer
+   auditoría (`logsayer audit run`) antes de tomar tarea nueva.
+3. Si el uso de contexto supera el **70%**, proponer cierre de sesión antes de tomar más
+   tareas.
+4. Al trabajar una HU, leer solo su carpeta en `docs/04_user_stories/HU-XX/`.
+5. Al cerrar sesión o commit (con aprobación previa del usuario): sobrescribir el snapshot
+   `docs/project_state.md` (nunca acumulativo, sin duplicar specs) y registrar el
+   porqué con `logsayer log add "..."`. Si el archivo de bitácora activo supera las
+   **400 líneas**, el CLI crea el siguiente `NN` y actualiza `docs/logbooks/00_index.md`.
+6. Antes de cerrar fase: `logsayer check` + `logsayer process check` + `npm run lint` ·
+   `npm run build` · `npm run test`.
+
+**Regla de oro:** cada documento vive en una sola capa. En `docs/` no hay `.md` sueltos:
+la documentación institucional, las entregas, los wireframes, los mockups y el Drive
+compartido viven en `documentacion/`. El histórico anterior a logsayer quedó archivado en
+`docs/logbooks/logbook_legado_01.md` y **no se edita** (append-only).
+
+- Subagentes por rol: `logsayer agent add opencode` genera
+  `.opencode/agents/{mentat,navigator,reverend-mother,truthsayer}.md`.
+- Ojo: si cambiás los umbrales de `logsayer.toml`, actualizá también los números de este
+  archivo, porque `logsayer process check` verifica que coincidan.
+
 ## Estado actual (leer antes de tocar nada)
 
-- Frontend ya andamiado y operativo (Fases 1-4, tags `v1.0.0`–`v1.3.0`): hay
-  `package.json`, `src/` completo (React 19 + Vite + TypeScript strict + Tailwind
-  v4) y scripts `lint/build/test` en verde en `develop`.
-- Se completó la Fase 5 (cierre/docs, `v1.4.0`), la Fase 6 (brechas de auditoría
-  sin dependencias: contacto/pie, accesos rápidos, modalidad/horarios, FAQ por
-  segmento, fechas ISO, `v1.5.0`) y el refactor Mapa Sitio V2 (15/09/2026: menú de
-  9 items + buscador global, `v1.6.0`). La Home es navegable con datos simulados
-  (`src/constants/mock-data.ts`); **aún no hay consumo de API real**.
-- Base de documentación SDD completada (18/09/2026, mergeada a `develop`):
-  `docs/sdd/01_global`, `02_tecnico`, `03_procesos` y `04_historias_usuario/HU-01`;
-  skill `fe-architect-scaffold` con endpoints genéricos por historia de usuario.
-  Ver detalles en `docs/sdd/estado_actual_proyecto.md`.
+- El ancla de contexto es `docs/project_state.md` (sección "Qué está construido" y
+  "Bloqueos abiertos"); el detalle técnico vigente, largo, está en
+  `docs/02_technical/estado_implementacion.md`.
+- Fases 1-6 y el refactor Mapa Sitio V2 cerrados (hasta `v1.6.0`). La Home es navegable
+  con datos simulados (`src/constants/mock-data.ts`); **aún no hay consumo de API real**.
+- Base de documentación completada (18/09/2026): `docs/01_global`, `docs/02_technical`,
+  `docs/03_process` y `docs/04_user_stories/HU-01`; skill `fe-architect-scaffold` con
+  endpoints genéricos por historia de usuario.
 - Ramas `feature/`/`fix/` se crean siempre desde `develop` (una rama = una tarea).
 - Siempre ejecutar `npm run lint` · `npm run build` · `npm run test` al tocar código.
 
 ## Fuente de verdad y anti-alucinación
 
 - No inventar endpoints, campos, tipos, textos ni contenido institucional. El
-  backend y los docs de `docs/driveFrontend/` son la única fuente de verdad.
+  backend y los docs de `documentacion/driveFrontend/` son la única fuente de verdad.
 - La fuente de verdad de endpoints del frontend es **por historia de usuario**:
-  `docs/sdd/04_historias_usuario/HU-XX/hu_xx_api.md` (skill `fe-architect-scaffold`).
+  `docs/04_user_stories/HU-XX/*_api.md` (skill `fe-architect-scaffold`).
   Un endpoint que no está documentado en ninguna HU se trata como inexistente.
 - Hasta validar contenidos, la Home se arma con datos simulados y sin
   afirmaciones institucionales definitivas; debe incluir acceso visible a Moodle
   y al enlace oficial de inscripción.
 - Afirmar algo como existente solo si se verificó en la sesión actual (archivo
   leído o comando corrido). Ambigüedad → preguntar, no decidir por cuenta propia.
+- Si el código real contradice lo que dice `docs/project_state.md` o
+  `docs/02_technical/estado_implementacion.md`, avisar antes de asumir cuál es la
+  fuente de verdad.
 - Trabajar en pasos chicos, releer cada archivo tras escribirlo. Regla completa:
-  `.opencode/rules/Reglas-anti-alucinacion.md`.
+  `.opencode/rules/Reglas-anti-alucinacion.md` (lo general ahora vive en
+  `~/.config/opencode/rules/anti-alucinacion.md`).
 
 ## Git (regla dura: `.opencode/rules/flujo-git.md`)
 
@@ -82,41 +123,45 @@ infraestructura VPS). Ojo: `docs/driveFrontend` está en `.gitignore`, no commit
   Se activan a pedido
   del usuario (en su mayoría están `disable-model-invocation`).
 
-
 ## Documentación con formato APA (regla + skill: `.agents/`)
 
-- **Reglas APA adaptadas:** `.agents/rules/apa-formato.md` (formato Markdown, estructura,
-  títulos, citas y referencias) y `.agents/rules/apa-software.md` (código, figuras, tablas,
-  referencias técnicas, checklist). Toda documentación nueva generada en el repo debe
-  seguirlas.
+- **Reglas APA adaptadas:** `.agents/rules/apa-formato.md` y `.agents/rules/apa-software.md`
+  (lo general de APA 7.ª vive en `~/.config/opencode/rules/apa.md`). Toda documentación
+  nueva generada en el repo debe seguirlas.
 - **Skill de plantilla:** `.agents/skills/apa-software-doc/SKILL.md` ofrece la plantilla de
   documento y ejemplos de citas/referencias.
-- Aplican a informes de auditoría, minutas, SSD (`docs/sdd/`), memoria y cualquier doc que se
-  genere. Se adapta al formato Markdown real del proyecto; no aplican pautas físicas de papel.
+- Aplican a informes de auditoría (`docs/06_audits/`), minutas, capas de `docs/`, memoria
+  y cualquier doc que se genere. Se adapta al formato Markdown real del proyecto; no
+  aplican pautas físicas de papel.
 
 ## Auditoría de documentación (regla + skill: `.agents/`)
 
 - **Regla dura:** `.agents/rules/auditoria-documentacion.md` — al auditar documentación
-  (requerimientos, especificaciones en `docs/driveFrontend/` u otra que afecte a un grupo),
-  el agente DEBE actualizar también el archivo del grupo correspondiente (`grupo_X_*.md`),
-  no quedarse solo con el informe versionado, y generar el informe en
-  `docs/sdd/06_auditorias/auditoria-*.md`.
-- **Fuente única de verdad de análisis funcional:** `docs/frontend/analisis_funcional_validado.md`
-  (18/09/2026) — síntesis de los 3 PDFs aprobados en `docs/driveFrontend/01_analisis_funcional/`.
-  Al auditar `grupo_1_analisis_funcional.md` u otra doc de análisis, comparar contra ese resumen
+  (requerimientos, especificaciones en `documentacion/driveFrontend/` u otra que afecte a un
+  grupo), el agente DEBE actualizar también el archivo del grupo correspondiente
+  (`grupo_X_*.md`), no quedarse solo con el informe versionado, y generar el informe en
+  `docs/06_audits/audit_<fecha>-<área>.md`.
+- **Fuente única de verdad de análisis funcional:**
+  `documentacion/frontend/analisis_funcional_validado.md` (18/09/2026) — síntesis de los 3
+  PDFs aprobados en `documentacion/driveFrontend/01_analisis_funcional/`. Al auditar
+  `grupo_1_analisis_funcional.md` u otra doc de análisis, comparar contra ese resumen
   validado + los PDFs aprobados, nunca contra suposiciones.
 - **Skill:** `.agents/skills/auditoria-documentacion/SKILL.md` — flujo completo: identificar
   grupo → relevar estado real → leer el doc del grupo → marcar ✅/🟡/🔵/⏳ → aplicar
-  correcciones verificadas → informe `docs/sdd/06_auditorias/auditoria-*.md` → memoria → commits
-  (los cambios de `docs/driveFrontend/` NO se commitean).
+  correcciones verificadas → informe en `docs/06_audits/` → bitácora y estado → commits
+  (los cambios de `documentacion/driveFrontend/` NO se commitean).
 - Ejemplo de referencia: auditoría de infraestructura (09/09/2026), que además del informe
   actualizó `grupo_5_infraestructura.md`.
 
-## Memoria del proyecto (docs/sdd/estado_actual_proyecto.md y docs/sdd/bitacora_agentica.md)
+## Memoria del proyecto
 
-- Antes de tocar código, leer `docs/sdd/estado_actual_proyecto.md` completo para tener el contexto actual del proyecto.
-- Al terminar una implementación, eliminación o edición relevante (nueva entidad, caso de uso, endpoint, refactor de arquitectura, dependencia core):
-  1. Actualizar la sección correspondiente de `docs/sdd/estado_actual_proyecto.md` (editar in-place, no reescribir todo el archivo).
-  2. Agregar una entrada nueva al final de `docs/sdd/bitacora_agentica.md` con: fecha, qué se hizo, decisiones tomadas, archivos tocados, estado resultante. Nunca editar entradas previas de la bitácora.
+- Antes de tocar código, leer `docs/project_state.md` (y `docs/02_technical/estado_implementacion.md`
+  si la tarea es de código) para tener el contexto actual.
+- Al terminar una implementación, eliminación o edición relevante (nueva entidad, caso de uso,
+  endpoint, refactor de arquitectura, dependencia core):
+  1. `logsayer log add "..."` con: qué se hizo, decisiones tomadas, archivos tocados, estado
+     resultante. Nunca editar entradas previas.
+  2. Actualizar la sección correspondiente de `docs/project_state.md` y, si aplica, de
+     `docs/02_technical/estado_implementacion.md` (editar in-place, no reescribir todo).
+  3. Si se cerró una HU, incrementar el contador de `## HUs cerradas desde la última auditoría`.
 - No generar entradas de bitácora por cambios triviales (typos, formateo, renames cosméticos).
-- Si el código real contradice lo que dice `estado_actual_proyecto.md`, avisar antes de asumir cuál es la fuente de verdad.

@@ -8,42 +8,41 @@ Cuando se audita documentación del proyecto (requerimientos, especificaciones, 
 historias de usuario), el resultado no puede quedarse solo en un informe aparte: el documento
 fuente del grupo/área afectada debe quedar **actualizado** para seguir siendo la fuente de
 verdad. Ejemplo real: la auditoría de infraestructura (09/09/2026) generó
-`docs/sdd/06_auditorias/auditoria-infraestructura.md` como informe **y además** se actualizó
-`docs/driveFrontend/05_infraestructura/grupo_5_infraestructura.md` marcando con ✅ lo ya
+`docs/06_audits/audit_2026-09-09-infraestructura.md` como informe **y además** se actualizó
+`documentacion/driveFrontend/05_infraestructura/grupo_5_infraestructura.md` marcando con ✅ lo ya
 cubierto y aplicando las correcciones detectadas.
 
 El análisis funcional ya tiene una fuente única de verdad validada:
-`docs/frontend/analisis_funcional_validado.md` (18/09/2026), síntesis de los 3 PDFs aprobados
-en `docs/driveFrontend/01_analisis_funcional/`. Al auditar documentación de análisis funcional
+`documentacion/frontend/analisis_funcional_validado.md` (18/09/2026), síntesis de los 3 PDFs aprobados
+en `documentacion/driveFrontend/01_analisis_funcional/`. Al auditar documentación de análisis funcional
 (ej. `grupo_1_analisis_funcional.md`), se compara contra ese resumen validado y contra los PDFs
 aprobados, nunca contra suposiciones.
 
 ## 2. Alcance
 
-- Aplica a auditorías de cualquier documento de `docs/driveFrontend/` (análisis funcional,
+- Aplica a auditorías de cualquier documento de `documentacion/driveFrontend/` (análisis funcional,
   UX/UI, frontend, backend, infraestructura, QA).
-- Aplica también a auditorías de documentación interna que afecten a un grupo (`docs/sdd/`,
-  `docs/frontend/`, `docs/backend/`, etc.).
+- Aplica también a auditorías de documentación interna que afecten a un grupo (las capas de `docs/`, `documentacion/frontend/`, etc.).
 - No aplica a cambios triviales (typos sueltos sin auditar, formateo, renames cosméticos).
 
 ## 3. Pasos obligatorios
 
 1. **Identificar** el grupo/área del documento auditado (1=Análisis, 2=UX/UI, 3=Frontend,
    4=Backend, 5=Infraestructura, 6=QA).
-2. **Localizar** el archivo del grupo en `docs/driveFrontend/`: `grupo_1_analisis_funcional.md`,
+2. **Localizar** el archivo del grupo en `documentacion/driveFrontend/`: `grupo_1_analisis_funcional.md`,
    `grupo_2_ux_ui.md`, `grupo_3_frontend.md`, `grupo_4_backend.md`,
    `grupo_5_infraestructura.md`, `grupo_6_qa.md`. Si la auditoría es de documentación interna,
-   afectará el documento fuente de su área en `docs/sdd/`.
+   afectará el documento fuente de su área en `docs/` (capa 1 o 2).
 3. **Definir la fuente de verdad contra la que auditar**: para análisis funcional, usar
-   `docs/frontend/analisis_funcional_validado.md` + los PDFs aprobados; para el resto, los
+   `documentacion/frontend/analisis_funcional_validado.md` + los PDFs aprobados; para el resto, los
    documentos fuente de su área.
 4. **Leer completo** el archivo del grupo antes de editarlo (nunca editar sin releer).
 5. **Marcar** con la leyenda de la sección 4 cada ítem según el estado verificado en la sesión.
 6. **Aplicar** en el archivo del grupo las correcciones que surjan de la auditoría y estén
    verificadas (typos, valores, configs de ejemplo, estados).
-7. **No commitear** los cambios del archivo del grupo: `docs/driveFrontend/` está en
+7. **No commitear** los cambios del archivo del grupo: `documentacion/driveFrontend/` está en
    `.gitignore` (fuente de verdad compartida, no se versiona). Solo se versiona el informe de
-   auditoría en `docs/sdd/06_auditorias/`.
+   auditoría en `docs/06_audits/`.
 
 ## 4. Leyenda de estados (consistente con las auditorías existentes)
 
@@ -65,8 +64,8 @@ aprobados, nunca contra suposiciones.
 
 ## 6. Cierre de la auditoría
 
-1. Generar o actualizar el informe versionado en `docs/sdd/06_auditorias/auditoria-*.md`,
+1. Generar o actualizar el informe versionado en `docs/06_audits/audit_*.md`,
    referenciando el archivo del grupo modificado.
-2. Actualizar `docs/sdd/estado_actual_proyecto.md` (sección correspondiente, in-place).
-3. Agregar entrada en `docs/sdd/bitacora_agentica.md` (append-only) con fecha, qué se hizo,
+2. Actualizar `docs/02_technical/estado_implementacion.md` (sección correspondiente, in-place).
+3. Agregar entrada en `docs/logbooks/logbook_legado_01.md` (append-only) con fecha, qué se hizo,
    decisiones, archivos tocados y estado resultante.
