@@ -8,7 +8,7 @@ disable-model-invocation: true
 # Estado Actual del Proyecto
 
 > Última actualización: YYYY-MM-DD
-> Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `docs/sdd/bitacora_agentica.md`.
+> Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `docs/logbooks/logbook_legado_01.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.
 
 ## 1. Resumen del proyecto
