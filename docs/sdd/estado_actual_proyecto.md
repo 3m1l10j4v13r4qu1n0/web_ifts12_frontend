@@ -1,6 +1,6 @@
 # Estado Actual del Proyecto
 
-> Última actualización: 2026-09-21 (Auditoría de la documentación UX/UI nueva: V1 y Mapa V2 + wireframes)
+> Última actualización: 2026-09-21 (Ajuste Mapa V2: header con accesos externos, footer V2, hero con carrusel, secciones con mocks y rutas de detalle)
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `docs/sdd/bitacora_agentica.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.
 
@@ -36,6 +36,19 @@ Estudiantes, Tutorías, Docentes, Institucional, Novedades, Contacto), se agreg�
 global** persistente en el header (`BuscadorGlobal`, filtra contenido local de mocks) y la Home
 separa **accesos destacados** (Moodle, Inscripción, Carreras) de los **accesos rápidos**
 (Tutorías, Becas, Constancias, Mesas, Calendario, Contacto).
+Se completó el **Ajuste Mapa V2** (21/09/2026, rama `feature/ajuste-mapa-v2`): los accesos
+Moodle/SIU/Inscripción (UX-A1, el V2 incluye SIU) pasan a una **barra superior del header**
+atenuada mientras las URLs oficiales sigan vacías (`ACCESOS_EXTERNOS`); el **Footer** se
+reestructuró al V2 (datos + columnas Mapa del sitio/Servicios/Plataformas externas +
+formulario de consulta + isologotipos IFTS/GCBA/UPCN + "exclusivamente nocturno"); el hero de la
+Home pasó de portada de texto a un **carrusel institucional** (`CarruselInstitucional` reusa
+`mockNoticias`) con **grid de novedades recientes**; las 8 secciones placeholder se
+reemplazaron por **estructura navegable con mocks** (Carreras, Ingresantes, Estudiantes,
+Tutorías, Docentes, Institucional, Noticias con buscador local, FAQ, Contacto) y se agregaron las
+**rutas de detalle** `/carreras/:id` y `/noticias/:id` (404 para ids inexistentes). El
+`FormularioConsulta` valida en local (nombre, correo, mensaje) **sin POST** hasta confirmar
+`/api/contacto` (BE-A6). Se eliminaron `Portada.tsx`, `PaginaPlaceholder.tsx` y `SliderNoticias.tsx`
+(quedaron sin uso).
 
 ## 2. Arquitectura
 
@@ -47,11 +60,13 @@ separa **accesos destacados** (Moodle, Inscripción, Carreras) de los **accesos 
   sin `try/catch` dispersos.
 - Tipado estricto, `any` prohibido (tsconfig en `strict`).
 - Estado global: Context API (no Redux); datos de API futuros con TanStack Query v5.
-- Páginas placeholder por sección: Home, Carreras, Ingresantes, Estudiantes, Docentes,
-  Tutorías, Institucional, Noticias, FAQ, Contacto + 404.
+- Páginas por sección con estructura navegable y datos de mocks (no más placeholders): Home,
+  Carreras + detalle, Ingresantes, Estudiantes, Docentes, Tutorías, Institucional, Noticias +
+  detalle, FAQ, Contacto + 404.
 - Navegación según el Mapa del Sitio V2 (UX/UI, 15/09/2026): menú principal de 9 items +
   buscador global persistente en el header (`BuscadorGlobal`, índice local de mocks) +
-  accesos destacados y rápidos separados en la Home.
+  barra superior de accesos externos (Moodle/SIU/Inscripción, atenuados sin URL) +
+  accesos destacados y rápidos separados en la Home + footer V2 (columnas, formulario e isologotipos).
 
 ## 3. Entidades / Modelos de dominio
 
@@ -74,12 +89,20 @@ separa **accesos destacados** (Moodle, Inscripción, Carreras) de los **accesos 
 - [x] AuthContext y ProtectedRoute **preparados** (sin login real; el backend no lo soporta).
 - [x] `constants/mock-data.ts` — mocks provisionales tipados (carreras, noticias, FAQ,
   accesos rápidos, comunidades) marcados para validar con Análisis.
-- [x] Componentes reutilizables presentacionales: Header+Nav, Footer, Portada, CardCarrera,
-  CardNoticia, FaqAcordeon, AccesosRapidos, Button (con tests).
-- [x] Home navegable (HomePage): portada, CTA de campus/inscripción (visible solo con URL),
-  accesos rápidos (11 items, 5 atenuados), carreras (6 con modalidad), slider de novedades
-  (con fechas y orden reciente→antigua), comunidades, FAQ (12 items, 4 categorías).
-- [x] ContactoPage con dirección, horario y correo (RF-22); Footer con dirección y horario.
+- [x] Componentes reutilizables presentacionales: Header+Nav, Footer, CardCarrera,
+  CardNoticia, FaqAcordeon, AccesosRapidos, Button, CarruselInstitucional,
+  FormularioConsulta (con tests).
+- [x] Home navegable (HomePage): hero con carrusel de novedades, CTA de campus/inscripción
+  (visible solo con URL), accesos rápidos (11 items, 5 atenuados), carreras (6 con modalidad),
+  grid de novedades recientes, comunidades, FAQ (12 items, 4 categorías).
+- [x] Header con barra superior de accesos directos (Campus virtual, SIU, Inscripción)
+  atenuados mientras las URLs oficiales estén vacías (UX-A1).
+- [x] Footer V2: datos institucionales, columnas Mapa del sitio/Servicios/Plataformas externas,
+  formulario de consulta y franja de isologotipos IFTS/GCBA/UPCN; copy "exclusivamente nocturno".
+- [x] ContactoPage con formulario, dirección y horario (RF-22); FAQ completa (12 items).
+- [x] Secciones con estructura navegable y mocks: CarrerasPage, CarreraDetallePage
+  (`/carreras/:id`), Ingresantes, Estudiantes, Tutorías, Docentes, Institucional,
+  NoticiasPage (buscador local), NotaCompletaPage (`/noticias/:id`), FAQ, Contacto.
 - [ ] Carreras, noticias, FAQ, etc. con contenido real — bloqueado por contratos de Análisis/Backend.
 
 ## 5. Endpoints / Interfaces expuestas
