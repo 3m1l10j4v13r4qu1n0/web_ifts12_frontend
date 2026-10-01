@@ -126,6 +126,8 @@ En `documentacion/frontend/`:
 
 Sistema documental **logsayer** (5 capas) en `docs/`: `01_global`, `02_technical`,
 `03_process`, `04_user_stories/HU-01`, `05_agile_methodology`, `06_audits` y
-`logbooks/`, con el snapshot de estado en `docs/project_state.md`. Verificación con
-`logsayer check` y `logsayer process check`. La documentación institucional y de la
-cátedra (entregas, wireframes, mockups, Drive compartido) vive en `documentacion/`.
+`logbooks/`, con el snapshot de estado en `docs/project_state.md` y el índice de
+navegación generado en `docs/00_memory_index.md` (`logsayer memory index`).
+Verificación con `logsayer check` y `logsayer process check`. La documentación
+institucional y de la cátedra (entregas, wireframes, mockups, Drive compartido) vive en
+`documentacion/`.

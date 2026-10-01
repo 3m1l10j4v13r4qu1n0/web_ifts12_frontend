@@ -1,10 +1,12 @@
 # Estado Actual del Proyecto
 
-> Última actualización: 2026-09-21 (Ajuste Mapa V2: header con accesos externos, footer V2, hero con carrusel, secciones con mocks y rutas de detalle)
+Fecha: 2026-09-30 · Estado: vigente
+
+> Última actualización de contenido: 2026-09-21 (Ajuste Mapa V2: header con accesos externos, footer V2, hero con carrusel, secciones con mocks y rutas de detalle)
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `docs/logbooks/logbook_legado_01.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.
 
-## 1. Resumen del proyecto
+## Resumen
 
 Sitio web institucional del IFTS N.º 12 (2026). Frontend en **React 19 + Vite + TypeScript
 strict + Tailwind CSS v4**, alineado al contrato `fe-architect-scaffold`. Se completó la
