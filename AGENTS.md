@@ -25,10 +25,23 @@ refleja.
 | 4 · Verificación | ¿lo construido sigue siendo lo especificado? | `logsayer check` (mecánica) · `logsayer audit run` → `docs/06_audits/` | Suk Doctor + Decidora |
 | 5 · Proceso | ¿cómo se trabaja acá? | `logsayer process check` + reglas de este archivo | Fremen |
 
-Fuera de las 5 capas hay un artefacto transversal de navegación:
-`docs/00_memory_index.md`, **generado** con `logsayer memory index` (no editar a mano). No
-es una sexta capa: ordena todos los documentos de `docs/` por (nivel, ruta) para responder
-"qué leer primero". `logsayer memory search "<consulta>"` consulta ese índice.
+Fuera de las 5 capas hay dos artefactos transversales, ninguno es una capa:
+
+- **Índice de memoria** — `docs/00_memory_index.md`, **generado** con `logsayer memory index`
+  (no editar a mano). Ordena todos los documentos de `docs/` por (nivel, ruta) para
+  responder "qué leer primero". `logsayer memory search "<consulta>"` lo consulta.
+- **Bandeja de entrada** — `inbox/`, en la raíz y **fuera de `docs/`** a propósito: un `.md`
+  suelto en `docs/` que no es de capa dispara el check `capas_mezcladas`. No se versiona
+  (su propio `.gitignore` lo declara) y su única salida es entrar a Capa 1. El contenido
+  lo deriva el subagente **Mentat**, no el agente a mano.
+
+**Documento externo que entra (entradas, contratos, actas, PDFs del Drive):** con
+`logsayer inbox add <archivo>` (lo mueve a `inbox/`), después
+`logsayer doc route <archivo>` para ver los candidatos y delegar la decisión de capa al
+subagente **Mentat**, y recién ahí `logsayer doc new <global|technical> <nombre> --from
+inbox/<archivo>`, que scaffoldea el header estándar y deja la procedencia en `## Fuente`.
+Nada se borra: lo procesado queda archivado en `inbox/_done/`. Si `logsayer check` lista
+archivos en `bandeja_entrada`, delegar a Mentat en vez de ubicarlos a mano.
 
 **Flujo de sesión (obligatorio):**
 
@@ -61,6 +74,10 @@ salvo el snapshot `docs/project_state.md` (Capa 2) y el índice generado
 los mockups y el Drive compartido viven en `documentacion/`. El histórico anterior a
 logsayer quedó archivado en `docs/logbooks/logbook_legado_01.md` y **no se edita**
 (append-only).
+
+- Bandeja `inbox/`: la crea `logsayer init`, se versiona solo su `.gitignore`. Lo que entra
+  (entradas, contratos, actas, PDFs) no se commitea; sale de ahí únicamente como documento
+  de Capa 1, vía el flujo `inbox add` → `doc route` → `doc new` (decide Mentat).
 
 - Subagentes por rol: `logsayer agent add opencode` genera
   `.opencode/agents/{mentat,navigator,reverend-mother,truthsayer}.md`.
