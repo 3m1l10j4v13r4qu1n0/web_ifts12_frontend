@@ -27,8 +27,11 @@ Mapa Sitio V2 cerrados, más la implementación de infraestructura, hasta `v1.7.
   más rutas de detalle `/carreras/:id` y `/noticias/:id` y 404.
 - Datos simulados en `src/constants/mock-data.ts`; **sin consumo de API real**.
 - HU-01 (Home institucional pública) especificada en `docs/04_user_stories/HU-01/`.
-- Cuatro auditorías cerradas en `docs/06_audits/` (análisis funcional, backend,
-  infraestructura, UX/UI).
+- Contrato del backend derivado del README que remitió el equipo de Backend:
+  `docs/02_technical/contrato_api_backend.md` (Capa 1, 01/10/2026), con jerarquía de fuentes
+  declarada y 9 divergencias abiertas (P1–P9).
+- Cinco auditorías cerradas en `docs/06_audits/` (análisis funcional, backend, infraestructura,
+  UX/UI y la del README del backend).
 
 ## Decisiones activas (últimas 3-5)
 
@@ -48,13 +51,27 @@ Mapa Sitio V2 cerrados, más la implementación de infraestructura, hasta `v1.7.
   Análisis validó 7 accesos rápidos y el V2 tiene 9 (incluye SIU) — falta cierre con UX/UI.
 - **Sin autenticación ni API real** hasta que Backend entregue Swagger y DTOs. Los accesos
   a Moodle/SIU/Inscripción se muestran atenuados mientras las URLs oficiales estén vacías.
+- **Jerarquía de fuentes del contrato de API** (decisión del 01/10/2026):
+  `04_backend/respuesta.md` (15/09/2026) > `preguntas_abiertas_2026-10-01.md` > el README de
+  `backend_ifts12` (01/10/2026). El README es más reciente pero **de alcance menor** (5 endpoints
+  de los 16 confirmados, ningún DTO), así que **no reemplaza** a `respuesta.md`: ni
+  `hu_01_api.md` ni `src/api/endpoints.ts` se modifican hasta que Backend responda.
 
 ## Bloqueos abiertos (no resolver sin fuente)
 
 - URLs oficiales de Moodle e inscripción (IFTS/Dirección) → bloquean `enlaces.ts`,
   `.env.example` y la migración a `import.meta.env`.
-- Swagger/OpenAPI y DTOs de Backend (entrega 2) → bloquean el consumo de API.
-- `/api/contacto` POST sin confirmar: hoy el formulario valida en local y no envía.
+- Swagger/OpenAPI y DTOs de Backend → bloquean el consumo de API. Al 01/10/2026 **vencieron las
+  entregas 2 (~22/09) y 3 (~29/09)**; la 4 (seeders + errores) vence ~06/10.
+- **Conflicto de ruta de noticias (P1, alta):** el README dice `/api/novedades`, la fuente
+  vigente dice `/api/noticias`. No escribir ninguna de las dos en `endpoints.ts` hasta respuesta.
+- **Alcance del mapa de rutas (P2, alta):** confirmar si los 16 endpoints confirmados siguen
+  vigentes o si el backend realmente expone solo los 5 del README.
+- SQLite en el seed vs. PostgreSQL confirmado (P4) y URL/puerto de testing para `API_BASE_URL`
+  (P9) → bloquean la configuración de la capa `api/`.
+- `/api/contacto` POST sin confirmar body ni errores: hoy el formulario valida en local y no envía.
+- ⚠️ El README del backend publica la contraseña del admin de seed en claro: no se reproduce ni se
+  usa contra entornos compartidos.
 - Tensión de accesos rápidos 7 vs 9 (AF-A6) y contenidos reales de Análisis (🔵/❌).
 
 ## Verificación

@@ -7,6 +7,7 @@
 01_global/reglas_negocio.md                       · nivel 0 · borrador · 2026-09-18 · reglas, negocio
 01_global/vision.md                               · nivel 0 · borrador · 2026-09-18 · vision
 project_state.md                                  · nivel 0 · — · — · project, state
+02_technical/contrato_api_backend.md              · nivel 1 · borrador · 2026-10-01 · contrato, api, backend
 02_technical/decisiones_tecnicas.md               · nivel 1 · borrador · 2026-09-18 · decisiones, tecnicas
 02_technical/estado_implementacion.md             · nivel 1 · vigente · 2026-09-30 · estado, implementacion
 02_technical/modelo_datos_global.md               · nivel 1 · borrador · 2026-09-18 · modelo, datos, global
@@ -21,6 +22,7 @@ project_state.md                                  · nivel 0 · — · — · pr
 06_audits/audit_2026-09-15-backend.md             · nivel 3 · — · — · audit, backend
 06_audits/audit_2026-09-18-analisis-funcional.md  · nivel 3 · — · — · audit, analisis, funcional
 06_audits/audit_2026-09-21-ux-ui.md               · nivel 3 · — · — · audit, ux, ui
+06_audits/audit_2026-10-01-backend-readme.md      · nivel 3 · — · — · audit, backend
 logbooks/00_index.md                              · nivel 3 · — · —
 logbooks/logbook_fase-7_01.md                     · nivel 3 · — · — · logbook, fase
 logbooks/logbook_legado_01.md                     · nivel 3 · — · — · logbook, legado
