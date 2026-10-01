@@ -1,3 +1,7 @@
+---
+fase: fase-7
+---
+
 # Estado del proyecto — IFTS N.º 12 (frontend)
 
 > Snapshot operativo para el agente al iniciar cada sesión. No es acumulativo: se
@@ -28,11 +32,13 @@ Mapa Sitio V2 cerrados, más la implementación de infraestructura, hasta `v1.7.
 
 ## Decisiones activas (últimas 3-5)
 
-- **Sistema documental logsayer (5 capas).** `docs/` contiene solo capas del framework
-  (`01_global`, `02_technical`, `03_process`, `04_user_stories`, `05_agile_methodology`,
-  `06_audits`, `logbooks`, `project_state.md`); la documentación institucional y de la
-  cátedra quedó en `documentacion/`. Verificación: `logsayer check` y
-  `logsayer process check`.
+- **Sistema documental logsayer (5 capas), CLI v0.8.0.** `docs/` contiene solo capas del
+  framework (`01_global`, `02_technical`, `03_process`, `04_user_stories`,
+  `05_agile_methodology`, `06_audits`, `logbooks`, `project_state.md`) más el índice
+  transversal generado `docs/00_memory_index.md`; la documentación institucional y de
+  la cátedra quedó en `documentacion/`. Verificación: `logsayer check` y
+  `logsayer process check`. El CLI se actualiza con `uv tool install --force logsayer`:
+  sin `--force` uv da la instalación por satisfactoria y no cambia nada.
 - **Rutas en inglés, contenido en español** (convención del framework). La fuente de verdad
   de endpoints es **por historia de usuario**: `docs/04_user_stories/HU-XX/*_api.md`. Un
   endpoint que no está en ninguna HU se trata como inexistente.
@@ -55,7 +61,7 @@ Mapa Sitio V2 cerrados, más la implementación de infraestructura, hasta `v1.7.
 
 - Frontend: `npm run lint` · `npm run build` · `npm run test`.
 - Sistema documental: `logsayer check` (mecánico) · `logsayer process check` (proceso) ·
-  `logsayer state show` · `logsayer audit status`.
+  `logsayer state show` · `logsayer audit status` · `logsayer memory status`.
 
 ## HUs cerradas desde la última auditoría
 
