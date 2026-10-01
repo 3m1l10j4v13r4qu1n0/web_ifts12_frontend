@@ -25,4 +25,5 @@ project_state.md                                  · nivel 0 · — · — · pr
 06_audits/audit_2026-10-01-backend-readme.md      · nivel 3 · — · — · audit, backend
 logbooks/00_index.md                              · nivel 3 · — · —
 logbooks/logbook_fase-7_01.md                     · nivel 3 · — · — · logbook, fase
+logbooks/logbook_fase-8_01.md                     · nivel 3 · — · — · logbook, fase
 logbooks/logbook_legado_01.md                     · nivel 3 · — · — · logbook, legado

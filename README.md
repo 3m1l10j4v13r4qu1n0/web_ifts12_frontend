@@ -6,13 +6,14 @@ Reemplaza el espacio actual alojado en Moodle por un sitio web institucional acc
 claro y fácilmente administrable por el propio instituto. El backend se integra luego
 con APIs y la web se despliega como build estático en un VPS independiente del Moodle.
 
-> **Estado:** completadas las 5 fases del plan inicial del frontend (tags `v1.0.0`…`v1.4.0`),
-> la Fase 6 de brechas de auditoría (`v1.5.0`) y el refactor del Mapa del Sitio V2
-> (menú de 9 ítems + buscador global, `v1.6.0`). La Home es navegable con datos
-> simulados; aún no hay consumo de API real. Base de documentación SDD completada
-> el 18/09/2026 (`docs/01_global/`, `docs/02_technical/`, `docs/03_process/`,
-> `docs/04_user_stories/HU-01/`), reorganizadas bajo el sistema documental
-> **logsayer** de 5 capas el 25/09/2026.
+> **Estado:** completadas las 8 fases (`v1.10.0`): las 5 fases iniciales del plan
+> (`v1.0.0`…`v1.4.0`), la Fase 6 de brechas de auditoría (`v1.5.0`), el refactor del Mapa
+> del Sitio V2 (menú de 9 ítems + buscador global, `v1.6.0`), la infraestructura y la
+> adopción del sistema documental **logsayer** de 5 capas (25/09/2026), y el cierre del
+> ticket 0000010 (01/10/2026). El sitio tiene **13 rutas navegables** con datos simulados
+> (11 de 15 wireframes implementados); aún no hay consumo de API real, porque la tabla
+> oficial de endpoints y los DTOs de Backend tienen plazo vencido. La evidencia de
+> navegación está en `documentacion/screenshots/`.
 
 ## Tecnología
 

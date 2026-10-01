@@ -1,5 +1,5 @@
 ---
-fase: fase-7
+fase: fase-8
 ---
 
 # Estado del proyecto — IFTS N.º 12 (frontend)
@@ -11,12 +11,12 @@ fase: fase-7
 
 ## Fase actual del roadmap
 
-Fase 7
+Fase 8
 
-_(Fase 7 = adopción del framework documental logsayer: `docs/` pasa a tener las 5 capas
-(Especificación, Estado, Bitácora, Verificación, Proceso). Fases 1-6 y el refactor
-Mapa Sitio V2 cerrados, más la implementación de infraestructura, hasta `v1.7.0`
-(la rama `main` va por `v1.8.0`). El sitio en sí no consume API todavía.)_
+_(Fase 8 = cierre del ticket 0000010: evidencia navegable de la primera versión y registro
+de las deudas bloqueantes, sin cambios de código en `src/`. Cierra la Fase 7 (logsayer v0.8.0)
+más el contrato derivado del backend Flask, hasta `v1.10.0`. El sitio en sí sigue sin
+consumir API.)_
 
 ## Qué está construido
 
@@ -32,6 +32,15 @@ Mapa Sitio V2 cerrados, más la implementación de infraestructura, hasta `v1.7.
   declarada y 9 divergencias abiertas (P1–P9).
 - Cinco auditorías cerradas en `docs/06_audits/` (análisis funcional, backend, infraestructura,
   UX/UI y la del README del backend).
+- **Evidencia del ticket 0000010** (01/10/2026): las **13 rutas** del sitio verificadas una por
+  una en navegador (con `h1` y enlaces de navegación leídos del DOM, sin errores de consola),
+  11 de 15 wireframes con equivalente implementado, y **15 capturas** en
+  `documentacion/screenshots/` (desktop 1680×900, mobile 390×844 y estado del menú desplegado).
+  Documento en `documentacion/entregas/2026-10-01__Evidencia_Ticket_0000010_Version_Navegable_v0.1.md`.
+- **Deudas bloqueantes registradas** con dueño por grupo en
+  `documentacion/driveFrontend/deudas_bloqueantes_2026-10-01.md` (no versionado, vive en el
+  Drive): 4 bloqueantes (DB-01 a DB-04) y 10 relevantes, cada una con qué falta, por qué
+  bloquea y qué se necesita de vuelta.
 
 ## Decisiones activas (últimas 3-5)
 
@@ -73,6 +82,26 @@ Mapa Sitio V2 cerrados, más la implementación de infraestructura, hasta `v1.7.
 - ⚠️ El README del backend publica la contraseña del admin de seed en claro: no se reproduce ni se
   usa contra entornos compartidos.
 - Tensión de accesos rápidos 7 vs 9 (AF-A6) y contenidos reales de Análisis (🔵/❌).
+
+### Las 4 deudas bloqueantes del ticket 0000010
+
+Detalle completo con dueño, estado y qué se necesita de vuelta en
+`documentacion/driveFrontend/deudas_bloqueantes_2026-10-01.md` (no versionado, en el Drive).
+
+| ID | Deuda | Dueño |
+|:---|:---|:---|
+| DB-01 | Tabla oficial de endpoints (parámetros, bodies, códigos) | Grupo 4 |
+| DB-02 | Esquemas JSON exactos (DTOs) | Grupo 4 |
+| DB-03 | Alcance de la administración (WF 13, 14, 15) | Grupo 1 |
+| DB-04 | Definición de la búsqueda global (WF 12): ¿widget o página? | Grupo 2 |
+
+Las dos primeras tienen **plazo vencido** (22/09 y 29/09). Verificado el 01/10/2026:
+`src/api/endpoints.ts` sigue con `endpoints = {} as const`, `src/api/services/` solo tiene
+`.gitkeep` y **ninguna de las 13 rutas consume la API**: el sitio navegable es 100% mocks.
+
+Dos deudas **no dependen de terceros** y se pueden avanzar ya: **DB-05**, crear las historias
+de usuario de las secciones que solo tienen HU-01 (Home), y **DB-14**, distinguir el 404 de
+`/carreras/:id` y `/noticias/:id` cuando un `:id` no exista (hoy cae en el 404 genérico).
 
 ## Verificación
 
