@@ -12,9 +12,10 @@ infraestructura VPS). Ojo: `documentacion/driveFrontend/` está en `.gitignore`,
 
 ## Sistema documental: logsayer (5 capas)
 
-Este repo usa el CLI `logsayer` (instalado con `uv tool install logsayer`, binario en
-`~/.local/bin/logsayer`) y su sistema de 5 capas. **Rutas en inglés, contenido en
-español.** Los umbrales viven en `logsayer.toml` y este archivo los refleja.
+Este repo usa el CLI `logsayer` (instalado con `uv tool install --force logsayer`, binario en
+`~/.local/bin/logsayer`, **v0.8.0** al 30/09/2026) y su sistema de 5 capas. **Rutas en
+inglés, contenido en español.** Los umbrales viven en `logsayer.toml` y este archivo los
+refleja.
 
 | Capa | Responde | Dónde vive | Rol |
 |---|---|---|---|
@@ -24,27 +25,42 @@ español.** Los umbrales viven en `logsayer.toml` y este archivo los refleja.
 | 4 · Verificación | ¿lo construido sigue siendo lo especificado? | `logsayer check` (mecánica) · `logsayer audit run` → `docs/06_audits/` | Suk Doctor + Decidora |
 | 5 · Proceso | ¿cómo se trabaja acá? | `logsayer process check` + reglas de este archivo | Fremen |
 
+Fuera de las 5 capas hay un artefacto transversal de navegación:
+`docs/00_memory_index.md`, **generado** con `logsayer memory index` (no editar a mano). No
+es una sexta capa: ordena todos los documentos de `docs/` por (nivel, ruta) para responder
+"qué leer primero". `logsayer memory search "<consulta>"` consulta ese índice.
+
 **Flujo de sesión (obligatorio):**
 
 1. Al iniciar, leer **solo** `docs/project_state.md` (`logsayer state show`). No leer
    `docs/logbooks/` completa: del logbook solo se consulta `docs/logbooks/00_index.md`
    y, si hace falta, un archivo puntual.
 2. `logsayer audit status`: si el contador de HUs cerradas llega a **>= 3 HUs**, proponer
-   auditoría (`logsayer audit run`) antes de tomar tarea nueva.
+   auditoría (`logsayer audit run`) antes de tomar tarea nueva. Para reauditar **una sola**
+   HU sin tocar el reporte: `logsayer audit run --hu HU-XX` (no escribe reporte).
 3. Si el uso de contexto supera el **70%**, proponer cierre de sesión antes de tomar más
    tareas.
-4. Al trabajar una HU, leer solo su carpeta en `docs/04_user_stories/HU-XX/`.
+4. Al trabajar una HU, leer solo su carpeta en `docs/04_user_stories/HU-XX/`. Para ubicar
+   qué leer primero: `logsayer memory search "<consulta>" --capa technical`. Ojo: el
+   retrieval matchea contra **tags**, no contra el contenido; sin frontmatter las tags se
+   derivan del nombre del archivo y de la carpeta `HU-XX/`.
 5. Al cerrar sesión o commit (con aprobación previa del usuario): sobrescribir el snapshot
    `docs/project_state.md` (nunca acumulativo, sin duplicar specs) y registrar el
    porqué con `logsayer log add "..."`. Si el archivo de bitácora activo supera las
    **400 líneas**, el CLI crea el siguiente `NN` y actualiza `docs/logbooks/00_index.md`.
-6. Antes de cerrar fase: `logsayer check` + `logsayer process check` + `npm run lint` ·
+6. Si tocás un documento de Capa 1 (`01_global/`, `02_technical/`, `04_user_stories/`),
+   regenerar el índice con `logsayer memory index`. El check `indice_al_dia` de
+   `logsayer process check` avisa cuando Capa 1 cambió después del índice, y el orden que
+   no dispara avisos es: editar Capa 1 → indexar → refrescar `project_state.md`.
+7. Antes de cerrar fase: `logsayer check` + `logsayer process check` + `npm run lint` ·
    `npm run build` · `npm run test`.
 
-**Regla de oro:** cada documento vive en una sola capa. En `docs/` no hay `.md` sueltos:
-la documentación institucional, las entregas, los wireframes, los mockups y el Drive
-compartido viven en `documentacion/`. El histórico anterior a logsayer quedó archivado en
-`docs/logbooks/logbook_legado_01.md` y **no se edita** (append-only).
+**Regla de oro:** cada documento vive en una sola capa. En `docs/` no hay `.md` sueltos,
+salvo el snapshot `docs/project_state.md` (Capa 2) y el índice generado
+`docs/00_memory_index.md`: la documentación institucional, las entregas, los wireframes,
+los mockups y el Drive compartido viven en `documentacion/`. El histórico anterior a
+logsayer quedó archivado en `docs/logbooks/logbook_legado_01.md` y **no se edita**
+(append-only).
 
 - Subagentes por rol: `logsayer agent add opencode` genera
   `.opencode/agents/{mentat,navigator,reverend-mother,truthsayer}.md`.
