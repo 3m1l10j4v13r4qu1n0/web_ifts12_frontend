@@ -1,5 +1,7 @@
 import { useId, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCarreras } from '../../hooks/useCarreras';
+import { useNovedades } from '../../hooks/useNovedades';
 import { buscarContenidoLocal } from '../../utils/busqueda';
 
 function BuscadorGlobal() {
@@ -10,7 +12,15 @@ function BuscadorGlobal() {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const navigate = useNavigate();
 
-  const resultados = useMemo(() => buscarContenidoLocal(consulta), [consulta]);
+  // El buscador indexa lo mismo que muestran las páginas: si siguiera sobre los mocks,
+  // ofrecería "Gestión Parlamentaria" con un enlace que ya no existe en el sitio.
+  const { carreras } = useCarreras();
+  const { novedades } = useNovedades();
+
+  const resultados = useMemo(
+    () => buscarContenidoLocal(consulta, { carreras, novedades }),
+    [consulta, carreras, novedades],
+  );
   const mostrarResultados = abierto && consulta.trim() !== '';
 
   const abrir = () => {
