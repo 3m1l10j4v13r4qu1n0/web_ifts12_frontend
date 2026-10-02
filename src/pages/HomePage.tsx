@@ -1,6 +1,10 @@
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { mapNovedadesApiANoticias } from '../api/mappers/novedad.mapper';
 import AccesosDestacados from '../components/ui/AccesosDestacados';
 import AccesosRapidos from '../components/ui/AccesosRapidos';
+import AvisoCarga from '../components/ui/AvisoCarga';
+import AvisoError from '../components/ui/AvisoError';
 import CardCarrera from '../components/ui/CardCarrera';
 import CardNoticia from '../components/ui/CardNoticia';
 import type { SlideCarrusel } from '../components/ui/CarruselInstitucional';
@@ -11,28 +15,52 @@ import { ENLACES } from '../constants/enlaces';
 import {
   mockAccesosDestacados,
   mockAccesosRapidos,
-  mockCarreras,
   mockComunidades,
   mockFaqs,
-  mockNoticias,
 } from '../constants/mock-data';
-
-const noticiasOrdenadas = [...mockNoticias].sort((a, b) => {
-  if (a.fecha === '' && b.fecha === '') return 0;
-  if (a.fecha === '') return 1;
-  if (b.fecha === '') return -1;
-  return new Date(b.fecha).getTime() - new Date(a.fecha).getTime();
-});
-
-const slidesNovedades: SlideCarrusel[] = noticiasOrdenadas.map((noticia) => ({
-  id: noticia.id,
-  titulo: noticia.titulo,
-  resumen: noticia.resumen,
-  fecha: noticia.fecha,
-  enlace: `/noticias/${noticia.id}`,
-}));
+import { useCarreras } from '../hooks/useCarreras';
+import { useNovedades } from '../hooks/useNovedades';
 
 function HomePage() {
+  // Carreras y novedades vienen del backend; el resto de la Home sigue en mocks. Las dos
+  // consultas comparten cache con `/carreras` y `/noticias`, así que navegar a esas rutas
+  // no vuelve a pedir los datos.
+  const {
+    carreras,
+    cargando: cargandoCarreras,
+    error: errorCarreras,
+    recargar: recargarCarreras,
+  } = useCarreras();
+  const {
+    novedades,
+    cargando: cargandoNovedades,
+    error: errorNovedades,
+    recargar: recargarNovedades,
+  } = useNovedades();
+
+  const noticias = useMemo(() => mapNovedadesApiANoticias(novedades), [novedades]);
+
+  // El backend ya ordena por `fecha_publicacion DESC` de forma fija (`app.py:81`), pero
+  // re-ordenamos igual para no depender de eso.
+  const noticiasOrdenadas = useMemo(() => {
+    return [...noticias].sort((a, b) => {
+      if (a.fecha === '' && b.fecha === '') return 0;
+      if (a.fecha === '') return 1;
+      if (b.fecha === '') return -1;
+      return new Date(b.fecha).getTime() - new Date(a.fecha).getTime();
+    });
+  }, [noticias]);
+
+  const slidesNovedades: SlideCarrusel[] = useMemo(() => {
+    return noticiasOrdenadas.map((noticia) => ({
+      id: noticia.id,
+      titulo: noticia.titulo,
+      resumen: noticia.resumen,
+      fecha: noticia.fecha,
+      enlace: `/noticias/${noticia.id}`,
+    }));
+  }, [noticiasOrdenadas]);
+
   return (
     <main>
       <CarruselInstitucional
@@ -85,13 +113,25 @@ function HomePage() {
             Carreras
           </h2>
           <p className="mt-2 text-slate-600">Conocé la oferta académica del instituto.</p>
-          <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {mockCarreras.map((carrera) => (
-              <li key={carrera.id}>
-                <CardCarrera carrera={carrera} />
-              </li>
-            ))}
-          </ul>
+          {cargandoCarreras ? (
+            <AvisoCarga que="las carreras" />
+          ) : errorCarreras !== null ? (
+            <AvisoError
+              que="las carreras"
+              mensaje={errorCarreras}
+              alReintentar={recargarCarreras}
+            />
+          ) : carreras.length > 0 ? (
+            <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {carreras.map((carrera) => (
+                <li key={carrera.id}>
+                  <CardCarrera carrera={carrera} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-6 text-slate-600">Aún no hay carreras publicadas.</p>
+          )}
         </div>
       </section>
 
@@ -99,7 +139,15 @@ function HomePage() {
         <h2 id="titulo-novedades" className="text-2xl font-bold text-slate-900">
           Novedades recientes
         </h2>
-        {mockNoticias.length > 0 ? (
+        {cargandoNovedades ? (
+          <AvisoCarga que="las novedades" />
+        ) : errorNovedades !== null ? (
+          <AvisoError
+            que="las novedades"
+            mensaje={errorNovedades}
+            alReintentar={recargarNovedades}
+          />
+        ) : noticiasOrdenadas.length > 0 ? (
           <>
             <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {noticiasOrdenadas.map((noticia) => (
