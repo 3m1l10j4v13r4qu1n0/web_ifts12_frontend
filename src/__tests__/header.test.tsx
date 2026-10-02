@@ -11,7 +11,11 @@ describe('Header', () => {
       </MemoryRouter>,
     );
 
-    expect(screen.getByRole('link', { name: 'IFTS N.º 12' })).toHaveAttribute('href', '/');
+    expect(screen.getByRole('link', { name: /IFTS N\.º 12/ })).toHaveAttribute('href', '/');
+    expect(screen.getByRole('img', { name: 'IFTS N.º 12' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('img', { name: 'Gobierno de la Ciudad de Buenos Aires' }),
+    ).toBeInTheDocument();
 
     for (const item of MENU_PRINCIPAL) {
       expect(screen.getByRole('link', { name: item.etiqueta })).toBeInTheDocument();

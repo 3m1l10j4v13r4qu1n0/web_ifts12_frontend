@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframes · Mapa sitio ifts12</title>
+<style>
+
+:root{
+  --wf-bg:#ffffff;
+  --wf-surface:#f6f6f6;
+  --wf-surface-2:#ececec;
+  --wf-border:#b3b3b3;
+  --wf-border-strong:#6f6f6f;
+  --wf-img:#d8d8d8;
+  --wf-text:#1f1f1f;
+  --wf-muted:#7a7a7a;
+  --wf-dark:#3a3a3a;
+  --wf-black:#111111;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--wf-bg);color:var(--wf-text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:14px;line-height:1.4}
+a{color:var(--wf-text)}
+.wf-wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+.wf-meta{background:var(--wf-bg);border-bottom:1px solid var(--wf-border);font-size:11px;color:var(--wf-muted);text-transform:uppercase;letter-spacing:.06em}
+.wf-meta .wf-wrap{display:flex;justify-content:space-between;gap:16px;align-items:center;padding-top:8px;padding-bottom:8px}
+.wf-meta strong{color:var(--wf-text)}
+.wf-header{border-bottom:2px solid var(--wf-border-strong);background:var(--wf-surface)}
+.wf-header .wf-wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
+.wf-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--wf-text)}
+.wf-logo-mark{width:44px;height:44px;border:2px solid var(--wf-border-strong);background:repeating-linear-gradient(45deg,#cfcfcf 0 6px,#e3e3e3 6px 12px);display:grid;place-items:center;font-size:9px;color:var(--wf-muted);letter-spacing:.08em}
+.wf-logo-text{font-size:13px;font-weight:700;line-height:1.15;text-transform:uppercase;letter-spacing:.03em}
+.wf-logo-text small{display:block;font-weight:400;color:var(--wf-muted);font-size:10px}
+.wf-nav{display:flex;flex-wrap:wrap;gap:6px}
+.wf-nav a{color:var(--wf-text);text-decoration:none;border:1px solid var(--wf-border);padding:6px 10px;font-size:12px;font-weight:600}
+.wf-nav a.is-active,.wf-nav a:hover{background:var(--wf-dark);color:#fff;border-color:var(--wf-dark)}
+.wf-search{display:flex;align-items:stretch;margin-left:auto}
+.wf-search .wf-field{width:200px;border:1px solid var(--wf-border-strong);background:#fff;padding:0 10px;display:flex;align-items:center;color:var(--wf-muted);font-size:12px}
+.wf-search button,.wf-search a.go{border:1px solid var(--wf-border-strong);background:var(--wf-dark);color:#fff;padding:0 14px;cursor:pointer;font-weight:600;font-size:12px;text-decoration:none;display:flex;align-items:center}
+.wf-destacados{display:flex;gap:6px;flex-wrap:wrap}
+.wf-destacados a{border:2px solid var(--wf-black);background:var(--wf-surface);color:var(--wf-black);padding:6px 10px;font-size:11px;font-weight:700;text-decoration:none}
+.wf-hero{background:var(--wf-surface-2);border-bottom:1px solid var(--wf-border)}
+.wf-hero-inner{max-width:1200px;margin:0 auto;padding:56px 20px 48px;text-align:center}
+.wf-hero h1{font-size:30px;margin:0 0 8px;text-transform:uppercase;letter-spacing:.04em}
+.wf-hero p{color:var(--wf-muted);margin:0 0 24px}
+.wf-hero-search{max-width:660px;margin:0 auto;display:flex}
+.wf-hero-search .wf-field{flex:1;height:44px}
+.wf-hero-search button,.wf-hero-search a.go{height:44px;padding:0 22px}
+.wf-section{padding:32px 0;border-bottom:1px solid var(--wf-border)}
+.wf-section-title{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--wf-black);margin:0 0 4px}
+.wf-section-title .wf-num{width:22px;height:22px;border:2px solid var(--wf-black);display:grid;place-items:center;font-size:11px;flex:none}
+.wf-section-note{color:var(--wf-muted);font-size:12px;margin:0 0 20px}
+.wf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.wf-grid.cols-3{grid-template-columns:repeat(3,1fr)}
+.wf-card{border:1px solid var(--wf-border);background:var(--wf-surface);padding:12px}
+.wf-img{border:2px solid var(--wf-border-strong);background:repeating-linear-gradient(45deg,#d8d8d8 0 8px,#eaeaea 8px 16px);height:130px;display:grid;place-items:center;color:var(--wf-muted);font-size:11px;letter-spacing:.3em}
+.wf-img.sm{height:80px}
+.wf-img.xs{height:60px}
+.wf-line{height:9px;background:#c2c2c2;border-radius:3px;margin:8px 0}
+.wf-line.w-25{width:25%}
+.wf-line.w-30{width:30%}
+.wf-line.w-35{width:35%}
+.wf-line.w-40{width:40%}
+.wf-line.w-45{width:45%}
+.wf-line.w-50{width:50%}
+.wf-line.w-55{width:55%}
+.wf-line.w-60{width:60%}
+.wf-line.w-65{width:65%}
+.wf-line.w-70{width:70%}
+.wf-line.w-75{width:75%}
+.wf-line.w-80{width:80%}
+.wf-line.w-85{width:85%}
+.wf-line.w-90{width:90%}
+.wf-line.w-100{width:100%}
+.wf-line.w-wide{width:100%}
+.wf-line.w-tiny{width:35%}
+.wf-line.dark{background:var(--wf-border-strong)}
+.wf-line.thin{height:6px;margin:5px 0}
+.wf-line.wide{height:14px}
+.wf-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.wf-btn{border:1px solid var(--wf-border-strong);background:var(--wf-surface);color:var(--wf-text);padding:7px 14px;font-size:12px;font-weight:600}
+.wf-btn.dark{background:var(--wf-dark);color:#fff}
+.wf-btn.link{border-color:transparent;background:none;padding-left:0;color:var(--wf-muted)}
+.wf-badge{display:inline-block;border:1px solid var(--wf-border-strong);border-radius:2px;font-size:10px;padding:2px 6px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--wf-muted)}
+.wf-badge.dark{background:var(--wf-dark);color:#fff;border-color:var(--wf-dark)}
+.wf-raccesos{display:flex;gap:10px;flex-wrap:wrap}
+.wf-racceso{flex:1 1 150px;border:1px solid var(--wf-border);border-top:4px solid var(--wf-black);background:var(--wf-surface);padding:12px;text-align:center;font-weight:700;font-size:12px}
+.wf-flex{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap}
+.wf-main{flex:1 1 auto;min-width:0}
+.wf-aside{flex:0 0 280px}
+.wf-box{border:1px solid var(--wf-border);background:var(--wf-surface);padding:16px}
+.wf-box-title{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin:0 0 10px}
+.wf-list{border-top:1px solid var(--wf-border)}
+.wf-list a{display:block;padding:9px 2px;border-bottom:1px solid var(--wf-border);color:var(--wf-text);text-decoration:none;font-size:13px}
+.wf-list a.is-active{font-weight:800;background:var(--wf-surface-2)}
+.wf-tabs{display:flex;gap:2px;border-bottom:1px solid var(--wf-border-strong);margin-bottom:16px;flex-wrap:wrap}
+.wf-tabs a{padding:8px 14px;border:1px solid var(--wf-border);border-bottom:none;color:var(--wf-text);text-decoration:none;font-size:12px;font-weight:600;background:var(--wf-surface)}
+.wf-tabs a.is-active{background:var(--wf-dark);color:#fff}
+.wf-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.wf-filters .wf-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--wf-muted);margin-right:6px}
+.wf-tag{border:1px solid var(--wf-border);padding:5px 10px;font-size:11px;background:#fff}
+.wf-tag.is-active{background:var(--wf-black);color:#fff;border-color:var(--wf-black)}
+.wf-table{width:100%;border-collapse:collapse;font-size:12px}
+.wf-table th,.wf-table td{border:1px solid var(--wf-border);padding:8px;text-align:left}
+.wf-table th{background:var(--wf-surface-2);text-transform:uppercase;font-size:10px;letter-spacing:.06em}
+.wf-form label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin:12px 0 4px}
+.wf-input,.wf-select,.wf-textarea{width:100%;border:1px solid var(--wf-border-strong);background:#fff;padding:8px;font-family:inherit;font-size:13px}
+.wf-textarea{min-height:110px}
+.wf-check{display:flex;gap:8px;align-items:center;margin:12px 0;font-size:12px}
+.wf-check i{width:14px;height:14px;border:1px solid var(--wf-border-strong);display:block;flex:none}
+.wf-radio{display:flex;width:16px;height:16px;border:1px solid var(--wf-border-strong);border-radius:50%;flex:none}
+.wf-faq{border:1px solid var(--wf-border)}
+.wf-faq-item{padding:12px 14px;border-bottom:1px solid var(--wf-border)}
+.wf-faq-item:last-child{border-bottom:none}
+.wf-faq-q{font-weight:700;font-size:13px;display:flex;justify-content:space-between;gap:12px}
+.wf-faq-q b{color:var(--wf-muted);flex:none}
+.wf-faq-a{color:var(--wf-muted);font-size:12px;margin-top:8px}
+.wf-breadcrumb{font-size:11px;color:var(--wf-muted);padding:12px 0;text-transform:uppercase;letter-spacing:.05em}
+.wf-breadcrumb a{color:var(--wf-muted)}
+.wf-breadcrumb .sep{margin:0 6px}
+.wf-pager{display:flex;gap:6px;justify-content:center;margin-top:24px}
+.wf-pager a{border:1px solid var(--wf-border);padding:5px 10px;color:var(--wf-text);text-decoration:none;font-size:12px}
+.wf-pager a.is-active{background:var(--wf-dark);color:#fff}
+.wf-slider{border:2px solid var(--wf-border-strong);position:relative;overflow:hidden}
+.wf-slide{height:250px;display:grid;place-items:center;background:repeating-linear-gradient(45deg,#d9d9d9 0 10px,#ebebeb 10px 20px);color:var(--wf-muted);letter-spacing:.3em;font-size:12px}
+.wf-slider .wf-controls{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;padding:0 10px}
+.wf-slider .wf-controls i{background:#fff;border:1px solid var(--wf-black);width:34px;height:34px;display:grid;place-items:center;font-style:normal;font-weight:800}
+.wf-dots{display:flex;gap:6px;justify-content:center;padding:10px}
+.wf-dots i{width:10px;height:10px;border:1px solid var(--wf-border-strong);border-radius:50%}
+.wf-dots i.is-active{background:var(--wf-black)}
+.wf-footer{border-top:3px solid var(--wf-black);background:var(--wf-surface-2);margin-top:48px}
+.wf-footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:24px;padding:32px 20px}
+.wf-footer-grid h4{font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin:0 0 10px}
+.wf-footer-grid a{display:block;color:var(--wf-text);text-decoration:none;font-size:12px;margin:4px 0}
+.wf-copy{border-top:1px solid var(--wf-border);padding:14px 20px;text-align:center;font-size:11px;color:var(--wf-muted)}
+.wf-toolbar{background:var(--wf-black);color:#fff}
+.wf-toolbar .wf-wrap{display:flex;justify-content:space-between;gap:12px;align-items:center;padding-top:10px;padding-bottom:10px;font-size:12px}
+.wf-toolbar a{color:#fff}
+.wf-legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:16px}
+.wf-swatch{display:flex;gap:10px;align-items:center;border:1px solid var(--wf-border);padding:8px;font-size:11px}
+.wf-swatch i{width:34px;height:34px;border:1px solid var(--wf-border-strong);flex:none}
+.wf-swatch span{line-height:1.3}
+.wf-feature{display:flex;gap:14px;align-items:flex-start;border:1px dashed var(--wf-border-strong);padding:14px;margin-top:10px}
+.wf-feature .wf-img{width:120px;height:90px;flex:none}
+.wf-alert{display:flex;gap:12px;align-items:center;border:2px solid var(--wf-black);background:var(--wf-surface);padding:14px;margin-bottom:20px}
+.wf-alert .wf-alert-ico{width:26px;height:26px;border:2px solid var(--wf-black);display:grid;place-items:center;font-weight:800;flex:none}
+.wf-steps{display:flex;margin:16px 0;flex-wrap:wrap}
+.wf-step{flex:1;min-width:140px;border:1px solid var(--wf-border);background:var(--wf-surface);padding:12px;margin-left:-1px}
+.wf-step:first-child{margin-left:0}
+.wf-step b{display:block;font-size:18px;color:var(--wf-muted)}
+.wf-video{aspect-ratio:16/9;border:2px solid var(--wf-border-strong);background:repeating-linear-gradient(-45deg,#d6d6d6 0 10px,#e8e8e8 10px 20px);display:grid;place-items:center;color:var(--wf-muted);letter-spacing:.3em;font-size:11px}
+.wf-divider{border:0;border-top:1px dashed var(--wf-border);margin:20px 0}
+.wf-hint{font-size:11px;color:var(--wf-muted);font-style:italic}
+.wf-thumb{display:flex;flex-direction:column}
+.wf-thumb .wf-img{flex:1}
+.wf-title-lg{font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;margin:0 0 6px}
+.wf-subtitle{color:var(--wf-muted);font-size:13px;margin:0 0 16px}
+@media (max-width:820px){
+  .wf-grid.cols-3{grid-template-columns:1fr 1fr}
+  .wf-footer-grid{grid-template-columns:1fr 1fr}
+  .wf-aside{flex:1 1 100%}
+  .wf-search .wf-field{width:140px}
+}
+@media (max-width:520px){
+  .wf-grid.cols-3{grid-template-columns:1fr}
+  .wf-footer-grid{grid-template-columns:1fr}
+}
+
+.wf-logos{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:center;padding:16px 20px;border-top:1px solid var(--wf-border);background:var(--wf-surface)}
+.wf-logo-item{width:120px;height:52px;border:1px solid var(--wf-border-strong);background:repeating-linear-gradient(45deg,#d8d8d8 0 8px,#eaeaea 8px 16px);display:grid;place-items:center;font-size:10px;color:var(--wf-muted);letter-spacing:.1em}
+.wf-footer-form{max-width:1200px;margin:0 auto;padding:0 20px 6px}
+.wf-footer-form .wf-box{background:var(--wf-surface)}
+.wf-state{border:1px dashed var(--wf-border-strong);padding:10px 12px;font-size:12px;display:flex;gap:10px;align-items:center;margin:10px 0}
+.wf-state i{width:16px;height:16px;border:1px solid var(--wf-border-strong);border-radius:50%;flex:none;font-style:normal;display:grid;place-items:center;font-size:9px;font-weight:800}
+.wf-state.empty{background:var(--wf-surface)}
+.wf-state.error{border:2px solid var(--wf-black);background:var(--wf-surface-2)}
+.wf-state.success{border-style:solid;background:var(--wf-surface)}
+.wf-addon{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.wf-table-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.wf-table-tools .wf-search{margin-left:0}
+
+</style>
+</head>
+<body>
+
+<div class="wf-meta">
+  <div class="wf-wrap">
+    <span>UX/UI · Wireframes de baja fidelidad</span>
+    <strong>ÍNDICE</strong>
+  </div>
+</div>
+
+<div class="wf-hero">
+  <div class="wf-hero-inner">
+    <h1>Wireframes · Mapa del Sitio V2</h1>
+    <p>IFTS N.º 12 — Sitio Web Institucional 2026 — Baja fidelidad, escala de grises · 16 pantallas alineadas al Mapa V2 (21/09/2026).</p>
+    
+  </div>
+</div>
+
+<div class="wf-section">
+  <div class="wf-wrap">
+    <h2 class="wf-section-title"><span class="wf-num">01</span> Propósito y método</h2>
+    <p class="wf-section-note">Qué son y cómo se construyeron estos wireframes.</p>
+    <p>Los wireframes son el resultado de descomponer el <strong>Mapa del Sitio V2 (21/09/2026)</strong> de UX/UI en bloques y componentes de layout y de re-componerlos como pantallas navegables de baja fidelidad, complementado con la Documentación de Diseño UX (V1) y la auditoría UX/UI.</p>
+    <p>Reglas aplicadas:</p>
+    <ul>
+      <li><strong>Escala de grises</strong>: solo negro, blancos y grises. Sin color de marca ni estilos finales.</li>
+      <li><strong>Baja fidelidad</strong>: textos como barras placeholder, imágenes como tramados xxxx, sin contenido institucional real.</li>
+      <li><strong>Fuente de verdad</strong>: solo el contenido listado en el Mapa del sitio ifts12. Lo que el mapa no define, se marca como bloque genérico.</li>
+      <li><strong>Sin decisiones institucionales</strong>: nada de textos, fechas ni enlaces definitivos (queda para Análisis Funcional).</li>
+    </ul>
+    <p>Cada wireframe indica en su franja superior la <strong>sección del Mapa del sitio</strong> de la que
+    proviene (marcador de ingeniería inversa). Elementos transversales del mapa — header con menú de
+    9 ítems y buscador global, accesos destacados Moodle / SIU / Inscripciones, footer con formulario de consulta
+    e isologotipos — se repiten en todas las pantallas públicas.</p>
+  </div>
+</div>
+
+<div class="wf-section">
+  <div class="wf-wrap">
+    <h2 class="wf-section-title"><span class="wf-num">02</span> Inventario de pantallas</h2>
+    <p class="wf-section-note">Correspondencia entre cada wireframe y la sección del Mapa del sitio.</p>
+    <table class="wf-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Pantalla</th>
+          <th>Abrir wireframe</th>
+          <th>Fuente Mapa del Sitio V2 (21/09/2026)</th>
+          <th>Contenidos cubiertos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>01</td>
+          <td>Home</td>
+          <td><a href="home.html">home.html</a></td>
+          <td>§1 INICIO · §2 · 5.</td>
+          <td>Carrusel de imágenes destacadas, botonera de accesos y trámites (inscripciones, becas, mesas, calendarios), novedades del mes, FAQ</td>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Carreras (listado)</td>
+          <td><a href="carreras.html">carreras.html</a></td>
+          <td>§1 CARRERAS · §3 RF-01</td>
+          <td>Oferta académica, presentación de cada carrera, badges de modalidad/horarios</td>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Carrera (detalle)</td>
+          <td><a href="carrera-detalle.html">carrera-detalle.html</a></td>
+          <td>§1 CARRERAS · §3 RF-04</td>
+          <td>Ficha técnica unificada: presentación, turno nocturno/modalidad, plan de estudios, materias y correlatividades, programas PDF, resoluciones, cuerpo docente</td>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Ingresantes</td>
+          <td><a href="ingresantes.html">ingresantes.html</a></td>
+          <td>§1 INGRESANTES · §3 RF-02/03/05/06</td>
+          <td>Requisitos y documentación, fechas e inscripción oficial (GCBA), horarios/modalidad/equivalencias, pases y cambio de carrera, FAQ</td>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Estudiantes</td>
+          <td><a href="estudiantes.html">estudiantes.html</a></td>
+          <td>§1 ESTUDIANTES · §3 RF-07…14/31/32</td>
+          <td>Regularidad, constancias, mesas de examen, calendario, becas, boleto estudiantil, trámites de títulos y traspasos, campus (Moodle), FAQ</td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Tutorías</td>
+          <td><a href="tutorias.html">tutorias.html</a></td>
+          <td>§1 TUTORÍAS</td>
+          <td>Presentación del espacio de acompañamiento, días/horarios/modalidades de atención, medios de contacto</td>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Docentes</td>
+          <td><a href="docentes.html">docentes.html</a></td>
+          <td>§1 DOCENTES · §3 RF-15/16/17/20</td>
+          <td>Información para docentes, docentes por carrera, concursos, repositorio de normativas</td>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Institucional</td>
+          <td><a href="institucional.html">institucional.html</a></td>
+          <td>§1 INSTITUCIONAL · §3 RF-18…21/29/33</td>
+          <td>Historia, autoridades, bedelía, normativa/reglamento/código de convivencia, enlaces de interés (Ciudad Bilingüe, Centro de Simulación)</td>
+        </tr>
+        <tr>
+          <td>09</td>
+          <td>Novedades (listado)</td>
+          <td><a href="novedades.html">novedades.html</a></td>
+          <td>§1 NOVEDADES · §3 RF-25</td>
+          <td>Listado por fecha, filtros por categorías, historial (CRUD en el panel admin)</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Nota completa</td>
+          <td><a href="nota-completa.html">nota-completa.html</a></td>
+          <td>§1 NOVEDADES</td>
+          <td>Nota completa, historial de publicaciones</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>Contacto</td>
+          <td><a href="contacto.html">contacto.html</a></td>
+          <td>§1 PIE DE PÁGINA · §3 RF-22/30 · 5.</td>
+          <td>Formulario de consulta con validación, datos institucionales (Misiones 26, nocturno), formulario de consulta en el pie</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>Búsqueda global (resultados)</td>
+          <td><a href="busqueda.html">busqueda.html</a></td>
+          <td>§1 BARRA DE NAVEGACIÓN · §4 · 5.</td>
+          <td>Resultados del buscador persistente del header sobre el índice del sitio, estados loading/empty/error</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td>Login admin</td>
+          <td><a href="admin-login.html">admin-login.html</a></td>
+          <td>§3 RF-23 · 5.</td>
+          <td>Acceso de administradores (solo personal autorizado), errores de validación en credenciales</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td>Panel admin</td>
+          <td><a href="panel-admin.html">panel-admin.html</a></td>
+          <td>§2 (panel interno) · §3 RF-24/25/26/34 · 5.</td>
+          <td>Tabs Noticias/Carreras/FAQ, tabla con filtros y búsqueda, datos actualizables (calendario, horarios, autoridades, carreras, banner), estados de UI</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td>Formulario admin</td>
+          <td><a href="admin-form.html">admin-form.html</a></td>
+          <td>§3 RF-25/26 · 5.</td>
+          <td>Alta/edición de noticias, validación de campos obligatorios, guardar/cancelar/eliminar</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="wf-section">
+  <div class="wf-wrap">
+    <h2 class="wf-section-title"><span class="wf-num">03</span> Leyenda de componentes</h2>
+    <p class="wf-section-note">Convención visual usada en todos los wireframes.</p>
+    <div class="wf-legend">
+      <div class="wf-swatch"><i style="background:#f6f6f6"></i><span>Caja genérica / fondo claro</span></div>
+      <div class="wf-swatch"><i style="background:#ececec"></i><span>Fondo gris medio / región atenuada</span></div>
+      <div class="wf-swatch"><i style="background:#3a3a3a"></i><span>Elemento activo / botón oscuro</span></div>
+      <div class="wf-swatch"><i style="background:repeating-linear-gradient(45deg,#d8d8d8 0 6px,#eaeaea 6px 12px)"></i><span>Imagen / banner placeholder (tramado)</span></div>
+      <div class="wf-swatch"><i><span class="wf-line wf-line thin" style="margin:0"></span></i><span>Línea de texto placeholder</span></div>
+      <div class="wf-swatch"><i style="border-style:dashed"></i><span>Borde punteado = bloque opcional / futuro</span></div>
+    </div>
+    <div class="wf-legend">
+      <div class="wf-swatch"><i style="background:#3a3a3a"></i><span>CTA primario (.wf-btn.dark) — acción principal del formulario</span></div>
+      <div class="wf-swatch"><i style="background:#f6f6f6"></i><span>CTA secundario (.wf-btn) — acción alternativa / limpiar</span></div>
+      <div class="wf-swatch"><i style="border-style:dashed"></i><span>Estado de UI (.wf-state: loading / empty / error / success)</span></div>
+      <div class="wf-swatch"><i style="background:repeating-linear-gradient(45deg,#d8d8d8 0 8px,#eaeaea 8px 16px)"></i><span>Isologotipo obligatorio (.wf-logos: IFTS N.º 12 · GCBA · UPCN)</span></div>
+    </div>
+    <p class="wf-hint">Nota: wireframes de estructura, no de estética. No representan la paleta ni la identidad final del sitio.</p>
+  </div>
+</div>
+
+<div class="wf-section">
+  <div class="wf-wrap">
+    <h2 class="wf-section-title"><span class="wf-num">04</span> Flujo de navegación (Entrada → Salida)</h2>
+    <p class="wf-section-note">Recorrido principal del sitio y del sector de administración (QA §6.4 · V2 §3 RF-23…26).</p>
+    <div class="wf-steps">
+      <div class="wf-step"><b>1</b>Home pública (carrusel + botonera)<br>→ Carreras · Ingresantes · Novedades</div>
+      <div class="wf-step"><b>2</b>Novedades (listado público)<br>→ nota completa</div>
+      <div class="wf-step"><b>3</b>Login admin (WF 13)<br>→ credenciales válidas</div>
+      <div class="wf-step"><b>4</b>Panel admin (WF 14)<br>→ CRUD Noticias / Carreras / FAQ</div>
+      <div class="wf-step"><b>5</b>Formulario admin (WF 15)<br>→ Guardar / Cancelar / Eliminar → Salir</div>
+    </div>
+    <p class="wf-hint">Flujo de Entrada: el visitante llega a la Home y navega por el menú de 9 ítems. Flujo de Salida: de cualquier pantalla pública se vuelve al Índice; del panel admin, "Cerrar sesión" → login → sitio público.</p>
+  </div>
+</div>
+
+<div class="wf-footer">
+  <div class="wf-footer-grid">
+    <div>
+      <h4>Wireframes · Mapa del Sitio V2</h4>
+      <a href="home.html">01 Home</a>
+      <a href="carreras.html">02 Carreras</a>
+      <a href="carrera-detalle.html">03 Carrera detalle</a>
+      <a href="ingresantes.html">04 Ingresantes</a>
+      <a href="estudiantes.html">05 Estudiantes</a>
+      <a href="tutorias.html">06 Tutorías</a>
+      <a href="docentes.html">07 Docentes</a>
+      <a href="institucional.html">08 Institucional</a>
+      <a href="novedades.html">09 Novedades</a>
+      <a href="nota-completa.html">10 Nota completa</a>
+      <a href="contacto.html">11 Contacto</a>
+      <a href="busqueda.html">12 Búsqueda global</a>
+      <a href="admin-login.html">13 Login admin</a>
+      <a href="panel-admin.html">14 Panel admin</a>
+      <a href="admin-form.html">15 Formulario admin</a>
+    </div>
+    <div>
+      <h4>Elementos transversales</h4>
+      <a href="busqueda.html">Buscador global (header)</a>
+      <a href="#destacados">Accesos destacados Moodle / SIU / Inscripción</a>
+      <a href="#menu">Menú principal de 9 ítems</a>
+      <a href="#footer">Footer V2 (formulario de consulta + isologotipos)</a>
+    </div>
+    <div>
+      <h4>Comunidades (§5)</h4>
+      <a href="tutorias.html">Comunidad de tutoría</a>
+      <a href="estudiantes.html">Comunidad de alumnos</a>
+      <a href="docentes.html">Comunidad docente</a>
+    </div>
+    <div>
+      <h4>Referencia</h4>
+      <a href="../../driveFrontend/02_ux_ui/mapa_sitio_ifts12_%28V2%29.md" target="_blank">Mapa del Sitio V2 (21/09/2026)</a>
+      <a href="../../driveFrontend/02_ux_ui/Documentaci%C3%B3nDisenoUX(V1).md" target="_blank">Documentación Diseño UX (V1)</a>
+      <a href="../../driveFrontend/02_ux_ui/grupo_2_ux_ui.md" target="_blank">Grupo 2 · UX/UI</a>
+    </div>
+  </div>
+  <div class="wf-copy">Wireframes de baja fidelidad · escala de grises · Sin contenido institucional definitivo · Fuente: Mapa del Sitio V2 · 21/09/2026 · 16 pantallas</div>
+</div>
+
+</body>
+</html>

@@ -1,10 +1,12 @@
-import Portada from '../components/layout/Portada';
+import { Link } from 'react-router-dom';
 import AccesosDestacados from '../components/ui/AccesosDestacados';
 import AccesosRapidos from '../components/ui/AccesosRapidos';
 import CardCarrera from '../components/ui/CardCarrera';
+import CardNoticia from '../components/ui/CardNoticia';
+import type { SlideCarrusel } from '../components/ui/CarruselInstitucional';
+import CarruselInstitucional from '../components/ui/CarruselInstitucional';
 import Comunidades from '../components/ui/Comunidades';
 import FaqAcordeon from '../components/ui/FaqAcordeon';
-import SliderNoticias from '../components/ui/SliderNoticias';
 import { ENLACES } from '../constants/enlaces';
 import {
   mockAccesosDestacados,
@@ -22,29 +24,27 @@ const noticiasOrdenadas = [...mockNoticias].sort((a, b) => {
   return new Date(b.fecha).getTime() - new Date(a.fecha).getTime();
 });
 
+const slidesNovedades: SlideCarrusel[] = noticiasOrdenadas.map((noticia) => ({
+  id: noticia.id,
+  titulo: noticia.titulo,
+  resumen: noticia.resumen,
+  fecha: noticia.fecha,
+  enlace: `/noticias/${noticia.id}`,
+}));
+
 function HomePage() {
-  const accionesPortada: {
-    etiqueta: string;
-    href: string;
-    variante?: 'primario' | 'secundario';
-  }[] = [{ etiqueta: 'Ver carreras', href: '/carreras' }];
-
-  if (ENLACES.inscripcion !== '') {
-    accionesPortada.push({ etiqueta: 'Inscripción', href: ENLACES.inscripcion });
-  }
-
   return (
     <main>
-      <Portada
+      <CarruselInstitucional
         titulo="Instituto de Formación Técnica Superior N.º 12"
         subtitulo="Formación técnica superior, pública y de calidad. Contenidos provisorios pendientes de validación."
-        acciones={accionesPortada}
+        slides={slidesNovedades}
       />
 
       {ENLACES.moodle !== '' && (
         <section
           aria-label="Acceso al campus virtual"
-          className="border-y border-slate-200 bg-acento-100"
+          className="border-b border-slate-200 bg-acento-100"
         >
           <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-6 sm:flex-row">
             <p className="text-center text-slate-800 sm:text-left">
@@ -97,11 +97,29 @@ function HomePage() {
 
       <section aria-labelledby="titulo-novedades" className="mx-auto max-w-6xl px-4 py-16">
         <h2 id="titulo-novedades" className="text-2xl font-bold text-slate-900">
-          Novedades
+          Novedades recientes
         </h2>
-        <div className="mt-6">
-          <SliderNoticias noticias={noticiasOrdenadas} titulo="Novedades" />
-        </div>
+        {mockNoticias.length > 0 ? (
+          <>
+            <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {noticiasOrdenadas.map((noticia) => (
+                <li key={noticia.id}>
+                  <CardNoticia noticia={noticia} />
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8">
+              <Link
+                to="/noticias"
+                className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:border-acento-600 hover:text-acento-700"
+              >
+                Ver todas las novedades
+              </Link>
+            </div>
+          </>
+        ) : (
+          <p className="mt-6 text-slate-600">Aún no hay novedades publicadas.</p>
+        )}
       </section>
 
       <section

@@ -6,8 +6,14 @@ Reemplaza el espacio actual alojado en Moodle por un sitio web institucional acc
 claro y fácilmente administrable por el propio instituto. El backend se integra luego
 con APIs y la web se despliega como build estático en un VPS independiente del Moodle.
 
-> **Estado:** completadas las 5 fases del plan inicial del frontend (tags `v1.0.0`…`v1.4.0` en
-> `develop`). La Home es navegable con datos simulados; aún no hay consumo de API real.
+> **Estado:** completadas las 8 fases (`v1.10.0`): las 5 fases iniciales del plan
+> (`v1.0.0`…`v1.4.0`), la Fase 6 de brechas de auditoría (`v1.5.0`), el refactor del Mapa
+> del Sitio V2 (menú de 9 ítems + buscador global, `v1.6.0`), la infraestructura y la
+> adopción del sistema documental **logsayer** de 5 capas (25/09/2026), y el cierre del
+> ticket 0000010 (01/10/2026). El sitio tiene **13 rutas navegables** con datos simulados
+> (11 de 15 wireframes implementados); aún no hay consumo de API real, porque la tabla
+> oficial de endpoints y los DTOs de Backend tienen plazo vencido. La evidencia de
+> navegación está en `documentacion/screenshots/`.
 
 ## Tecnología
 
@@ -70,30 +76,31 @@ src/
 └── __tests__/               # suites de pruebas
 
 docs/
-├── estado_actual_proyecto.md  # foto del estado actual del proyecto
-├── bitacora_agentica.md       # historial cronológico de decisiones
-├── frontend/                  # plan, propuesta tecnológica, actas, dependencias
-├── entregas/                  # entregables de cierre de fases (docs, actas)
-├── driveFrontend/             # requisitos fuente de verdad (no versionado, en .gitignore)
-└── mockups/                   # mockups HTML de las vistas (para ver en Tailwind Play)
+├── sdd/                      # memoria (estado_actual, bitácora), SSD base (01_global, 02_tecnico,
+│                            # 03_procesos, 04_historias_usuario/HU-01), metodología (05_), auditorías (06_)
+├── frontend/                 # plan, propuesta tecnológica, actas, dependencias, análisis funcional validado
+├── entregas/                 # entregables de cierre de fases (docs, actas)
+├── driveFrontend/            # requisitos fuente de verdad (no versionado, en .gitignore)
+└── mockups/                  # mockups HTML de las vistas (para ver en Tailwind Play)
 ```
 
 ## Mockups de las vistas
 
-En `docs/mockups/` hay mockups HTML autocontenidos que replican el diseño real de las
+En `documentacion/mockups/` hay mockups HTML autocontenidos que replican el diseño real de las
 vistas (Home, secciones placeholder y página 404) para verlos renderizados al instante
 en Tailwind Play sin levantar el proyecto.
 
 Las instrucciones completas de cómo abrirlos, pegarlos y experimentar con los estados
-comentados están en el [instructivo de mockups](docs/mockups/README.md).
+comentados están en el [instructivo de mockups](documentacion/mockups/README.md).
 
 ## Estado del frontend
 
 - Home navegable con datos simulados en `constants/mock-data.ts` (marcados como provisorios).
 - URLs de Moodle e inscripción como placeholders en `constants/enlaces.ts`; los enlaces externos
   se muestran solo cuando existe URL oficial.
-- Sin consumo de API real todavía: la tabla oficial de endpoints del backend está vacía
-  (regla anti-alucinación).
+- Sin consumo de API real todavía: los endpoints se documentan por historia de
+  usuario (`docs/04_user_stories/HU-XX/hu_xx_api.md`, regla anti-alucinación);
+  la HU-01 Home ya tiene su `hu_01_api.md` con los endpoints GET públicos.
 - Componentes presentacionales, accesibles y responsive (mobile-first).
 
 ## Equipo y roles
@@ -109,12 +116,19 @@ comentados están en el [instructivo de mockups](docs/mockups/README.md).
 
 ## Documentación
 
-En `docs/frontend/`:
+En `documentacion/frontend/`:
 
 - `plan.md` — plan de la fase frontend (5 fases, cronograma y entregables).
 - `propuesta-tecnologica.md` — stack, estructura, componentes e infraestructura del Plan B (VPS).
 - `acta-decisiones.md` — decisiones tomadas en las fases 1-5.
 - `dependencias-equipos.md` — bloqueos y dependencias por equipo.
 - `agenda-reunion-lunes.md` — agenda de la reunión de revisión del 31/08/2026.
+- `analisis_funcional_validado.md` — **fuente única de verdad** del análisis funcional (18/09/2026).
 
-Memoria del proyecto y vitácora del agente en `docs/`.
+Sistema documental **logsayer** (5 capas) en `docs/`: `01_global`, `02_technical`,
+`03_process`, `04_user_stories/HU-01`, `05_agile_methodology`, `06_audits` y
+`logbooks/`, con el snapshot de estado en `docs/project_state.md` y el índice de
+navegación generado en `docs/00_memory_index.md` (`logsayer memory index`).
+Verificación con `logsayer check` y `logsayer process check`. La documentación
+institucional y de la cátedra (entregas, wireframes, mockups, Drive compartido) vive en
+`documentacion/`.

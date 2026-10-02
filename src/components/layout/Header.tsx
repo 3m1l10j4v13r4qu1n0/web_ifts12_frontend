@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MENU_PRINCIPAL } from '../../constants/navegacion';
+import { ACCESOS_EXTERNOS, MENU_PRINCIPAL } from '../../constants/navegacion';
 import BuscadorGlobal from './BuscadorGlobal';
 import NavMenu from './NavMenu';
 
@@ -9,9 +9,43 @@ function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+      <div className="border-b border-slate-800 bg-slate-900">
+        <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-1.5">
+          <p className="text-xs uppercase tracking-wide text-slate-400">Accesos directos</p>
+          <ul className="ml-auto flex items-center gap-3">
+            {ACCESOS_EXTERNOS.map((acceso) =>
+              acceso.href === '' ? (
+                <li
+                  key={acceso.id}
+                  aria-disabled="true"
+                  className="cursor-default text-xs font-medium text-slate-500"
+                >
+                  {acceso.etiqueta}
+                </li>
+              ) : (
+                <li key={acceso.id}>
+                  <a
+                    href={acceso.href}
+                    className="text-xs font-medium text-slate-200 transition-colors hover:text-white"
+                    rel="noopener noreferrer"
+                  >
+                    {acceso.etiqueta}
+                  </a>
+                </li>
+              ),
+            )}
+          </ul>
+        </div>
+      </div>
+
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-4">
-        <Link to="/" className="shrink-0 text-lg font-semibold text-slate-900">
-          IFTS N.º 12
+        <Link to="/" className="flex shrink-0 items-center gap-2">
+          <img src="/IFTS12.jpg" alt="IFTS N.º 12" className="h-10 w-auto" />
+          <img
+            src="/logoCABA.png"
+            alt="Gobierno de la Ciudad de Buenos Aires"
+            className="h-8 w-auto"
+          />
         </Link>
 
         <div className="ml-auto w-full max-w-xs sm:max-w-sm lg:w-72">

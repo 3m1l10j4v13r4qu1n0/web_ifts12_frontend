@@ -1,6 +1,6 @@
 # Versionado por Fases — Commits Atómicos y Tags
 
-Reglas obligatorias para el cierre de cada fase del plan (`docs/frontend/plan.md`).
+Reglas obligatorias para el cierre de cada fase del plan (`documentacion/frontend/plan.md`).
 Aplican a agentes y humanos por igual.
 
 ## Al terminar una fase
