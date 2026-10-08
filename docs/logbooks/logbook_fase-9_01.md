@@ -1,0 +1,38 @@
+# Logbook — fase-9 (01)
+
+- 2026-10-02 13:29 — Auditoría del código fuente del backend y primer consumo real de API (carreras y novedades).
+
+QUÉ SE HIZO
+Se leyó ~/Descargas/backend_ifts12/ línea por línea (app.py, models.py, config.py, routes.py, seed.py, database/schema.sql, instance/ifts12.db) y, con lo verificado, el frontend pasó a consumir GET /api/carreras y GET /api/novedades. Cierra la Fase 8, que había dejado las 13 rutas 100% en mocks.
+
+HALLAZGO PRINCIPAL
+El backend recibido es un prototipo, no la entrega pactada. De las 16 rutas confirmadas el 15/09/2026, solo 5 existen: app.py:25-30 (health), 34-58 (login), 62-75 (carreras), 79-92 (novedades), 96-111 (contacto). routes.py nunca se importa (el import está comentado en app.py:151), así que sus 12 rutas y el CRUD administrativo son código muerto. Sin tests, database/schema.sql corrupto, requirements.txt incompleto y .env faltante.
+
+DECISIONES TOMADAS
+1. Jerarquía de fuentes invertida: el código fuente manda sobre respuesta.md y sobre el README. Es lo único verificable sin esperar respuesta de Backend. Esto resuelve P1 y P7 por observación y contradice la decisión del 01/10 que los ponía por debajo.
+2. P1 resuelta: la ruta es /api/novedades, no /api/noticias (app.py:79).
+3. Un endpoint ausente del código se documenta como inexistente. Las 11 rutas restantes no se promete.
+4. Detalle sin endpoint de detalle: /api/carreras/:id y /api/noticias/:id no existen, así que el detalle resuelve por slug contra la lista completa (misma consulta cacheada por TanStack Query). El slug se deriva del nombre en un mapper porque el backend no expone slug.
+5. Se consume igual pese a ser prototipo: bloquear el avance del frontend esperando una entrega que no llegó sería peor que avanzar con alcance acotado y documentado.
+6. El buscador global pasó a usar los mismos hooks que las páginas. Antes indexaba mockCarreras y ofrecía enlaces a carreras que las páginas ya no mostraban.
+
+HALLAZGO QUE TOCÓ CÓDIGO DE UI
+La etiqueta fija 'Turno: exclusivamente nocturno' en la ficha de carrera contradecía la fila id:2 de la DB real, que declara modalidad 'A Distancia / Híbrida'. Se eliminó la etiqueta y la sección 'Todas las carreras se dictan en modalidad presencial'. Ahora el sitio muestra el dato real.
+
+DETALLE TECNICO QUE MERECE TEST DEDICADO
+fecha_publicacion usa datetime.utcnow + .isoformat(), así que llega como 2026-09-28T19:54:25.920870, sin Z ni offset. new Date() lo interpretaría como hora local y correría el día para usuarios en UTC-3. El mapper agrega la Z explícitamente.
+
+ARCHIVOS TOCADOS
+Nuevos en src/: api/services/carrera.service.ts, api/services/novedad.service.ts, hooks/useCarreras.ts, hooks/useNovedades.ts, components/ui/AvisoCarga.tsx, components/ui/AvisoError.tsx, utils/mensajeDeConsulta.ts, test-utils.tsx, types/api/carrera.schema.ts, types/api/novedad.schema.ts.
+Reescritos: api/endpoints.ts, api/client.ts, api/mappers/carrera.mapper.ts, api/mappers/novedad.mapper.ts, types/api/carrera.types.ts, types/api/novedad.types.ts, types/api/error.types.ts, vite-env.d.ts, utils/busqueda.ts, components/layout/BuscadorGlobal.tsx, pages/HomePage.tsx, pages/CarrerasPage.tsx, pages/CarreraDetallePage.tsx, pages/NoticiasPage.tsx, pages/NotaCompletaPage.tsx.
+Tests: nuevos carrera-mapper.test.ts, novedad-mapper.test.ts, api-schemas.test.ts, api-services.test.ts; reescritos carrera-detalle.test.tsx, noticias.test.tsx, buscador-global.test.tsx, header.test.tsx, busqueda.test.ts.
+Docs: .env.example, docs/02_technical/contrato_api_backend.md (§3 reescrito con DTOs por línea, errores reales y lista de inexistentes; §7 seguridad con BE-E01–BE-E10), docs/04_user_stories/HU-01/hu_01_api.md, docs/project_state.md.
+Drive (no versionado): 04_backend/deudas_codigo_backend_2026-10-02.md con 15 hallazgos BE-E01–BE-E15; deudas_bloqueantes_2026-10-01.md; grupo_1, grupo_2, grupo_4.
+
+VERIFICACIÓN
+npm run lint, build y test en verde (118 tests, antes 29). logsayer check y process check sanos. Consumo comprobado en navegador contra un servidor que replica la serialización de app.py:62-92 leyendo de instance/ifts12.db: listado, detalle, buscador, y los tres estados (con datos, con backend caído, y reintento). DTOs cotejados contra las filas reales de la DB.
+
+ESTADO RESULTANTE
+Carreras y novedades salen del backend; el resto del sitio sigue en mocks. Quedan bloqueados: URL del backend en el entorno de testing (P9), las 11 rutas restantes, y 11 hallazgos de seguridad que son de Backend y no se pueden compensar desde el cliente.
+- 2026-10-08 17:18 — Actualización del CLI documental logsayer de v0.8.0 a v0.9.0 con 'uv tool install --force logsayer' desde PyPI, verificado por 'logsayer --help', 'logsayer check' (13 checks, sano con 2 avisos preexistentes de freshness) y 'logsayer process check'. Lo que trae v0.9.0 (release 2026-10-07): init --preset con [project].preset y [adapters].enabled en logsayer.toml (snapshot de convenciones, no herencia viva), checks nuevos preset_conocido, adaptadores_declarados y contador_hus_al_dia (mide el contador declarado de HUs contra los directorios HU-* en disco), comando audit reset (reemplaza el shim deprecado audit run --reset-counter), audit status muestra el derivado del disco, adaptador de GitHub Copilot (dos archivos por rol: .github/agents/ e .github/instructions/logsayer/) y publicación por Trusted Publishing OIDC. Nada de esto rompe la config existente: [logsayer] no cambia de forma y este repo no declara preset ni adaptadores. Archivos tocados: AGENTS.md (referencia de versión v0.8.0 al 30/09/2026 -> v0.9.0 al 07/10/2026) y docs/project_state.md (CLI v0.8.0 -> v0.9.0 en 'Qué está construido'). No se tocó logsayer.toml ni se corrió init --preset, porque el proyecto ya está scaffoldeado y en modo adopt el TOML existente manda.
+- 2026-10-08 17:45 — Se ingresa a Capa 1 el documento 'Correcciones de UX/UI y Frontend' recibido de Coordinación (docx original en /home/emi/Downloads, convertido a Markdown con pandoc y dejado en inbox/). Flujo aplicado: 'logsayer doc route' (sin decisión automática) -> Mentat decide la capa (docs/01_global/, porque es un set de requisitos transversales a muchas pantallas, no de una HU ni especificación técnica) -> 'logsayer doc new global correcciones_ux_ui_frontend --from inbox/IFTS12_Correcciones_UXUI_Frontend.md'. El CLI scaffoldeo la plantilla de Capa 1 y archivó el original en inbox/_done/IFTS12_Correcciones_UXUI_Frontend.md; el contenido lo derivó el subagente Mentat (419 líneas): 9 bloqueantes B1-B9, 12 importantes I1-I12 y 7 mejoras M1-M7 de la auditoría UX/UI del 07/10, con criterio de aceptación, prioridad y orden recomendado, más dependencias institucionales. Se regeneró el índice de memoria (27 documentos) y se refrescó docs/project_state.md con una viñeta del documento nuevo. Ambigüedades señaladas por Mentat que quedan para confirmar con Coordinación: (1) I8 menciona 'los siete accesos confirmados' y a la vez 'agregar Inscripción', que según RN-08 ya es uno de los siete; (2) los ítems M no traen criterio de aceptación explícito; (3) las referencias RF de B1/B2/B4/B8 provienen de la auditoría sin cotejar contra el análisis funcional validado (RF-34 y RF-25 aparecen mapeados a dos secciones). Trabajo hecho en la rama docs/cierre-sesion-logsayer-correcciones (regla de flujo-git: no se trabaja directo sobre develop).
