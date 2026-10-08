@@ -1,16 +1,50 @@
 import { Link, useParams } from 'react-router-dom';
-import { mockNoticias } from '../constants/mock-data';
+import {
+  buscarNovedadPorSlug,
+  fechaNovedadAIso,
+  slugDesdeNovedad,
+} from '../api/mappers/novedad.mapper';
+import AvisoCarga from '../components/ui/AvisoCarga';
+import AvisoError from '../components/ui/AvisoError';
+import { useNovedades } from '../hooks/useNovedades';
 import PaginaNoEncontrada from './PaginaNoEncontrada';
 
 function NotaCompletaPage() {
   const { id } = useParams<{ id: string }>();
-  const noticia = mockNoticias.find((item) => item.id === id);
+  const { novedades, cargando, error, recargar } = useNovedades();
+
+  // El backend no expone `GET /api/noticias/:id`, así que el detalle se resuelve contra la
+  // lista completa. Es la misma consulta que el listado, que TanStack Query cachea.
+  const noticia = id === undefined ? undefined : buscarNovedadPorSlug(novedades, id);
+
+  if (cargando) {
+    return (
+      <main className="min-h-screen">
+        <article className="mx-auto max-w-6xl px-4 py-12">
+          <h1 className="text-3xl font-bold text-slate-900">Novedad</h1>
+          <AvisoCarga que="la novedad" />
+        </article>
+      </main>
+    );
+  }
+
+  if (error !== null) {
+    return (
+      <main className="min-h-screen">
+        <article className="mx-auto max-w-6xl px-4 py-12">
+          <h1 className="text-3xl font-bold text-slate-900">Novedad</h1>
+          <AvisoError que="la novedad" mensaje={error} alReintentar={recargar} />
+        </article>
+      </main>
+    );
+  }
 
   if (noticia === undefined) {
     return <PaginaNoEncontrada />;
   }
 
-  const otrasNoticias = mockNoticias.filter((item) => item.id !== noticia.id);
+  const otrasNovedades = novedades.filter((item) => item.id !== noticia.id);
+  const fecha = fechaNovedadAIso(noticia.fecha_publicacion);
 
   return (
     <main className="min-h-screen">
@@ -29,39 +63,46 @@ function NotaCompletaPage() {
 
         <div className="mt-6 max-w-3xl">
           <p className="text-sm font-medium uppercase tracking-wide text-acento-700">
-            {noticia.fecha !== '' ? noticia.fecha : 'Novedad'}
+            {fecha ?? 'Novedad'}
           </p>
           <h1 className="mt-2 text-3xl font-bold text-slate-900">{noticia.titulo}</h1>
-          <p className="mt-4 text-lg leading-relaxed text-slate-700">{noticia.resumen}</p>
+          {noticia.copete !== null && (
+            <p className="mt-4 text-lg leading-relaxed text-slate-700">{noticia.copete}</p>
+          )}
 
-          <div className="mt-8 rounded-xl border border-dashed border-slate-300 bg-white p-6">
-            <p className="text-slate-500">
-              El contenido completo de la nota se publica cuando esté disponible el detalle
-              institucional.
+          <p className="mt-6 whitespace-pre-line leading-relaxed text-slate-600">
+            {noticia.contenido}
+          </p>
+
+          {noticia.categoria !== null && (
+            <p className="mt-8 border-t border-slate-200 pt-4 text-sm text-slate-500">
+              Categoría: {noticia.categoria}
             </p>
-            <span className="mt-3 inline-block rounded-md bg-slate-100 px-3 py-1 text-xs font-medium uppercase tracking-wide text-slate-500">
-              Próximamente
-            </span>
-          </div>
+          )}
         </div>
 
-        <aside aria-labelledby="titulo-historial" className="mt-14 border-t border-slate-200 pt-8">
-          <h2 id="titulo-historial" className="text-lg font-semibold text-slate-900">
-            Otras novedades
-          </h2>
-          <ul className="mt-4 space-y-2">
-            {otrasNoticias.map((item) => (
-              <li key={item.id}>
-                <Link
-                  to={`/noticias/${item.id}`}
-                  className="text-sm text-slate-600 transition-colors hover:text-acento-700"
-                >
-                  {item.titulo}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </aside>
+        {otrasNovedades.length > 0 && (
+          <aside
+            aria-labelledby="titulo-historial"
+            className="mt-14 border-t border-slate-200 pt-8"
+          >
+            <h2 id="titulo-historial" className="text-lg font-semibold text-slate-900">
+              Otras novedades
+            </h2>
+            <ul className="mt-4 space-y-2">
+              {otrasNovedades.map((item) => (
+                <li key={item.id}>
+                  <Link
+                    to={`/noticias/${slugDesdeNovedad(item)}`}
+                    className="text-sm text-slate-600 transition-colors hover:text-acento-700"
+                  >
+                    {item.titulo}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )}
       </article>
     </main>
   );

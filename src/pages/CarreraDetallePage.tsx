@@ -1,6 +1,9 @@
 import { Link, useParams } from 'react-router-dom';
+import { buscarCarreraPorSlug } from '../api/mappers/carrera.mapper';
+import AvisoCarga from '../components/ui/AvisoCarga';
+import AvisoError from '../components/ui/AvisoError';
 import { ENLACES } from '../constants/enlaces';
-import { mockCarreras } from '../constants/mock-data';
+import { useCarreras } from '../hooks/useCarreras';
 import PaginaNoEncontrada from './PaginaNoEncontrada';
 
 const ACCIONES_INSCRIPCION = {
@@ -10,13 +13,49 @@ const ACCIONES_INSCRIPCION = {
 
 function CarreraDetallePage() {
   const { id } = useParams<{ id: string }>();
-  const carrera = mockCarreras.find((item) => item.id === id);
+  const { carreras, cargando, error, recargar } = useCarreras();
+
+  // El backend no expone `GET /api/carreras/:id` (solo figura en el archivo muerto
+  // `routes.py:61`), así que el detalle se resuelve contra la lista completa. Es la misma
+  // consulta que el listado, que TanStack Query cachea: entrar al detalle no dispara un
+  // segundo request.
+  const carrera = id === undefined ? undefined : buscarCarreraPorSlug(carreras, id);
+
+  if (cargando) {
+    return (
+      <main className="min-h-screen">
+        <div className="border-b border-slate-200 bg-slate-50">
+          <div className="mx-auto max-w-6xl px-4 py-12">
+            <h1 className="text-3xl font-bold text-slate-900">Carrera</h1>
+          </div>
+        </div>
+        <div className="mx-auto max-w-6xl px-4 py-14">
+          <AvisoCarga que="la carrera" />
+        </div>
+      </main>
+    );
+  }
+
+  if (error !== null) {
+    return (
+      <main className="min-h-screen">
+        <div className="border-b border-slate-200 bg-slate-50">
+          <div className="mx-auto max-w-6xl px-4 py-12">
+            <h1 className="text-3xl font-bold text-slate-900">Carrera</h1>
+          </div>
+        </div>
+        <div className="mx-auto max-w-6xl px-4 py-14">
+          <AvisoError que="la carrera" mensaje={error} alReintentar={recargar} />
+        </div>
+      </main>
+    );
+  }
 
   if (carrera === undefined) {
     return <PaginaNoEncontrada />;
   }
 
-  const otrasCarreras = mockCarreras.filter((item) => item.id !== carrera.id);
+  const otrasCarreras = carreras.filter((item) => item.id !== carrera.id);
 
   return (
     <main className="min-h-screen">
@@ -35,14 +74,17 @@ function CarreraDetallePage() {
           </nav>
 
           <h1 className="mt-4 text-3xl font-bold text-slate-900">{carrera.nombre}</h1>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <span className="rounded-full border border-acento-600 px-3 py-1 text-xs font-medium text-acento-700">
+          {/*
+            Solo se muestra la modalidad que trae el backend, sin sumar etiquetas fijas como
+            "exclusivamente nocturno": las filas reales de la base incluyen "A Distancia /
+            Híbrida" (`instance/ifts12.db`), así que una etiqueta fija contradiría el dato
+            real. El turno queda pendiente hasta que IFTS valide el dato institucional.
+          */}
+          {carrera.modalidad !== '' && (
+            <span className="mt-4 inline-block rounded-full border border-acento-600 px-3 py-1 text-xs font-medium text-acento-700">
               Modalidad: {carrera.modalidad}
             </span>
-            <span className="rounded-full border border-slate-300 px-3 py-1 text-xs font-medium text-slate-600">
-              Turno: exclusivamente nocturno
-            </span>
-          </div>
+          )}
         </div>
       </div>
 
@@ -110,26 +152,28 @@ function CarreraDetallePage() {
             </div>
           </section>
 
-          <section
-            aria-labelledby="titulo-otras"
-            className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
-          >
-            <h2 id="titulo-otras" className="text-lg font-semibold text-slate-900">
-              Otras carreras
-            </h2>
-            <ul className="mt-4 space-y-2">
-              {otrasCarreras.map((item) => (
-                <li key={item.id}>
-                  <Link
-                    to={`/carreras/${item.id}`}
-                    className="text-sm text-slate-600 transition-colors hover:text-acento-700"
-                  >
-                    {item.nombre}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </section>
+          {otrasCarreras.length > 0 && (
+            <section
+              aria-labelledby="titulo-otras"
+              className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
+            >
+              <h2 id="titulo-otras" className="text-lg font-semibold text-slate-900">
+                Otras carreras
+              </h2>
+              <ul className="mt-4 space-y-2">
+                {otrasCarreras.map((item) => (
+                  <li key={item.id}>
+                    <Link
+                      to={`/carreras/${item.id}`}
+                      className="text-sm text-slate-600 transition-colors hover:text-acento-700"
+                    >
+                      {item.nombre}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
         </aside>
       </div>
     </main>

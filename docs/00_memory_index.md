@@ -8,12 +8,12 @@
 01_global/reglas_negocio.md                       · nivel 0 · borrador · 2026-09-18 · reglas, negocio
 01_global/vision.md                               · nivel 0 · borrador · 2026-09-18 · vision
 project_state.md                                  · nivel 0 · — · — · project, state
-02_technical/contrato_api_backend.md              · nivel 1 · borrador · 2026-10-01 · contrato, api, backend
+02_technical/contrato_api_backend.md              · nivel 1 · vigente · 2026-10-02 · contrato, api, backend
 02_technical/decisiones_tecnicas.md               · nivel 1 · borrador · 2026-09-18 · decisiones, tecnicas
 02_technical/estado_implementacion.md             · nivel 1 · vigente · 2026-09-30 · estado, implementacion
 02_technical/modelo_datos_global.md               · nivel 1 · borrador · 2026-09-18 · modelo, datos, global
 04_user_stories/HU-01/README.md                   · nivel 2 · borrador · 2026-09-18 · hu-01
-04_user_stories/HU-01/hu_01_api.md                · nivel 2 · borrador · 2026-09-18 · hu-01, hu, api
+04_user_stories/HU-01/hu_01_api.md                · nivel 2 · — · 2026-09-18 · hu-01, api, backend
 04_user_stories/HU-01/hu_01_caso_uso_expandido.md · nivel 2 · borrador · 2026-09-18 · hu-01, hu, caso, uso, expandido
 04_user_stories/HU-01/hu_01_modelos_datos.md      · nivel 2 · borrador · 2026-09-18 · hu-01, hu, modelos, datos
 04_user_stories/HU-01/hu_01_pruevas.md            · nivel 2 · borrador · 2026-09-18 · hu-01, hu, pruevas

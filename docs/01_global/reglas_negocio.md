@@ -20,7 +20,7 @@ documento de origen; lo pendiente externo se marca 🔵/⏳ y no se inventa.
 | RN-04 | El contenido se clasifica como **fijo** (historia, normativa, planes, logos, enlaces oficiales, dirección) o **administrable** (noticias, carrusel, calendario, horarios, autoridades, docentes, bedeles, becas, tutorías, FAQ) | Matriz fijo-administrable del Análisis Funcional, 2026 |
 | RN-05 | El login es **exclusivo del personal que administra contenidos**; el contenido informativo es público | RF-23 (Análisis Funcional, 2026) |
 | RN-06 | El instituto tiene 6 carreras; el listado debe mostrar nombre y modalidad, con horarios/turno en cada ficha | RF-01, RF-04 (Análisis Funcional, 2026) |
-| RN-07 | Contacto y pie de página muestran dirección y horario confirmados: **Misiones 26, C1083 ABB, CABA**, atención solo nocturno | RF-22 (Análisis Funcional, 2026) |
+| RN-07 | Contacto y pie de página muestran dirección y horario confirmados: **Misiones 26, C1083 ABB, CABA**, atención solo nocturno; el pie agrega las modalidades reales del backend (Presencial, Híbrida, a distancia) | RF-22 (Análisis Funcional, 2026); `modalidad` de `Carrera` (`models.py:35`) |
 | RN-08 | La Home expone los **7 accesos rápidos confirmados**: Campus Virtual (Moodle), SIU, inscripción oficial (GCBA), becas, constancias, mesas de examen y calendario académico | Análisis Funcional, 2026 (Parte IV y VI) |
 | RN-09 | El asistente virtual (bot) queda fuera de la primera versión (etapa C); no debe aparecer en el sitio v1 | Análisis Funcional, 2026 (§7) |
 | RN-10 | Las URLs oficiales externas (Moodle, inscripción GCBA, SIU) se muestran **solo cuando sean provistas por la institución**; mientras tanto se usan placeholders vacíos y los CTA se ocultan o atenúan | Análisis Funcional, 2026 (§8); Frontend |

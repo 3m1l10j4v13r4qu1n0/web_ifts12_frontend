@@ -1,15 +1,29 @@
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { listarCarreras } from '../api/services/carrera.service';
+import { listarNovedades } from '../api/services/novedad.service';
 import Header from '../components/layout/Header';
 import { MENU_PRINCIPAL } from '../constants/navegacion';
+import { CARRERAS_API_FIJA, NOVEDADES_API_FIJA, renderConRouter } from '../test-utils';
+import type { CarreraApi } from '../types/api/carrera.types';
+import type { NovedadApi } from '../types/api/novedad.types';
+
+vi.mock('../api/services/carrera.service');
+vi.mock('../api/services/novedad.service');
+
+const listarCarrerasMock = vi.mocked(listarCarreras);
+const listarNovedadesMock = vi.mocked(listarNovedades);
 
 describe('Header', () => {
-  it('enlaza el nombre del instituto a la home y muestra el menu principal', () => {
-    render(
-      <MemoryRouter>
-        <Header />
-      </MemoryRouter>,
-    );
+  beforeEach(() => {
+    listarCarrerasMock.mockReset();
+    listarCarrerasMock.mockResolvedValue(CARRERAS_API_FIJA as CarreraApi[]);
+    listarNovedadesMock.mockReset();
+    listarNovedadesMock.mockResolvedValue(NOVEDADES_API_FIJA as NovedadApi[]);
+  });
+
+  it('enlaza el nombre del instituto a la home y muestra el menu principal', async () => {
+    renderConRouter(<Header />);
 
     expect(screen.getByRole('link', { name: /IFTS N\.º 12/ })).toHaveAttribute('href', '/');
     expect(screen.getByRole('img', { name: 'IFTS N.º 12' })).toBeInTheDocument();
@@ -20,5 +34,17 @@ describe('Header', () => {
     for (const item of MENU_PRINCIPAL) {
       expect(screen.getByRole('link', { name: item.etiqueta })).toBeInTheDocument();
     }
+  });
+
+  it('se renderiza aunque la API de carreras y novedades falle', async () => {
+    // El header es chrome: si el backend no responde, el sitio tiene que seguir siendo
+    // navegable. El buscador queda vacío, pero la estructura no se cae.
+    listarCarrerasMock.mockRejectedValue({ status: 0, mensaje: 'sin conexión' });
+    listarNovedadesMock.mockRejectedValue({ status: 0, mensaje: 'sin conexión' });
+
+    renderConRouter(<Header />);
+
+    expect(screen.getByRole('combobox', { name: 'Buscar en el sitio' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /IFTS N\.º 12/ })).toHaveAttribute('href', '/');
   });
 });

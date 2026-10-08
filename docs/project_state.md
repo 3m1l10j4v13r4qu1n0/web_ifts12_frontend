@@ -43,6 +43,12 @@ mocks.)_
   (`docs/01_global/correcciones_ux_ui_frontend.md`, 08/10/2026): 9 bloqueantes (B1–B9), 12
   importantes (I1–I12) y 7 mejoras (M1–M7) de la auditoría UX/UI del 07/10, cada una con criterio
   de aceptación. Pendiente de priorización/implementación.
+- **Revisión del consumo de API (08/10/2026):** los helpers del buscador se renombraron
+  (`coincideTexto` / `coincideNullable`); el footer combina el horario confirmado
+  "exclusivamente nocturno" (RF-22) con las modalidades reales del backend (Presencial,
+  Híbrida y a distancia), absorbido por **RN-07** (`reglas_negocio.md`) y el contrato. Queda en
+  `inbox/` el feedback sobre el guard de `contenido` en `NotaCompletaPage` (depende de una
+  fuente de verdad de Backend/Contenidos).
 - Contrato de API reescrito sobre el código fuente: `docs/02_technical/contrato_api_backend.md`
   (§3.1 DTOs con línea, §3.2 errores reales, §3.3 lo que no existe).
 - Anexo de auditoría del backend en

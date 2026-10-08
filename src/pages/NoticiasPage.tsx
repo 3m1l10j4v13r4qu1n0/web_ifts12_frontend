@@ -1,7 +1,10 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { mapNovedadesApiANoticias } from '../api/mappers/novedad.mapper';
+import AvisoCarga from '../components/ui/AvisoCarga';
+import AvisoError from '../components/ui/AvisoError';
 import CardNoticia from '../components/ui/CardNoticia';
-import { mockNoticias } from '../constants/mock-data';
+import { useNovedades } from '../hooks/useNovedades';
 
 function normalizar(texto: string) {
   return texto
@@ -12,9 +15,15 @@ function normalizar(texto: string) {
 
 function NoticiasPage() {
   const [consulta, setConsulta] = useState('');
+  const { novedades, cargando, error, recargar } = useNovedades();
+
+  const noticias = useMemo(() => mapNovedadesApiANoticias(novedades), [novedades]);
 
   const noticiasFiltradas = useMemo(() => {
-    const ordenadas = [...mockNoticias].sort((a, b) => {
+    // El backend ya ordena por `fecha_publicacion DESC` de forma fija (`app.py:81`), pero
+    // re-ordenamos igual para no depender de eso: si el backend cambia el orden, la página
+    // sigue mostrando reciente→antigua.
+    const ordenadas = [...noticias].sort((a, b) => {
       if (a.fecha === '' && b.fecha === '') return 0;
       if (a.fecha === '') return 1;
       if (b.fecha === '') return -1;
@@ -29,7 +38,7 @@ function NoticiasPage() {
     return ordenadas.filter((noticia) =>
       normalizar(`${noticia.titulo} ${noticia.resumen}`).includes(termino),
     );
-  }, [consulta]);
+  }, [consulta, noticias]);
 
   return (
     <main className="min-h-screen">
@@ -58,7 +67,11 @@ function NoticiasPage() {
           />
         </div>
 
-        {noticiasFiltradas.length > 0 ? (
+        {cargando ? (
+          <AvisoCarga que="las novedades" />
+        ) : error !== null ? (
+          <AvisoError que="las novedades" mensaje={error} alReintentar={recargar} />
+        ) : noticiasFiltradas.length > 0 ? (
           <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {noticiasFiltradas.map((noticia) => (
               <li key={noticia.id}>
@@ -73,7 +86,9 @@ function NoticiasPage() {
           </ul>
         ) : (
           <p className="mt-8 rounded-xl border border-slate-200 bg-white p-6 text-slate-600">
-            No se encontraron novedades para “{consulta}”. Probá con otras palabras.
+            {consulta === ''
+              ? 'Todavía no hay novedades publicadas.'
+              : `No se encontraron novedades para “${consulta}”. Probá con otras palabras.`}
           </p>
         )}
       </div>
