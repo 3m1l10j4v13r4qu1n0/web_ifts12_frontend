@@ -1,5 +1,5 @@
 ---
-fase: fase-8
+fase: fase-9
 ---
 
 # Estado del proyecto — IFTS N.º 12 (frontend)
@@ -11,103 +11,115 @@ fase: fase-8
 
 ## Fase actual del roadmap
 
-Fase 8
+Fase 9
 
-_(Fase 8 = cierre del ticket 0000010: evidencia navegable de la primera versión y registro
-de las deudas bloqueantes, sin cambios de código en `src/`. Cierra la Fase 7 (logsayer v0.8.0)
-más el contrato derivado del backend Flask, hasta `v1.10.0`. El sitio en sí sigue sin
-consumir API.)_
+_(Fase 9 = auditoría del código fuente del backend y **primer consumo real de API**.
+Se leyó `~/Descargas/backend_ifts12/` línea por línea y, con lo verificado, el frontend pasó a
+leer carreras y novedades del backend. Cierra la Fase 8, que había dejado el sitio 100% en
+mocks.)_
 
 ## Qué está construido
 
-- SPA React 19 + Vite + TypeScript strict + Tailwind v4 con `npm run lint · build · test` en verde.
-- Home navegable según el **Mapa del Sitio V2** (9 ítems de menú + buscador global en el
-  header), portada con carrusel institucional, footer V2, secciones de Carreras,
-  Ingresantes, Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y Contacto,
-  más rutas de detalle `/carreras/:id` y `/noticias/:id` y 404.
-- Datos simulados en `src/constants/mock-data.ts`; **sin consumo de API real**.
-- HU-01 (Home institucional pública) especificada en `docs/04_user_stories/HU-01/`.
-- Contrato del backend derivado del README que remitió el equipo de Backend:
-  `docs/02_technical/contrato_api_backend.md` (Capa 1, 01/10/2026), con jerarquía de fuentes
-  declarada y 9 divergencias abiertas (P1–P9).
-- Cinco auditorías cerradas en `docs/06_audits/` (análisis funcional, backend, infraestructura,
-  UX/UI y la del README del backend).
-- **Evidencia del ticket 0000010** (01/10/2026): las **13 rutas** del sitio verificadas una por
-  una en navegador (con `h1` y enlaces de navegación leídos del DOM, sin errores de consola),
-  11 de 15 wireframes con equivalente implementado, y **15 capturas** en
-  `documentacion/screenshots/` (desktop 1680×900, mobile 390×844 y estado del menú desplegado).
-  Documento en `documentacion/entregas/2026-10-01__Evidencia_Ticket_0000010_Version_Navegable_v0.1.md`.
-- **Deudas bloqueantes registradas** con dueño por grupo en
-  `documentacion/driveFrontend/deudas_bloqueantes_2026-10-01.md` (no versionado, vive en el
-  Drive): 4 bloqueantes (DB-01 a DB-04) y 10 relevantes, cada una con qué falta, por qué
-  bloquea y qué se necesita de vuelta.
+- SPA React 19 + Vite + TypeScript strict + Tailwind v4 con `npm run lint · build · test` en verde
+  (**118 tests**, antes 29).
+- Home navegable según el **Mapa del Sitio V2** (9 ítems de menú + buscador global en el header),
+  portada con carrusel institucional, footer V2, secciones de Carreras, Ingresantes,
+  Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y Contacto, más rutas de detalle
+  `/carreras/:id` y `/noticias/:id` y 404.
+- **Consumo real de API para carreras y novedades** (02/10/2026), contra `GET /api/carreras` y
+  `GET /api/novedades`:
+  - `src/api/endpoints.ts` con `VITE_API_BASE_URL` (fallback `localhost:5000`) y solo las 5 rutas
+    que existen en `app.py`.
+  - DTOs + esquemas Zod derivados de `models.py`: `carrera.types.ts`, `novedad.schema.ts`.
+  - Servicios `carrera.service.ts` y `novedad.service.ts`, única capa que conoce endpoints.
+  - Hooks `useCarreras` / `useNovedades` con TanStack Query (`staleTime` 5 min y 2 min).
+  - Consumen API: `CarrerasPage`, `NoticiasPage`, `CarreraDetallePage`, `NotaCompletaPage`, las
+    secciones de carreras y novedades de la **Home**, y el **buscador global**.
+  - Estados de carga, error con reintento y vacío en las cuatro vistas. El mensaje de error lo
+    produce el interceptor global de `src/api/client.ts`, no el componente (RN-13).
+- Resto del sitio **sigue con datos simulados** en `src/constants/mock-data.ts`.
+- HU-01 especificada y **actualizada contra el código** en `docs/04_user_stories/HU-01/`.
+- **Correcciones de UX/UI y Frontend** especificadas en Capa 1
+  (`docs/01_global/correcciones_ux_ui_frontend.md`, 08/10/2026): 9 bloqueantes (B1–B9), 12
+  importantes (I1–I12) y 7 mejoras (M1–M7) de la auditoría UX/UI del 07/10, cada una con criterio
+  de aceptación. Pendiente de priorización/implementación.
+- Contrato de API reescrito sobre el código fuente: `docs/02_technical/contrato_api_backend.md`
+  (§3.1 DTOs con línea, §3.2 errores reales, §3.3 lo que no existe).
+- Anexo de auditoría del backend en
+  `documentacion/driveFrontend/04_backend/deudas_codigo_backend_2026-10-02.md`: 15 hallazgos
+  **BE-E01**–**BE-E15** (no versionado, vive en el Drive).
+- **Evidencia del ticket 0000010** (01/10/2026) sigue vigente: 13 rutas verificadas en navegador,
+  15 capturas en `documentacion/screenshots/`.
+- Cinco auditorías cerradas en `docs/06_audits/`.
 
 ## Decisiones activas (últimas 3-5)
 
-- **Sistema documental logsayer (5 capas), CLI v0.8.0.** `docs/` contiene solo capas del
-  framework (`01_global`, `02_technical`, `03_process`, `04_user_stories`,
-  `05_agile_methodology`, `06_audits`, `logbooks`, `project_state.md`) más el índice
-  transversal generado `docs/00_memory_index.md`; la documentación institucional y de
-  la cátedra quedó en `documentacion/`. Verificación: `logsayer check` y
-  `logsayer process check`. El CLI se actualiza con `uv tool install --force logsayer`:
-  sin `--force` uv da la instalación por satisfactoria y no cambia nada.
-- **Rutas en inglés, contenido en español** (convención del framework). La fuente de verdad
-  de endpoints es **por historia de usuario**: `docs/04_user_stories/HU-XX/*_api.md`. Un
-  endpoint que no está en ninguna HU se trata como inexistente.
-- **Reglas y skills delegates al global de opencode** (`~/.config/opencode/rules/`,
-  `~/.config/opencode/skills/`). En el repo queda solo lo específico del proyecto.
+- **Jerarquía de fuentes del contrato invertida (decisión del 02/10/2026):** **el código fuente
+  manda**. `app.py` / `models.py` > `respuesta.md` (15/09) > README (01/10). El código es lo único
+  verificable sin esperar una respuesta de Backend. Esto resuelve P1 y P7 por observación, y
+  contradice la decisión del 01/10 que los ponía por debajo de `respuesta.md`.
+- **El backend recibido es un prototipo, no la entrega pactada.** Se consume igual para no
+  bloquear el avance del frontend, pero el alcance se limita a lo verificable: 5 endpoints de 16.
+- **Detalle sin endpoint de detalle.** `GET /api/carreras/:id` y `/api/noticias/:id` no existen,
+  así que el detalle se resuelve por slug contra la lista completa (misma consulta cacheada). El
+  slug se deriva del `nombre`/`titulo` en un mapper, porque el backend no expone slug.
+- **Un endpoint no documentado en el código se trata como inexistente.** No se promete ninguna de
+  las 11 rutas restantes mientras Backend no las implemente.
+- **Sistema documental logsayer (5 capas), CLI v0.9.0.** Verificación con `logsayer check` y
+  `logsayer process check`. Índice de memoria generado con `logsayer memory index`.
+- **Rutas en inglés, contenido en español.** La fuente de verdad de endpoints sigue siendo **por
+  historia de usuario**: `docs/04_user_stories/HU-XX/*_api.md`.
 - **Mapa del Sitio V2 manda en navegación** (9 ítems + buscador). Tensión **AF-A6 abierta**:
   Análisis validó 7 accesos rápidos y el V2 tiene 9 (incluye SIU) — falta cierre con UX/UI.
-- **Sin autenticación ni API real** hasta que Backend entregue Swagger y DTOs. Los accesos
-  a Moodle/SIU/Inscripción se muestran atenuados mientras las URLs oficiales estén vacías.
-- **Jerarquía de fuentes del contrato de API** (decisión del 01/10/2026):
-  `04_backend/respuesta.md` (15/09/2026) > `preguntas_abiertas_2026-10-01.md` > el README de
-  `backend_ifts12` (01/10/2026). El README es más reciente pero **de alcance menor** (5 endpoints
-  de los 16 confirmados, ningún DTO), así que **no reemplaza** a `respuesta.md`: ni
-  `hu_01_api.md` ni `src/api/endpoints.ts` se modifican hasta que Backend responda.
 
 ## Bloqueos abiertos (no resolver sin fuente)
 
-- URLs oficiales de Moodle e inscripción (IFTS/Dirección) → bloquean `enlaces.ts`,
-  `.env.example` y la migración a `import.meta.env`.
-- Swagger/OpenAPI y DTOs de Backend → bloquean el consumo de API. Al 01/10/2026 **vencieron las
-  entregas 2 (~22/09) y 3 (~29/09)**; la 4 (seeders + errores) vence ~06/10.
-- **Conflicto de ruta de noticias (P1, alta):** el README dice `/api/novedades`, la fuente
-  vigente dice `/api/noticias`. No escribir ninguna de las dos en `endpoints.ts` hasta respuesta.
-- **Alcance del mapa de rutas (P2, alta):** confirmar si los 16 endpoints confirmados siguen
-  vigentes o si el backend realmente expone solo los 5 del README.
-- SQLite en el seed vs. PostgreSQL confirmado (P4) y URL/puerto de testing para `API_BASE_URL`
-  (P9) → bloquean la configuración de la capa `api/`.
-- `/api/contacto` POST sin confirmar body ni errores: hoy el formulario valida en local y no envía.
-- ⚠️ El README del backend publica la contraseña del admin de seed en claro: no se reproduce ni se
-  usa contra entornos compartidos.
+- **URL del backend en el entorno de testing (P9)** → bloquean el build de despliegue. `.env.example`
+  lo tiene marcado con `@TODO`; hoy solo hay `localhost:5000`.
+- **Las 11 rutas restantes** (`/faqs`, `/slider`, `/calendario`, `/docentes`, `/autoridades`,
+  `/tutorias`, `/becas`, `/horarios`, `/bedeles`, `/auth/logout`, `/auth/me` + CRUD) → sin backend
+  no hay contrato. Esas páginas siguen en mocks. **Dueño: Grupo 4.**
+- **11 hallazgos de seguridad del backend** (BE-E01–BE-E06, BE-E10): `debug=True` en `0.0.0.0`,
+  secretos JWT hardcodeados, CORS `*`, ninguna ruta con `jwt_required`, `activo` no verificado en
+  el login, credencial de admin en claro. **No bloquean el frontend**, pero impiden considerar el
+  backend apto para producción. **Dueño: Grupo 4.**
+- **SQLite vs PostgreSQL (P4)** → si el entorno de testing corre SQLite, los tipos del DTO pueden
+  diferir. Hoy verificado sobre SQLite.
+- **Nombre del token (🔴):** el login real devuelve `token`, el cliente lee `auth_token`
+  (`src/api/client.ts`). Sin impacto mientras no haya login; hay que alinearlo cuando exista.
+- **Plazos vencidos (P5):** Swagger (~22/09) y DTOs (~29/09) no llegaron. El frontend compensó
+  con DTOs derivados del código, pero no es una entrega de Backend.
+- URLs oficiales de Moodle, inscripción y SIU (IFTS/Dirección) → bloquean `enlaces.ts`. Los accesos
+  se muestran atenuados.
+- `/api/contacto`: el endpoint existe (`P3` resuelta) pero el formulario sigue validando en local
+  sin enviar. Falta decisión de alcance, no de contrato.
 - Tensión de accesos rápidos 7 vs 9 (AF-A6) y contenidos reales de Análisis (🔵/❌).
 
-### Las 4 deudas bloqueantes del ticket 0000010
+### Estado de las deudas del ticket 0000010
 
-Detalle completo con dueño, estado y qué se necesita de vuelta en
+Detalle con dueño y qué se necesita de vuelta en
 `documentacion/driveFrontend/deudas_bloqueantes_2026-10-01.md` (no versionado, en el Drive).
 
-| ID | Deuda | Dueño |
-|:---|:---|:---|
-| DB-01 | Tabla oficial de endpoints (parámetros, bodies, códigos) | Grupo 4 |
-| DB-02 | Esquemas JSON exactos (DTOs) | Grupo 4 |
-| DB-03 | Alcance de la administración (WF 13, 14, 15) | Grupo 1 |
-| DB-04 | Definición de la búsqueda global (WF 12): ¿widget o página? | Grupo 2 |
-
-Las dos primeras tienen **plazo vencido** (22/09 y 29/09). Verificado el 01/10/2026:
-`src/api/endpoints.ts` sigue con `endpoints = {} as const`, `src/api/services/` solo tiene
-`.gitkeep` y **ninguna de las 13 rutas consume la API**: el sitio navegable es 100% mocks.
-
-Dos deudas **no dependen de terceros** y se pueden avanzar ya: **DB-05**, crear las historias
-de usuario de las secciones que solo tienen HU-01 (Home), y **DB-14**, distinguir el 404 de
-`/carreras/:id` y `/noticias/:id` cuando un `:id` no exista (hoy cae en el 404 genérico).
+| ID | Deuda | Dueño | Estado 02/10/2026 |
+|:---|:---|:---|:---|
+| DB-01 | Tabla oficial de endpoints (parámetros, bodies, códigos) | Grupo 4 | 🟡 **Avanzada**: hay tabla de los 5 endpoints reales, verificada con línea. Faltan las 11 rutas. |
+| DB-02 | Esquemas JSON exactos (DTOs) | Grupo 4 | 🟢 **Resuelta de hecho**: DTOs derivados de `models.py` + Zod + 18 tests. Falta que Backend los confirme. |
+| DB-03 | Alcance de la administración (WF 13, 14, 15) | Grupo 1 | 🔵 Abierta. Sin avance. |
+| DB-04 | Definición de la búsqueda global (WF 12): ¿widget o página? | Grupo 2 | 🔵 Abierta. El buscador existe como widget y ya usa datos reales; falta la decisión formal. |
+| DB-05 | HUs de las secciones que solo tienen HU-01 | Frontend | 🔵 Abierta. Sin avance. |
+| DB-14 | 404 de `/carreras/:id` y `/noticias/:id` con `:id` inexistente | Frontend | 🟢 **Resuelta**: el detalle distingue "carrera inexistente" del 404 de ruta, con tests. |
 
 ## Verificación
 
-- Frontend: `npm run lint` · `npm run build` · `npm run test`.
-- Sistema documental: `logsayer check` (mecánico) · `logsayer process check` (proceso) ·
-  `logsayer state show` · `logsayer audit status` · `logsayer memory status`.
+- Frontend: `npm run lint` · `npm run build` · `npm run test` (118 tests).
+- Sistema documental: `logsayer check` · `logsayer process check` · `logsayer memory index`.
+- Consumo verificado **en navegador** (Firefox, `localhost:5173`) contra un servidor que replica
+  la serialización de `app.py:62-92` leyendo de `instance/ifts12.db`: listado, detalle, buscador,
+  y los tres estados (con datos, con backend caído, y reintento funcionando).
+- **Cotejo con la DB real:** 3 carreras (`id` 1–3) y 2 novedades (`id` 1–2) leídas de
+  `instance/ifts12.db`. Los nombres reales (`Tecnicatura Superior en Análisis de Sistemas`) **no
+  coinciden** con los mocks del sitio (`Gestión Parlamentaria`), por eso se quitaron los mocks de
+  estas dos secciones.
 
 ## HUs cerradas desde la última auditoría
 

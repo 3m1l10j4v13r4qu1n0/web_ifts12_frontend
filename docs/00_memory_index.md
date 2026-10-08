@@ -4,6 +4,7 @@
 
 01_global/actores.md                              · nivel 0 · borrador · 2026-09-18 · actores
 01_global/alcance.md                              · nivel 0 · borrador · 2026-09-18 · alcance
+01_global/correcciones_ux_ui_frontend.md          · nivel 0 · borrador · 2026-10-08 · correcciones, ux, ui, frontend
 01_global/reglas_negocio.md                       · nivel 0 · borrador · 2026-09-18 · reglas, negocio
 01_global/vision.md                               · nivel 0 · borrador · 2026-09-18 · vision
 project_state.md                                  · nivel 0 · — · — · project, state
@@ -26,4 +27,5 @@ project_state.md                                  · nivel 0 · — · — · pr
 logbooks/00_index.md                              · nivel 3 · — · —
 logbooks/logbook_fase-7_01.md                     · nivel 3 · — · — · logbook, fase
 logbooks/logbook_fase-8_01.md                     · nivel 3 · — · — · logbook, fase
+logbooks/logbook_fase-9_01.md                     · nivel 3 · — · — · logbook, fase
 logbooks/logbook_legado_01.md                     · nivel 3 · — · — · logbook, legado
