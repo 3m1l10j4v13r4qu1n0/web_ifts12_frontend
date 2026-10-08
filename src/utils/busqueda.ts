@@ -44,11 +44,11 @@ export function buscarContenidoLocal(
     return [];
   }
 
-  const coinciden = (valor: string) => normalizar(valor).includes(termino);
+  const coincideTexto = (valor: string) => normalizar(valor).includes(termino);
   const resultados: ResultadoBusqueda[] = [];
 
   for (const item of MENU_PRINCIPAL) {
-    if (coinciden(item.etiqueta)) {
+    if (coincideTexto(item.etiqueta)) {
       resultados.push({
         id: `seccion-${item.href}`,
         titulo: item.etiqueta,
@@ -60,7 +60,7 @@ export function buscarContenidoLocal(
   }
 
   for (const carrera of carreras) {
-    if (coinciden(carrera.nombre) || coinciden(carrera.descripcionBreve)) {
+    if (coincideTexto(carrera.nombre) || coincideTexto(carrera.descripcionBreve)) {
       resultados.push({
         id: `carrera-${carrera.id}`,
         titulo: carrera.nombre,
@@ -73,7 +73,7 @@ export function buscarContenidoLocal(
   }
 
   for (const novedad of novedades) {
-    if (coinciden(novedad.titulo) || coincide(novedad.copete, coinciden)) {
+    if (coincideTexto(novedad.titulo) || coincideNullable(novedad.copete, coincideTexto)) {
       resultados.push({
         id: `novedad-${novedad.id}`,
         titulo: novedad.titulo,
@@ -85,7 +85,7 @@ export function buscarContenidoLocal(
   }
 
   for (const faq of mockFaqs) {
-    if (coinciden(faq.pregunta) || coinciden(faq.respuesta)) {
+    if (coincideTexto(faq.pregunta) || coincideTexto(faq.respuesta)) {
       resultados.push({
         id: `faq-${faq.id}`,
         titulo: faq.pregunta,
@@ -100,6 +100,9 @@ export function buscarContenidoLocal(
 }
 
 /** `copete` es nullable (`models.py:57`), así que hay que tolerar `null` sin romper. */
-function coincide(valor: string | null, coinciden: (texto: string) => boolean): boolean {
-  return valor !== null && coinciden(valor);
+function coincideNullable(
+  valor: string | null,
+  coincideTexto: (texto: string) => boolean,
+): boolean {
+  return valor !== null && coincideTexto(valor);
 }
