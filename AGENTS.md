@@ -13,7 +13,7 @@ infraestructura VPS). Ojo: `documentacion/driveFrontend/` está en `.gitignore`,
 ## Sistema documental: logsayer (5 capas)
 
 Este repo usa el CLI `logsayer` (instalado con `uv tool install --force logsayer`, binario en
-`~/.local/bin/logsayer`, **v0.8.0** al 30/09/2026) y su sistema de 5 capas. **Rutas en
+`~/.local/bin/logsayer`, **v0.9.0** al 07/10/2026) y su sistema de 5 capas. **Rutas en
 inglés, contenido en español.** Los umbrales viven en `logsayer.toml` y este archivo los
 refleja.
 
