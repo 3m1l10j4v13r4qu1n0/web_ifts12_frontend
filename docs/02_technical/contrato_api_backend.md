@@ -182,8 +182,9 @@ trata como inexistente:**
 > **Verificación en la DB sembrada** (`instance/ifts12.db`): 3 carreras con `id` 1, 2, 3 y 2
 > novedades con `id` 1, 2. El nombre real es `Tecnicatura Superior en Análisis de Sistemas`, no el
 > de los mocks del frontend, que era `Gestión Parlamentaria`. Las modalidades reales incluyen
-> `A Distancia / Híbrida`, lo que contradice la etiqueta fija "exclusivamente nocturno" que el
-> sitio mostraba antes: esa etiqueta se eliminó.
+> `A Distancia / Híbrida`, que no describe la etiqueta fija "exclusivamente nocturno": esa
+> etiqueta quedó como horario de atención confirmado (RN-07) y el footer la combina con las
+> modalidades reales, mientras que las fichas de carrera muestran la modalidad del dato.
 
 ## 4. Lo que sigue confirmado por escrito pero ausente del código
 
@@ -306,8 +307,9 @@ Estado al 02/10/2026, después de la auditoría del código y del primer consumo
    listado, el detalle, el buscador, y los tres estados (con datos, sin backend, reintento).
 4. **Esquemas Zod:** 18 tests verifican que el borde rechaza `id` como string, `destacado` como
    `1`, respuestas envueltas en `{data, meta}`, y duration decimal.
-5. **Contradicción institucional removida:** la etiqueta fija "exclusivamente nocturno" se quitó
-   porque la fila `id: 2` declara `A Distancia / Híbrida`. El sitio ahora muestra el dato real.
+5. **Horario y modalidad reales:** el footer conserva el horario confirmado "exclusivamente
+   nocturno" (RN-07, RF-22) y suma las modalidades reales de la DB (Presencial, Híbrida y a
+   distancia); las fichas de carrera muestran la modalidad del dato (`A Distancia / Híbrida`).
 6. **Credencial redactada:** la contraseña del administrador no aparece en ningún documento
    versionado, ni en este archivo.
 7. **Hallazgos referenciados:** BE-E01 a BE-E15 resuelven contra
