@@ -12,7 +12,7 @@ const DATOS_INSTITUCIONALES = {
   nombre: 'IFTS N.º 12',
   organismo: 'Instituto de Formación Técnica Superior N.º 12 · Ministerio de Educación · GCBA',
   direccion: 'Misiones 26, C1083 ABB, CABA',
-  horario: 'Exclusivamente nocturno',
+  horario: 'Exclusivamente nocturno · Presencial, Híbrida y a distancia',
 };
 
 function EnlaceColumna({ item }: { item: ItemNavegacion }) {
