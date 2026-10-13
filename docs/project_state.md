@@ -25,7 +25,9 @@ mocks.)_
 - Home navegable según el **Mapa del Sitio V2** (9 ítems de menú + buscador global en el header),
   portada con carrusel institucional, footer V2, secciones de Carreras, Ingresantes,
   Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y Contacto, más rutas de detalle
-  `/carreras/:id` y `/noticias/:id` y 404.
+  `/carreras/:id` y `/noticias/:id` y 404. La **portada de la Home siempre se muestra** (título +
+  subtítulo institucionales); el set de novedades del carrusel muestra un **skeleton** mientras
+  carga y solo se ve con datos del backend (14/10/2026).
 - **Consumo real de API para carreras y novedades** (02/10/2026), contra `GET /api/carreras` y
   `GET /api/novedades`:
   - `src/api/endpoints.ts` con `VITE_API_BASE_URL` (fallback `localhost:5000`) y solo las 5 rutas

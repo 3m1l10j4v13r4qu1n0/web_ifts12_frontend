@@ -58,8 +58,23 @@ describe('CarruselInstitucional', () => {
     );
   });
 
-  it('no renderiza nada cuando no hay novedades', () => {
-    const { container } = render(<CarruselInstitucional titulo="IFTS N.º 12" slides={[]} />);
-    expect(container.firstChild).toBeNull();
+  it('sin novedades y aún cargando muestra un skeleton', () => {
+    render(<CarruselInstitucional titulo="IFTS N.º 12" slides={[]} cargando />);
+
+    expect(screen.getByRole('status')).toBeInTheDocument();
+    const setBuscable = screen.getByText('Cargando novedades destacadas');
+    expect(setBuscable).toHaveClass('sr-only');
+    expect(screen.queryByRole('heading', { level: 2 })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Novedad siguiente' })).not.toBeInTheDocument();
+  });
+
+  it('sin novedades muestra solo la portada, sin el set ni los controles', () => {
+    render(<CarruselInstitucional titulo="IFTS N.º 12" slides={[]} />);
+
+    expect(screen.getByRole('heading', { level: 1, name: 'IFTS N.º 12' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { level: 2 })).not.toBeInTheDocument();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Novedad siguiente' })).not.toBeInTheDocument();
+    expect(screen.queryByText('1 / 2')).not.toBeInTheDocument();
   });
 });

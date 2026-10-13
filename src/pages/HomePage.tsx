@@ -67,6 +67,7 @@ function HomePage() {
         titulo="Instituto de Formación Técnica Superior N.º 12"
         subtitulo="Formación técnica superior, pública y de calidad. Contenidos provisorios pendientes de validación."
         slides={slidesNovedades}
+        cargando={cargandoNovedades}
       />
 
       {ENLACES.moodle !== '' && (
