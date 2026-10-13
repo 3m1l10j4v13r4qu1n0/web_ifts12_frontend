@@ -1,5 +1,5 @@
 import { useId, useMemo, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCarreras } from '../../hooks/useCarreras';
 import { useNovedades } from '../../hooks/useNovedades';
 import { buscarContenidoLocal } from '../../utils/busqueda';
@@ -62,16 +62,16 @@ function BuscadorGlobal() {
         aria-expanded={mostrarResultados}
         aria-autocomplete="list"
         aria-controls={mostrarResultados ? resultadosId : undefined}
-        className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-acento-600 focus:outline-none focus:ring-1 focus:ring-acento-600"
+        className="w-full rounded-lg border border-borde bg-white px-3 py-2 text-sm text-texto placeholder:text-texto-suave focus:border-acento-600 focus:outline-none focus:ring-1 focus:ring-acento-600"
       />
 
       {mostrarResultados && (
         <div
           id={resultadosId}
-          className="absolute right-0 top-full z-50 mt-2 w-full overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg"
+          className="absolute right-0 top-full z-50 mt-2 w-full overflow-hidden rounded-lg border border-borde-suave bg-white shadow-elevada"
         >
           {resultados.length === 0 ? (
-            <p className="px-4 py-3 text-sm text-slate-500">Sin resultados para «{consulta}».</p>
+            <p className="px-4 py-3 text-sm text-texto-suave">Sin resultados para «{consulta}».</p>
           ) : (
             <ul className="max-h-80 overflow-y-auto">
               {resultados.map((resultado) => (
@@ -79,10 +79,10 @@ function BuscadorGlobal() {
                   <button
                     type="button"
                     onMouseDown={() => navigate(resultado.href)}
-                    className="flex w-full flex-col gap-0.5 px-4 py-3 text-left transition-colors hover:bg-slate-50"
+                    className="flex w-full flex-col gap-0.5 px-4 py-3 text-left transition-colors hover:bg-fondo"
                   >
-                    <span className="text-sm font-medium text-slate-900">{resultado.titulo}</span>
-                    <span className="text-xs text-slate-500">{resultado.descripcion}</span>
+                    <span className="text-sm font-medium text-texto">{resultado.titulo}</span>
+                    <span className="text-xs text-texto-suave">{resultado.descripcion}</span>
                     <span className="text-xs font-medium uppercase tracking-wide text-acento-700">
                       {resultado.categoria}
                     </span>
@@ -91,6 +91,13 @@ function BuscadorGlobal() {
               ))}
             </ul>
           )}
+          <Link
+            to={`/buscar?q=${encodeURIComponent(consulta)}`}
+            onMouseDown={() => setAbierto(false)}
+            className="block border-t border-borde-suave px-4 py-3 text-center text-sm font-medium text-acento-700 transition-colors hover:bg-fondo"
+          >
+            Ver todos los resultados
+          </Link>
         </div>
       )}
     </form>
