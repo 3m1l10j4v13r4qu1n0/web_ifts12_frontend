@@ -1,8 +1,56 @@
 @import "tailwindcss";
 
-/* Tokens de diseno provisionales: un unico color de acento + neutros (regla 90/10).
-   La paleta oficial se valida con el equipo de UX/UI; reemplazar este bloque. */
+/* ==========================================================================
+   Fundaciones — tokens de diseno (Figma v2 "IFTS 12 v2 - alineado a contratos").
+   Documento rector: docs/01_global/figma_v2_contrato_visual.md.
+   Regla 90/10: un unico color de acento + neutros. Los acentos por seccion se
+   usan SOLO en eyebrow/breadcrumb/indicador/overlay (FLACSO), nunca como color
+   de superficie o de texto corrido.
+   PROVISIONAL: la paleta definitiva la entrega UX/UI (B9, M7). Reemplazar aqui.
+   ========================================================================== */
 @theme {
+  /* Tipografia: una sola familia SANS (B9/M3). */
+  --font-sans: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  /* Escala tipografica. Figma: H1 48, H3 24, H4 20, Body/LG 18, Body/SM 14. */
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.4;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.5;
+  --text-base: 1rem;
+  --text-base--line-height: 1.6;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.55;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.5;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 1.35;
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: 1.25;
+  --text-4xl: 2.25rem;
+  --text-4xl--line-height: 1.15;
+  --text-5xl: 3rem;
+  --text-5xl--line-height: 1.1;
+
+  /* Espaciado y ritmo vertical de secciones. */
+  --spacing-seccion-sm: 2.5rem;
+  --spacing-seccion-md: 4rem;
+  --spacing-seccion-lg: 6rem;
+  /* Zona tactil minima recomendada (M6): 44x44px. */
+  --spacing-touch: 2.75rem;
+  /* Contenedor fluido (no layout fijo de 992px, ver I9/B6). */
+  --container-contenido: 76rem; /* 1216px */
+
+  /* Radius (Figma: 4-12px). */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+
+  /* Sombra suave. */
+  --shadow-suave: 0 1px 2px rgb(0 0 0 / 0.06), 0 4px 12px rgb(0 0 0 / 0.08);
+  --shadow-elevada: 0 8px 24px rgb(0 0 0 / 0.12);
+
+  /* --- Color de acento unico (PROVISIONAL, regla 90/10). --- */
   --color-acento-50: #eff6ff;
   --color-acento-100: #dbeafe;
   --color-acento-200: #bfdbfe;
@@ -10,4 +58,39 @@
   --color-acento-600: #2563eb;
   --color-acento-700: #1d4ed8;
   --color-acento-800: #1e40af;
+
+  /* Acentos por seccion (solo eyebrow/breadcrumb/indicador/overlay). */
+  --color-seccion-rojo: #ba0c2f;
+  --color-seccion-verde: #228848;
+  --color-seccion-ambar: #f2a900;
+  --color-seccion-cian: #0092bc;
+  --color-seccion-naranja: #dc582a;
+
+  /* Neutros. */
+  --color-texto: #333333;
+  --color-texto-suave: #666666;
+  --color-borde: #cccccc;
+  --color-borde-suave: #dedfda;
+  --color-fondo: #f1f2ec;
+  --color-fondo-alt: #ebebeb;
+
+  /* Estados de interfaz (I2). */
+  --color-exito: #15803d;
+  --color-error: #b91c1c;
+  --color-aviso: #b45309;
+  --color-info: #1d4ed8;
+}
+
+/* Foco visible en todo el sitio (accesibilidad AA). */
+@layer base {
+  :focus-visible {
+    outline: 3px solid var(--color-acento-600);
+    outline-offset: 2px;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-texto);
+    background-color: #ffffff;
+  }
 }
