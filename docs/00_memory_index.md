@@ -5,6 +5,7 @@
 01_global/actores.md                              · nivel 0 · borrador · 2026-09-18 · actores
 01_global/alcance.md                              · nivel 0 · borrador · 2026-09-18 · alcance
 01_global/correcciones_ux_ui_frontend.md          · nivel 0 · borrador · 2026-10-08 · correcciones, ux, ui, frontend
+01_global/figma_v2_contrato_visual.md             · nivel 0 · vigente · 2026-10-13 · figma, contrato, visual, ux, ui
 01_global/reglas_negocio.md                       · nivel 0 · borrador · 2026-09-18 · reglas, negocio
 01_global/vision.md                               · nivel 0 · borrador · 2026-09-18 · vision
 project_state.md                                  · nivel 0 · — · — · project, state
