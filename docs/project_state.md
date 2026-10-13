@@ -39,12 +39,35 @@ mocks.)_
     secciones de carreras y novedades de la **Home**, y el **buscador global**.
   - Estados de carga, error con reintento y vacío en las cuatro vistas. El mensaje de error lo
     produce el interceptor global de `src/api/client.ts`, no el componente (RN-13).
-- Resto del sitio **sigue con datos simulados** en `src/constants/mock-data.ts`.
+- Resto del sitio **sigue con datos simulados** en `src/constants/mock-data.ts` (se eliminó el
+  bloque `mockComunidades` por B3/I12).
 - HU-01 especificada y **actualizada contra el código** en `docs/04_user_stories/HU-01/`.
 - **Correcciones de UX/UI y Frontend** especificadas en Capa 1
   (`docs/01_global/correcciones_ux_ui_frontend.md`, 08/10/2026): 9 bloqueantes (B1–B9), 12
   importantes (I1–I12) y 7 mejoras (M1–M7) de la auditoría UX/UI del 07/10, cada una con criterio
   de aceptación. Pendiente de priorización/implementación.
+- **Rediseño alineado al Figma v2 «IFTS 12 v2 - alineado a contratos» (en curso, rama
+  `feature/figma-v2-contrato-visual`):** el Figma nuevo quedó registrado como contrato visual
+  vigente en Capa 1 (`docs/01_global/figma_v2_contrato_visual.md`, da de baja al Figma anterior)
+  y las dos auditorías asociadas viven en Capa 4 (`docs/06_audits/audit_2026-10-08-ux-ui-frontend.md`
+  y `audit_2026-10-09-figma.md`). Ejecutadas las **Fases 2–5** del plan:
+  - Tokens de diseño en `src/styles/index.css` (`@theme`, regla 90/10: acento único + neutros, una
+    sola familia Source Sans 3, escala H1 48/H3 24/H4 20, zonas táctiles de 44px, contenedor
+    fluido 1216px).
+  - Componentes base nuevos: `Button` (variantes/tamaños/cargando), `Badge`, `Eyebrow`,
+    `Breadcrumb`, `Tabs`, `FiltroTag`, `Paginacion`, `Estado` (loading/empty/error/success/404…),
+    `Toast`, `ModalBaja`, `FormField` (+Input/Select/Textarea), `Checkbox`, `TablaAdmin`.
+  - Layout: `Header` (top bar Campus/SIU/Inscripción, logo→home, buscador, hamburguesa 44×44 sin
+    ícono de persona), `NavMenu` con activo subrayado, `MobileMenu` (Esc + scroll-lock),
+    `EncabezadoPagina` estándar con eyebrow de sección, íconos con `lucide-react`.
+  - Páginas: buscador como página `/buscar` agrupado por tipo + enlace "Ver todos los resultados",
+    FAQ con filtro por segmento, Ingresantes/Carreras con `useCarreras()`, admin solo-UI
+    (`/admin` y `/admin/login` con acciones deshabilitadas y PENDIENTE), 404 con `Estado`, y se
+    eliminó el bloque "Comunidad de alumnos" (B3/I12: `Comunidades.tsx`, `mockComunidades`, tipo y
+    test). Pantallas alineadas a tokens y `EncabezadoPagina` en todo el sitio.
+  - **Pendiente:** Fase 6+ (responsive e interactivos finos) y tokens de color definitivos de
+    UX/UI — el `get_figma_data` de Figma está en rate limit (~4 días), se trabaja con la
+    referencia FLACSO + GLOBAL_VARS ya obtenidos.
 - **Revisión del consumo de API (08/10/2026):** los helpers del buscador se renombraron
   (`coincideTexto` / `coincideNullable`); el footer combina el horario confirmado
   "exclusivamente nocturno" (RF-22) con las modalidades reales del backend (Presencial,
