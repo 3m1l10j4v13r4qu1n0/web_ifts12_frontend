@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { buscarCarreraPorSlug } from '../api/mappers/carrera.mapper';
 import AvisoCarga from '../components/ui/AvisoCarga';
 import AvisoError from '../components/ui/AvisoError';
+import Estado from '../components/ui/Estado';
 import { ENLACES } from '../constants/enlaces';
 import { useCarreras } from '../hooks/useCarreras';
 import PaginaNoEncontrada from './PaginaNoEncontrada';
@@ -24,12 +25,12 @@ function CarreraDetallePage() {
   if (cargando) {
     return (
       <main className="min-h-screen">
-        <div className="border-b border-slate-200 bg-slate-50">
-          <div className="mx-auto max-w-6xl px-4 py-12">
-            <h1 className="text-3xl font-bold text-slate-900">Carrera</h1>
+        <div className="border-b border-borde-suave bg-fondo">
+          <div className="mx-auto max-w-contenido px-4 py-12">
+            <h1 className="text-4xl font-semibold text-texto">Carrera</h1>
           </div>
         </div>
-        <div className="mx-auto max-w-6xl px-4 py-14">
+        <div className="mx-auto max-w-contenido px-4 py-14">
           <AvisoCarga que="la carrera" />
         </div>
       </main>
@@ -39,12 +40,12 @@ function CarreraDetallePage() {
   if (error !== null) {
     return (
       <main className="min-h-screen">
-        <div className="border-b border-slate-200 bg-slate-50">
-          <div className="mx-auto max-w-6xl px-4 py-12">
-            <h1 className="text-3xl font-bold text-slate-900">Carrera</h1>
+        <div className="border-b border-borde-suave bg-fondo">
+          <div className="mx-auto max-w-contenido px-4 py-12">
+            <h1 className="text-4xl font-semibold text-texto">Carrera</h1>
           </div>
         </div>
-        <div className="mx-auto max-w-6xl px-4 py-14">
+        <div className="mx-auto max-w-contenido px-4 py-14">
           <AvisoError que="la carrera" mensaje={error} alReintentar={recargar} />
         </div>
       </main>
@@ -59,9 +60,9 @@ function CarreraDetallePage() {
 
   return (
     <main className="min-h-screen">
-      <div className="border-b border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-6xl px-4 py-12">
-          <nav aria-label="Ruta de navegación" className="text-sm text-slate-500">
+      <div className="border-b border-borde-suave bg-fondo">
+        <div className="mx-auto max-w-contenido px-4 py-12">
+          <nav aria-label="Ruta de navegación" className="text-sm text-texto-suave">
             <Link to="/" className="hover:text-acento-700">
               Inicio
             </Link>
@@ -70,10 +71,10 @@ function CarreraDetallePage() {
               Carreras
             </Link>
             {' / '}
-            <span className="text-slate-900">{carrera.nombre}</span>
+            <span className="text-texto">{carrera.nombre}</span>
           </nav>
 
-          <h1 className="mt-4 text-3xl font-bold text-slate-900">{carrera.nombre}</h1>
+          <h1 className="mt-4 text-4xl font-semibold text-texto">{carrera.nombre}</h1>
           {/*
             Solo se muestra la modalidad que trae el backend, sin sumar etiquetas fijas como
             "exclusivamente nocturno": las filas reales de la base incluyen "A Distancia /
@@ -88,49 +89,43 @@ function CarreraDetallePage() {
         </div>
       </div>
 
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-12 lg:grid-cols-3">
+      <div className="mx-auto grid max-w-contenido grid-cols-1 gap-10 px-4 py-12 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
           <section aria-labelledby="titulo-descripcion">
-            <h2 id="titulo-descripcion" className="text-xl font-semibold text-slate-900">
+            <h2 id="titulo-descripcion" className="text-xl font-semibold text-texto">
               Descripción
             </h2>
-            <p className="mt-3 leading-relaxed text-slate-600">{carrera.descripcionBreve}</p>
+            <p className="mt-3 leading-relaxed text-texto-suave">{carrera.descripcionBreve}</p>
           </section>
 
-          <section
-            aria-labelledby="titulo-plan"
-            className="rounded-xl border border-dashed border-slate-300 bg-white p-6"
-          >
-            <h2 id="titulo-plan" className="text-xl font-semibold text-slate-900">
+          <section aria-labelledby="titulo-plan" className="space-y-4">
+            <h2 id="titulo-plan" className="text-xl font-semibold text-texto">
               Plan de estudios
             </h2>
-            <p className="mt-3 text-slate-500">
-              Plan de estudios, materias, correlatividades y programas pendientes de validación.
-            </p>
-            <span className="mt-4 inline-block rounded-md bg-slate-100 px-3 py-1 text-xs font-medium uppercase tracking-wide text-slate-600">
-              Próximamente
-            </span>
+            <Estado
+              tipo="empty"
+              titulo="Plan de estudios y correlatividades pendientes"
+              mensaje="La tabla de materias, años y correlatividades se publica cuando IFTS valide el plan de la carrera."
+            />
           </section>
         </div>
 
         <aside aria-label="Acciones y otras carreras" className="space-y-6">
           <section
             aria-labelledby="titulo-acciones"
-            className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
+            className="rounded-xl border border-borde-suave bg-white p-6 shadow-suave"
           >
-            <h2 id="titulo-acciones" className="text-lg font-semibold text-slate-900">
+            <h2 id="titulo-acciones" className="text-lg font-semibold text-texto">
               Acciones
             </h2>
             <div className="mt-4 space-y-3">
               <div
                 aria-disabled={ACCIONES_INSCRIPCION.queda}
-                className="rounded-lg border border-slate-200 p-4"
+                className="rounded-lg border border-borde-suave p-4"
               >
-                <p className="text-sm font-medium text-slate-700">
-                  {ACCIONES_INSCRIPCION.etiqueta}
-                </p>
+                <p className="text-sm font-medium text-texto">{ACCIONES_INSCRIPCION.etiqueta}</p>
                 {ACCIONES_INSCRIPCION.queda ? (
-                  <p className="mt-1 text-xs text-slate-500">
+                  <p className="mt-1 text-xs text-texto-suave">
                     El enlace oficial se publica cuando esté disponible.
                   </p>
                 ) : (
@@ -145,7 +140,7 @@ function CarreraDetallePage() {
               </div>
               <Link
                 to="/contacto"
-                className="block rounded-lg border border-slate-200 p-4 text-sm font-medium text-acento-700 transition-colors hover:border-acento-600"
+                className="block rounded-lg border border-borde-suave p-4 text-sm font-medium text-acento-700 transition-colors hover:border-acento-600"
               >
                 Consultar por esta carrera →
               </Link>
@@ -155,9 +150,9 @@ function CarreraDetallePage() {
           {otrasCarreras.length > 0 && (
             <section
               aria-labelledby="titulo-otras"
-              className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
+              className="rounded-xl border border-borde-suave bg-white p-6 shadow-suave"
             >
-              <h2 id="titulo-otras" className="text-lg font-semibold text-slate-900">
+              <h2 id="titulo-otras" className="text-lg font-semibold text-texto">
                 Otras carreras
               </h2>
               <ul className="mt-4 space-y-2">
@@ -165,7 +160,7 @@ function CarreraDetallePage() {
                   <li key={item.id}>
                     <Link
                       to={`/carreras/${item.id}`}
-                      className="text-sm text-slate-600 transition-colors hover:text-acento-700"
+                      className="text-sm text-texto-suave transition-colors hover:text-acento-700"
                     >
                       {item.nombre}
                     </Link>

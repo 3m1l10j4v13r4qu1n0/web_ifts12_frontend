@@ -9,15 +9,9 @@ import CardCarrera from '../components/ui/CardCarrera';
 import CardNoticia from '../components/ui/CardNoticia';
 import type { SlideCarrusel } from '../components/ui/CarruselInstitucional';
 import CarruselInstitucional from '../components/ui/CarruselInstitucional';
-import Comunidades from '../components/ui/Comunidades';
 import FaqAcordeon from '../components/ui/FaqAcordeon';
 import { ENLACES } from '../constants/enlaces';
-import {
-  mockAccesosDestacados,
-  mockAccesosRapidos,
-  mockComunidades,
-  mockFaqs,
-} from '../constants/mock-data';
+import { mockAccesosDestacados, mockAccesosRapidos, mockFaqs } from '../constants/mock-data';
 import { useCarreras } from '../hooks/useCarreras';
 import { useNovedades } from '../hooks/useNovedades';
 
@@ -73,10 +67,10 @@ function HomePage() {
       {ENLACES.moodle !== '' && (
         <section
           aria-label="Acceso al campus virtual"
-          className="border-b border-slate-200 bg-acento-100"
+          className="border-b border-borde-suave bg-acento-100"
         >
-          <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-6 sm:flex-row">
-            <p className="text-center text-slate-800 sm:text-left">
+          <div className="mx-auto flex max-w-contenido flex-col items-center justify-between gap-4 px-4 py-6 sm:flex-row">
+            <p className="text-center text-texto sm:text-left">
               Accedé al campus virtual para iniciar o continuar tu cursada.
             </p>
             <a
@@ -90,8 +84,8 @@ function HomePage() {
         </section>
       )}
 
-      <section aria-labelledby="titulo-destacados" className="mx-auto max-w-6xl px-4 pt-16">
-        <h2 id="titulo-destacados" className="text-2xl font-bold text-slate-900">
+      <section aria-labelledby="titulo-destacados" className="mx-auto max-w-contenido px-4 pt-16">
+        <h2 id="titulo-destacados" className="text-2xl font-bold text-texto">
           Accesos destacados
         </h2>
         <div className="mt-6">
@@ -99,8 +93,8 @@ function HomePage() {
         </div>
       </section>
 
-      <section aria-labelledby="titulo-accesos" className="mx-auto max-w-6xl px-4 py-16">
-        <h2 id="titulo-accesos" className="text-2xl font-bold text-slate-900">
+      <section aria-labelledby="titulo-accesos" className="mx-auto max-w-contenido px-4 py-16">
+        <h2 id="titulo-accesos" className="text-2xl font-bold text-texto">
           Accesos rápidos
         </h2>
         <div className="mt-6">
@@ -108,12 +102,12 @@ function HomePage() {
         </div>
       </section>
 
-      <section aria-labelledby="titulo-carreras" className="border-y border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-6xl px-4 py-16">
-          <h2 id="titulo-carreras" className="text-2xl font-bold text-slate-900">
+      <section aria-labelledby="titulo-carreras" className="border-y border-borde-suave bg-fondo">
+        <div className="mx-auto max-w-contenido px-4 py-16">
+          <h2 id="titulo-carreras" className="text-2xl font-bold text-texto">
             Carreras
           </h2>
-          <p className="mt-2 text-slate-600">Conocé la oferta académica del instituto.</p>
+          <p className="mt-2 text-texto-suave">Conocé la oferta académica del instituto.</p>
           {cargandoCarreras ? (
             <AvisoCarga que="las carreras" />
           ) : errorCarreras !== null ? (
@@ -131,13 +125,13 @@ function HomePage() {
               ))}
             </ul>
           ) : (
-            <p className="mt-6 text-slate-600">Aún no hay carreras publicadas.</p>
+            <p className="mt-6 text-texto-suave">Aún no hay carreras publicadas.</p>
           )}
         </div>
       </section>
 
-      <section aria-labelledby="titulo-novedades" className="mx-auto max-w-6xl px-4 py-16">
-        <h2 id="titulo-novedades" className="text-2xl font-bold text-slate-900">
+      <section aria-labelledby="titulo-novedades" className="mx-auto max-w-contenido px-4 py-16">
+        <h2 id="titulo-novedades" className="text-2xl font-bold text-texto">
           Novedades recientes
         </h2>
         {cargandoNovedades ? (
@@ -160,39 +154,22 @@ function HomePage() {
             <div className="mt-8">
               <Link
                 to="/noticias"
-                className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:border-acento-600 hover:text-acento-700"
+                className="inline-flex items-center justify-center rounded-lg border border-borde bg-white px-5 py-2.5 text-sm font-medium text-texto transition-colors hover:border-acento-600 hover:text-acento-700"
               >
                 Ver todas las novedades
               </Link>
             </div>
           </>
         ) : (
-          <p className="mt-6 text-slate-600">Aún no hay novedades publicadas.</p>
+          <p className="mt-6 text-texto-suave">Aún no hay novedades publicadas.</p>
         )}
       </section>
 
-      <section
-        aria-labelledby="titulo-comunidades"
-        className="border-y border-slate-200 bg-slate-50"
-      >
-        <div className="mx-auto max-w-6xl px-4 py-16">
-          <h2 id="titulo-comunidades" className="text-2xl font-bold text-slate-900">
-            Comunidades
-          </h2>
-          <p className="mt-2 text-slate-600">
-            Espacios de acompañamiento, recursos y novedades según tu vínculo con el instituto.
-          </p>
-          <div className="mt-6">
-            <Comunidades items={mockComunidades} />
-          </div>
-        </div>
-      </section>
-
       <section aria-labelledby="titulo-faq" className="mx-auto max-w-3xl px-4 py-16">
-        <h2 id="titulo-faq" className="text-2xl font-bold text-slate-900">
+        <h2 id="titulo-faq" className="text-2xl font-bold text-texto">
           Preguntas frecuentes
         </h2>
-        <p className="mt-2 text-slate-600">Respuestas sobre ingreso, cursada y trámites.</p>
+        <p className="mt-2 text-texto-suave">Respuestas sobre ingreso, cursada y trámites.</p>
         <div className="mt-6">
           <FaqAcordeon items={mockFaqs} />
         </div>

@@ -76,7 +76,7 @@ describe('CarreraDetallePage', () => {
   it('muestra la página 404 para un id inexistente', async () => {
     renderizarConRuta('/carreras/inexistente');
 
-    expect(await screen.findByText('Pagina no encontrada')).toBeInTheDocument();
+    expect(await screen.findByText(/página no encontrada/i)).toBeInTheDocument();
   });
 
   it('muestra el estado de carga antes de resolver la consulta', () => {
