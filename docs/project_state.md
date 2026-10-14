@@ -1,5 +1,5 @@
 ---
-fase: fase-9
+fase: fase-10
 ---
 
 # Estado del proyecto — IFTS N.º 12 (frontend)
@@ -11,12 +11,11 @@ fase: fase-9
 
 ## Fase actual del roadmap
 
-Fase 9
+Fase 10
 
-_(Fase 9 = auditoría del código fuente del backend y **primer consumo real de API**.
-Se leyó `~/Descargas/backend_ifts12/` línea por línea y, con lo verificado, el frontend pasó a
-leer carreras y novedades del backend. Cierra la Fase 8, que había dejado el sitio 100% en
-mocks.)_
+_(Fase 10 = **alineación del frontend a los exports Desktop 1440 del avance de diseño**,
+página por página (tareas T1–T16). Cierra la Fase 9, que había dejado el consumo real de API de
+carreras y novedades. Detalle de avance y pendientes en la sección siguiente.)_
 
 ## Alineación al diseño del avance (en curso · próxima sesión)
 

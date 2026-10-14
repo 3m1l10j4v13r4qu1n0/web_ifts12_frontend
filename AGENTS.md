@@ -89,10 +89,12 @@ logsayer quedó archivado en `docs/logbooks/logbook_legado_01.md` y **no se edit
 - El ancla de contexto es `docs/project_state.md` (sección "Qué está construido" y
   "Bloqueos abiertos"); el detalle técnico vigente, largo, está en
   `docs/02_technical/estado_implementacion.md`.
-- Fases 1-8 cerradas (`develop` y `main` van hasta `v1.10.0`): las 5 fases iniciales, la
-  Fase 6 de brechas, el refactor Mapa Sitio V2, la infraestructura, la adopción de logsayer
-  y el cierre del ticket 0000010. El sitio tiene **13 rutas navegables** con datos simulados
-  (`src/constants/mock-data.ts`); **aún no hay consumo de API real**.
+- Fases 1-9 cerradas (`develop` y `main` van hasta `v1.10.0`): las 5 fases iniciales, la
+  Fase 6 de brechas, el refactor Mapa Sitio V2, la infraestructura, la adopción de logsayer,
+  el cierre del ticket 0000010 y la Fase 9 de consumo real de API (carreras y novedades).
+  **Fase 10 en curso:** alineación del frontend a los exports Desktop 1440 del avance de diseño,
+  página por página (T1–T3 mergeadas; T4–T16 pendientes). El resto del sitio sigue con datos
+  simulados (`src/constants/mock-data.ts`).
 - Base de documentación completada (18/09/2026): `docs/01_global`, `docs/02_technical`,
   `docs/03_process` y `docs/04_user_stories/HU-01`; skill `fe-architect-scaffold` con
   endpoints genéricos por historia de usuario.

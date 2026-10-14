@@ -30,6 +30,7 @@ project_state.md                                  · nivel 0 · — · — · pr
 06_audits/audit_2026-10-08-ux-ui-frontend.md      · nivel 3 · — · — · audit, ux, ui, frontend
 06_audits/audit_2026-10-09-figma.md               · nivel 3 · — · — · audit, figma
 logbooks/00_index.md                              · nivel 3 · — · —
+logbooks/logbook_fase-10_01.md                    · nivel 3 · — · — · logbook, fase
 logbooks/logbook_fase-7_01.md                     · nivel 3 · — · — · logbook, fase
 logbooks/logbook_fase-8_01.md                     · nivel 3 · — · — · logbook, fase
 logbooks/logbook_fase-9_01.md                     · nivel 3 · — · — · logbook, fase
