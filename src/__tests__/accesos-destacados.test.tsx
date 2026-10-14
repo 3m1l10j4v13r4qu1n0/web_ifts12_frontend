@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import AccesosDestacados from '../components/ui/AccesosDestacados';
+import { mockAccesosDestacados } from '../constants/mock-data';
 
 const items = [
   {
@@ -29,5 +30,15 @@ describe('AccesosDestacados', () => {
 
     const sinEnlace = screen.getByText('Campus virtual').closest('li');
     expect(sinEnlace).toHaveAttribute('aria-disabled', 'true');
+  });
+
+  it('la Home tiene los 3 accesos destacados del diseño', () => {
+    render(
+      <MemoryRouter>
+        <AccesosDestacados items={mockAccesosDestacados} />
+      </MemoryRouter>,
+    );
+
+    expect(screen.getAllByRole('listitem')).toHaveLength(3);
   });
 });
