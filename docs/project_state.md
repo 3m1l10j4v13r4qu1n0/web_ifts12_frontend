@@ -34,6 +34,10 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   Ya corregido en Home y Carreras (`fix/alineacion-disenio-anotaciones`, merge `dca04ed`). Los
   mensajes de proceso tipo "sitio en construcción" sí se mantienen. La regla quedó en
   `inbox/plan_diseño_aprobado.md`.
+- **Ajuste de logos del header (14/10/2026):** el usuario reportó los dos logos "en diferentes
+  posiciones". Ahora van `logoCABA.png` + `apple-touch-icon.png`, ambos a `h-10` y centrados
+  (antes `IFTS12.jpg` h-10 + `logoCABA.png` h-8). El footer e Institucional siguen con
+  `IFTS12.jpg`. Rama `fix/header-logos`, merge `29b2fe6`.
 - **Ramas:** `feature/alineacion-disenio-tNN-*` creadas **desde `develop`**. Una rama = una
   tarea. El orden seguro al retomar: editar → `logsayer log add` → refrescar este snapshot.
 - **Límite:** solo hay exports Desktop 1440; el Figma v2 (tablet/mobile) sigue bloqueado por
