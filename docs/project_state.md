@@ -28,6 +28,12 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 - **Pendientes (próxima sesión):** T4 (ficha de carrera), T5 (novedades), T6 (nota completa),
   T7 (FAQ), T8 (búsqueda), T9 (ingresantes), T10 (estudiantes), T11 (docentes), T12 (tutorías),
   T13 (institucional), T14 (contacto), T15 (404) y T16 (verificación y cierre).
+- **Regla de anotaciones (14/10/2026):** los textos de los exports que son **notas de UX/UI**
+  (refs `RF-xx`, `PENDIENTE`, "Se cargan desde el panel admin", "Sin datos inventados", etc.)
+  **no se renderizan** en ninguna pantalla: van como **comentario de código** en el componente.
+  Ya corregido en Home y Carreras (`fix/alineacion-disenio-anotaciones`, merge `dca04ed`). Los
+  mensajes de proceso tipo "sitio en construcción" sí se mantienen. La regla quedó en
+  `inbox/plan_diseño_aprobado.md`.
 - **Ramas:** `feature/alineacion-disenio-tNN-*` creadas **desde `develop`**. Una rama = una
   tarea. El orden seguro al retomar: editar → `logsayer log add` → refrescar este snapshot.
 - **Límite:** solo hay exports Desktop 1440; el Figma v2 (tablet/mobile) sigue bloqueado por
