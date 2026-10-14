@@ -70,8 +70,8 @@ function EnlacePlataforma({ acceso }: { acceso: AccesoExterno }) {
 }
 
 const ISOLOGOTIPOS = [
-  { src: '/IFTS12.jpg', alt: 'IFTS N.º 12' },
   { src: '/logoCABA.png', alt: 'Gobierno de la Ciudad de Buenos Aires' },
+  { src: '/IFTS12.jpg', alt: 'IFTS N.º 12' },
   { src: '/logoUpcn.png', alt: 'UPCN' },
 ];
 
