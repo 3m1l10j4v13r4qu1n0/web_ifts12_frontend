@@ -1,15 +1,16 @@
 import { Menu } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ACCESOS_EXTERNOS, MENU_PRINCIPAL } from '../../constants/navegacion';
+import { ACCESOS_EXTERNOS, MENU_PRINCIPAL, UBICACION_HEADER } from '../../constants/navegacion';
 import BuscadorGlobal from './BuscadorGlobal';
 import MobileMenu from './MobileMenu';
 import NavMenu from './NavMenu';
 
 /**
- * Header (B6/I12/RF-03/12/30). Top bar con Campus Virtual Moodle + SIU +
- * Inscripción GCBA (destinos configurables). Logo → Inicio. Menú de 9 ítems,
- * buscador visible y hamburguesa de 44×44. SIN ícono de persona.
+ * Header (B6/I12/RF-03/12/30). Top bar con la ubicación del instituto y los
+ * accesos Campus Virtual Moodle + SIU · Autogestión + Inscripción GCBA (destinos
+ * configurables). Logo → Inicio. Menú de 9 ítems, buscador visible y hamburguesa
+ * de 44×44. SIN ícono de persona.
  */
 function Header() {
   const [menuAbierto, setMenuAbierto] = useState(false);
@@ -17,9 +18,9 @@ function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-borde-suave bg-white/95 backdrop-blur">
       <div className="bg-slate-900">
-        <div className="mx-auto flex max-w-contenido items-center gap-4 px-4 py-1.5">
-          <p className="text-xs uppercase tracking-wide text-slate-400">Accesos directos</p>
-          <ul className="ml-auto flex items-center gap-3">
+        <div className="mx-auto flex max-w-contenido flex-wrap items-center gap-x-4 gap-y-1 px-4 py-1.5">
+          <p className="text-xs text-slate-300">{UBICACION_HEADER}</p>
+          <ul className="flex flex-wrap items-center gap-x-3 gap-y-1 sm:ml-auto">
             {ACCESOS_EXTERNOS.map((acceso) =>
               acceso.href === '' ? (
                 <li

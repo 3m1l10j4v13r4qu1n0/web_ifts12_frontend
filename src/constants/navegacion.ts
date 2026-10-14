@@ -23,13 +23,17 @@ export const MENU_PRINCIPAL: readonly ItemNavegacion[] = [
   { etiqueta: 'Contacto', href: '/contacto' },
 ];
 
+// Direccion y horario institucional que muestra la barra superior del header
+// (diseno Desktop 1440, export "Avance del diseno del sitio IFTS N.º 12").
+export const UBICACION_HEADER = 'Misiones 26, C1083 ABB, CABA · Atención exclusivamente nocturna';
+
 // Accesos directos a plataformas externas en la barra superior del header
 // (Mapa del Sitio V2 · RF-03/12/30). Las URLs oficiales son placeholders hasta
 // recibirlas de IFTS/Direccion; las rutas vacias se renderizan atenuadas.
 export const ACCESOS_EXTERNOS: readonly AccesoExterno[] = [
-  { id: 'campus-virtual', etiqueta: 'Campus virtual', href: ENLACES.moodle },
-  { id: 'siu', etiqueta: 'SIU', href: ENLACES.siu },
-  { id: 'inscripcion', etiqueta: 'Inscripción', href: ENLACES.inscripcion },
+  { id: 'campus-virtual', etiqueta: 'Campus Virtual Moodle', href: ENLACES.moodle },
+  { id: 'siu', etiqueta: 'SIU · Autogestión', href: ENLACES.siu },
+  { id: 'inscripcion', etiqueta: 'Inscripción GCBA', href: ENLACES.inscripcion },
 ];
 
 // Columnas del pie de pagina segun el Mapa del Sitio V2 y los wireframes.

@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { listarCarreras } from '../api/services/carrera.service';
 import { listarNovedades } from '../api/services/novedad.service';
 import Header from '../components/layout/Header';
-import { MENU_PRINCIPAL } from '../constants/navegacion';
+import { ACCESOS_EXTERNOS, MENU_PRINCIPAL, UBICACION_HEADER } from '../constants/navegacion';
 import { CARRERAS_API_FIJA, NOVEDADES_API_FIJA, renderConRouter } from '../test-utils';
 import type { CarreraApi } from '../types/api/carrera.types';
 import type { NovedadApi } from '../types/api/novedad.types';
@@ -33,6 +33,16 @@ describe('Header', () => {
 
     for (const item of MENU_PRINCIPAL) {
       expect(screen.getByRole('link', { name: item.etiqueta })).toBeInTheDocument();
+    }
+  });
+
+  it('muestra la ubicación del instituto y los accesos externos con etiqueta larga', () => {
+    renderConRouter(<Header />);
+
+    expect(screen.getByText(UBICACION_HEADER)).toBeInTheDocument();
+
+    for (const acceso of ACCESOS_EXTERNOS) {
+      expect(screen.getByText(acceso.etiqueta)).toBeInTheDocument();
     }
   });
 
