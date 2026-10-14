@@ -100,7 +100,11 @@ function HomePage() {
         <h2 id="titulo-novedades" className="text-2xl font-bold text-texto">
           Novedades del último mes
         </h2>
-        <p className="mt-2 text-texto-suave">De la más reciente a la más antigua (RF-25).</p>
+        {/*
+          Anotación del diseño (comentario UX/UI, no es copy visible):
+          "De la más reciente a la más antigua (RF-25). Se cargan desde el panel admin."
+          El backend ya ordena por fecha DESC; el título ya expresa "del último mes".
+        */}
         {cargandoNovedades ? (
           <AvisoCarga que="las novedades" />
         ) : errorNovedades !== null ? (
@@ -150,9 +154,10 @@ function HomePage() {
               Ver todas las carreras
             </Link>
           </div>
-          <p className="mt-2 text-texto-suave">
-            Todas en turno exclusivamente nocturno. Modalidad y horarios por carrera: PENDIENTE.
-          </p>
+          {/*
+            Anotación del diseño (comentario UX/UI, no es copy visible):
+            "Todas en turno exclusivamente nocturno. Modalidad y horarios por carrera: PENDIENTE."
+          */}
           {cargandoCarreras ? (
             <AvisoCarga que="las carreras" />
           ) : errorCarreras !== null ? (
