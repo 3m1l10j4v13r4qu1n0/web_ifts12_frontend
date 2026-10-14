@@ -189,43 +189,51 @@ export const mockAccesosDestacados: AccesoRapido[] = [
   },
 ];
 
-// Accesos rapidos de la Home segun el Mapa del Sitio V2 (UX/UI): las rutas
-// internas siguen el AppRouter; las pendientes de URL oficial quedan vacias.
+// Accesos rapidos de la Home segun el diseno Desktop 1440 (7 accesos confirmados
+// por Analisis Funcional): Moodle, SIU, Inscripcion GCBA, Becas, Constancias,
+// Mesas de examen y Calendario academico. Las descripciones son las del diseno;
+// las rutas pendientes de URL oficial quedan vacias.
 export const mockAccesosRapidos: AccesoRapido[] = [
   {
-    id: 'tutorias',
-    titulo: 'Tutorías',
-    descripcion: 'Acompañamiento y orientación para estudiantes.',
-    href: '/tutorias',
+    id: 'campus-virtual',
+    titulo: 'Campus Virtual Moodle',
+    descripcion: 'Externo · URL PENDIENTE',
+    href: ENLACES.moodle,
+  },
+  {
+    id: 'siu',
+    titulo: 'SIU · Autogestión',
+    descripcion: 'Externo · nombre y URL a confirmar',
+    href: ENLACES.siu,
+  },
+  {
+    id: 'inscripcion',
+    titulo: 'Inscripción GCBA',
+    descripcion: 'Externo · URL PENDIENTE',
+    href: ENLACES.inscripcion,
   },
   {
     id: 'becas',
     titulo: 'Becas',
-    descripcion: 'Información sobre requisitos y solicitud de becas.',
+    descripcion: 'Estudiantes › Becas',
     href: '',
   },
   {
     id: 'constancias',
     titulo: 'Constancias',
-    descripcion: 'Solicitud de constancias de cursada y título.',
+    descripcion: 'Estudiantes › Constancias',
     href: ENLACES.constancias,
   },
   {
     id: 'mesas-examen',
     titulo: 'Mesas de examen',
-    descripcion: 'Fechas y convocatorias de mesas de examen.',
+    descripcion: 'Estudiantes › Mesas',
     href: ENLACES.mesasExamen,
   },
   {
     id: 'calendario',
     titulo: 'Calendario académico',
-    descripcion: 'Fechas del ciclo lectivo, vacaciones y eventos.',
+    descripcion: 'Estudiantes › Calendario',
     href: ENLACES.calendario,
-  },
-  {
-    id: 'contacto',
-    titulo: 'Contacto',
-    descripcion: 'Vías de contacto con el instituto.',
-    href: '/contacto',
   },
 ];

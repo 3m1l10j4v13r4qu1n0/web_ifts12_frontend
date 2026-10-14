@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import AccesosRapidos from '../components/ui/AccesosRapidos';
+import { mockAccesosRapidos } from '../constants/mock-data';
 
 const items = [
   { id: 'carreras', titulo: 'Carreras', descripcion: 'Ofertas académicas.', href: '/carreras' },
@@ -19,5 +20,15 @@ describe('AccesosRapidos', () => {
 
     const sinEnlace = screen.getByText('Becas').closest('li');
     expect(sinEnlace).toHaveAttribute('aria-disabled', 'true');
+  });
+
+  it('la Home tiene los 7 accesos rápidos del diseño', () => {
+    render(
+      <MemoryRouter>
+        <AccesosRapidos items={mockAccesosRapidos} />
+      </MemoryRouter>,
+    );
+
+    expect(screen.getAllByRole('listitem')).toHaveLength(7);
   });
 });

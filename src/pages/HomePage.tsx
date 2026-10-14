@@ -15,6 +15,9 @@ import { mockAccesosDestacados, mockAccesosRapidos, mockFaqs } from '../constant
 import { useCarreras } from '../hooks/useCarreras';
 import { useNovedades } from '../hooks/useNovedades';
 
+// FAQ destacadas de la Home: el diseño muestra 4 destacadas + "Ver todas".
+const FAQ_DESTACADAS = mockFaqs.slice(0, 4);
+
 function HomePage() {
   // Carreras y novedades vienen del backend; el resto de la Home sigue en mocks. Las dos
   // consultas comparten cache con `/carreras` y `/noticias`, así que navegar a esas rutas
@@ -93,47 +96,11 @@ function HomePage() {
         </div>
       </section>
 
-      <section aria-labelledby="titulo-accesos" className="mx-auto max-w-contenido px-4 py-16">
-        <h2 id="titulo-accesos" className="text-2xl font-bold text-texto">
-          Accesos rápidos
-        </h2>
-        <div className="mt-6">
-          <AccesosRapidos items={mockAccesosRapidos} />
-        </div>
-      </section>
-
-      <section aria-labelledby="titulo-carreras" className="border-y border-borde-suave bg-fondo">
-        <div className="mx-auto max-w-contenido px-4 py-16">
-          <h2 id="titulo-carreras" className="text-2xl font-bold text-texto">
-            Carreras
-          </h2>
-          <p className="mt-2 text-texto-suave">Conocé la oferta académica del instituto.</p>
-          {cargandoCarreras ? (
-            <AvisoCarga que="las carreras" />
-          ) : errorCarreras !== null ? (
-            <AvisoError
-              que="las carreras"
-              mensaje={errorCarreras}
-              alReintentar={recargarCarreras}
-            />
-          ) : carreras.length > 0 ? (
-            <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {carreras.map((carrera) => (
-                <li key={carrera.id}>
-                  <CardCarrera carrera={carrera} />
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="mt-6 text-texto-suave">Aún no hay carreras publicadas.</p>
-          )}
-        </div>
-      </section>
-
       <section aria-labelledby="titulo-novedades" className="mx-auto max-w-contenido px-4 py-16">
         <h2 id="titulo-novedades" className="text-2xl font-bold text-texto">
-          Novedades recientes
+          Novedades del último mes
         </h2>
+        <p className="mt-2 text-texto-suave">De la más reciente a la más antigua (RF-25).</p>
         {cargandoNovedades ? (
           <AvisoCarga que="las novedades" />
         ) : errorNovedades !== null ? (
@@ -165,13 +132,73 @@ function HomePage() {
         )}
       </section>
 
-      <section aria-labelledby="titulo-faq" className="mx-auto max-w-3xl px-4 py-16">
+      <section aria-labelledby="titulo-carreras" className="border-y border-borde-suave bg-fondo">
+        <div className="mx-auto max-w-contenido px-4 py-16">
+          {!cargandoCarreras && errorCarreras === null && carreras.length > 0 && (
+            <p className="text-xs font-medium uppercase tracking-wide text-acento-700">
+              Oferta académica · {carreras.length} carreras
+            </p>
+          )}
+          <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
+            <h2 id="titulo-carreras" className="text-2xl font-bold text-texto">
+              Carreras
+            </h2>
+            <Link
+              to="/carreras"
+              className="inline-flex items-center justify-center rounded-lg border border-borde bg-white px-5 py-2.5 text-sm font-medium text-texto transition-colors hover:border-acento-600 hover:text-acento-700"
+            >
+              Ver todas las carreras
+            </Link>
+          </div>
+          <p className="mt-2 text-texto-suave">
+            Todas en turno exclusivamente nocturno. Modalidad y horarios por carrera: PENDIENTE.
+          </p>
+          {cargandoCarreras ? (
+            <AvisoCarga que="las carreras" />
+          ) : errorCarreras !== null ? (
+            <AvisoError
+              que="las carreras"
+              mensaje={errorCarreras}
+              alReintentar={recargarCarreras}
+            />
+          ) : carreras.length > 0 ? (
+            <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {carreras.map((carrera) => (
+                <li key={carrera.id}>
+                  <CardCarrera carrera={carrera} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-6 text-texto-suave">Aún no hay carreras publicadas.</p>
+          )}
+        </div>
+      </section>
+
+      <section aria-labelledby="titulo-accesos" className="mx-auto max-w-contenido px-4 py-16">
+        <h2 id="titulo-accesos" className="text-2xl font-bold text-texto">
+          Accesos rápidos
+        </h2>
+        <div className="mt-6">
+          <AccesosRapidos items={mockAccesosRapidos} />
+        </div>
+      </section>
+
+      <section aria-labelledby="titulo-faq" className="mx-auto max-w-3xl px-4 pb-16">
         <h2 id="titulo-faq" className="text-2xl font-bold text-texto">
           Preguntas frecuentes
         </h2>
         <p className="mt-2 text-texto-suave">Respuestas sobre ingreso, cursada y trámites.</p>
         <div className="mt-6">
-          <FaqAcordeon items={mockFaqs} />
+          <FaqAcordeon items={FAQ_DESTACADAS} />
+        </div>
+        <div className="mt-8">
+          <Link
+            to="/faq"
+            className="inline-flex items-center justify-center rounded-lg border border-borde bg-white px-5 py-2.5 text-sm font-medium text-texto transition-colors hover:border-acento-600 hover:text-acento-700"
+          >
+            Ver todas las preguntas
+          </Link>
         </div>
       </section>
     </main>
