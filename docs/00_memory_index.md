@@ -6,6 +6,7 @@
 01_global/alcance.md                              · nivel 0 · borrador · 2026-09-18 · alcance
 01_global/correcciones_ux_ui_frontend.md          · nivel 0 · borrador · 2026-10-08 · correcciones, ux, ui, frontend
 01_global/figma_v2_contrato_visual.md             · nivel 0 · vigente · 2026-10-13 · figma, contrato, visual, ux, ui
+01_global/plan_correcciones_uxui_frontend.md      · nivel 0 · borrador · 2026-10-08 · plan, correcciones, ux, ui, frontend
 01_global/reglas_negocio.md                       · nivel 0 · borrador · 2026-09-18 · reglas, negocio
 01_global/vision.md                               · nivel 0 · borrador · 2026-09-18 · vision
 project_state.md                                  · nivel 0 · — · — · project, state
@@ -13,6 +14,7 @@ project_state.md                                  · nivel 0 · — · — · pr
 02_technical/decisiones_tecnicas.md               · nivel 1 · borrador · 2026-09-18 · decisiones, tecnicas
 02_technical/estado_implementacion.md             · nivel 1 · vigente · 2026-09-30 · estado, implementacion
 02_technical/modelo_datos_global.md               · nivel 1 · borrador · 2026-09-18 · modelo, datos, global
+02_technical/revision_consumo_api.md              · nivel 1 · borrador · 2026-10-08 · revision, consumo, api, novedades
 04_user_stories/HU-01/README.md                   · nivel 2 · borrador · 2026-09-18 · hu-01
 04_user_stories/HU-01/hu_01_api.md                · nivel 2 · — · 2026-09-18 · hu-01, api, backend
 04_user_stories/HU-01/hu_01_caso_uso_expandido.md · nivel 2 · borrador · 2026-09-18 · hu-01, hu, caso, uso, expandido
@@ -25,6 +27,8 @@ project_state.md                                  · nivel 0 · — · — · pr
 06_audits/audit_2026-09-18-analisis-funcional.md  · nivel 3 · — · — · audit, analisis, funcional
 06_audits/audit_2026-09-21-ux-ui.md               · nivel 3 · — · — · audit, ux, ui
 06_audits/audit_2026-10-01-backend-readme.md      · nivel 3 · — · — · audit, backend
+06_audits/audit_2026-10-08-ux-ui-frontend.md      · nivel 3 · — · — · audit, ux, ui, frontend
+06_audits/audit_2026-10-09-figma.md               · nivel 3 · — · — · audit, figma
 logbooks/00_index.md                              · nivel 3 · — · —
 logbooks/logbook_fase-7_01.md                     · nivel 3 · — · — · logbook, fase
 logbooks/logbook_fase-8_01.md                     · nivel 3 · — · — · logbook, fase

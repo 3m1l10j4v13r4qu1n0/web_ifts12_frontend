@@ -46,6 +46,14 @@ mocks.)_
   (`docs/01_global/correcciones_ux_ui_frontend.md`, 08/10/2026): 9 bloqueantes (B1–B9), 12
   importantes (I1–I12) y 7 mejoras (M1–M7) de la auditoría UX/UI del 07/10, cada una con criterio
   de aceptación. Pendiente de priorización/implementación.
+- **Plan de correcciones UX/UI y Frontend (faseado):** Capa 1 define el **orden y fases** para
+  abordar esos hallazgos en `docs/01_global/plan_correcciones_uxui_frontend.md` (08/10/2026),
+  complementando los criterios por corrección de
+  `docs/01_global/correcciones_ux_ui_frontend.md`.
+- **Revisión del consumo de API (técnica):** Capa 2 registra el único punto pendiente
+  (guard defensivo de `contenido` en `NotaCompletaPage`) en
+  `docs/02_technical/revision_consumo_api.md` (08/10/2026), sujeto a validación con
+  Backend/Contenidos.
 - **Rediseño alineado al Figma v2 «IFTS 12 v2 - alineado a contratos» (en curso, rama
   `feature/figma-v2-contrato-visual`):** el Figma nuevo quedó registrado como contrato visual
   vigente en Capa 1 (`docs/01_global/figma_v2_contrato_visual.md`, da de baja al Figma anterior)
