@@ -1,5 +1,6 @@
 import { X } from 'lucide-react';
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { MENU_PRINCIPAL } from '../../constants/navegacion';
 import BuscadorGlobal from './BuscadorGlobal';
 import NavMenu from './NavMenu';
@@ -38,7 +39,11 @@ function MobileMenu({ abierto, onCerrar }: MobileMenuProps) {
     return null;
   }
 
-  return (
+  // Se renderiza en un portal a document.body: el header tiene backdrop-blur
+  // (backdrop-filter), que convierte al header en containing block de los
+  // fixed/absolute y encerraba al overlay dentro del header (solo se veía ahí).
+  // Con el portal, `fixed inset-0` se resuelve contra el viewport.
+  return createPortal(
     <div className="fixed inset-0 z-50 lg:hidden">
       <button
         type="button"
@@ -65,7 +70,8 @@ function MobileMenu({ abierto, onCerrar }: MobileMenuProps) {
         <BuscadorGlobal />
         <NavMenu items={MENU_PRINCIPAL} onNavigate={onCerrar} />
       </nav>
-    </div>
+    </div>,
+    document.body,
   );
 }
 
