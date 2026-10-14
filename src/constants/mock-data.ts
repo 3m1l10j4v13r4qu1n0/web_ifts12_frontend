@@ -3,13 +3,7 @@
 // institucional definitivo: las descripciones y respuestas son marcadas como
 // pendientes de validacion hasta recibir la minuta V2 y el Drive del IFTS.
 
-import type {
-  AccesoRapido,
-  Carrera,
-  Comunidad,
-  FaqItem,
-  Noticia,
-} from '../types/domain/sitio.types';
+import type { AccesoRapido, Carrera, FaqItem, Noticia } from '../types/domain/sitio.types';
 import { ENLACES } from './enlaces';
 
 // Carreras mencionadas en la minuta de relevamiento del 27/08/2026. El listado
@@ -233,27 +227,5 @@ export const mockAccesosRapidos: AccesoRapido[] = [
     titulo: 'Contacto',
     descripcion: 'Vías de contacto con el instituto.',
     href: '/contacto',
-  },
-];
-
-// Bloques comunidad visibles en la Home segun la minuta.
-export const mockComunidades: Comunidad[] = [
-  {
-    id: 'tutoria',
-    titulo: 'Comunidad de tutoría',
-    descripcion: 'Espacio de acompañamiento para estudiantes.',
-    href: '/tutorias',
-  },
-  {
-    id: 'alumnos',
-    titulo: 'Comunidad de alumnos',
-    descripcion: 'Servicios y novedades para estudiantes cursantes.',
-    href: '/estudiantes',
-  },
-  {
-    id: 'docentes',
-    titulo: 'Comunidad docente',
-    descripcion: 'Recursos y novedades para el equipo docente.',
-    href: '/docentes',
   },
 ];

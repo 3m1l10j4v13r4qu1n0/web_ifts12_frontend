@@ -14,23 +14,23 @@ function AccesosRapidos({ items }: AccesosRapidosProps) {
             <li
               key={item.id}
               aria-disabled="true"
-              className="flex flex-col rounded-xl border border-slate-200 bg-slate-50 p-6 opacity-60"
+              className="flex flex-col rounded-xl border border-borde-suave bg-fondo p-6 opacity-60"
             >
-              <h3 className="text-base font-semibold text-slate-900">{item.titulo}</h3>
-              <p className="mt-1 text-sm text-slate-600">{item.descripcion}</p>
+              <h3 className="text-base font-semibold text-texto">{item.titulo}</h3>
+              <p className="mt-1 text-sm text-texto-suave">{item.descripcion}</p>
             </li>
           );
         }
 
         const contenido = (
           <>
-            <h3 className="text-base font-semibold text-slate-900">{item.titulo}</h3>
-            <p className="mt-1 text-sm text-slate-600">{item.descripcion}</p>
+            <h3 className="text-base font-semibold text-texto">{item.titulo}</h3>
+            <p className="mt-1 text-sm text-texto-suave">{item.descripcion}</p>
           </>
         );
 
         const clasesEnlace =
-          'group flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-colors hover:border-acento-600';
+          'group flex flex-col rounded-xl border border-borde-suave bg-white p-6 shadow-suave transition-colors hover:border-acento-600';
 
         return item.href.startsWith('/') ? (
           <li key={item.id}>

@@ -7,6 +7,10 @@ interface NavMenuProps {
   onNavigate?: () => void;
 }
 
+/**
+ * Ítem de menú. Activo: borde inferior de 3px + color + peso 600 (NavLink ya
+ * marca aria-current="page"). En móvil/tablet el ítem es vertical, de 52px.
+ */
 function NavMenu({ items, onNavigate }: NavMenuProps) {
   return (
     <ul className="flex flex-col gap-1 lg:flex-row lg:items-center lg:gap-2">
@@ -17,10 +21,10 @@ function NavMenu({ items, onNavigate }: NavMenuProps) {
             onClick={onNavigate}
             className={({ isActive }) =>
               cn(
-                'block rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                'flex min-h-[52px] items-center border-b-[3px] px-3 text-sm font-medium transition-colors lg:min-h-11',
                 isActive
-                  ? 'bg-acento-100 text-acento-800'
-                  : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900',
+                  ? 'border-acento-600 font-semibold text-acento-700'
+                  : 'border-transparent text-texto-suave hover:text-texto',
               )
             }
           >

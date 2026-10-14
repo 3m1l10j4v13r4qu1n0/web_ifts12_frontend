@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { mapNovedadesApiANoticias } from '../api/mappers/novedad.mapper';
+import EncabezadoPagina from '../components/layout/EncabezadoPagina';
 import AvisoCarga from '../components/ui/AvisoCarga';
 import AvisoError from '../components/ui/AvisoError';
 import CardNoticia from '../components/ui/CardNoticia';
@@ -42,19 +43,16 @@ function NoticiasPage() {
 
   return (
     <main className="min-h-screen">
-      <div className="border-b border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-6xl px-4 py-12">
-          <h1 className="text-3xl font-bold text-slate-900">Novedades</h1>
-          <p className="mt-3 max-w-2xl text-slate-600">
-            Noticias e información oficial del instituto, ordenadas de la más reciente a la más
-            antigua.
-          </p>
-        </div>
-      </div>
+      <EncabezadoPagina
+        eyebrow="Actualidad"
+        seccion="naranja"
+        titulo="Novedades"
+        descripcion="Noticias e información oficial del instituto, ordenadas de la más reciente a la más antigua."
+      />
 
-      <div className="mx-auto max-w-6xl px-4 py-12">
+      <div className="mx-auto max-w-contenido px-4 py-12">
         <div className="max-w-xl">
-          <label htmlFor="buscador-noticias" className="block text-sm font-medium text-slate-700">
+          <label htmlFor="buscador-noticias" className="block text-sm font-medium text-texto">
             Buscar en novedades
           </label>
           <input
@@ -63,7 +61,7 @@ function NoticiasPage() {
             value={consulta}
             onChange={(evento) => setConsulta(evento.target.value)}
             placeholder="Buscá por palabra clave…"
-            className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-acento-600 focus:outline-none focus:ring-1 focus:ring-acento-600"
+            className="mt-1 w-full rounded-lg border border-borde bg-white px-3 py-2 text-sm text-texto placeholder:text-texto-suave focus:border-acento-600 focus:outline-none focus:ring-1 focus:ring-acento-600"
           />
         </div>
 
@@ -85,7 +83,7 @@ function NoticiasPage() {
             ))}
           </ul>
         ) : (
-          <p className="mt-8 rounded-xl border border-slate-200 bg-white p-6 text-slate-600">
+          <p className="mt-8 rounded-xl border border-borde-suave bg-white p-6 text-texto-suave">
             {consulta === ''
               ? 'Todavía no hay novedades publicadas.'
               : `No se encontraron novedades para “${consulta}”. Probá con otras palabras.`}

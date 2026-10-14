@@ -140,6 +140,6 @@ describe('NotaCompletaPage', () => {
   it('muestra la página 404 para un id inexistente', async () => {
     renderizarNota('/noticias/inexistente');
 
-    expect(await screen.findByText('Pagina no encontrada')).toBeInTheDocument();
+    expect(await screen.findByText(/página no encontrada/i)).toBeInTheDocument();
   });
 });

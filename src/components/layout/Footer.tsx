@@ -78,7 +78,7 @@ const ISOLOGOTIPOS = [
 function Footer() {
   return (
     <footer className="bg-slate-900 text-slate-300">
-      <div className="mx-auto max-w-6xl px-4 py-10">
+      <div className="mx-auto max-w-contenido px-4 py-10">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <h2 className="text-lg font-semibold text-white">{DATOS_INSTITUCIONALES.nombre}</h2>

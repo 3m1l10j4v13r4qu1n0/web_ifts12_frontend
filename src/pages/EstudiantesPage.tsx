@@ -1,3 +1,4 @@
+import EncabezadoPagina from '../components/layout/EncabezadoPagina';
 import FaqAcordeon from '../components/ui/FaqAcordeon';
 import { ENLACES } from '../constants/enlaces';
 import { mockFaqs } from '../constants/mock-data';
@@ -52,25 +53,23 @@ function EstudiantesPage() {
 
   return (
     <main className="min-h-screen">
-      <div className="border-b border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-6xl px-4 py-12">
-          <h1 className="text-3xl font-bold text-slate-900">Estudiantes</h1>
-          <p className="mt-3 max-w-2xl text-slate-600">
-            Servicios, trámites y recursos para tu cursada en el instituto.
-          </p>
-        </div>
-      </div>
+      <EncabezadoPagina
+        eyebrow="Cursada"
+        seccion="cian"
+        titulo="Estudiantes"
+        descripcion="Servicios, trámites y recursos para tu cursada en el instituto."
+      />
 
-      <div className="mx-auto max-w-6xl space-y-14 px-4 py-12">
+      <div className="mx-auto max-w-contenido space-y-14 px-4 py-12">
         <section
           aria-labelledby="titulo-campus"
-          className="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between"
+          className="flex flex-col gap-4 rounded-xl border border-borde-suave bg-white p-6 shadow-suave sm:flex-row sm:items-center sm:justify-between"
         >
           <div>
-            <h2 id="titulo-campus" className="text-xl font-semibold text-slate-900">
+            <h2 id="titulo-campus" className="text-xl font-semibold text-texto">
               Campus virtual (Moodle)
             </h2>
-            <p className="mt-2 text-slate-600">
+            <p className="mt-2 text-texto-suave">
               Ingresá al aula virtual para consultar materias, recursos y novedades de la cursada.
             </p>
           </div>
@@ -85,7 +84,7 @@ function EstudiantesPage() {
           ) : (
             <span
               aria-disabled="true"
-              className="inline-flex shrink-0 cursor-default items-center rounded-lg bg-slate-100 px-5 py-2.5 text-sm font-medium text-slate-500"
+              className="inline-flex shrink-0 cursor-default items-center rounded-lg bg-fondo px-5 py-2.5 text-sm font-medium text-texto-suave"
             >
               Enlace oficial próximamente
             </span>
@@ -93,7 +92,7 @@ function EstudiantesPage() {
         </section>
 
         <section aria-labelledby="titulo-servicios">
-          <h2 id="titulo-servicios" className="text-2xl font-bold text-slate-900">
+          <h2 id="titulo-servicios" className="text-2xl font-bold text-texto">
             Servicios para estudiantes
           </h2>
           <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -101,11 +100,11 @@ function EstudiantesPage() {
               <li
                 key={servicio.id}
                 aria-disabled="true"
-                className="rounded-xl border border-dashed border-slate-300 bg-white p-5"
+                className="rounded-xl border border-dashed border-borde bg-white p-5"
               >
-                <h3 className="text-sm font-semibold text-slate-900">{servicio.titulo}</h3>
-                <p className="mt-1 text-sm text-slate-500">{servicio.descripcion}</p>
-                <span className="mt-3 inline-block rounded bg-slate-100 px-2 py-0.5 text-[0.65rem] font-medium uppercase tracking-wide text-slate-500">
+                <h3 className="text-sm font-semibold text-texto">{servicio.titulo}</h3>
+                <p className="mt-1 text-sm text-texto-suave">{servicio.descripcion}</p>
+                <span className="mt-3 inline-block rounded bg-fondo px-2 py-0.5 text-[0.65rem] font-medium uppercase tracking-wide text-texto-suave">
                   Próximamente
                 </span>
               </li>
@@ -115,19 +114,19 @@ function EstudiantesPage() {
 
         <section
           aria-labelledby="titulo-calendario"
-          className="rounded-xl border border-dashed border-slate-300 bg-white p-6"
+          className="rounded-xl border border-dashed border-borde bg-white p-6"
         >
-          <h2 id="titulo-calendario" className="text-xl font-semibold text-slate-900">
+          <h2 id="titulo-calendario" className="text-xl font-semibold text-texto">
             Calendario académico
           </h2>
-          <p className="mt-3 text-slate-500">
+          <p className="mt-3 text-texto-suave">
             Fechas del ciclo lectivo, mesas de examen y recesos. Se publica cuando esté el
             calendario oficial del ciclo.
           </p>
         </section>
 
         <section aria-labelledby="titulo-faq" className="mx-auto max-w-3xl">
-          <h2 id="titulo-faq" className="text-2xl font-bold text-slate-900">
+          <h2 id="titulo-faq" className="text-2xl font-bold text-texto">
             Preguntas frecuentes de estudiantes
           </h2>
           <div className="mt-6">

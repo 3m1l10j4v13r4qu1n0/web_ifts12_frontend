@@ -30,10 +30,3 @@ export interface AccesoRapido {
   descripcion: string;
   href: string;
 }
-
-export interface Comunidad {
-  id: string;
-  titulo: string;
-  descripcion: string;
-  href: string;
-}

@@ -62,18 +62,18 @@ function FormularioConsulta({
   const estadoInput = (invalido: boolean) =>
     invalido
       ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
-      : 'border-slate-300 focus:border-acento-600 focus:ring-acento-600';
+      : 'border-borde focus:border-acento-600 focus:ring-acento-600';
 
   return (
     <section
       aria-label={titulo}
-      className="w-full rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
+      className="w-full rounded-xl border border-borde-suave bg-white p-6 shadow-suave"
     >
-      <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-900">{titulo}</h3>
+      <h3 className="text-sm font-semibold uppercase tracking-wide text-texto">{titulo}</h3>
 
       <form onSubmit={enviar} noValidate className="mt-4 space-y-4" aria-live="polite">
         <div>
-          <label htmlFor="consulta-nombre" className="block text-sm font-medium text-slate-700">
+          <label htmlFor="consulta-nombre" className="block text-sm font-medium text-texto">
             Nombre
           </label>
           <input
@@ -82,7 +82,7 @@ function FormularioConsulta({
             value={nombre}
             onChange={(evento) => setNombre(evento.target.value)}
             aria-invalid={errores.nombre !== undefined}
-            className={`mt-1 w-full rounded-lg border bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-1 ${estadoInput(errores.nombre !== undefined)}`}
+            className={`mt-1 w-full rounded-lg border bg-white px-3 py-2 text-sm text-texto placeholder:text-texto-suave focus:outline-none focus:ring-1 ${estadoInput(errores.nombre !== undefined)}`}
           />
           {errores.nombre !== undefined && (
             <p role="alert" className="mt-1 text-sm text-red-600">
@@ -92,7 +92,7 @@ function FormularioConsulta({
         </div>
 
         <div>
-          <label htmlFor="consulta-correo" className="block text-sm font-medium text-slate-700">
+          <label htmlFor="consulta-correo" className="block text-sm font-medium text-texto">
             Correo electrónico
           </label>
           <input
@@ -101,7 +101,7 @@ function FormularioConsulta({
             value={correo}
             onChange={(evento) => setCorreo(evento.target.value)}
             aria-invalid={errores.correo !== undefined}
-            className={`mt-1 w-full rounded-lg border bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-1 ${estadoInput(errores.correo !== undefined)}`}
+            className={`mt-1 w-full rounded-lg border bg-white px-3 py-2 text-sm text-texto placeholder:text-texto-suave focus:outline-none focus:ring-1 ${estadoInput(errores.correo !== undefined)}`}
           />
           {errores.correo !== undefined && (
             <p role="alert" className="mt-1 text-sm text-red-600">
@@ -111,7 +111,7 @@ function FormularioConsulta({
         </div>
 
         <div>
-          <label htmlFor="consulta-mensaje" className="block text-sm font-medium text-slate-700">
+          <label htmlFor="consulta-mensaje" className="block text-sm font-medium text-texto">
             Consulta
           </label>
           <textarea
@@ -120,7 +120,7 @@ function FormularioConsulta({
             value={consulta}
             onChange={(evento) => setConsulta(evento.target.value)}
             aria-invalid={errores.consulta !== undefined}
-            className={`mt-1 w-full rounded-lg border bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-1 ${estadoInput(errores.consulta !== undefined)}`}
+            className={`mt-1 w-full rounded-lg border bg-white px-3 py-2 text-sm text-texto placeholder:text-texto-suave focus:outline-none focus:ring-1 ${estadoInput(errores.consulta !== undefined)}`}
           />
           {errores.consulta !== undefined && (
             <p role="alert" className="mt-1 text-sm text-red-600">
@@ -139,7 +139,7 @@ function FormularioConsulta({
           <button
             type="button"
             onClick={limpiar}
-            className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:border-acento-600 hover:text-acento-700"
+            className="inline-flex items-center justify-center rounded-lg border border-borde bg-white px-5 py-2.5 text-sm font-medium text-texto transition-colors hover:border-acento-600 hover:text-acento-700"
           >
             Limpiar
           </button>

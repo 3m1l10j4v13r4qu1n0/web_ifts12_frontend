@@ -21,7 +21,7 @@ function FaqAcordeon({ items }: FaqAcordeonProps) {
   }
 
   return (
-    <div className="divide-y divide-slate-200 rounded-xl border border-slate-200 bg-white">
+    <div className="divide-y divide-borde-suave rounded-xl border border-borde-suave bg-white">
       {items.map((item) => {
         const abierto = abiertoId === item.id;
         const panelId = `${baseId}-panel-${item.id}`;
@@ -42,16 +42,16 @@ function FaqAcordeon({ items }: FaqAcordeonProps) {
                   <span className="text-xs font-medium uppercase tracking-wide text-acento-700">
                     {etiquetasCategoria[item.categoria]}
                   </span>
-                  <span className="font-medium text-slate-900">{item.pregunta}</span>
+                  <span className="font-medium text-texto">{item.pregunta}</span>
                 </span>
-                <span aria-hidden="true" className="text-slate-400">
+                <span aria-hidden="true" className="text-texto-suave">
                   {abierto ? '−' : '+'}
                 </span>
               </button>
             </h3>
             {abierto && (
               <section id={panelId} aria-labelledby={botonId}>
-                <p className="px-6 pb-4 text-sm text-slate-600">{item.respuesta}</p>
+                <p className="px-6 pb-4 text-sm text-texto-suave">{item.respuesta}</p>
               </section>
             )}
           </div>

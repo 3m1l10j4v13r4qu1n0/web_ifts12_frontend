@@ -1,27 +1,58 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import EncabezadoPagina from '../components/layout/EncabezadoPagina';
+import Estado from '../components/ui/Estado';
 import FaqAcordeon from '../components/ui/FaqAcordeon';
+import Tabs from '../components/ui/Tabs';
 import { mockFaqs } from '../constants/mock-data';
+import type { FaqCategoria } from '../types/domain/sitio.types';
+
+const ETIQUETAS: Record<FaqCategoria, string> = {
+  ingresantes: 'Ingresantes',
+  estudiantes: 'Estudiantes',
+  docentes: 'Docentes',
+  institucional: 'Institucional',
+};
+
+const TABS = [
+  { id: 'todas', etiqueta: 'Todas' },
+  ...(Object.keys(ETIQUETAS) as FaqCategoria[]).map((categoria) => ({
+    id: categoria,
+    etiqueta: ETIQUETAS[categoria],
+  })),
+];
 
 function FaqPage() {
+  const [categoria, setCategoria] = useState('todas');
+
+  const faqs = categoria === 'todas' ? mockFaqs : mockFaqs.filter((f) => f.categoria === categoria);
+
   return (
     <main className="min-h-screen">
-      <div className="border-b border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-6xl px-4 py-12">
-          <h1 className="text-3xl font-bold text-slate-900">Preguntas frecuentes</h1>
-          <p className="mt-3 max-w-2xl text-slate-600">
-            Respuestas sobre ingreso, cursada, trámites e información institucional.
-          </p>
-        </div>
-      </div>
+      <EncabezadoPagina
+        eyebrow="Preguntas frecuentes"
+        seccion="ambar"
+        titulo="Preguntas frecuentes"
+        descripcion="Respuestas sobre ingreso, cursada, trámites e información institucional."
+      />
 
       <section aria-labelledby="titulo-faq" className="mx-auto max-w-3xl px-4 py-12">
         <h2 id="titulo-faq" className="sr-only">
           Listado de preguntas frecuentes
         </h2>
-        <FaqAcordeon items={mockFaqs} />
 
-        <div className="mt-8 rounded-xl border border-slate-200 bg-slate-50 p-6">
-          <p className="text-sm text-slate-600">
+        <Tabs tabs={TABS} activa={categoria} onChange={setCategoria} />
+
+        <div className="mt-6">
+          {faqs.length > 0 ? (
+            <FaqAcordeon items={faqs} />
+          ) : (
+            <Estado tipo="empty" mensaje="Todavía no hay preguntas en esta categoría." />
+          )}
+        </div>
+
+        <div className="mt-8 rounded-xl border border-borde-suave bg-fondo p-6">
+          <p className="text-sm text-texto-suave">
             ¿No encontraste tu respuesta? Escribinos a través del formulario de contacto.
           </p>
           <Link

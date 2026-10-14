@@ -1,4 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
+import AdminLoginPage from '../pages/AdminLoginPage';
+import AdminPanelPage from '../pages/AdminPanelPage';
+import BusquedaPage from '../pages/BusquedaPage';
 import CarreraDetallePage from '../pages/CarreraDetallePage';
 import CarrerasPage from '../pages/CarrerasPage';
 import ContactoPage from '../pages/ContactoPage';
@@ -17,6 +20,7 @@ function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/buscar" element={<BusquedaPage />} />
       <Route path="/carreras" element={<CarrerasPage />} />
       <Route path="/carreras/:id" element={<CarreraDetallePage />} />
       <Route path="/ingresantes" element={<IngresantesPage />} />
@@ -28,6 +32,8 @@ function AppRouter() {
       <Route path="/noticias/:id" element={<NotaCompletaPage />} />
       <Route path="/faq" element={<FaqPage />} />
       <Route path="/contacto" element={<ContactoPage />} />
+      <Route path="/admin/login" element={<AdminLoginPage />} />
+      <Route path="/admin" element={<AdminPanelPage />} />
       <Route path="*" element={<PaginaNoEncontrada />} />
     </Routes>
   );

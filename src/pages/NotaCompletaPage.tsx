@@ -20,8 +20,8 @@ function NotaCompletaPage() {
   if (cargando) {
     return (
       <main className="min-h-screen">
-        <article className="mx-auto max-w-6xl px-4 py-12">
-          <h1 className="text-3xl font-bold text-slate-900">Novedad</h1>
+        <article className="mx-auto max-w-contenido px-4 py-12">
+          <h1 className="text-4xl font-semibold text-texto">Novedad</h1>
           <AvisoCarga que="la novedad" />
         </article>
       </main>
@@ -31,8 +31,8 @@ function NotaCompletaPage() {
   if (error !== null) {
     return (
       <main className="min-h-screen">
-        <article className="mx-auto max-w-6xl px-4 py-12">
-          <h1 className="text-3xl font-bold text-slate-900">Novedad</h1>
+        <article className="mx-auto max-w-contenido px-4 py-12">
+          <h1 className="text-4xl font-semibold text-texto">Novedad</h1>
           <AvisoError que="la novedad" mensaje={error} alReintentar={recargar} />
         </article>
       </main>
@@ -48,8 +48,8 @@ function NotaCompletaPage() {
 
   return (
     <main className="min-h-screen">
-      <article className="mx-auto max-w-6xl px-4 py-12">
-        <nav aria-label="Ruta de navegación" className="text-sm text-slate-500">
+      <article className="mx-auto max-w-contenido px-4 py-12">
+        <nav aria-label="Ruta de navegación" className="text-sm text-texto-suave">
           <Link to="/" className="hover:text-acento-700">
             Inicio
           </Link>
@@ -58,24 +58,24 @@ function NotaCompletaPage() {
             Novedades
           </Link>
           {' / '}
-          <span className="text-slate-900">{noticia.titulo}</span>
+          <span className="text-texto">{noticia.titulo}</span>
         </nav>
 
         <div className="mt-6 max-w-3xl">
           <p className="text-sm font-medium uppercase tracking-wide text-acento-700">
             {fecha ?? 'Novedad'}
           </p>
-          <h1 className="mt-2 text-3xl font-bold text-slate-900">{noticia.titulo}</h1>
+          <h1 className="mt-2 text-4xl font-semibold text-texto">{noticia.titulo}</h1>
           {noticia.copete !== null && (
-            <p className="mt-4 text-lg leading-relaxed text-slate-700">{noticia.copete}</p>
+            <p className="mt-4 text-lg leading-relaxed text-texto">{noticia.copete}</p>
           )}
 
-          <p className="mt-6 whitespace-pre-line leading-relaxed text-slate-600">
+          <p className="mt-6 whitespace-pre-line leading-relaxed text-texto-suave">
             {noticia.contenido}
           </p>
 
           {noticia.categoria !== null && (
-            <p className="mt-8 border-t border-slate-200 pt-4 text-sm text-slate-500">
+            <p className="mt-8 border-t border-borde-suave pt-4 text-sm text-texto-suave">
               Categoría: {noticia.categoria}
             </p>
           )}
@@ -84,9 +84,9 @@ function NotaCompletaPage() {
         {otrasNovedades.length > 0 && (
           <aside
             aria-labelledby="titulo-historial"
-            className="mt-14 border-t border-slate-200 pt-8"
+            className="mt-14 border-t border-borde-suave pt-8"
           >
-            <h2 id="titulo-historial" className="text-lg font-semibold text-slate-900">
+            <h2 id="titulo-historial" className="text-lg font-semibold text-texto">
               Otras novedades
             </h2>
             <ul className="mt-4 space-y-2">
@@ -94,7 +94,7 @@ function NotaCompletaPage() {
                 <li key={item.id}>
                   <Link
                     to={`/noticias/${slugDesdeNovedad(item)}`}
-                    className="text-sm text-slate-600 transition-colors hover:text-acento-700"
+                    className="text-sm text-texto-suave transition-colors hover:text-acento-700"
                   >
                     {item.titulo}
                   </Link>
