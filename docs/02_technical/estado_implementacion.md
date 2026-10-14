@@ -142,6 +142,17 @@ sobre rutas administrables. La tabla oficial (Swagger/OpenAPI) llega como entreg
 
 ## 7. Pendientes / TODO conocidos
 
+- **Alineación al diseño del avance (14/10/2026, en curso):** referencia = exports Desktop 1440 en
+  `documentacion/driveFrontend/01_analisis_funcional/avance_disenio_sitio_ifts12/` + contrato
+  `docs/01_global/figma_v2_contrato_visual.md`. Plan en `inbox/plan_diseño_aprobado.md` (T1–T16).
+  **T1 (header), T2 (home) y T3 (carreras) mergeadas a `develop`**; **T4–T16 pendientes** («ficha de
+  carrera, novedades, nota completa, FAQ, búsqueda, ingresantes, estudiantes, docentes, tutorías,
+  institucional, contacto, 404 y verificación/cierre»). El snapshot vigente (incluye el detalle de
+  T1–T3, decisiones y bloqueos) está en `docs/project_state.md`.
+  - **Nota de mantenimiento:** este archivo quedó desactualizado respecto de la Fase 9 (consumo
+    real de API de carreras/novedades y sistema logsayer). El contrato vigente es
+    `docs/02_technical/contrato_api_backend.md`; este documento necesita un refresh, no lo tomó la
+    alineación en curso.
 - **Fase 2** — Base **completada** en `feature/fase-2-base` (types de dominio + mocks).
 - **Fase 3** — Componentes reutilizables **completada** en `feature/fase-3-componentes`.
 - **Fase 4** — Home navegable **completada** en `feature/fase-4-home` (slider accesible,

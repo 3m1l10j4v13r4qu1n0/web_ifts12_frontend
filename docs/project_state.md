@@ -18,10 +18,26 @@ Se leyó `~/Descargas/backend_ifts12/` línea por línea y, con lo verificado, e
 leer carreras y novedades del backend. Cierra la Fase 8, que había dejado el sitio 100% en
 mocks.)_
 
+## Alineación al diseño del avance (en curso · próxima sesión)
+
+Plan de alineación página por página a los **exports Desktop 1440** del avance de diseño
+(`documentacion/driveFrontend/01_analisis_funcional/avance_disenio_sitio_ifts12/`, 14 PDFs) y
+al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
+`inbox/plan_diseño_aprobado.md` (tareas **T1–T16**, no versionado). Estado al 14/10/2026:
+
+- **Hechas y mergeadas a `develop`:** T1 (header), T2 (home), T3 (carreras).
+- **Pendientes (próxima sesión):** T4 (ficha de carrera), T5 (novedades), T6 (nota completa),
+  T7 (FAQ), T8 (búsqueda), T9 (ingresantes), T10 (estudiantes), T11 (docentes), T12 (tutorías),
+  T13 (institucional), T14 (contacto), T15 (404) y T16 (verificación y cierre).
+- **Ramas:** `feature/alineacion-disenio-tNN-*` creadas **desde `develop`**. Una rama = una
+  tarea. El orden seguro al retomar: editar → `logsayer log add` → refrescar este snapshot.
+- **Límite:** solo hay exports Desktop 1440; el Figma v2 (tablet/mobile) sigue bloqueado por
+  rate limit (429).
+
 ## Qué está construido
 
 - SPA React 19 + Vite + TypeScript strict + Tailwind v4 con `npm run lint · build · test` en verde
-  (**118 tests**, antes 29).
+  (**121 tests**, antes 29).
 - Home navegable según el **Mapa del Sitio V2** (9 ítems de menú + buscador global en el header),
   portada con carrusel institucional, footer V2, secciones de Carreras, Ingresantes,
   Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y Contacto, más rutas de detalle
@@ -76,6 +92,20 @@ mocks.)_
   - **Pendiente:** Fase 6+ (responsive e interactivos finos) y tokens de color definitivos de
     UX/UI — el `get_figma_data` de Figma está en rate limit (~4 días), se trabaja con la
     referencia FLACSO + GLOBAL_VARS ya obtenidos.
+- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T3 mergeadas a `develop`.
+  - **T1 (header):** top bar con la ubicación `Misiones 26, C1083 ABB, CABA · Atención
+    exclusivamente nocturna` (texto del PDF; el plan decía "nocturno") y accesos con etiqueta
+    larga (`Campus Virtual Moodle` / `SIU · Autogestión` / `Inscripción GCBA`); constante
+    `UBICACION_HEADER` en `constants/navegacion.ts`.
+  - **T2 (home):** orden del diseño (Carrusel → Accesos destacados → Novedades del último mes →
+    Carreras → Accesos rápidos → FAQ). Se **mantiene** la sección "Carreras" (Oferta académica · N
+    carreras + "Ver todas las carreras") — decisión del usuario, revierte el plan original que la
+    quitaba. `mockAccesosRapidos` pasa a **7** accesos con las descripciones del diseño. FAQ de la
+    Home: 4 destacadas (no coinciden todavía con las 4 del diseño; se alinean en T7) + "Ver todas
+    las preguntas" → `/faq`. Sin "Comunidades".
+  - **T3 (carreras):** H2 "Nuestras carreras" + subtítulo con cantidad; sección "Horarios" →
+    "Turno, modalidad y horarios (resumen)" con tabla Carrera/Turno/Modalidad/Horarios/Ficha
+    (Turno = Nocturno, Modalidad = dato real del backend, Horarios = PENDIENTE, Ficha → detalle).
 - **Revisión del consumo de API (08/10/2026):** los helpers del buscador se renombraron
   (`coincideTexto` / `coincideNullable`); el footer combina el horario confirmado
   "exclusivamente nocturno" (RF-22) con las modalidades reales del backend (Presencial,
@@ -93,6 +123,14 @@ mocks.)_
 
 ## Decisiones activas (últimas 3-5)
 
+- **Los exports Desktop 1440 del avance de diseño son la referencia visual vigente** para la
+  alineación en curso (junto al contrato `figma_v2_contrato_visual.md`). El plan está en
+  `inbox/plan_diseño_aprobado.md`; se trabaja una tarea por rama. (14/10/2026)
+- **La Home conserva la sección "Carreras" (Oferta académica)** tal como el diseño, revirtiendo
+  la decisión del plan original de quitarla. "Comunidades" sigue fuera (B3/I12). (14/10/2026)
+- **Modalidad desde el backend, no PENDIENTE:** aunque el diseño muestre "Modalidad: PENDIENTE",
+  se muestra el dato real del backend (coherente con `CardCarrera`); PENDIENTE solo si viene
+  vacío. Los horarios sí quedan PENDIENTE (no existen en el DTO). (14/10/2026)
 - **Jerarquía de fuentes del contrato invertida (decisión del 02/10/2026):** **el código fuente
   manda**. `app.py` / `models.py` > `respuesta.md` (15/09) > README (01/10). El código es lo único
   verificable sin esperar una respuesta de Backend. Esto resuelve P1 y P7 por observación, y
@@ -132,7 +170,12 @@ mocks.)_
   se muestran atenuados.
 - `/api/contacto`: el endpoint existe (`P3` resuelta) pero el formulario sigue validando en local
   sin enviar. Falta decisión de alcance, no de contrato.
-- Tensión de accesos rápidos 7 vs 9 (AF-A6) y contenidos reales de Análisis (🔵/❌).
+- Tensión de accesos rápidos 7 vs 9 (AF-A6) y contenidos reales de Análisis (🔵/❌). El diseño
+  del avance confirma **7 accesos rápidos** (incluye SIU) y 5–6 carreras, según la pantalla.
+- **Backend local sin dependencias para el smoke:** `~/Descargas/backend_ifts12/` necesita
+  Flask/Flask-SQLAlchemy/Flask-CORS (no instalados en el entorno). Sin backend corriendo, el
+  consumo real de carreras/novedades no se puede verificar en navegador; sí se ven los estados de
+  carga/error/vacío. `npm run lint · build · test` no depende de él.
 
 ### Estado de las deudas del ticket 0000010
 
@@ -150,7 +193,7 @@ Detalle con dueño y qué se necesita de vuelta en
 
 ## Verificación
 
-- Frontend: `npm run lint` · `npm run build` · `npm run test` (118 tests).
+- Frontend: `npm run lint` · `npm run build` · `npm run test` (121 tests).
 - Sistema documental: `logsayer check` · `logsayer process check` · `logsayer memory index`.
 - Consumo verificado **en navegador** (Firefox, `localhost:5173`) contra un servidor que replica
   la serialización de `app.py:62-92` leyendo de `instance/ifts12.db`: listado, detalle, buscador,
