@@ -8,11 +8,6 @@ import { useCarreras } from '../hooks/useCarreras';
 function CarrerasPage() {
   const { carreras, cargando, error, recargar } = useCarreras();
 
-  const subtituloListado =
-    carreras.length > 0
-      ? `Listado completo de las ${carreras.length} carreras con turno y modalidad (RF-01). Nombres según fichas oficiales.`
-      : 'Listado completo con turno y modalidad (RF-01). Nombres según fichas oficiales.';
-
   return (
     <main className="min-h-screen">
       <EncabezadoPagina
@@ -26,7 +21,10 @@ function CarrerasPage() {
         <h2 id="titulo-carreras" className="text-2xl font-bold text-texto">
           Nuestras carreras
         </h2>
-        <p className="mt-3 max-w-2xl text-texto-suave">{subtituloListado}</p>
+        {/*
+          Anotación del diseño (comentario UX/UI, no es copy visible):
+          "Listado completo con turno y modalidad (RF-01). Nombres según fichas oficiales."
+        */}
 
         {cargando ? (
           <AvisoCarga que="las carreras" />
@@ -62,10 +60,11 @@ function CarrerasPage() {
           <h2 id="titulo-turnos" className="text-2xl font-bold text-texto">
             Turno, modalidad y horarios (resumen)
           </h2>
-          <p className="mt-3 max-w-2xl text-texto-suave">
-            Estructura informativa por carrera (RF-04). Los horarios quedan PENDIENTES hasta
-            confirmación institucional; la modalidad se muestra cuando el backend la expone.
-          </p>
+          {/*
+            Anotación del diseño (comentario UX/UI, no es copy visible):
+            "Estructura informativa por carrera (RF-04). Sin datos inventados: horarios y
+            modalidad quedan PENDIENTES hasta confirmación institucional."
+          */}
 
           {cargando ? (
             <AvisoCarga que="el resumen de carreras" />
