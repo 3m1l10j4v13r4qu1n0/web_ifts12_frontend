@@ -8,14 +8,24 @@ import { useCarreras } from '../hooks/useCarreras';
 function CarrerasPage() {
   const { carreras, cargando, error, recargar } = useCarreras();
 
+  // Bajada del diseño (`02 · Carreras`). El número de carreras sale del backend, no se
+  // fija en el copy: el export muestra 5, pero la cantidad real la manda la API.
+  const descripcion =
+    !cargando && error === null && carreras.length > 0
+      ? `Oferta académica del IFTS N.º 12: ${carreras.length} ${
+          carreras.length === 1 ? 'carrera' : 'carreras'
+        } en turno exclusivamente nocturno. Ingresá a cada carrera para ver plan de estudios, correlatividades, programas, resoluciones y cuerpo docente.`
+      : undefined;
+
   return (
     <main className="min-h-screen">
-      {/*
-        Texto quitado de la UI (no es copy visible): "Oferta académica del instituto. La
-        ficha completa de cada carrera (plan de estudios, materias y programas) se publica
-        cuando el equipo de Análisis valide los contenidos oficiales."
-      */}
-      <EncabezadoPagina eyebrow="Oferta académica" seccion="cian" titulo="Carreras" />
+      <EncabezadoPagina
+        breadcrumb={[{ etiqueta: 'Inicio', href: '/' }, { etiqueta: 'Carreras' }]}
+        eyebrow="Carreras"
+        seccion="cian"
+        titulo="Carreras"
+        descripcion={descripcion}
+      />
 
       <section aria-labelledby="titulo-carreras" className="mx-auto max-w-contenido px-4 py-14">
         <h2 id="titulo-carreras" className="text-2xl font-bold text-texto">

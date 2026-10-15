@@ -63,6 +63,18 @@ server de Vite (`localhost:5173`), a 1440 × 900.
 | `t4_revision_carreras.png` | `/carreras` | Post-merge: sin el `descripcion` del encabezado |
 | `t4_revision_ficha.png` | `/carreras/analisis-de-sistemas` | Post-merge: ficha alineada al export "02.1 · Carrera · detalle" |
 
+### Alineación al diseño del avance — T5 (novedades)
+
+Capturas de la tarea **T5 (novedades)** y de los fixes de encabezado que salieron de la
+revisión, tomadas el **15/10/2026** sobre `feature/alineacion-disenio-t05-novedades`, con el
+mock local que replica `app.py:62-92` (`localhost:5000`) y Vite (`localhost:5173`), a
+1440 × 900.
+
+| Archivo | Pantalla | Estado |
+|:---|:---|:---|
+| `t5_novedades_render.png` | `/noticias` | Hero + breadcrumb "Inicio / Novedades", filtros (palabra clave/Año/Mes/Filtrar), chips de categoría, contador "N de N resultados", grilla y paginación |
+| `t5_carreras_bajada_breadcrumb.png` | `/carreras` | Fix de encabezado: breadcrumb "Inicio / Carreras" + bajada con la cantidad real de carreras del backend |
+
 ## Alcance de la evidencia
 
 Estas capturas cubren las 13 rutas registradas en `src/routes/AppRouter.tsx` más dos
