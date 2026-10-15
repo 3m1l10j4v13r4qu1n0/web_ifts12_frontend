@@ -82,7 +82,7 @@ describe('slugDesdeCarrera', () => {
 });
 
 describe('mapCarrerasApiACarreras', () => {
-  it('mapea los campos que consume la tarjeta', () => {
+  it('mapea los campos que consume la tarjeta y los oficiales de la ficha', () => {
     const [primera] = mapCarrerasApiACarreras(CARRERAS);
 
     expect(primera).toEqual({
@@ -92,6 +92,9 @@ describe('mapCarrerasApiACarreras', () => {
         'Formación profesional orientada al desarrollo de software, análisis funcional, bases de datos e infraestructura tecnológica.',
       modalidad: 'Híbrida / Presencial',
       horarios: undefined,
+      tituloOtorgado: 'Técnico Superior en Análisis de Sistemas',
+      duracionAnios: 3,
+      resolucion: 'RS-2023-6336-GCABA-MEDGC',
     });
   });
 
@@ -107,6 +110,16 @@ describe('mapCarrerasApiACarreras', () => {
     const [primera] = mapCarrerasApiACarreras([CARRERA_SIN_OPCIONALES]);
 
     expect(primera.modalidad).toBe('');
+  });
+
+  it('deja los campos oficiales en undefined cuando el backend los trae en null', () => {
+    const [primera] = mapCarrerasApiACarreras([CARRERA_SIN_OPCIONALES]);
+
+    // `undefined` (y no `''`) para que la ficha distinga "el backend no lo tiene" de un
+    // valor vacío y muestre PENDIENTE sin inventar título, duración ni resolución.
+    expect(primera.tituloOtorgado).toBeUndefined();
+    expect(primera.duracionAnios).toBeUndefined();
+    expect(primera.resolucion).toBeUndefined();
   });
 
   it('genera slugs únicos para las tres carreras reales', () => {

@@ -50,6 +50,10 @@ export function slugDesdeCarrera(carrera: Pick<CarreraApi, 'nombre'>): string {
  *
  * `descripcionBreve` recibe el `descripcion` del backend, que es un `Text` completo
  * (`models.py:32`). Es el mejor texto disponible; el nombre "breve" es histórico.
+ *
+ * Los campos oficiales (`titulo_otorgado`, `duracion_anios`, `resolucion`) se traducen a
+ * camelCase y pasan a `undefined` cuando el backend los trae en `null`: la ficha de carrera
+ * los muestra en "Datos oficiales" y degrada a PENDIENTE sin inventar el dato.
  */
 export function mapCarreraApiACarrera(carrera: CarreraApi): Carrera {
   return {
@@ -58,6 +62,9 @@ export function mapCarreraApiACarrera(carrera: CarreraApi): Carrera {
     descripcionBreve: carrera.descripcion ?? '',
     modalidad: carrera.modalidad ?? '',
     horarios: undefined,
+    tituloOtorgado: carrera.titulo_otorgado ?? undefined,
+    duracionAnios: carrera.duracion_anios ?? undefined,
+    resolucion: carrera.resolucion ?? undefined,
   };
 }
 
