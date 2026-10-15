@@ -25,8 +25,8 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 `inbox/plan_diseño_aprobado.md` (tareas **T1–T16**, no versionado). Estado al 15/10/2026:
 
 - **Hechas y mergeadas a `develop`:** T1 (header), T2 (home), T3 (carreras), T4 (ficha de
-  carrera, 15/10/2026).
-- **Pendientes (próxima sesión):** T5 (novedades), T6 (nota completa),
+  carrera, 15/10/2026) y T5 (novedades, 15/10/2026).
+- **Pendientes (próxima sesión):** T6 (nota completa),
   T7 (FAQ), T8 (búsqueda), T9 (ingresantes), T10 (estudiantes), T11 (docentes), T12 (tutorías),
   T13 (institucional), T14 (contacto), T15 (404) y T16 (verificación y cierre).
 - **Regla de anotaciones (14/10/2026):** los textos de los exports que son **notas de UX/UI**
@@ -38,10 +38,12 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   `src/__tests__/anotaciones-no-renderizadas.test.ts` (15/10/2026) recorre las fuentes de
   `src/` y falla si una anotación quedó renderizada.
 - **Texto propio fuera de la UI (15/10/2026):** se quitaron del render y quedaron como
-  comentario el `descripcion` del encabezado de Carreras ("Oferta académica del instituto…") y
-  el segundo renglón del subtítulo del carrusel de la Home ("Contenidos provisorios pendientes
-  de validación."). Ninguno figura en los 14 PDFs (verificado con `pdftotext`): eran copy
-  propio, no del diseño.
+  comentario el `descripcion` original del encabezado de Carreras ("Oferta académica del
+  instituto…") y el segundo renglón del subtítulo del carrusel de la Home ("Contenidos
+  provisorios pendientes de validación."). Ninguno figura en los 14 PDFs (verificado con
+  `pdftotext`): eran copy propio, no del diseño. En **T5** se recuperó para Carreras la **bajada
+  del export** ("Oferta académica del IFTS N.º 12: N carreras en turno exclusivamente nocturno…"),
+  con la cantidad tomada del backend (no fija en el "5" del diseño).
 - **Base de las ramas Tn (15/10/2026):** las ramas T4–T16 se habían creado por adelantado desde
   `1b40ec3`, **anterior** al fix de anotaciones (`dca04ed`) y al de logos (`29b2fe6`); por eso T4
   arrancó con los textos viejos y hubo que integrar `develop` a mitad de tarea. Regla: **cada Tn
@@ -57,7 +59,7 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 ## Qué está construido
 
 - SPA React 19 + Vite + TypeScript strict + Tailwind v4 con `npm run lint · build · test` en verde
-  (**129 tests**, antes 29).
+  (**141 tests**, antes 29).
 - Home navegable según el **Mapa del Sitio V2** (9 ítems de menú + buscador global en el header),
   portada con carrusel institucional, footer V2, secciones de Carreras, Ingresantes,
   Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y Contacto, más rutas de detalle
@@ -112,7 +114,7 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   - **Pendiente:** Fase 6+ (responsive e interactivos finos) y tokens de color definitivos de
     UX/UI — el `get_figma_data` de Figma está en rate limit (~4 días), se trabaja con la
     referencia FLACSO + GLOBAL_VARS ya obtenidos.
-- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T3 mergeadas a `develop`.
+- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T5 mergeadas a `develop`.
   - **T1 (header):** top bar con la ubicación `Misiones 26, C1083 ABB, CABA · Atención
     exclusivamente nocturna` (texto del PDF; el plan decía "nocturno") y accesos con etiqueta
     larga (`Campus Virtual Moodle` / `SIU · Autogestión` / `Inscripción GCBA`); constante
@@ -140,6 +142,18 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
     código. Hallazgo: la DB real tiene una tabla `materias` **vacía** y sin modelo/ruta, lo que
     confirma el estado vacío. Verificado en navegador contra un servidor local que replica
     `app.py:62-92` sobre `instance/ifts12.db`.
+  - **T5 (novedades, 15/10/2026):** `NoticiasPage` alineada al export "08 · Novedades":
+    hero con la bajada real ("Gacetillas, avisos y comunicaciones del instituto, de la más
+    reciente a la más antigua"), barra de filtros (búsqueda en vivo + Año + Mes + "Filtrar"),
+    chips de categoría **derivadas de los datos del backend** (no se inventa el listado del
+    wireframe: el export trae "Carreras / Institucional / Gacetillas / Docentes" como nota de
+    UX/UI), contador "N de N resultados · orden: más reciente primero.", grilla 1/2/3 columnas y
+    paginación de 6. `CardNoticia` con badges fecha+categoría, copete a 3 líneas e imagen 16:9.
+    `Noticia` ganó `categoria`; el mapper mapea `categoria`; helper `src/utils/fecha.ts`
+    (`dd/mm/aaaa`). Además, fixes de encabezado que salieron de la revisión: `EncabezadoPagina`
+    acepta **breadcrumb** opcional → `/carreras` y `/noticias` muestran "Inicio / Sección"; y
+    Carreras recupera breadcrumb, **bajada del export** y eyebrow "Carreras" (antes "Oferta
+    académica", que no está en el PDF). Verificado en navegador contra el mock local.
 - **Revisión del consumo de API (08/10/2026):** los helpers del buscador se renombraron
   (`coincideTexto` / `coincideNullable`); el footer combina el horario confirmado
   "exclusivamente nocturno" (RF-22) con las modalidades reales del backend (Presencial,
@@ -227,7 +241,7 @@ Detalle con dueño y qué se necesita de vuelta en
 
 ## Verificación
 
-- Frontend: `npm run lint` · `npm run build` · `npm run test` (129 tests).
+- Frontend: `npm run lint` · `npm run build` · `npm run test` (141 tests).
 - Sistema documental: `logsayer check` · `logsayer process check` · `logsayer memory index`.
 - Consumo verificado **en navegador** (Firefox, `localhost:5173`) contra un servidor que replica
   la serialización de `app.py:62-92` leyendo de `instance/ifts12.db`: listado, detalle, buscador,
