@@ -49,6 +49,20 @@ Luego abrir la ruta correspondiente en el navegador.
 | `14-estado-menu-abierto.png` | Botón «Abrir menú» desplegado | 1680 × 900 |
 | `15-home-mobile-390.png` | Home responsive | 390 × 844 |
 
+### Alineación al diseño del avance (Fase 10)
+
+Capturas de revisión de la tarea **T4 (ficha de carrera)**, tomadas el **15/10/2026**
+sobre `develop`, con el mock local que replica `app.py:62-92` (`localhost:5000`) y el dev
+server de Vite (`localhost:5173`), a 1440 × 900.
+
+| Archivo | Pantalla | Estado |
+|:---|:---|:---|
+| `t4_ficha_carrera_analisis.png` | `/carreras/analisis-de-sistemas` | **Pre-merge**: muestra los textos de anotación que después se quitaron (rama basada en `1b40ec3`, anterior al fix `dca04ed`) |
+| `t4_ficha_carrera_administracion.png` | `/carreras/administracion-publica` | **Pre-merge**: idem anterior |
+| `t4_revision_home.png` | `/` | Post-merge: sin "Contenidos provisorios pendientes de validación." |
+| `t4_revision_carreras.png` | `/carreras` | Post-merge: sin el `descripcion` del encabezado |
+| `t4_revision_ficha.png` | `/carreras/analisis-de-sistemas` | Post-merge: ficha alineada al export "02.1 · Carrera · detalle" |
+
 ## Alcance de la evidencia
 
 Estas capturas cubren las 13 rutas registradas en `src/routes/AppRouter.tsx` más dos
