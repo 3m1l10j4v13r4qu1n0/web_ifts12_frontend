@@ -34,7 +34,9 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   **no se renderizan** en ninguna pantalla: van como **comentario de código** en el componente.
   Ya corregido en Home y Carreras (`fix/alineacion-disenio-anotaciones`, merge `dca04ed`). Los
   mensajes de proceso tipo "sitio en construcción" sí se mantienen. La regla quedó en
-  `inbox/plan_diseño_aprobado.md`.
+  `inbox/plan_diseño_aprobado.md` y ahora tiene **guard mecánico**:
+  `src/__tests__/anotaciones-no-renderizadas.test.ts` (15/10/2026) recorre las fuentes de
+  `src/` y falla si una anotación quedó renderizada.
 - **Texto propio fuera de la UI (15/10/2026):** se quitaron del render y quedaron como
   comentario el `descripcion` del encabezado de Carreras ("Oferta académica del instituto…") y
   el segundo renglón del subtítulo del carrusel de la Home ("Contenidos provisorios pendientes
@@ -55,7 +57,7 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 ## Qué está construido
 
 - SPA React 19 + Vite + TypeScript strict + Tailwind v4 con `npm run lint · build · test` en verde
-  (**127 tests**, antes 29).
+  (**129 tests**, antes 29).
 - Home navegable según el **Mapa del Sitio V2** (9 ítems de menú + buscador global en el header),
   portada con carrusel institucional, footer V2, secciones de Carreras, Ingresantes,
   Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y Contacto, más rutas de detalle
@@ -225,7 +227,7 @@ Detalle con dueño y qué se necesita de vuelta en
 
 ## Verificación
 
-- Frontend: `npm run lint` · `npm run build` · `npm run test` (127 tests).
+- Frontend: `npm run lint` · `npm run build` · `npm run test` (129 tests).
 - Sistema documental: `logsayer check` · `logsayer process check` · `logsayer memory index`.
 - Consumo verificado **en navegador** (Firefox, `localhost:5173`) contra un servidor que replica
   la serialización de `app.py:62-92` leyendo de `instance/ifts12.db`: listado, detalle, buscador,
