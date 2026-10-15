@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, within } from '@testing-library/react';
 import { Route, Routes } from 'react-router-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { listarCarreras } from '../api/services/carrera.service';
@@ -40,8 +40,8 @@ describe('CarreraDetallePage', () => {
       }),
     ).toBeInTheDocument();
     // La modalidad viene del backend, no de una etiqueta fija: la fila 2 tiene `modalidad`
-    // en `null`, así que no se debe renderizar ninguna.
-    expect(screen.queryByText(/^Modalidad:/)).not.toBeInTheDocument();
+    // en `null`, así que se muestra PENDIENTE, sin inventar el dato.
+    expect(screen.getByText('Modalidad: PENDIENTE')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Plan de estudios' })).toBeInTheDocument();
   });
 
@@ -59,10 +59,71 @@ describe('CarreraDetallePage', () => {
     expect(await screen.findByText('Modalidad: Híbrida / Presencial')).toBeInTheDocument();
   });
 
+  it('muestra los datos oficiales reales del backend', async () => {
+    renderizarConRuta(`/carreras/${SLUG_ANALISIS}`);
+
+    const datos = await screen.findByRole('region', { name: 'Datos oficiales' });
+    expect(within(datos).getByText('Técnico Superior en Análisis de Sistemas')).toBeInTheDocument();
+    expect(within(datos).getByText('3 años')).toBeInTheDocument();
+    expect(within(datos).getByText('RS-2023-6336-GCABA-MEDGC')).toBeInTheDocument();
+    expect(within(datos).getByText('Exclusivamente nocturno')).toBeInTheDocument();
+  });
+
+  it('marca PENDIENTE en los datos oficiales que el backend trae en null', async () => {
+    renderizarConRuta(`/carreras/${SLOG_ADMINISTRACION}`);
+
+    const datos = await screen.findByRole('region', { name: 'Datos oficiales' });
+    // Sin título, duración, resolución ni modalidad no se inventa ningún valor oficial:
+    // los cuatro campos quedan en PENDIENTE (el turno es institucional y siempre sale).
+    expect(within(datos).getAllByText('PENDIENTE')).toHaveLength(4);
+  });
+
+  it('ofrece el índice "En esta carrera" con anclas a cada bloque', async () => {
+    renderizarConRuta(`/carreras/${SLUG_ANALISIS}`);
+
+    const indice = await screen.findByRole('navigation', { name: 'En esta carrera' });
+    expect(within(indice).getByRole('link', { name: 'Presentación' })).toHaveAttribute(
+      'href',
+      '#presentacion',
+    );
+    expect(
+      within(indice).getByRole('link', { name: 'Materias y correlatividades' }),
+    ).toHaveAttribute('href', '#materias-y-correlatividades');
+    expect(within(indice).getAllByRole('link')).toHaveLength(7);
+  });
+
+  it('muestra la tabla de materias con estado vacío (sin filas inventadas)', async () => {
+    renderizarConRuta(`/carreras/${SLUG_ANALISIS}`);
+
+    const tabla = await screen.findByRole('table', {
+      name: /materias y correlatividades del plan/i,
+    });
+    expect(within(tabla).getByRole('columnheader', { name: 'Año' })).toBeInTheDocument();
+    expect(
+      within(tabla).getByRole('columnheader', { name: 'Correlativas para rendir' }),
+    ).toBeInTheDocument();
+    // Una sola fila de aviso: el plan vigente todavía no está validado.
+    expect(within(tabla).getAllByRole('row')).toHaveLength(2);
+  });
+
+  it('deja los archivos descargables deshabilitados mientras no existan', async () => {
+    renderizarConRuta(`/carreras/${SLUG_ANALISIS}`);
+
+    // Plan de estudios, programas y resoluciones: los tres PDF siguen pendientes.
+    const botones = await screen.findAllByRole('button', { name: 'Descargar' });
+    expect(botones).toHaveLength(3);
+    for (const boton of botones) {
+      expect(boton).toBeDisabled();
+    }
+  });
+
   it('enlaza a la inscripción oficial atenuada mientras no haya URL', async () => {
     renderizarConRuta(`/carreras/${SLOG_ADMINISTRACION}`);
 
-    expect(await screen.findByText('Inscripción oficial (GCBA)')).toBeInTheDocument();
+    expect(await screen.findByText('¿Querés inscribirte?')).toBeInTheDocument();
+    expect(
+      screen.getByText('El enlace oficial se publica cuando esté disponible.'),
+    ).toBeInTheDocument();
   });
 
   it('lista las otras carreras', async () => {

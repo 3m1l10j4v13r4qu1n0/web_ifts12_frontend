@@ -6,6 +6,14 @@ export interface Carrera {
   descripcionBreve: string;
   modalidad: string;
   horarios?: string;
+  /**
+   * Campos oficiales del DTO (`titulo_otorgado`, `duracion_anios`, `resolucion` en
+   * `models.py:25-36`). Quedan `undefined` cuando el backend los trae en `null`: la UI
+   * los muestra en "Datos oficiales" de la ficha y degrada a PENDIENTE sin inventar.
+   */
+  tituloOtorgado?: string;
+  duracionAnios?: number;
+  resolucion?: string;
 }
 
 export interface Noticia {
