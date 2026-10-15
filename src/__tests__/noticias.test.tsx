@@ -183,36 +183,128 @@ describe('NoticiasPage', () => {
 });
 
 describe('NotaCompletaPage', () => {
+  const escribirTexto = vi.fn().mockResolvedValue(undefined);
+
   beforeEach(() => {
     listarNovedadesMock.mockReset();
     listarNovedadesMock.mockResolvedValue(NOVEDADES_API_FIJA as NovedadApi[]);
+    // jsdom no implementa el portapapeles: se stubbea para poder probar "Copiar enlace".
+    Object.defineProperty(navigator, 'clipboard', {
+      value: { writeText: escribirTexto },
+      configurable: true,
+    });
+    escribirTexto.mockClear();
   });
 
-  it('muestra la nota solicitada con el contenido del backend', async () => {
-    renderizarNota(`/noticias/${SLUG_INSCRIPCIONES}`);
+  async function renderizarNotaCargada(slug = SLUG_INSCRIPCIONES) {
+    renderizarNota(`/noticias/${slug}`);
+    return screen.findByRole('heading', {
+      level: 1,
+      name: 'Inscripciones abiertas para el ciclo lectivo 2026',
+    });
+  }
 
-    expect(
-      await screen.findByRole('heading', {
-        level: 1,
-        name: 'Inscripciones abiertas para el ciclo lectivo 2026',
-      }),
-    ).toBeInTheDocument();
+  it('muestra la nota solicitada con el contenido del backend', async () => {
+    await renderizarNotaCargada();
+
     // El `contenido` completo sí se muestra acá, a diferencia del listado.
     expect(screen.getByText(/Modalidad gratuita y con títulos oficiales/)).toBeInTheDocument();
   });
 
-  it('muestra la categoría cuando el backend la trae', async () => {
-    renderizarNota(`/noticias/${SLUG_INSCRIPCIONES}`);
+  it('muestra el breadcrumb Inicio / Novedades / título', async () => {
+    await renderizarNotaCargada();
 
-    expect(await screen.findByText('Categoría: Ingresantes')).toBeInTheDocument();
+    const nav = screen.getByRole('navigation', { name: 'Ruta de navegación' });
+    expect(within(nav).getByRole('link', { name: 'Inicio' })).toHaveAttribute('href', '/');
+    expect(within(nav).getByRole('link', { name: 'Novedades' })).toHaveAttribute(
+      'href',
+      '/noticias',
+    );
+    expect(within(nav).getByText('Inscripciones abiertas para el ciclo lectivo 2026')) //
+      .toBeInTheDocument();
   });
 
-  it('lista las otras novedades', async () => {
-    renderizarNota(`/noticias/${SLUG_INSCRIPCIONES}`);
+  it('muestra la fecha en formato dd/mm/aaaa y la categoría en badges', async () => {
+    await renderizarNotaCargada();
+
+    expect(await screen.findByText('28/09/2026')).toBeInTheDocument();
+    expect(screen.getByText('Ingresantes')).toBeInTheDocument();
+  });
+
+  it('muestra la imagen principal con alt cuando el backend la trae', async () => {
+    listarNovedadesMock.mockResolvedValue([
+      { ...NOVEDADES_API_FIJA[0], imagen_url: 'https://ejemplo.test/novedad.png' },
+      NOVEDADES_API_FIJA[1],
+    ] as NovedadApi[]);
+
+    await renderizarNotaCargada();
 
     expect(
-      await screen.findByRole('link', { name: 'Inicio de Clases y Tutorías para Estudiantes' }),
+      await screen.findByAltText('Inscripciones abiertas para el ciclo lectivo 2026'),
+    ).toHaveAttribute('src', 'https://ejemplo.test/novedad.png');
+  });
+
+  it('arma el historial con la nota actual y las publicaciones anteriores', async () => {
+    await renderizarNotaCargada();
+
+    const seccion = await screen.findByRole('region', { name: 'Historial de publicaciones' });
+    expect(within(seccion).getByText('Nota actual')).toBeInTheDocument();
+    expect(within(seccion).getAllByText('Publicación anterior')).toHaveLength(1);
+    expect(
+      within(seccion).getByRole('link', { name: 'Inicio de Clases y Tutorías para Estudiantes' }),
     ).toHaveAttribute('href', `/noticias/${SLUG_TUTORIAS}`);
+    expect(within(seccion).getByRole('link', { name: 'Ver todas las novedades' })).toHaveAttribute(
+      'href',
+      '/noticias',
+    );
+  });
+
+  it('no lista en el historial las novedades posteriores a la actual', async () => {
+    listarNovedadesMock.mockResolvedValue([
+      { ...NOVEDADES_API_FIJA[1], fecha_publicacion: '2026-10-01T10:00:00' },
+      NOVEDADES_API_FIJA[0],
+    ] as NovedadApi[]);
+
+    await renderizarNotaCargada();
+
+    const seccion = await screen.findByRole('region', { name: 'Historial de publicaciones' });
+    expect(within(seccion).getByText('No hay publicaciones anteriores.')).toBeInTheDocument();
+    expect(
+      within(seccion).queryByRole('link', { name: 'Inicio de Clases y Tutorías para Estudiantes' }),
+    ).not.toBeInTheDocument();
+  });
+
+  it('copia el enlace al portapapeles y avisa con un toast', async () => {
+    await renderizarNotaCargada();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Copiar enlace' }));
+
+    expect(await screen.findByText('Enlace copiado al portapapeles.')).toBeInTheDocument();
+    expect(escribirTexto).toHaveBeenCalledWith(window.location.href);
+  });
+
+  it('sin Web Share API, "Compartir" cae en copiar el enlace', async () => {
+    await renderizarNotaCargada();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Compartir' }));
+
+    expect(await screen.findByText('Enlace copiado al portapapeles.')).toBeInTheDocument();
+    expect(escribirTexto).toHaveBeenCalledTimes(1);
+  });
+
+  it('muestra el enlace Volver a Novedades hacia el listado', async () => {
+    await renderizarNotaCargada();
+
+    expect(screen.getByRole('link', { name: 'Volver a Novedades' })).toHaveAttribute(
+      'href',
+      '/noticias',
+    );
+  });
+
+  it('muestra el mensaje de proceso del adjunto (el DTO no tiene ese campo)', async () => {
+    await renderizarNotaCargada();
+
+    expect(await screen.findByText(/Cuando el panel admin publique adjuntos/)).toBeInTheDocument();
   });
 
   it('muestra la página 404 para un id inexistente', async () => {
