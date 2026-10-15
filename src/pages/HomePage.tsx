@@ -60,9 +60,13 @@ function HomePage() {
 
   return (
     <main>
+      {/*
+        Texto quitado de la UI (no es copy visible): "Contenidos provisorios pendientes de
+        validación."
+      */}
       <CarruselInstitucional
         titulo="Instituto de Formación Técnica Superior N.º 12"
-        subtitulo="Formación técnica superior, pública y de calidad. Contenidos provisorios pendientes de validación."
+        subtitulo="Formación técnica superior, pública y de calidad."
         slides={slidesNovedades}
         cargando={cargandoNovedades}
       />

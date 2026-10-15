@@ -10,12 +10,12 @@ function CarrerasPage() {
 
   return (
     <main className="min-h-screen">
-      <EncabezadoPagina
-        eyebrow="Oferta académica"
-        seccion="cian"
-        titulo="Carreras"
-        descripcion="Oferta académica del instituto. La ficha completa de cada carrera (plan de estudios, materias y programas) se publica cuando el equipo de Análisis valide los contenidos oficiales."
-      />
+      {/*
+        Texto quitado de la UI (no es copy visible): "Oferta académica del instituto. La
+        ficha completa de cada carrera (plan de estudios, materias y programas) se publica
+        cuando el equipo de Análisis valide los contenidos oficiales."
+      */}
+      <EncabezadoPagina eyebrow="Oferta académica" seccion="cian" titulo="Carreras" />
 
       <section aria-labelledby="titulo-carreras" className="mx-auto max-w-contenido px-4 py-14">
         <h2 id="titulo-carreras" className="text-2xl font-bold text-texto">
