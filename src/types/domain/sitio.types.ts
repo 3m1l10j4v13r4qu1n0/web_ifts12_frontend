@@ -21,6 +21,8 @@ export interface Noticia {
   titulo: string;
   resumen: string;
   fecha: string;
+  /** Categoría del backend (`novedad.categoria`). `undefined` si viene `null`. */
+  categoria?: string;
   imagenUrl?: string;
   enlace?: string;
 }

@@ -101,9 +101,16 @@ describe('mapNovedadesApiANoticias', () => {
       titulo: 'Inscripciones abiertas para el ciclo lectivo 2026',
       resumen: 'Inicia el proceso de preingreso a las tecnicaturas superiores del IFTS N.º 12.',
       fecha: '2026-09-28',
+      categoria: 'Ingresantes',
       imagenUrl: undefined,
       enlace: undefined,
     });
+  });
+
+  it('deca la categoría vacía cuando el backend no la trae', () => {
+    const [primera] = mapNovedadesApiANoticias([{ ...NOVEDADES[0], categoria: null }]);
+
+    expect(primera.categoria).toBeUndefined();
   });
 
   it('deca el copete vacío cuando el backend no lo trae', () => {

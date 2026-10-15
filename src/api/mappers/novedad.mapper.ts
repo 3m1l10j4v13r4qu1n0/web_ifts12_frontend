@@ -56,6 +56,7 @@ export function fechaNovedadAIso(fecha: string | null): string | null {
  *
  * Mapeo de nombres, porque el backend usa `snake_case` y nunca camelCase:
  * `copete` → `resumen`, `fecha_publicacion` → `fecha`, `imagen_url` → `imagenUrl`.
+ * `categoria` se copia tal cual y queda `undefined` cuando el backend la manda en `null`.
  *
  * `contenido` **no tiene lugar en `Noticia`**: ese tipo es el de las tarjetas y el listado,
  * que muestran `resumen`. El cuerpo completo se lee en la página de detalle, que por eso
@@ -67,6 +68,7 @@ export function mapNovedadApiANoticia(novedad: NovedadApi): Noticia {
     titulo: novedad.titulo,
     resumen: novedad.copete ?? '',
     fecha: fechaNovedadAIso(novedad.fecha_publicacion) ?? '',
+    categoria: novedad.categoria ?? undefined,
     imagenUrl: novedad.imagen_url ?? undefined,
     enlace: undefined,
   };
