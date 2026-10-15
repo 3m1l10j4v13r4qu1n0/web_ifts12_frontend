@@ -124,6 +124,11 @@ logsayer quedó archivado en `docs/logbooks/logbook_legado_01.md` y **no se edit
 
 - Prohibido trabajar directo sobre `main` o `develop`. Ramas `feature/`/`fix/`
   siempre desde `develop`, una rama = una tarea.
+- **Base de la rama:** cada tarea se crea desde el `develop` **del momento**
+  (`git fetch` → `checkout develop` → `pull` → `checkout -b feature/…`). No reutilizar
+  ramas pre-creadas: si `develop` avanzó, la rama arranca desactualizada y reintroduce
+  fixes ya mergeados (pasó en T4, que nació de `1b40ec3`, anterior al fix de anotaciones
+  `dca04ed`).
 - Commits atómicos, Conventional Commits EN ESPAÑOL con scope en minúscula
   (ej. `feat(ui): se agrega componente header`). Prohibidos mensajes vagos
   ("cambios", "update", "cosas varias").
@@ -159,6 +164,11 @@ logsayer quedó archivado en `docs/logbooks/logbook_legado_01.md` y **no se edit
   V2 de UX/UI — 9 items aprobados el 15/09/2026 —, logo enlazado a home, portada 1680×900, etc.).
   Se activan a pedido
   del usuario (en su mayoría están `disable-model-invocation`).
+- **Anotaciones de diseño:** los textos de los exports que son notas de UX/UI (refs `RF-xx`,
+  `WF xx`, códigos `B4`/`I5`/`M1`, "PENDIENTE INSTITUCIONAL", "Se cargan desde el panel admin",
+  "Sin datos inventados") **no se renderizan**: van como comentario de código y, si ocupan el
+  lugar de un dato, se reemplazan por un mensaje de proceso. El guard
+  `src/__tests__/anotaciones-no-renderizadas.test.ts` falla si alguna queda renderizada.
 
 ## Documentación con formato APA (regla + skill: `.agents/`)
 
