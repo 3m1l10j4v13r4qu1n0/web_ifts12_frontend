@@ -22,10 +22,11 @@ carreras y novedades. Detalle de avance y pendientes en la sección siguiente.)_
 Plan de alineación página por página a los **exports Desktop 1440** del avance de diseño
 (`documentacion/driveFrontend/01_analisis_funcional/avance_disenio_sitio_ifts12/`, 14 PDFs) y
 al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
-`inbox/plan_diseño_aprobado.md` (tareas **T1–T16**, no versionado). Estado al 14/10/2026:
+`inbox/plan_diseño_aprobado.md` (tareas **T1–T16**, no versionado). Estado al 15/10/2026:
 
-- **Hechas y mergeadas a `develop`:** T1 (header), T2 (home), T3 (carreras).
-- **Pendientes (próxima sesión):** T4 (ficha de carrera), T5 (novedades), T6 (nota completa),
+- **Hechas y mergeadas a `develop`:** T1 (header), T2 (home), T3 (carreras), T4 (ficha de
+  carrera, 15/10/2026).
+- **Pendientes (próxima sesión):** T5 (novedades), T6 (nota completa),
   T7 (FAQ), T8 (búsqueda), T9 (ingresantes), T10 (estudiantes), T11 (docentes), T12 (tutorías),
   T13 (institucional), T14 (contacto), T15 (404) y T16 (verificación y cierre).
 - **Regla de anotaciones (14/10/2026):** los textos de los exports que son **notas de UX/UI**
@@ -34,19 +35,27 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   Ya corregido en Home y Carreras (`fix/alineacion-disenio-anotaciones`, merge `dca04ed`). Los
   mensajes de proceso tipo "sitio en construcción" sí se mantienen. La regla quedó en
   `inbox/plan_diseño_aprobado.md`.
+- **Texto propio fuera de la UI (15/10/2026):** se quitaron del render y quedaron como
+  comentario el `descripcion` del encabezado de Carreras ("Oferta académica del instituto…") y
+  el segundo renglón del subtítulo del carrusel de la Home ("Contenidos provisorios pendientes
+  de validación."). Ninguno figura en los 14 PDFs (verificado con `pdftotext`): eran copy
+  propio, no del diseño.
+- **Base de las ramas Tn (15/10/2026):** las ramas T4–T16 se habían creado por adelantado desde
+  `1b40ec3`, **anterior** al fix de anotaciones (`dca04ed`) y al de logos (`29b2fe6`); por eso T4
+  arrancó con los textos viejos y hubo que integrar `develop` a mitad de tarea. Regla: **cada Tn
+  se crea desde el `develop` del momento** (`git fetch` → `checkout develop` → `pull` →
+  `checkout -b feature/…`), nunca reutilizando una rama pre-creada.
 - **Ajuste de logos del header (14/10/2026):** el usuario reportó los dos logos "en diferentes
   posiciones". Ahora van `logoCABA.png` + `apple-touch-icon.png`, ambos a `h-10` y centrados
   (antes `IFTS12.jpg` h-10 + `logoCABA.png` h-8). El footer e Institucional siguen con
   `IFTS12.jpg`. Rama `fix/header-logos`, merge `29b2fe6`.
-- **Ramas:** `feature/alineacion-disenio-tNN-*` creadas **desde `develop`**. Una rama = una
-  tarea. El orden seguro al retomar: editar → `logsayer log add` → refrescar este snapshot.
 - **Límite:** solo hay exports Desktop 1440; el Figma v2 (tablet/mobile) sigue bloqueado por
   rate limit (429).
 
 ## Qué está construido
 
 - SPA React 19 + Vite + TypeScript strict + Tailwind v4 con `npm run lint · build · test` en verde
-  (**121 tests**, antes 29).
+  (**127 tests**, antes 29).
 - Home navegable según el **Mapa del Sitio V2** (9 ítems de menú + buscador global en el header),
   portada con carrusel institucional, footer V2, secciones de Carreras, Ingresantes,
   Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y Contacto, más rutas de detalle
@@ -115,6 +124,20 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   - **T3 (carreras):** H2 "Nuestras carreras" + subtítulo con cantidad; sección "Horarios" →
     "Turno, modalidad y horarios (resumen)" con tabla Carrera/Turno/Modalidad/Horarios/Ficha
     (Turno = Nocturno, Modalidad = dato real del backend, Horarios = PENDIENTE, Ficha → detalle).
+  - **T4 (ficha de carrera, 15/10/2026):** `CarreraDetallePage` reescrita según el export
+    "02.1 · Carrera · detalle (plantilla)": breadcrumb + eyebrow "Carreras", índice lateral "En
+    esta carrera" (7 anclas) y bloques Presentación, Datos oficiales, Modalidad y horarios, Plan
+    de estudios, Materias y correlatividades (tabla con estado vacío), Programas, Resoluciones y
+    Cuerpo docente; sidebar "¿Querés inscribirte?" + "Consultar por esta carrera" + "En esta
+    carrera" + "Otras carreras". Los campos oficiales del DTO (`titulo_otorgado`,
+    `duracion_anios`, `resolucion`) se agregaron al tipo de dominio `Carrera` y al mapper
+    (`undefined` si el backend trae `null`): "Datos oficiales" muestra dato real y PENDIENTE solo
+    como fallback. Turno = "Exclusivamente nocturno" (RN-07), Modalidad = backend, Horarios =
+    PENDIENTE, PDFs (plan/programas/resoluciones) con "Descargar" deshabilitado. Anotaciones del
+    diseño (RF-16, "PENDIENTE INSTITUCIONAL", "Se administra desde el panel") como comentario de
+    código. Hallazgo: la DB real tiene una tabla `materias` **vacía** y sin modelo/ruta, lo que
+    confirma el estado vacío. Verificado en navegador contra un servidor local que replica
+    `app.py:62-92` sobre `instance/ifts12.db`.
 - **Revisión del consumo de API (08/10/2026):** los helpers del buscador se renombraron
   (`coincideTexto` / `coincideNullable`); el footer combina el horario confirmado
   "exclusivamente nocturno" (RF-22) con las modalidades reales del backend (Presencial,
@@ -202,7 +225,7 @@ Detalle con dueño y qué se necesita de vuelta en
 
 ## Verificación
 
-- Frontend: `npm run lint` · `npm run build` · `npm run test` (121 tests).
+- Frontend: `npm run lint` · `npm run build` · `npm run test` (127 tests).
 - Sistema documental: `logsayer check` · `logsayer process check` · `logsayer memory index`.
 - Consumo verificado **en navegador** (Firefox, `localhost:5173`) contra un servidor que replica
   la serialización de `app.py:62-92` leyendo de `instance/ifts12.db`: listado, detalle, buscador,
