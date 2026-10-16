@@ -26,9 +26,10 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 
 - **Hechas y mergeadas a `develop`:** T1 (header), T2 (home), T3 (carreras), T4 (ficha de
   carrera, 15/10/2026) y T5 (novedades, 15/10/2026).
-- **T6 (nota completa, 15/10/2026):** implementada en la rama `feature/t6-nota-completa`,
-  pendiente de PR/merge. Detalle en "Alineación al diseño del avance" más abajo.
-- **Pendientes (próxima sesión):** T7 (FAQ), T8 (búsqueda), T9 (ingresantes), T10 (estudiantes),
+- **T6 (nota completa, 15/10/2026):** mergeada a `develop` (`1852e46`).
+- **T7 (FAQ, 15/10/2026):** implementada en la rama `feature/t7-faq`, pendiente de PR/merge.
+  Detalle en "Alineación al diseño del avance" más abajo.
+- **Pendientes (próxima sesión):** T8 (búsqueda), T9 (ingresantes), T10 (estudiantes),
   T11 (docentes), T12 (tutorías), T13 (institucional), T14 (contacto), T15 (404) y T16
   (verificación y cierre).
 - **Regla de anotaciones (14/10/2026):** los textos de los exports que son **notas de UX/UI**
@@ -61,7 +62,7 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 ## Qué está construido
 
 - SPA React 19 + Vite + TypeScript strict + Tailwind v4 con `npm run lint · build · test` en verde
-  (**148 tests**, antes 29).
+  (**156 tests**, antes 29).
 - Home navegable según el **Mapa del Sitio V2** (9 ítems de menú + buscador global en el header),
   portada con carrusel institucional, footer V2, secciones de Carreras, Ingresantes,
   Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y Contacto, más rutas de detalle
@@ -116,8 +117,8 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   - **Pendiente:** Fase 6+ (responsive e interactivos finos) y tokens de color definitivos de
     UX/UI — el `get_figma_data` de Figma está en rate limit (~4 días), se trabaja con la
     referencia FLACSO + GLOBAL_VARS ya obtenidos.
-- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T5 mergeadas a `develop`; T6
-  implementada en la rama `feature/t6-nota-completa` (pendiente de PR/merge).
+- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T6 mergeadas a `develop`; T7
+  implementada en la rama `feature/t7-faq` (pendiente de PR/merge).
   - **T1 (header):** top bar con la ubicación `Misiones 26, C1083 ABB, CABA · Atención
     exclusivamente nocturna` (texto del PDF; el plan decía "nocturno") y accesos con etiqueta
     larga (`Campus Virtual Moodle` / `SIU · Autogestión` / `Inscripción GCBA`); constante
@@ -173,6 +174,28 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
     `t6_nota_completa_historial.png`. Nota: el layout Desktop 1440 `lg:` de 2 columnas quedó
     probado por CSS estándar y por el patrón de T4 (la pantalla del equipo es de 1024px, la
     evidencia se capturó a ese ancho con la sidebar apilada).
+  - **T7 (FAQ, 15/10/2026):** `FaqPage` alineada al export "10 · Preguntas frecuentes
+    (segmentada)": breadcrumb `Inicio / Preguntas frecuentes`, eyebrow "Preguntas frecuentes"
+    (ambar) y bajada "Respuestas por perfil: ingresantes, estudiantes y docentes." (las refs
+    `RF-06 · RF-14 · I3` y la nota de UX/UI "Accesible desde Home…" quedan como comentario de
+    código). **Tres segmentos** del diseño (Ingresantes / Estudiantes / Docentes, sin "Todas" ni
+    "Institucional"), **buscador interno** "Buscar en preguntas frecuentes" (filtra por pregunta o
+    respuesta dentro del segmento activo), dos **estados vacíos** (con y sin búsqueda) y CTA
+    "¿No encontraste lo que buscabas?" + "Ir a Contacto" → `/contacto`. **Decisiones del usuario:**
+    (1) las 12 FAQ inventadas de fases previas se reemplazaron por las **5 preguntas del export**
+    (segmento Ingresantes), con respuesta como **mensaje de proceso** ("Respuesta oficial pendiente
+    de validación institucional.") porque las respuestas oficiales están PENDIENTES; (2) las **4
+    FAQ institucionales** (bedeles, SIU, títulos, traspasos) se conservan en el data **sin tab**,
+    accesibles solo desde el buscador global del header. `FaqAcordeon` ganó la prop
+    `mostrarCategoria` (la etiqueta de categoría se oculta en `/faq`, donde el segmento ya la
+    indica; se mantiene en las páginas de sección) y un **guard de array vacío** ("No hay preguntas
+    para este segmento por ahora.") que evita el recuadro vacío en Estudiantes/Docentes. Tests:
+    `src/__tests__/faq-page.test.tsx` (7) + 1 en `faq-acordeon.test.tsx`. Verificado en navegador
+    contra el mock local: estructura, tabs, buscador ("carreras" → 2, "inscripción" → 1), estados
+    vacíos y CTA a `/contacto`; efectos colaterales OK en Home (4 destacadas de ingresantes) e
+    Ingresantes (5 FAQ con etiqueta). Evidencia: `documentacion/screenshots/t7_faq.png` y
+    `t7_faq_busqueda.png`. **Hallazgo (fuera de T1–T16):** el footer "Mapa del sitio" no lista
+    "Preguntas frecuentes" en Servicios, a diferencia del export.
 - **Revisión del consumo de API (08/10/2026):** los helpers del buscador se renombraron
   (`coincideTexto` / `coincideNullable`); el footer combina el horario confirmado
   "exclusivamente nocturno" (RF-22) con las modalidades reales del backend (Presencial,
@@ -260,7 +283,7 @@ Detalle con dueño y qué se necesita de vuelta en
 
 ## Verificación
 
-- Frontend: `npm run lint` · `npm run build` · `npm run test` (148 tests).
+- Frontend: `npm run lint` · `npm run build` · `npm run test` (156 tests).
 - Sistema documental: `logsayer check` · `logsayer process check` · `logsayer memory index`.
 - Consumo verificado **en navegador** (Firefox, `localhost:5173`) contra un servidor que replica
   la serialización de `app.py:62-92` leyendo de `instance/ifts12.db`: listado, detalle, buscador,
