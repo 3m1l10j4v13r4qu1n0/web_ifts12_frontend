@@ -10,9 +10,14 @@ const etiquetasCategoria: Record<FaqItem['categoria'], string> = {
 
 interface FaqAcordeonProps {
   items: FaqItem[];
+  /**
+   * Muestra la etiqueta de categoría sobre cada pregunta. Se oculta en `/faq`, donde el
+   * segmento activo ya la indica (diseño `10 · Preguntas frecuentes`).
+   */
+  mostrarCategoria?: boolean;
 }
 
-function FaqAcordeon({ items }: FaqAcordeonProps) {
+function FaqAcordeon({ items, mostrarCategoria = true }: FaqAcordeonProps) {
   const [abiertoId, setAbiertoId] = useState<string | null>(null);
   const baseId = useId();
 
@@ -22,6 +27,11 @@ function FaqAcordeon({ items }: FaqAcordeonProps) {
 
   return (
     <div className="divide-y divide-borde-suave rounded-xl border border-borde-suave bg-white">
+      {items.length === 0 && (
+        <p className="px-6 py-4 text-sm text-texto-suave">
+          No hay preguntas para este segmento por ahora.
+        </p>
+      )}
       {items.map((item) => {
         const abierto = abiertoId === item.id;
         const panelId = `${baseId}-panel-${item.id}`;
@@ -39,9 +49,11 @@ function FaqAcordeon({ items }: FaqAcordeonProps) {
                 className="flex w-full items-center justify-between gap-4 px-6 py-4 text-left"
               >
                 <span className="flex flex-col gap-1">
-                  <span className="text-xs font-medium uppercase tracking-wide text-acento-700">
-                    {etiquetasCategoria[item.categoria]}
-                  </span>
+                  {mostrarCategoria && (
+                    <span className="text-xs font-medium uppercase tracking-wide text-acento-700">
+                      {etiquetasCategoria[item.categoria]}
+                    </span>
+                  )}
                   <span className="font-medium text-texto">{item.pregunta}</span>
                 </span>
                 <span aria-hidden="true" className="text-texto-suave">
