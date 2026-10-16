@@ -22,7 +22,7 @@ carreras y novedades. Detalle de avance y pendientes en la sección siguiente.)_
 Plan de alineación página por página a los **exports Desktop 1440** del avance de diseño
 (`documentacion/driveFrontend/01_analisis_funcional/avance_disenio_sitio_ifts12/`, 14 PDFs) y
 al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
-`inbox/plan_diseño_aprobado.md` (tareas **T1–T16**, no versionado). Estado al 15/10/2026:
+`inbox/plan_diseño_aprobado.md` (tareas **T1–T16**, no versionado). Estado al 16/10/2026:
 
 - **Hechas y mergeadas a `develop`:** T1 (header), T2 (home), T3 (carreras), T4 (ficha de
   carrera, 15/10/2026) y T5 (novedades, 15/10/2026).
@@ -34,8 +34,11 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   "Alineación al diseño del avance" más abajo.
 - **T11 (docentes, 16/10/2026):** mergeada a `develop` (PR #24, `dd04b33`). Detalle en
   "Alineación al diseño del avance" más abajo.
-- **Pendientes (próxima sesión):** T12 (tutorías), T13 (institucional), T14 (contacto), T15 (404)
-  y T16 (verificación y cierre).
+- **T12 (tutorías, 16/10/2026):** implementada en `feature/t12-tutorias` (commits `4a54238` y
+  `62e6255`), **pendiente de push/PR/merge**. Detalle en "Alineación al diseño del avance" más
+  abajo.
+- **Pendientes (próxima sesión):** push/PR/merge de T12, T13 (institucional), T14 (contacto),
+  T15 (404) y T16 (verificación y cierre).
 - **Regla de anotaciones (14/10/2026):** los textos de los exports que son **notas de UX/UI**
   (refs `RF-xx`, `PENDIENTE`, "Se cargan desde el panel admin", "Sin datos inventados", etc.)
   **no se renderizan** en ninguna pantalla: van como **comentario de código** en el componente.
@@ -121,8 +124,9 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   - **Pendiente:** Fase 6+ (responsive e interactivos finos) y tokens de color definitivos de
     UX/UI — el `get_figma_data` de Figma está en rate limit (~4 días), se trabaja con la
     referencia FLACSO + GLOBAL_VARS ya obtenidos.
-- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T11 mergeadas a `develop`; la
-  próxima tarea pendiente es T12 (tutorías).
+- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T11 mergeadas a `develop`, T12
+  (tutorías) implementada en `feature/t12-tutorias` y pendiente de merge; la próxima tarea
+  pendiente es T13 (institucional).
   - **T1 (header):** top bar con la ubicación `Misiones 26, C1083 ABB, CABA · Atención
     exclusivamente nocturna` (texto del PDF; el plan decía "nocturno") y accesos con etiqueta
     larga (`Campus Virtual Moodle` / `SIU · Autogestión` / `Inscripción GCBA`); constante
@@ -281,6 +285,25 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
     `src/__tests__/docentes-page.test.tsx` (6) → **181 tests verdes**. Verificado en navegador
     contra un mock local (`:5000`) con 3 carreras: estructura, estados vacío/proceso y accesos sin
     anotaciones renderizadas. Evidencia: `documentacion/screenshots/t11_docentes.png`.
+  - **T12 (tutorías, 16/10/2026):** `TutoriasPage` reescrita según el export "05 · Tutorías"
+    (implementada en `feature/t12-tutorias`, **pendiente de push/PR/merge**). Breadcrumb
+    `Inicio / Tutorías`, eyebrow ambar y **H1 + bajada del diseño** ("Espacio de acompañamiento
+    al estudiante. Información institucional del servicio de tutorías."; el "(sin reserva de
+    turnos ni solicitud online · I12)" queda como comentario). Secciones del export:
+    **"Presentación del espacio"** ("Qué es y para quién": texto de presentación y foto del
+    espacio como mensajes de proceso, anotaciones "PENDIENTE INSTITUCIONAL" y M1 como código),
+    **"Días, horarios y modalidades de atención"** (tabla Día / Horario / Modalidad con las 2
+    filas PENDIENTE del diseño) y **"Contacto con el equipo de tutores"** (3 tarjetas —Correo de
+    tutorías con mensaje de proceso, Dónde con la ubicación real, ¿Tenés una consulta? con CTA
+    "Ir a Contacto" → `/contacto`— más tarjeta de datos del instituto con "Correo institucional"
+    como mensaje de proceso; anotaciones I10 y franja horaria como comentario). **"Consulta
+    directa"** usa `FormularioConsulta` con el título del diseño, **sin h2 externo** (el título
+    lo aporta el propio formulario, mismo patrón que Contacto, para no duplicar la región
+    accesible); la nota I1 (campos obligatorios, validación de correo, éxito según API) queda como
+    comentario. Tests: nuevo `src/__tests__/tutorias-page.test.tsx` (6) → **187 tests verdes**
+    (lint y build OK). Verificado en navegador contra el dev server: DOM sin anotaciones
+    renderizadas, validación del formulario con los 3 mensajes de error y navegación a
+    `/contacto`. Evidencia: `documentacion/screenshots/t12_tutorias.png`.
 - **Revisión del consumo de API (08/10/2026):** los helpers del buscador se renombraron
   (`coincideTexto` / `coincideNullable`); el footer combina el horario confirmado
   "exclusivamente nocturno" (RF-22) con las modalidades reales del backend (Presencial,
