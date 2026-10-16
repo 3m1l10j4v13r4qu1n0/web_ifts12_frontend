@@ -67,7 +67,7 @@ describe('FaqPage', () => {
     const usuario = userEvent.setup();
     renderizarFaq();
 
-    await usuario.click(screen.getByRole('tab', { name: 'Estudiantes' }));
+    await usuario.click(screen.getByRole('tab', { name: 'Docentes' }));
 
     expect(screen.getByText('Todavía no hay preguntas en este segmento.')).toBeInTheDocument();
   });
