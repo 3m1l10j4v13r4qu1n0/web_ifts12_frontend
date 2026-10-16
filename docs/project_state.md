@@ -32,8 +32,8 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 - **T9 (ingresantes, 16/10/2026):** mergeada a `develop` (PR #21, `79cc8c3`).
 - **T10 (estudiantes, 16/10/2026):** mergeada a `develop` (PR #22, `bf30b5c`). Detalle en
   "Alineación al diseño del avance" más abajo.
-- **T11 (docentes, 16/10/2026):** implementada en la rama `feature/t11-docentes`, pendiente de
-  PR/merge. Detalle en "Alineación al diseño del avance" más abajo.
+- **T11 (docentes, 16/10/2026):** mergeada a `develop` (PR #24, `dd04b33`). Detalle en
+  "Alineación al diseño del avance" más abajo.
 - **Pendientes (próxima sesión):** T12 (tutorías), T13 (institucional), T14 (contacto), T15 (404)
   y T16 (verificación y cierre).
 - **Regla de anotaciones (14/10/2026):** los textos de los exports que son **notas de UX/UI**
@@ -121,8 +121,8 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   - **Pendiente:** Fase 6+ (responsive e interactivos finos) y tokens de color definitivos de
     UX/UI — el `get_figma_data` de Figma está en rate limit (~4 días), se trabaja con la
     referencia FLACSO + GLOBAL_VARS ya obtenidos.
-- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T10 mergeadas a `develop`; T11
-  implementada en la rama `feature/t11-docentes` (pendiente de PR/merge).
+- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T11 mergeadas a `develop`; la
+  próxima tarea pendiente es T12 (tutorías).
   - **T1 (header):** top bar con la ubicación `Misiones 26, C1083 ABB, CABA · Atención
     exclusivamente nocturna` (texto del PDF; el plan decía "nocturno") y accesos con etiqueta
     larga (`Campus Virtual Moodle` / `SIU · Autogestión` / `Inscripción GCBA`); constante
@@ -261,7 +261,7 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
     verdes.** Verificado en navegador contra el dev server: estructura, tablas, acordeón y ausencia
     de anotaciones renderizadas. Evidencia: `documentacion/screenshots/t10_estudiantes.png`.
   - **T11 (docentes, 16/10/2026):** `DocentesPage` reescrita según el export "06 · Docentes"
-    (rama `feature/t11-docentes`, pendiente de PR/merge). Breadcrumb `Inicio / Docentes`, eyebrow
+    (mergeada a `develop`, PR #24 `dd04b33`). Breadcrumb `Inicio / Docentes`, eyebrow
     verde y **H1 + bajada del diseño** ("Información y accesos de interés para el plantel docente.
     Las autoridades se publican en Institucional."; las refs RF-15/16/17 e I7 quedan como
     comentario). Secciones del export: **"Información general y comunicados"** (mensaje de proceso:
