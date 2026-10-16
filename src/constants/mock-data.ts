@@ -78,10 +78,11 @@ export const mockNoticias: Noticia[] = [
   },
 ];
 
-// Preguntas del export `10 · Preguntas frecuentes (segmentada)`, segmento Ingresantes. Las
-// respuestas oficiales están PENDIENTES (las carga Análisis Funcional; no inventar): se
-// reemplazan por el mensaje de proceso `RESPUESTA_PENDIENTE`. Las FAQ institucionales no tienen
-// tab en el diseño (quedan accesibles solo desde el buscador global del header).
+// Preguntas del export `10 · Preguntas frecuentes (segmentada)`, segmento Ingresantes, más las
+// 4 de estudiantes del export `04 · Estudiantes`. Las respuestas oficiales están PENDIENTES (las
+// carga Análisis Funcional; no inventar): se reemplazan por el mensaje de proceso
+// `RESPUESTA_PENDIENTE`. Las FAQ institucionales no tienen tab en el diseño (quedan accesibles
+// solo desde el buscador global del header).
 const RESPUESTA_PENDIENTE = 'Respuesta oficial pendiente de validación institucional.';
 
 export const mockFaqs: FaqItem[] = [
@@ -113,6 +114,30 @@ export const mockFaqs: FaqItem[] = [
     id: 'faq-ing-modalidad',
     categoria: 'ingresantes',
     pregunta: '¿Cuál es la modalidad y el horario de las carreras?',
+    respuesta: RESPUESTA_PENDIENTE,
+  },
+  {
+    id: 'faq-est-regularidad',
+    categoria: 'estudiantes',
+    pregunta: '¿Cómo mantengo la condición de regularidad?',
+    respuesta: RESPUESTA_PENDIENTE,
+  },
+  {
+    id: 'faq-est-constancia',
+    categoria: 'estudiantes',
+    pregunta: '¿Dónde solicito una constancia?',
+    respuesta: RESPUESTA_PENDIENTE,
+  },
+  {
+    id: 'faq-est-mesa',
+    categoria: 'estudiantes',
+    pregunta: '¿Cómo me presento a una mesa de examen?',
+    respuesta: RESPUESTA_PENDIENTE,
+  },
+  {
+    id: 'faq-est-campus',
+    categoria: 'estudiantes',
+    pregunta: '¿Cómo accedo al Campus Virtual?',
     respuesta: RESPUESTA_PENDIENTE,
   },
   {
