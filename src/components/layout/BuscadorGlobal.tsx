@@ -4,6 +4,9 @@ import { useCarreras } from '../../hooks/useCarreras';
 import { useNovedades } from '../../hooks/useNovedades';
 import { buscarContenidoLocal } from '../../utils/busqueda';
 
+/** El desplegable del header muestra un máximo de sugerencias; la página `/buscar` no limita. */
+const SUGERENCIAS_MAX = 8;
+
 function BuscadorGlobal() {
   const [consulta, setConsulta] = useState('');
   const [abierto, setAbierto] = useState(false);
@@ -18,7 +21,7 @@ function BuscadorGlobal() {
   const { novedades } = useNovedades();
 
   const resultados = useMemo(
-    () => buscarContenidoLocal(consulta, { carreras, novedades }),
+    () => buscarContenidoLocal(consulta, { carreras, novedades }).slice(0, SUGERENCIAS_MAX),
     [consulta, carreras, novedades],
   );
   const mostrarResultados = abierto && consulta.trim() !== '';
@@ -83,9 +86,11 @@ function BuscadorGlobal() {
                   >
                     <span className="text-sm font-medium text-texto">{resultado.titulo}</span>
                     <span className="text-xs text-texto-suave">{resultado.descripcion}</span>
-                    <span className="text-xs font-medium uppercase tracking-wide text-acento-700">
-                      {resultado.categoria}
-                    </span>
+                    {resultado.seccion !== resultado.titulo && (
+                      <span className="text-xs font-medium uppercase tracking-wide text-acento-700">
+                        {resultado.seccion}
+                      </span>
+                    )}
                   </button>
                 </li>
               ))}
