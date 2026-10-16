@@ -27,9 +27,10 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 - **Hechas y mergeadas a `develop`:** T1 (header), T2 (home), T3 (carreras), T4 (ficha de
   carrera, 15/10/2026) y T5 (novedades, 15/10/2026).
 - **T6 (nota completa, 15/10/2026):** mergeada a `develop` (`1852e46`).
-- **T7 (FAQ, 15/10/2026):** implementada en la rama `feature/t7-faq`, pendiente de PR/merge.
-  Detalle en "Alineación al diseño del avance" más abajo.
-- **Pendientes (próxima sesión):** T8 (búsqueda), T9 (ingresantes), T10 (estudiantes),
+- **T7 (FAQ, 15/10/2026):** mergeada a `develop` (PR #19, `e4c22ad`).
+- **T8 (búsqueda, 16/10/2026):** implementada en la rama `feature/t8-busqueda`, pendiente de
+  PR/merge. Detalle en "Alineación al diseño del avance" más abajo.
+- **Pendientes (próxima sesión):** T9 (ingresantes), T10 (estudiantes),
   T11 (docentes), T12 (tutorías), T13 (institucional), T14 (contacto), T15 (404) y T16
   (verificación y cierre).
 - **Regla de anotaciones (14/10/2026):** los textos de los exports que son **notas de UX/UI**
@@ -62,7 +63,7 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 ## Qué está construido
 
 - SPA React 19 + Vite + TypeScript strict + Tailwind v4 con `npm run lint · build · test` en verde
-  (**156 tests**, antes 29).
+  (**164 tests**, antes 29).
 - Home navegable según el **Mapa del Sitio V2** (9 ítems de menú + buscador global en el header),
   portada con carrusel institucional, footer V2, secciones de Carreras, Ingresantes,
   Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y Contacto, más rutas de detalle
@@ -117,8 +118,8 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   - **Pendiente:** Fase 6+ (responsive e interactivos finos) y tokens de color definitivos de
     UX/UI — el `get_figma_data` de Figma está en rate limit (~4 días), se trabaja con la
     referencia FLACSO + GLOBAL_VARS ya obtenidos.
-- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T6 mergeadas a `develop`; T7
-  implementada en la rama `feature/t7-faq` (pendiente de PR/merge).
+- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T7 mergeadas a `develop`; T8
+  implementada en la rama `feature/t8-busqueda` (pendiente de PR/merge).
   - **T1 (header):** top bar con la ubicación `Misiones 26, C1083 ABB, CABA · Atención
     exclusivamente nocturna` (texto del PDF; el plan decía "nocturno") y accesos con etiqueta
     larga (`Campus Virtual Moodle` / `SIU · Autogestión` / `Inscripción GCBA`); constante
@@ -196,6 +197,26 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
     Ingresantes (5 FAQ con etiqueta). Evidencia: `documentacion/screenshots/t7_faq.png` y
     `t7_faq_busqueda.png`. **Hallazgo (fuera de T1–T16):** el footer "Mapa del sitio" no lista
     "Preguntas frecuentes" en Servicios, a diferencia del export.
+  - **T8 (búsqueda, 16/10/2026):** `BusquedaPage` alineada al export "11 · Resultados de búsqueda"
+    y a su estado sin resultados (11b). Encabezado con breadcrumb `Inicio / Resultados de búsqueda`
+    + eyebrow y H1 "Resultados de búsqueda" (antes el H1 era `Resultados para «…»`), **formulario de
+    búsqueda** (input + "Buscar") que actualiza `?q`, **chips "Secciones"** que filtran por sección,
+    **resumen** "N resultado(s) para «q» · criterio: títulos y metadatos." (la nota de alcance
+    pendiente, "(… a confirmar con Análisis · I4)", queda como comentario de código), resultados
+    **agrupados por sección** con título, descripción y ruta de migas, y **paginación de 4** por
+    página (`Paginacion`, antes sin usar). Estado **sin resultados**: "Sin resultados para «q»" +
+    "Revisá la ortografía, probá con otra palabra o navegá por las secciones." + "Limpiar filtros" +
+    accesos directos (Carreras / Ingresantes / Estudiantes / Preguntas frecuentes / Contacto).
+    **Decisión del usuario:** los chips se arman con las **secciones presentes en los resultados**
+    (no se ofrecen filtros vacíos) por I4 pendiente; **no se amplió el índice buscable** (alcance a
+    confirmar con Análisis). `src/utils/busqueda.ts`: `categoria` → `seccion` + nuevo `contexto`
+    (ruta de migas); el tope de 8 resultados salió de la utilidad y quedó en el desplegable del
+    header (`SUGERENCIAS_MAX`), porque la página necesita todos para paginar. `BuscadorGlobal` usa
+    `seccion` y oculta la etiqueta cuando coincide con el título. Tests: `busqueda.test.ts`
+    actualizado, nuevo `busqueda-page.test.tsx` (7) y ajuste en `buscador-global.test.tsx`.
+    Verificado en navegador contra el mock local (chips, filtro por chip, paginación, sin
+    resultados y accesos directos). Evidencia: `documentacion/screenshots/t8_busqueda.png` y
+    `t8_busqueda_sin_resultados.png`.
 - **Revisión del consumo de API (08/10/2026):** los helpers del buscador se renombraron
   (`coincideTexto` / `coincideNullable`); el footer combina el horario confirmado
   "exclusivamente nocturno" (RF-22) con las modalidades reales del backend (Presencial,
@@ -213,6 +234,11 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 
 ## Decisiones activas (últimas 3-5)
 
+- **Los chips "Secciones" del buscador se arman con los datos (T8, 16/10/2026):** se listan solo
+  las secciones presentes en los resultados de la consulta (no los 5 fijos del export), porque el
+  alcance buscable sigue pendiente con Análisis (**I4**) y no se quieren filtros que no devuelvan
+  nada. El índice buscable no se amplió: sigue limitado a secciones del menú, carreras, novedades
+  y FAQ.
 - **Los exports Desktop 1440 del avance de diseño son la referencia visual vigente** para la
   alineación en curso (junto al contrato `figma_v2_contrato_visual.md`). El plan está en
   `inbox/plan_diseño_aprobado.md`; se trabaja una tarea por rama. (14/10/2026)
@@ -283,7 +309,7 @@ Detalle con dueño y qué se necesita de vuelta en
 
 ## Verificación
 
-- Frontend: `npm run lint` · `npm run build` · `npm run test` (156 tests).
+- Frontend: `npm run lint` · `npm run build` · `npm run test` (164 tests).
 - Sistema documental: `logsayer check` · `logsayer process check` · `logsayer memory index`.
 - Consumo verificado **en navegador** (Firefox, `localhost:5173`) contra un servidor que replica
   la serialización de `app.py:62-92` leyendo de `instance/ifts12.db`: listado, detalle, buscador,

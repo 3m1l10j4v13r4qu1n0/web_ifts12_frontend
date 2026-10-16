@@ -85,6 +85,8 @@ describe('BuscadorGlobal', () => {
 
     escribir('novedades');
 
-    expect(await screen.findByText('Novedades')).toBeInTheDocument();
+    // El resultado de la sección trae título y etiqueta de sección "Novedades": se busca la
+    // descripción, que es única, para no chocar con el texto duplicado.
+    expect(await screen.findByText('Sección del sitio')).toBeInTheDocument();
   });
 });

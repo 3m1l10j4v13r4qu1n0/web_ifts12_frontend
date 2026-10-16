@@ -8,8 +8,11 @@ export interface ResultadoBusqueda {
   id: string;
   titulo: string;
   descripcion: string;
-  categoria: string;
+  /** Sección del sitio a la que pertenece el resultado (agrupa y alimenta los chips). */
+  seccion: string;
   href: string;
+  /** Ruta de migas del resultado, ej. `Carreras › Análisis de Sistemas`. */
+  contexto: readonly string[];
 }
 
 /**
@@ -53,8 +56,9 @@ export function buscarContenidoLocal(
         id: `seccion-${item.href}`,
         titulo: item.etiqueta,
         descripcion: 'Sección del sitio',
-        categoria: 'Secciones',
+        seccion: item.etiqueta,
         href: item.href,
+        contexto: ['Secciones del sitio', item.etiqueta],
       });
     }
   }
@@ -65,9 +69,10 @@ export function buscarContenidoLocal(
         id: `carrera-${carrera.id}`,
         titulo: carrera.nombre,
         descripcion: carrera.descripcionBreve,
-        categoria: 'Carreras',
+        seccion: 'Carreras',
         // Enlace directo a la ficha, no al listado: el slug ya viene resuelto en `carrera.id`.
         href: `/carreras/${carrera.id}`,
+        contexto: ['Carreras', carrera.nombre],
       });
     }
   }
@@ -78,8 +83,9 @@ export function buscarContenidoLocal(
         id: `novedad-${novedad.id}`,
         titulo: novedad.titulo,
         descripcion: novedad.copete ?? '',
-        categoria: 'Novedades',
+        seccion: 'Novedades',
         href: `/noticias/${slugDesdeNovedad(novedad)}`,
+        contexto: ['Novedades'],
       });
     }
   }
@@ -90,13 +96,14 @@ export function buscarContenidoLocal(
         id: `faq-${faq.id}`,
         titulo: faq.pregunta,
         descripcion: 'Pregunta frecuente',
-        categoria: 'Preguntas frecuentes',
+        seccion: 'Preguntas frecuentes',
         href: '/faq',
+        contexto: ['Preguntas frecuentes'],
       });
     }
   }
 
-  return resultados.slice(0, 8);
+  return resultados;
 }
 
 /** `copete` es nullable (`models.py:57`), así que hay que tolerar `null` sin romper. */
