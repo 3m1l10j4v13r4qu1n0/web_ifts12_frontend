@@ -30,8 +30,8 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 - **T7 (FAQ, 15/10/2026):** mergeada a `develop` (PR #19, `e4c22ad`).
 - **T8 (búsqueda, 16/10/2026):** mergeada a `develop` (PR #20, `45afdda`).
 - **T9 (ingresantes, 16/10/2026):** mergeada a `develop` (PR #21, `79cc8c3`).
-- **T10 (estudiantes, 16/10/2026):** implementada en la rama `feature/t10-estudiantes`, pendiente de
-  PR/merge. Detalle en "Alineación al diseño del avance" más abajo.
+- **T10 (estudiantes, 16/10/2026):** mergeada a `develop` (PR #22, `bf30b5c`). Detalle en
+  "Alineación al diseño del avance" más abajo.
 - **Pendientes (próxima sesión):** T11 (docentes), T12 (tutorías), T13 (institucional), T14
   (contacto), T15 (404) y T16 (verificación y cierre).
 - **Regla de anotaciones (14/10/2026):** los textos de los exports que son **notas de UX/UI**
@@ -119,8 +119,8 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   - **Pendiente:** Fase 6+ (responsive e interactivos finos) y tokens de color definitivos de
     UX/UI — el `get_figma_data` de Figma está en rate limit (~4 días), se trabaja con la
     referencia FLACSO + GLOBAL_VARS ya obtenidos.
-- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T9 mergeadas a `develop`; T10
-  implementada en la rama `feature/t10-estudiantes` (pendiente de PR/merge).
+- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T10 mergeadas a `develop`; la
+  próxima tarea pendiente es T11 (docentes).
   - **T1 (header):** top bar con la ubicación `Misiones 26, C1083 ABB, CABA · Atención
     exclusivamente nocturna` (texto del PDF; el plan decía "nocturno") y accesos con etiqueta
     larga (`Campus Virtual Moodle` / `SIU · Autogestión` / `Inscripción GCBA`); constante
@@ -238,7 +238,7 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
     ejemplo") como comentario de código. Tests: nuevo `src/__tests__/ingresantes-page.test.tsx`
     (5). Evidencia: `documentacion/screenshots/t9_ingresantes.png`.
   - **T10 (estudiantes, 16/10/2026):** `EstudiantesPage` alineada al export "04 · Estudiantes"
-    (rama `feature/t10-estudiantes`, pendiente de PR/merge). Breadcrumb `Inicio / Estudiantes`,
+    (mergeada a `develop`, PR #22 `bf30b5c`). Breadcrumb `Inicio / Estudiantes`,
     eyebrow cian y **H1 + bajada del diseño** ("Información y trámites para estudiantes actuales:
     regularidad, constancias, mesas, calendario, becas, boleto y títulos/traspasos"; el "Reemplaza
     la propuesta 'Comunidad de alumnos' (B3)" y la nota "el propio sitio vs. trámites externos"
