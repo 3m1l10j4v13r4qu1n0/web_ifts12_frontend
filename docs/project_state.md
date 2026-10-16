@@ -29,11 +29,11 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 - **T6 (nota completa, 15/10/2026):** mergeada a `develop` (`1852e46`).
 - **T7 (FAQ, 15/10/2026):** mergeada a `develop` (PR #19, `e4c22ad`).
 - **T8 (búsqueda, 16/10/2026):** mergeada a `develop` (PR #20, `45afdda`).
-- **T9 (ingresantes, 16/10/2026):** implementada en la rama `feature/t9-ingresantes`, pendiente de
+- **T9 (ingresantes, 16/10/2026):** mergeada a `develop` (PR #21, `79cc8c3`).
+- **T10 (estudiantes, 16/10/2026):** implementada en la rama `feature/t10-estudiantes`, pendiente de
   PR/merge. Detalle en "Alineación al diseño del avance" más abajo.
-- **Pendientes (próxima sesión):** T10 (estudiantes),
-  T11 (docentes), T12 (tutorías), T13 (institucional), T14 (contacto), T15 (404) y T16
-  (verificación y cierre).
+- **Pendientes (próxima sesión):** T11 (docentes), T12 (tutorías), T13 (institucional), T14
+  (contacto), T15 (404) y T16 (verificación y cierre).
 - **Regla de anotaciones (14/10/2026):** los textos de los exports que son **notas de UX/UI**
   (refs `RF-xx`, `PENDIENTE`, "Se cargan desde el panel admin", "Sin datos inventados", etc.)
   **no se renderizan** en ninguna pantalla: van como **comentario de código** en el componente.
@@ -64,7 +64,7 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 ## Qué está construido
 
 - SPA React 19 + Vite + TypeScript strict + Tailwind v4 con `npm run lint · build · test` en verde
-  (**169 tests**, antes 29).
+  (**175 tests**, antes 29).
 - Home navegable según el **Mapa del Sitio V2** (9 ítems de menú + buscador global en el header),
   portada con carrusel institucional, footer V2, secciones de Carreras, Ingresantes,
   Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y Contacto, más rutas de detalle
@@ -119,8 +119,8 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   - **Pendiente:** Fase 6+ (responsive e interactivos finos) y tokens de color definitivos de
     UX/UI — el `get_figma_data` de Figma está en rate limit (~4 días), se trabaja con la
     referencia FLACSO + GLOBAL_VARS ya obtenidos.
-- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T8 mergeadas a `develop`; T9
-  implementada en la rama `feature/t9-ingresantes` (pendiente de PR/merge).
+- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T9 mergeadas a `develop`; T10
+  implementada en la rama `feature/t10-estudiantes` (pendiente de PR/merge).
   - **T1 (header):** top bar con la ubicación `Misiones 26, C1083 ABB, CABA · Atención
     exclusivamente nocturna` (texto del PDF; el plan decía "nocturno") y accesos con etiqueta
     larga (`Campus Virtual Moodle` / `SIU · Autogestión` / `Inscripción GCBA`); constante
@@ -218,29 +218,46 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
     Verificado en navegador contra el mock local (chips, filtro por chip, paginación, sin
     resultados y accesos directos). Evidencia: `documentacion/screenshots/t8_busqueda.png` y
     `t8_busqueda_sin_resultados.png`.
-  - **T9 (ingresantes, 16/10/2026):** `IngresantesPage` alineada al export "03 · Ingresantes".
-    Breadcrumb `Inicio / Ingresantes`, eyebrow verde e **H1 + bajada del diseño** ("Todo lo que
-    necesitás para ingresar al IFTS N.º 12: carreras, requisitos, fechas, modalidad, equivalencias,
-    pases y preguntas frecuentes"). Aviso de inscripción informativo ("La inscripción se realiza en
-    el sitio oficial del Gobierno de la Ciudad. Este sitio informa el recorrido; no inscribe."; ref
-    RF-03 como comentario). Sección "Carreras disponibles" con **contador y enlace "Ver las N
-    carreras" con la cantidad real del backend** (no el "6" fijo del diseño) → `/carreras`. Nueva
-    sección **"Requisitos y fechas de inscripción"**: bloque de requisitos (mensaje de proceso para
-    el listado oficial PENDIENTE + CTA "Inscribirme en el sitio oficial (GCBA)" que usa
-    `ENLACES.inscripcion`, hoy vacío → "El enlace oficial se publica cuando esté disponible.") y
-    **tabla Etapa / Fecha** con las 3 etapas del diseño (Inscripción online · Presentación de
-    documentación · Inicio de clases) y Fecha = PENDIENTE (nota "estructura de ejemplo: validar con
-    Análisis" como comentario). "Modalidad, horarios y equivalencias" con las bajadas del export y
-    mensajes de proceso en las 3 tarjetas. "Pases desde otros institutos" con "Cómo pedir un pase"
-    (mensaje de proceso) + "Consultar por Contacto" → `/contacto`. FAQ de ingresantes con enlace
-    "Ver todas las preguntas" → `/faq`. Anotaciones del diseño (RF-03/04/05/06/32, I5, "PENDIENTE
-    INSTITUCIONAL", "estructura de ejemplo") como comentario de código. Se reemplazó el uso de
-    `Estado` por `AvisoCarga`/`AvisoError` (patrón de T3/T5) en la grilla de carreras. Tests: nuevo
-    `src/__tests__/ingresantes-page.test.tsx` (5) → **169 tests verdes**. Verificado en navegador
-    contra el mock local (`:5000`): contador "3 carreras · turno nocturno", "Ver las 3 carreras",
-    tabla con 3 filas PENDIENTE, FAQ desplegable, navegación a `/carreras`, `/contacto` y `/faq`, y
-    ausencia de anotaciones renderizadas. Evidencia: `documentacion/screenshots/t9_ingresantes.png`
-    (1020px de ancho, consistente con la evidencia de T6–T8).
+  - **T9 (ingresantes, 16/10/2026):** `IngresantesPage` alineada al export "03 · Ingresantes"
+    (mergeada a `develop`, PR #21 `79cc8c3`). Breadcrumb `Inicio / Ingresantes`, eyebrow verde e
+    **H1 + bajada del diseño** ("Todo lo que necesitás para ingresar al IFTS N.º 12: carreras,
+    requisitos, fechas, modalidad, equivalencias, pases y preguntas frecuentes"). Aviso de
+    inscripción informativo ("La inscripción se realiza en el sitio oficial del Gobierno de la
+    Ciudad. Este sitio informa el recorrido; no inscribe."; ref RF-03 como comentario). Sección
+    "Carreras disponibles" con **contador y enlace "Ver las N carreras" con la cantidad real del
+    backend** (no el "6" fijo del diseño) → `/carreras`. Nueva sección **"Requisitos y fechas de
+    inscripción"**: bloque de requisitos (mensaje de proceso para el listado oficial PENDIENTE +
+    CTA "Inscribirme en el sitio oficial (GCBA)" que usa `ENLACES.inscripcion`, hoy vacío → "El
+    enlace oficial se publica cuando esté disponible.") y **tabla Etapa / Fecha** con las 3 etapas
+    del diseño (Inscripción online · Presentación de documentación · Inicio de clases) y Fecha =
+    PENDIENTE (nota "estructura de ejemplo: validar con Análisis" como comentario). "Modalidad,
+    horarios y equivalencias" con las bajadas del export y mensajes de proceso en las 3 tarjetas.
+    "Pases desde otros institutos" con "Cómo pedir un pase" (mensaje de proceso) + "Consultar por
+    Contacto" → `/contacto`. FAQ de ingresantes con enlace "Ver todas las preguntas" → `/faq`.
+    Anotaciones del diseño (RF-03/04/05/06/32, I5, "PENDIENTE INSTITUCIONAL", "estructura de
+    ejemplo") como comentario de código. Tests: nuevo `src/__tests__/ingresantes-page.test.tsx`
+    (5). Evidencia: `documentacion/screenshots/t9_ingresantes.png`.
+  - **T10 (estudiantes, 16/10/2026):** `EstudiantesPage` alineada al export "04 · Estudiantes"
+    (rama `feature/t10-estudiantes`, pendiente de PR/merge). Breadcrumb `Inicio / Estudiantes`,
+    eyebrow cian y **H1 + bajada del diseño** ("Información y trámites para estudiantes actuales:
+    regularidad, constancias, mesas, calendario, becas, boleto y títulos/traspasos"; el "Reemplaza
+    la propuesta 'Comunidad de alumnos' (B3)" y la nota "el propio sitio vs. trámites externos"
+    quedan como comentario). Sección **"Trámites e información"** con las **8 tarjetas del diseño**
+    (Regularidad · Constancias · Mesas de examen · Becas · Boleto estudiantil · Trámite de títulos ·
+    Traspasos entre IFTS · Campus Virtual Moodle), con los CTAs del export: los destinos que aún no
+    existen como página quedan **deshabilitados**, "Ver mesas" baja a la tabla de la propia página
+    (`#mesas-de-examen-final`) y Moodle usa `ENLACES.moodle` (hoy vacío → "Enlace oficial
+    próximamente"). Sección **"Calendario académico"** como **tabla** Período / Actividad / Desde /
+    Hasta con las 3 filas del diseño (1.er cuatrimestre, Receso, 2.º cuatrimestre) y fechas
+    PENDIENTE + caja "Calendario académico completo" con "Descargar" deshabilitado (PDF PENDIENTE).
+    Sección **"Mesas de examen final"** como tabla Turno / Carrera / Fecha / Modalidad (2 filas de
+    ejemplo, PENDIENTE). FAQ de estudiantes con las **4 preguntas del export** + "Ver todas las
+    preguntas" → `/faq`. Anotaciones del diseño (RF-07…RF-32, I8, B3) como comentario de código. Datos:
+    se agregaron las 4 FAQ de estudiantes a `mock-data.ts` (respuesta de proceso `RESPUESTA_PENDIENTE`);
+    el estado vacío de `/faq` pasó del segmento Estudiantes al de Docentes. Tests: nuevo
+    `src/__tests__/estudiantes-page.test.tsx` (6) + ajuste en `faq-page.test.tsx`. **175 tests
+    verdes.** Verificado en navegador contra el dev server: estructura, tablas, acordeón y ausencia
+    de anotaciones renderizadas. Evidencia: `documentacion/screenshots/t10_estudiantes.png`.
 - **Revisión del consumo de API (08/10/2026):** los helpers del buscador se renombraron
   (`coincideTexto` / `coincideNullable`); el footer combina el horario confirmado
   "exclusivamente nocturno" (RF-22) con las modalidades reales del backend (Presencial,
@@ -333,7 +350,7 @@ Detalle con dueño y qué se necesita de vuelta en
 
 ## Verificación
 
-- Frontend: `npm run lint` · `npm run build` · `npm run test` (169 tests).
+- Frontend: `npm run lint` · `npm run build` · `npm run test` (175 tests).
 - Sistema documental: `logsayer check` · `logsayer process check` · `logsayer memory index`.
 - Consumo verificado **en navegador** (Firefox, `localhost:5173`) contra un servidor que replica
   la serialización de `app.py:62-92` leyendo de `instance/ifts12.db`: listado, detalle, buscador,
