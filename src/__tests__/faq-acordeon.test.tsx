@@ -40,4 +40,10 @@ describe('FaqAcordeon', () => {
     expect(screen.queryByText('Respuesta uno')).not.toBeInTheDocument();
     expect(boton).toHaveAttribute('aria-expanded', 'false');
   });
+
+  it('muestra un mensaje cuando no hay preguntas en el segmento', () => {
+    render(<FaqAcordeon items={[]} />);
+
+    expect(screen.getByText('No hay preguntas para este segmento por ahora.')).toBeInTheDocument();
+  });
 });

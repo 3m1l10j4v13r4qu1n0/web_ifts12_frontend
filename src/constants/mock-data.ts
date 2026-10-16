@@ -78,90 +78,66 @@ export const mockNoticias: Noticia[] = [
   },
 ];
 
+// Preguntas del export `10 · Preguntas frecuentes (segmentada)`, segmento Ingresantes. Las
+// respuestas oficiales están PENDIENTES (las carga Análisis Funcional; no inventar): se
+// reemplazan por el mensaje de proceso `RESPUESTA_PENDIENTE`. Las FAQ institucionales no tienen
+// tab en el diseño (quedan accesibles solo desde el buscador global del header).
+const RESPUESTA_PENDIENTE = 'Respuesta oficial pendiente de validación institucional.';
+
 export const mockFaqs: FaqItem[] = [
+  {
+    id: 'faq-ing-carreras',
+    categoria: 'ingresantes',
+    pregunta: '¿Qué carreras ofrece el instituto?',
+    respuesta: RESPUESTA_PENDIENTE,
+  },
   {
     id: 'faq-ing-inscripcion',
     categoria: 'ingresantes',
-    pregunta: '¿Cómo me inscribo en una carrera?',
-    respuesta:
-      'La inscripción se realiza a través del GCBA. Próximamente se publicará el enlace oficial con las fechas y requisitos del proceso de admisión.',
+    pregunta: '¿Cuándo es el período de inscripción?',
+    respuesta: RESPUESTA_PENDIENTE,
   },
   {
     id: 'faq-ing-equivalencias',
     categoria: 'ingresantes',
-    pregunta: '¿Se pueden reconocer estudios previos o equivalencias?',
-    respuesta:
-      'El instituto evalúa equivalencias y pases desde otros institutos. Consultá en la secretaría académica para conocer el procedimiento vigente.',
+    pregunta: '¿Puedo presentar equivalencias?',
+    respuesta: RESPUESTA_PENDIENTE,
   },
   {
-    id: 'faq-ing-requisitos',
+    id: 'faq-ing-pase',
     categoria: 'ingresantes',
-    pregunta: '¿Qué requisitos necesito para anotarme?',
-    respuesta:
-      'Los requisitos varían según la carrera. Como regla general se requiere título secundario completo. Las condiciones específicas se publicarán al abrirse la inscripción.',
+    pregunta: '¿Cómo hago un pase o cambio de carrera?',
+    respuesta: RESPUESTA_PENDIENTE,
   },
   {
-    id: 'faq-est-regularidad',
-    categoria: 'estudiantes',
-    pregunta: '¿Cómo mantengo mi regularidad?',
-    respuesta:
-      'La regularidad se mantiene cumpliendo con los requisitos de asistencia y promoción de las materias de cada año. Consultá el reglamento vigente para los porcentajes específicos.',
-  },
-  {
-    id: 'faq-est-constancias',
-    categoria: 'estudiantes',
-    pregunta: '¿Cómo solicito constancias de cursada o título?',
-    respuesta:
-      'Las constancias se solicitan en la secretaría del instituto. Próximamente se habilitará el trámite en línea a través del SIU.',
-  },
-  {
-    id: 'faq-est-mesas',
-    categoria: 'estudiantes',
-    pregunta: '¿Cuándo son las mesas de examen?',
-    respuesta:
-      'Las mesas de examen se convocan según el calendario académico del instituto. Las fechas se publican en el campus virtual y en la sección de novedades.',
-  },
-  {
-    id: 'faq-doc-concursos',
-    categoria: 'docentes',
-    pregunta: '¿Cómo accedo a los concursos docentes?',
-    respuesta:
-      'Los concursos docentes se publican en el sitio oficial del instituto y en los medios que determine la dirección. Los requisitos y plazos se indican en cada convocatoria.',
-  },
-  {
-    id: 'faq-doc-acceso',
-    categoria: 'docentes',
-    pregunta: '¿Qué accesos tengo como docente del instituto?',
-    respuesta:
-      'Los docentes cuentan con acceso al campus virtual (Moodle), al SIU para carga de notas y a los recursos de la comunidad docente.',
+    id: 'faq-ing-modalidad',
+    categoria: 'ingresantes',
+    pregunta: '¿Cuál es la modalidad y el horario de las carreras?',
+    respuesta: RESPUESTA_PENDIENTE,
   },
   {
     id: 'faq-inst-bedeles',
     categoria: 'institucional',
     pregunta: '¿Quiénes son los bedeles y cómo los contacto?',
-    respuesta:
-      'Los bedeles son el personal de apoyo administrativo del instituto. Podés contactarlos en la sede durante el horario de atención o por correo electrónico (próximamente se publicará el contacto).',
+    respuesta: RESPUESTA_PENDIENTE,
   },
   {
     id: 'faq-inst-siu',
     categoria: 'institucional',
     pregunta: '¿Qué es el SIU?',
-    respuesta:
-      'El SIU es el Sistema de Gestión Académica utilizado por el instituto para trámites de inscripción, consulta de notas y constancias. El acceso se habilita al iniciar la cursada.',
+    respuesta: RESPUESTA_PENDIENTE,
   },
   {
     id: 'faq-inst-titulos',
     categoria: 'institucional',
     pregunta: '¿Cómo solicito mi título?',
-    respuesta:
-      'El procedimiento de solicitud de título se realiza una vez aprobadas todas las materias y reunidos los requisitos académicos. La información específica se publicará en esta sección.',
+    respuesta: RESPUESTA_PENDIENTE,
   },
   {
     id: 'faq-inst-traspasos',
     categoria: 'institucional',
     pregunta: '¿Se pueden hacer traspasos desde otros institutos?',
-    respuesta:
-      'El IFTS N.º 12 recibe traspasos desde otros institutos de formación técnica superior. El procedimiento y los requisitos se detallan en la normativa vigente del instituto.',
+    respuesta: RESPUESTA_PENDIENTE,
   },
 ];
 
