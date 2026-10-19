@@ -22,7 +22,7 @@ carreras y novedades. Detalle de avance y pendientes en la sección siguiente.)_
 Plan de alineación página por página a los **exports Desktop 1440** del avance de diseño
 (`documentacion/driveFrontend/01_analisis_funcional/avance_disenio_sitio_ifts12/`, 14 PDFs) y
 al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
-`inbox/plan_diseño_aprobado.md` (tareas **T1–T16**, no versionado). Estado al 16/10/2026:
+`inbox/plan_diseño_aprobado.md` (tareas **T1–T16**, no versionado). Estado al 19/10/2026:
 
 - **Hechas y mergeadas a `develop`:** T1 (header), T2 (home), T3 (carreras), T4 (ficha de
   carrera, 15/10/2026) y T5 (novedades, 15/10/2026).
@@ -34,10 +34,9 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   "Alineación al diseño del avance" más abajo.
 - **T11 (docentes, 16/10/2026):** mergeada a `develop` (PR #24, `dd04b33`). Detalle en
   "Alineación al diseño del avance" más abajo.
-- **T12 (tutorías, 16/10/2026):** implementada en `feature/t12-tutorias` (commits `4a54238` y
-  `62e6255`), **pendiente de push/PR/merge**. Detalle en "Alineación al diseño del avance" más
-  abajo.
-- **Pendientes (próxima sesión):** push/PR/merge de T12, T13 (institucional), T14 (contacto),
+- **T12 (tutorías, 19/10/2026):** mergeada a `develop` (PR #26, `e14d69d`). Detalle en
+  "Alineación al diseño del avance" más abajo.
+- **Pendientes (próxima sesión):** T13 (institucional), T14 (contacto),
   T15 (404) y T16 (verificación y cierre).
 - **Regla de anotaciones (14/10/2026):** los textos de los exports que son **notas de UX/UI**
   (refs `RF-xx`, `PENDIENTE`, "Se cargan desde el panel admin", "Sin datos inventados", etc.)
@@ -124,9 +123,8 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   - **Pendiente:** Fase 6+ (responsive e interactivos finos) y tokens de color definitivos de
     UX/UI — el `get_figma_data` de Figma está en rate limit (~4 días), se trabaja con la
     referencia FLACSO + GLOBAL_VARS ya obtenidos.
-- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T11 mergeadas a `develop`, T12
-  (tutorías) implementada en `feature/t12-tutorias` y pendiente de merge; la próxima tarea
-  pendiente es T13 (institucional).
+- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T12 mergeadas a `develop`;
+  la próxima tarea pendiente es T13 (institucional).
   - **T1 (header):** top bar con la ubicación `Misiones 26, C1083 ABB, CABA · Atención
     exclusivamente nocturna` (texto del PDF; el plan decía "nocturno") y accesos con etiqueta
     larga (`Campus Virtual Moodle` / `SIU · Autogestión` / `Inscripción GCBA`); constante
@@ -285,8 +283,8 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
     `src/__tests__/docentes-page.test.tsx` (6) → **181 tests verdes**. Verificado en navegador
     contra un mock local (`:5000`) con 3 carreras: estructura, estados vacío/proceso y accesos sin
     anotaciones renderizadas. Evidencia: `documentacion/screenshots/t11_docentes.png`.
-  - **T12 (tutorías, 16/10/2026):** `TutoriasPage` reescrita según el export "05 · Tutorías"
-    (implementada en `feature/t12-tutorias`, **pendiente de push/PR/merge**). Breadcrumb
+  - **T12 (tutorías, 19/10/2026):** `TutoriasPage` reescrita según el export "05 · Tutorías"
+    (mergeada a `develop`, PR #26, `e14d69d`). Breadcrumb
     `Inicio / Tutorías`, eyebrow ambar y **H1 + bajada del diseño** ("Espacio de acompañamiento
     al estudiante. Información institucional del servicio de tutorías."; el "(sin reserva de
     turnos ni solicitud online · I12)" queda como comentario). Secciones del export:
