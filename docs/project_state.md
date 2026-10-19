@@ -36,8 +36,9 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   "Alineación al diseño del avance" más abajo.
 - **T12 (tutorías, 19/10/2026):** mergeada a `develop` (PR #26, `e14d69d`). Detalle en
   "Alineación al diseño del avance" más abajo.
-- **Pendientes (próxima sesión):** T13 (institucional), T14 (contacto),
-  T15 (404) y T16 (verificación y cierre).
+- **T13 (institucional, 19/10/2026):** mergeada a `develop` (PR #28, `3b215cc`). Detalle en
+  "Alineación al diseño del avance" más abajo.
+- **Pendientes (próxima sesión):** T14 (contacto), T15 (404) y T16 (verificación y cierre).
 - **Regla de anotaciones (14/10/2026):** los textos de los exports que son **notas de UX/UI**
   (refs `RF-xx`, `PENDIENTE`, "Se cargan desde el panel admin", "Sin datos inventados", etc.)
   **no se renderizan** en ninguna pantalla: van como **comentario de código** en el componente.
@@ -123,8 +124,8 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   - **Pendiente:** Fase 6+ (responsive e interactivos finos) y tokens de color definitivos de
     UX/UI — el `get_figma_data` de Figma está en rate limit (~4 días), se trabaja con la
     referencia FLACSO + GLOBAL_VARS ya obtenidos.
-- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T12 mergeadas a `develop`;
-  la próxima tarea pendiente es T13 (institucional).
+- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T13 mergeadas a `develop`;
+  la próxima tarea pendiente es T14 (contacto).
   - **T1 (header):** top bar con la ubicación `Misiones 26, C1083 ABB, CABA · Atención
     exclusivamente nocturna` (texto del PDF; el plan decía "nocturno") y accesos con etiqueta
     larga (`Campus Virtual Moodle` / `SIU · Autogestión` / `Inscripción GCBA`); constante
@@ -302,6 +303,24 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
     (lint y build OK). Verificado en navegador contra el dev server: DOM sin anotaciones
     renderizadas, validación del formulario con los 3 mensajes de error y navegación a
     `/contacto`. Evidencia: `documentacion/screenshots/t12_tutorias.png`.
+  - **T13 (institucional, 19/10/2026):** `InstitucionalPage` reescrita según el export
+    "07 · Institucional" (mergeada a `develop`, PR #28, `3b215cc`). Breadcrumb
+    `Inicio / Institucional`, eyebrow "El instituto" y **H1 + bajada del diseño** ("Historia,
+    autoridades, bedelía, normativa y enlaces de interés del IFTS N.º 12."; las refs RF-xx
+    quedan como comentario). Secciones del export: **"Historia del IFTS N.º 12"** (texto de
+    historia y foto institucional como mensajes de proceso; anotaciones I6 y M1 como código),
+    **"Autoridades"** (3 bloques de estructura "Nombre y apellido / Cargo · a validar" con
+    mensaje de proceso; B7: ejemplos de cargo = estructura, no dato), **"Bedelía"** (tabla
+    Año / carrera · Bedel/a · Horario · Contacto con las 3 filas PENDIENTE del diseño; RF-29 y
+    la nota de datos individuales vs. genéricos como comentario), **"Normativa"** (Reglamento
+    orgánico, Código de convivencia y Otra normativa institucional con botón "Descargar"
+    deshabilitado, patrón de T4/T11) y **"Enlaces de interés institucional"** (Ciudad Bilingüe
+    y Centro de Simulación con "Enlace oficial próximamente"; RF-33/URLs PENDIENTES como
+    comentario). Se quitó lo que no estaba en el export (isologotipos, CTA de contacto,
+    Inscripciones GCBA en el aside). Tests: nuevo `src/__tests__/institucional-page.test.tsx`
+    (6) → **193 tests verdes** (lint y build OK). Evidencia:
+    `documentacion/screenshots/t13_institucional.png` (1440×3600, Firefox headless; el
+    `saveTo` del MCP de Firefox fallaba, se usó `firefox --headless --screenshot`).
 - **Revisión del consumo de API (08/10/2026):** los helpers del buscador se renombraron
   (`coincideTexto` / `coincideNullable`); el footer combina el horario confirmado
   "exclusivamente nocturno" (RF-22) con las modalidades reales del backend (Presencial,
