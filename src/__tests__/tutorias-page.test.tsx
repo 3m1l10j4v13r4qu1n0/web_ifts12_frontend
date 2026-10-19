@@ -81,7 +81,7 @@ describe('TutoriasPage', () => {
     renderizarPagina();
 
     const formulario = screen.getByRole('region', { name: 'Consulta directa' });
-    expect(within(formulario).getByLabelText('Nombre')).toBeInTheDocument();
+    expect(within(formulario).getByLabelText('Nombre y apellido')).toBeInTheDocument();
     expect(within(formulario).getByLabelText('Correo electrónico')).toBeInTheDocument();
     expect(within(formulario).getByLabelText('Consulta')).toBeInTheDocument();
     expect(within(formulario).getByRole('button', { name: 'Enviar consulta' })).toBeInTheDocument();
