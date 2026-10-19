@@ -6,14 +6,15 @@ Reemplaza el espacio actual alojado en Moodle por un sitio web institucional acc
 claro y fácilmente administrable por el propio instituto. El backend se integra luego
 con APIs y la web se despliega como build estático en un VPS independiente del Moodle.
 
-> **Estado:** completadas las 8 fases (`v1.10.0`): las 5 fases iniciales del plan
-> (`v1.0.0`…`v1.4.0`), la Fase 6 de brechas de auditoría (`v1.5.0`), el refactor del Mapa
-> del Sitio V2 (menú de 9 ítems + buscador global, `v1.6.0`), la infraestructura y la
-> adopción del sistema documental **logsayer** de 5 capas (25/09/2026), y el cierre del
-> ticket 0000010 (01/10/2026). El sitio tiene **13 rutas navegables** con datos simulados
-> (11 de 15 wireframes implementados); aún no hay consumo de API real, porque la tabla
-> oficial de endpoints y los DTOs de Backend tienen plazo vencido. La evidencia de
-> navegación está en `documentacion/screenshots/`.
+> **Estado:** completadas las 10 fases (`develop` cierra la Fase 10 con `v1.11.0`): las 5
+> fases iniciales del plan (`v1.0.0`…`v1.4.0`), la Fase 6 de brechas de auditoría (`v1.5.0`),
+> el refactor del Mapa del Sitio V2 (menú de 9 ítems + buscador global, `v1.6.0`), la
+> infraestructura y la adopción del sistema documental **logsayer** de 5 capas, el cierre del
+> ticket 0000010 (`v1.10.0`), la Fase 9 de **consumo real de API** de carreras y novedades y la
+> Fase 10 de **alineación del frontend a los exports Desktop 1440** del avance de diseño
+> (T1–T16). El sitio tiene **16 rutas** (14 del sitio + 2 de administración solo-UI), consumo
+> real de API para carreras/novedades y **206 tests** en verde. El resto del sitio sigue con
+> datos simulados. La evidencia de navegación está en `documentacion/screenshots/`.
 
 ## Tecnología
 
@@ -59,29 +60,40 @@ cerrarse esa definición se documentarán acá los valores y el `.env.example` c
 
 ```
 src/
-├── api/                     # client (Axios+interceptor), endpoints, services (a crear)
+├── api/                     # client (Axios+interceptor), endpoints, mappers y services
+│                            # (carrera, novedad)
 ├── components/
-│   ├── ui/                  # Button, CardCarrera, CardNoticia, FaqAcordeon,
-│   │                        # AccesosRapidos, SliderNoticias, Comunidades
-│   └── layout/              # Header, NavMenu, Footer, Portada
-├── pages/                   # Home, Carreras, Ingresantes, Estudiantes, Docentes,
-│                            # Tutorías, Institucional, Noticias, FAQ, Contacto
+│   ├── ui/                  # Button, CardCarrera, CardNoticia, FaqAcordeon, FormularioConsulta,
+│   │                        # Estado, Tabs, Paginacion, Toast, TablaAdmin, etc.
+│   └── layout/              # Header, NavMenu, MobileMenu, BuscadorGlobal, EncabezadoPagina,
+│                            # Footer
+├── pages/                   # Home, Carreras, CarreraDetalle, Ingresantes, Estudiantes, Docentes,
+│                            # Tutorías, Institucional, Noticias, NotaCompleta, Búsqueda, FAQ,
+│                            # Contacto, 404 y admin (login/panel solo-UI)
 ├── contexts/                # AuthContext (preparado)
-├── routes/                  # AppRouter, ProtectedRoute (preparado)
+├── routes/                  # AppRouter
 ├── types/
-│   ├── api/                 # espejo de esquemas del backend
+│   ├── api/                 # DTOs + esquemas Zod (carrera, novedad, error)
 │   └── domain/              # modelo de dominio (sitio.types)
 ├── constants/               # navegacion, mock-data (provisorios), enlaces (placeholders)
-├── hooks/, utils/, styles/  # helpers y tema Tailwind
+├── hooks/                   # useCarreras, useNovedades (TanStack Query)
+├── utils/, styles/          # helpers y tema Tailwind
 └── __tests__/               # suites de pruebas
 
-docs/
-├── sdd/                      # memoria (estado_actual, bitácora), SSD base (01_global, 02_tecnico,
-│                            # 03_procesos, 04_historias_usuario/HU-01), metodología (05_), auditorías (06_)
-├── frontend/                 # plan, propuesta tecnológica, actas, dependencias, análisis funcional validado
-├── entregas/                 # entregables de cierre de fases (docs, actas)
-├── driveFrontend/            # requisitos fuente de verdad (no versionado, en .gitignore)
-└── mockups/                  # mockups HTML de las vistas (para ver en Tailwind Play)
+docs/                        # sistema documental logsayer (5 capas)
+├── 00_memory_index.md       # índice generado (logsayer memory index)
+├── project_state.md         # snapshot de estado (Capa 2)
+├── 01_global/, 02_technical/, 03_process/, 04_user_stories/, 05_agile_methodology/
+├── 06_audits/               # informes de auditoría
+└── logbooks/                # bitácora append-only
+
+documentacion/               # documentación institucional y de la cátedra
+├── frontend/                # plan, propuesta tecnológica, actas, dependencias, análisis validado
+├── entregas/                # entregables de cierre de fases
+├── driveFrontend/           # requisitos fuente de verdad (no versionado, en .gitignore)
+├── mockups/                 # mockups HTML de las vistas
+├── wireframes/, screenshots/
+└── rol_equipo.md
 ```
 
 ## Mockups de las vistas
@@ -95,13 +107,17 @@ comentados están en el [instructivo de mockups](documentacion/mockups/README.md
 
 ## Estado del frontend
 
-- Home navegable con datos simulados en `constants/mock-data.ts` (marcados como provisorios).
+- **Consumo real de API** para carreras y novedades (`GET /api/carreras`, `GET /api/novedades`):
+  listados, fichas, notas completas, buscador global y secciones de la Home, con estados de
+  carga, error y vacío. El resto del sitio sigue con datos simulados en
+  `constants/mock-data.ts`.
 - URLs de Moodle e inscripción como placeholders en `constants/enlaces.ts`; los enlaces externos
   se muestran solo cuando existe URL oficial.
-- Sin consumo de API real todavía: los endpoints se documentan por historia de
-  usuario (`docs/04_user_stories/HU-XX/hu_xx_api.md`, regla anti-alucinación);
-  la HU-01 Home ya tiene su `hu_01_api.md` con los endpoints GET públicos.
-- Componentes presentacionales, accesibles y responsive (mobile-first).
+- Endpoints documentados por historia de usuario (`docs/04_user_stories/HU-XX/hu_xx_api.md`,
+  regla anti-alucinación); la HU-01 Home ya tiene su `hu_01_api.md` con los endpoints GET
+  públicos.
+- Componentes presentacionales, accesibles y responsive (mobile-first), alineados a los tokens
+  del contrato visual `docs/01_global/figma_v2_contrato_visual.md`.
 
 ## Equipo y roles
 
