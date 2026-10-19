@@ -1,162 +1,226 @@
-import { Link } from 'react-router-dom';
 import EncabezadoPagina from '../components/layout/EncabezadoPagina';
-import { ENLACES } from '../constants/enlaces';
+import Button from '../components/ui/Button';
 
-const SECCIONES_INSTITUCIONAL = [
+/**
+ * Estructura de autoridades del export `07 · Institucional`. Anotación del diseño (comentario
+ * UX/UI, no es copy visible): "Ejemplos de cargo = estructura, no dato (B7)" y "PENDIENTE
+ * INSTITUCIONAL · validar con Nosotros/Drive (B7)": los tres bloques son la estructura del
+ * diseño, no nombres ni cargos reales.
+ */
+const AUTORIDADES = ['autoridad-1', 'autoridad-2', 'autoridad-3'];
+
+/**
+ * Filas de la tabla Bedelía del export (RF-29). Anotación del diseño (comentario UX/UI, no es
+ * copy visible): "Pendiente definir si se publican datos individuales o información genérica
+ * del rol" y celdas "PENDIENTE": no hay datos oficiales publicados y no se inventan.
+ */
+const FILAS_BEDELIA: {
+  id: string;
+  anio: string;
+  bedel: string;
+  horario: string;
+  contacto: string;
+}[] = [
   {
-    id: 'historia',
-    titulo: 'Historia del instituto',
-    descripcion:
-      'Trayectoria, hitos y datos institucionales. El recorrido histórico se publica cuando el equipo valide el contenido oficial.',
+    id: 'anio-1',
+    anio: '1.er año',
+    bedel: 'PENDIENTE',
+    horario: 'PENDIENTE',
+    contacto: 'PENDIENTE',
   },
   {
-    id: 'mision-vision',
-    titulo: 'Misión y visión',
-    descripcion:
-      'Propósitos formativos del instituto en el marco del sistema de educación superior de la Ciudad.',
+    id: 'anio-2',
+    anio: '2.º año',
+    bedel: 'PENDIENTE',
+    horario: 'PENDIENTE',
+    contacto: 'PENDIENTE',
   },
   {
-    id: 'bedelia',
-    titulo: 'Bedelía',
-    descripcion:
-      'Información y vías de contacto con el personal de bedelía durante el horario de atención.',
-  },
-  {
-    id: 'reglamento',
-    titulo: 'Reglamento orgánico',
-    descripcion:
-      'Normativa que organiza la vida institucional. La versión completa se publica como documento adjunto.',
-  },
-  {
-    id: 'convivencia',
-    titulo: 'Código de convivencia',
-    descripcion: 'Acuerdos de convivencia vigentes para estudiantes y docentes del instituto.',
+    id: 'anio-3',
+    anio: '3.er año',
+    bedel: 'PENDIENTE',
+    horario: 'PENDIENTE',
+    contacto: 'PENDIENTE',
   },
 ];
 
+/**
+ * Documentos de Normativa del export (RF-20). Anotación del diseño (comentario UX/UI, no es
+ * copy visible): "Archivo oficial PENDIENTE · PDF" + botón "Descargar". Los archivos todavía
+ * no existen: se muestran como mensaje de proceso con la descarga deshabilitada (patrón de T4).
+ */
+const DOCUMENTOS_NORMATIVA = [
+  { titulo: 'Reglamento orgánico' },
+  { titulo: 'Código de convivencia' },
+  { titulo: 'Otra normativa institucional' },
+];
+
+/**
+ * Enlaces de interés institucional del export (RF-33). Anotación del diseño (comentario UX/UI,
+ * no es copy visible): "Externo · URL PENDIENTE": las URLs oficiales siguen pendientes y no se
+ * inventan.
+ */
 const ENLACES_INSTITUCIONALES = [
-  { id: 'ciudad-bilingue', etiqueta: 'Ciudad Bilingüe', href: '' },
-  { id: 'centro-simulacion', etiqueta: 'Centro de Simulación', href: '' },
-];
-
-const ISOLOGOTIPOS = [
-  { src: '/IFTS12.jpg', alt: 'IFTS N.º 12' },
-  { src: '/logoCABA.png', alt: 'Gobierno de la Ciudad de Buenos Aires' },
-  { src: '/logoUpcn.png', alt: 'UPCN' },
+  { id: 'ciudad-bilingue', titulo: 'Ciudad Bilingüe' },
+  { id: 'centro-simulacion', titulo: 'Centro de Simulación' },
 ];
 
 function InstitucionalPage() {
   return (
     <main className="min-h-screen">
       <EncabezadoPagina
+        breadcrumb={[{ etiqueta: 'Inicio', href: '/' }, { etiqueta: 'Institucional' }]}
         eyebrow="El instituto"
         seccion="rojo"
         titulo="Institucional"
-        descripcion="Conocé el instituto: su historia, autoridades, normativa y los programas institucionales de la Ciudad."
+        descripcion="Historia, autoridades, bedelía, normativa y enlaces de interés del IFTS N.º 12."
       />
 
-      <div className="mx-auto grid max-w-contenido grid-cols-1 gap-10 px-4 py-12 lg:grid-cols-3">
-        <div className="space-y-6 lg:col-span-2">
-          <section aria-labelledby="titulo-institucion">
-            <h2 id="titulo-institucion" className="text-2xl font-bold text-texto">
-              El instituto
-            </h2>
-            <div className="mt-4 space-y-4">
-              {SECCIONES_INSTITUCIONAL.map((seccion) => (
-                <article
-                  key={seccion.id}
-                  className="rounded-xl border border-borde-suave bg-white p-6 shadow-suave"
-                >
-                  <h3 className="text-base font-semibold text-texto">{seccion.titulo}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-texto-suave">
-                    {seccion.descripcion}
-                  </p>
-                  <span className="mt-3 inline-block rounded-md bg-fondo px-3 py-1 text-xs font-medium uppercase tracking-wide text-texto-suave">
-                    Próximamente
-                  </span>
-                </article>
-              ))}
-            </div>
-          </section>
-        </div>
+      {/*
+        Anotaciones del diseño (comentario UX/UI, no es copy visible): las refs de la bajada
+        original "(RF-18 · RF-19 · RF-20 · RF-29 · RF-33)" no se renderizan (guard
+        anti-anotaciones).
+      */}
+      <div className="mx-auto max-w-contenido space-y-14 px-4 py-12">
+        <section aria-labelledby="titulo-historia">
+          <h2 id="titulo-historia" className="text-2xl font-bold text-texto">
+            Historia del IFTS N.º 12
+          </h2>
+          {/*
+            Anotación del diseño (comentario UX/UI, no es copy visible): "Texto de historia y
+            presentación del instituto · PENDIENTE INSTITUCIONAL (I6)" y "PENDIENTE
+            INSTITUCIONAL · historia oficial". El texto oficial todavía no existe: se muestra
+            como mensaje de proceso (no se inventa contenido).
+          */}
+          <p className="mt-6 rounded-xl border border-borde-suave bg-white p-6 text-texto-suave">
+            El instituto publica el texto de historia y presentación cuando esté validado por el
+            equipo institucional.
+          </p>
+          {/*
+            Anotación del diseño (comentario UX/UI, no es copy visible):
+            "Foto institucional · PENDIENTE (M1)". La imagen todavía no existe.
+          */}
+          <div className="mt-4 rounded-xl border border-dashed border-borde bg-fondo p-6 text-sm text-texto-suave">
+            La foto institucional se publica cuando esté disponible.
+          </div>
+        </section>
 
-        <aside aria-label="Enlaces institucionales" className="space-y-6">
-          <section
-            aria-labelledby="titulo-enlaces"
-            className="rounded-xl border border-borde-suave bg-white p-6 shadow-suave"
-          >
-            <h2 id="titulo-enlaces" className="text-lg font-semibold text-texto">
-              Enlaces de interés
-            </h2>
-            <ul className="mt-4 space-y-2">
-              {ENLACES_INSTITUCIONALES.map((enlace) =>
-                enlace.href === '' ? (
-                  <li
-                    key={enlace.id}
-                    aria-disabled="true"
-                    className="cursor-default rounded-lg border border-borde-suave px-3 py-2 text-sm text-texto-suave"
-                  >
-                    {enlace.etiqueta} · próximamente
-                  </li>
-                ) : (
-                  <li key={enlace.id}>
-                    <a
-                      href={enlace.href}
-                      className="block rounded-lg px-3 py-2 text-sm text-acento-700 transition-colors hover:bg-fondo"
-                      rel="noopener noreferrer"
-                    >
-                      {enlace.etiqueta} →
-                    </a>
-                  </li>
-                ),
-              )}
-              <li>
-                {ENLACES.inscripcion === '' ? (
-                  <span className="block cursor-default rounded-lg border border-borde-suave px-3 py-2 text-sm text-texto-suave">
-                    Inscripciones GCBA · próximamente
-                  </span>
-                ) : (
-                  <a
-                    href={ENLACES.inscripcion}
-                    className="block rounded-lg px-3 py-2 text-sm text-acento-700 transition-colors hover:bg-fondo"
-                    rel="noopener noreferrer"
-                  >
-                    Inscripciones GCBA →
-                  </a>
-                )}
+        <section aria-labelledby="titulo-autoridades">
+          <h2 id="titulo-autoridades" className="text-2xl font-bold text-texto">
+            Autoridades
+          </h2>
+          <p className="mt-2 text-texto-suave">Cargos y nombres solo con fuente verificable.</p>
+
+          <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {AUTORIDADES.map((id) => (
+              <li
+                key={id}
+                className="rounded-xl border border-borde-suave bg-white p-5 shadow-suave"
+              >
+                <h3 className="text-base font-semibold text-texto">Nombre y apellido</h3>
+                <p className="mt-1 text-sm text-texto-suave">Cargo · a validar</p>
+                <p className="mt-3 text-sm text-texto-suave">
+                  El instituto publica los nombres y cargos cuando estén verificados.
+                </p>
               </li>
-            </ul>
-          </section>
+            ))}
+          </ul>
+        </section>
 
-          <section
-            aria-labelledby="titulo-isologotipos"
-            className="rounded-xl border border-borde-suave bg-white p-6 shadow-suave"
-          >
-            <h2 id="titulo-isologotipos" className="text-lg font-semibold text-texto">
-              Isologotipos
-            </h2>
-            <div className="mt-4 flex flex-wrap items-center gap-4">
-              {ISOLOGOTIPOS.map((logo) => (
-                <img
-                  key={logo.src}
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="h-12 w-auto bg-fondo p-1"
-                />
-              ))}
-            </div>
-          </section>
+        <section aria-labelledby="titulo-bedelia">
+          <h2 id="titulo-bedelia" className="text-2xl font-bold text-texto">
+            Bedelía
+          </h2>
+          <p className="mt-2 text-texto-suave">Horarios y puntos de contacto por año.</p>
 
-          <section className="rounded-xl border border-borde-suave bg-white p-6 shadow-suave">
-            <h2 className="text-lg font-semibold text-texto">¿Necesitás más información?</h2>
-            <Link
-              to="/contacto"
-              className="mt-3 inline-block text-sm font-medium text-acento-700 hover:text-acento-800"
-            >
-              Ir a la sección de contacto →
-            </Link>
-          </section>
-        </aside>
+          <div className="mt-6 overflow-x-auto rounded-xl border border-borde-suave bg-white">
+            <table className="w-full border-collapse text-left text-sm">
+              <caption className="sr-only">Datos de bedelía por año de cursada</caption>
+              <thead className="bg-fondo">
+                <tr>
+                  <th scope="col" className="px-4 py-3 font-semibold text-texto">
+                    Año / carrera
+                  </th>
+                  <th scope="col" className="px-4 py-3 font-semibold text-texto">
+                    Bedel/a
+                  </th>
+                  <th scope="col" className="px-4 py-3 font-semibold text-texto">
+                    Horario
+                  </th>
+                  <th scope="col" className="px-4 py-3 font-semibold text-texto">
+                    Contacto
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {FILAS_BEDELIA.map((fila) => (
+                  <tr key={fila.id} className="border-t border-borde-suave">
+                    <th scope="row" className="px-4 py-3 align-top font-medium text-texto">
+                      {fila.anio}
+                    </th>
+                    <td className="px-4 py-3 align-top text-texto-suave">{fila.bedel}</td>
+                    <td className="px-4 py-3 align-top text-texto-suave">{fila.horario}</td>
+                    <td className="px-4 py-3 align-top text-texto-suave">{fila.contacto}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="titulo-normativa">
+          <h2 id="titulo-normativa" className="text-2xl font-bold text-texto">
+            Normativa
+          </h2>
+          <p className="mt-2 text-texto-suave">
+            Marco normativo, reglamento orgánico y código de convivencia.
+          </p>
+
+          <ul className="mt-6 space-y-3">
+            {DOCUMENTOS_NORMATIVA.map((documento) => (
+              <li
+                key={documento.titulo}
+                className="flex flex-col gap-3 rounded-xl border border-borde-suave bg-white p-5 sm:flex-row sm:items-center sm:justify-between"
+              >
+                <div>
+                  <p className="font-medium text-texto">{documento.titulo}</p>
+                  <p className="mt-1 text-sm text-texto-suave">
+                    El archivo oficial se publica cuando esté disponible.
+                  </p>
+                </div>
+                <Button variante="secundario" disabled>
+                  Descargar
+                </Button>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section aria-labelledby="titulo-enlaces">
+          <h2 id="titulo-enlaces" className="text-2xl font-bold text-texto">
+            Enlaces de interés institucional
+          </h2>
+          <p className="mt-2 text-texto-suave">Enlaces externos.</p>
+
+          <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {ENLACES_INSTITUCIONALES.map((enlace) => (
+              <li
+                key={enlace.id}
+                className="flex flex-col rounded-xl border border-borde-suave bg-white p-5 shadow-suave"
+              >
+                <h3 className="text-base font-semibold text-texto">{enlace.titulo}</h3>
+                <div className="mt-4">
+                  <span
+                    aria-disabled="true"
+                    className="inline-flex min-h-11 items-center rounded-md border border-borde bg-fondo px-3 text-sm font-medium text-texto-suave"
+                  >
+                    Enlace oficial próximamente
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
       </div>
     </main>
   );
