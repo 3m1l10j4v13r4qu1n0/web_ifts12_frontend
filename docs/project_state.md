@@ -38,7 +38,9 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   "Alineación al diseño del avance" más abajo.
 - **T13 (institucional, 19/10/2026):** mergeada a `develop` (PR #28, `3b215cc`). Detalle en
   "Alineación al diseño del avance" más abajo.
-- **Pendientes (próxima sesión):** T14 (contacto), T15 (404) y T16 (verificación y cierre).
+- **T14 (contacto, 19/10/2026):** mergeada a `develop` (PR #30, `654e1c4`). Detalle en
+  "Alineación al diseño del avance" más abajo.
+- **Pendientes (próxima sesión):** T15 (404) y T16 (verificación y cierre).
 - **Regla de anotaciones (14/10/2026):** los textos de los exports que son **notas de UX/UI**
   (refs `RF-xx`, `PENDIENTE`, "Se cargan desde el panel admin", "Sin datos inventados", etc.)
   **no se renderizan** en ninguna pantalla: van como **comentario de código** en el componente.
@@ -124,8 +126,8 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   - **Pendiente:** Fase 6+ (responsive e interactivos finos) y tokens de color definitivos de
     UX/UI — el `get_figma_data` de Figma está en rate limit (~4 días), se trabaja con la
     referencia FLACSO + GLOBAL_VARS ya obtenidos.
-- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T13 mergeadas a `develop`;
-  la próxima tarea pendiente es T14 (contacto).
+- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T14 mergeadas a `develop`;
+  la próxima tarea pendiente es T15 (404).
   - **T1 (header):** top bar con la ubicación `Misiones 26, C1083 ABB, CABA · Atención
     exclusivamente nocturna` (texto del PDF; el plan decía "nocturno") y accesos con etiqueta
     larga (`Campus Virtual Moodle` / `SIU · Autogestión` / `Inscripción GCBA`); constante
@@ -321,6 +323,27 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
     (6) → **193 tests verdes** (lint y build OK). Evidencia:
     `documentacion/screenshots/t13_institucional.png` (1440×3600, Firefox headless; el
     `saveTo` del MCP de Firefox fallaba, se usó `firefox --headless --screenshot`).
+  - **T14 (contacto, 19/10/2026):** `ContactoPage` y `FormularioConsulta` alineados al export
+    "09 · Contacto" (mergeada a `develop`, PR #30, `654e1c4`). Breadcrumb `Inicio / Contacto`
+    y **H1 + bajada del diseño** ("Consultas generales, de ingreso y de tutorías. También
+    podés usar la consulta directa del pie de página."). **"Escribinos"**: el formulario se
+    extiende con props `conAsunto` (select Consulta general / Ingreso / Tutorías, tomados de
+    la bajada de la página y del CTA de Tutorías de T12), `conPrivacidad` (checkbox
+    "Acepto la política de privacidad" obligatorio), `etiquetaMensaje` ("Mensaje" en
+    Contacto, "Consulta" en las consultas directas) y `ayuda` ("Campos obligatorios marcados
+    con *."); la etiqueta "Nombre" pasó a **"Nombre y apellido"** en todos los usos (diseño
+    del pie y de Contacto). **"Datos institucionales"** (dirección y horario nocturno reales;
+    correo y teléfono como mensajes de proceso, anotaciones I10 como código), **"Ubicación"**
+    (mapa y "Cómo llegar" pendientes: proveedor y enlace PENDIENTE como comentario, sin
+    inventar URL) y **"Preguntas frecuentes de contacto"** (las 3 preguntas del export con
+    `FaqAcordeon`, sin categoría visible y respuestas de proceso; no existen en
+    `mockFaqs`). La consulta directa del pie y Tutorías mantienen el formato simple. El
+    mensaje de éxito confirma solo el registro (nota de "06 · Estados" como comentario; el
+    `POST /api/contacto` existe en el backend pero se consume en un ticket propio, HU-01).
+    Tests: nuevo `src/__tests__/contacto-page.test.tsx` (5) + 3 en
+    `formulario-consulta.test.tsx` y ajuste de `tutorias-page.test.tsx` → **201 tests
+    verdes** (lint y build OK). Evidencia:
+    `documentacion/screenshots/t14_contacto.png`.
 - **Revisión del consumo de API (08/10/2026):** los helpers del buscador se renombraron
   (`coincideTexto` / `coincideNullable`); el footer combina el horario confirmado
   "exclusivamente nocturno" (RF-22) con las modalidades reales del backend (Presencial,
