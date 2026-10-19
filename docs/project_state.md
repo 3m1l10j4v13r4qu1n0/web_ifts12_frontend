@@ -40,7 +40,9 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   "Alineación al diseño del avance" más abajo.
 - **T14 (contacto, 19/10/2026):** mergeada a `develop` (PR #30, `654e1c4`). Detalle en
   "Alineación al diseño del avance" más abajo.
-- **Pendientes (próxima sesión):** T15 (404) y T16 (verificación y cierre).
+- **T15 (404, 19/10/2026):** mergeada a `develop` (PR #32, `3408e10`). Detalle en
+  "Alineación al diseño del avance" más abajo.
+- **Pendiente (próxima sesión):** T16 (verificación y cierre).
 - **Regla de anotaciones (14/10/2026):** los textos de los exports que son **notas de UX/UI**
   (refs `RF-xx`, `PENDIENTE`, "Se cargan desde el panel admin", "Sin datos inventados", etc.)
   **no se renderizan** en ninguna pantalla: van como **comentario de código** en el componente.
@@ -71,7 +73,7 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 ## Qué está construido
 
 - SPA React 19 + Vite + TypeScript strict + Tailwind v4 con `npm run lint · build · test` en verde
-  (**181 tests**, antes 29).
+  (**206 tests**, antes 29).
 - Home navegable según el **Mapa del Sitio V2** (9 ítems de menú + buscador global en el header),
   portada con carrusel institucional, footer V2, secciones de Carreras, Ingresantes,
   Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y Contacto, más rutas de detalle
@@ -126,8 +128,8 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   - **Pendiente:** Fase 6+ (responsive e interactivos finos) y tokens de color definitivos de
     UX/UI — el `get_figma_data` de Figma está en rate limit (~4 días), se trabaja con la
     referencia FLACSO + GLOBAL_VARS ya obtenidos.
-- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T14 mergeadas a `develop`;
-  la próxima tarea pendiente es T15 (404).
+- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T15 mergeadas a `develop`;
+  la próxima tarea pendiente es T16 (verificación y cierre).
   - **T1 (header):** top bar con la ubicación `Misiones 26, C1083 ABB, CABA · Atención
     exclusivamente nocturna` (texto del PDF; el plan decía "nocturno") y accesos con etiqueta
     larga (`Campus Virtual Moodle` / `SIU · Autogestión` / `Inscripción GCBA`); constante
@@ -344,6 +346,13 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
     `formulario-consulta.test.tsx` y ajuste de `tutorias-page.test.tsx` → **201 tests
     verdes** (lint y build OK). Evidencia:
     `documentacion/screenshots/t14_contacto.png`.
+  - **T15 (404, 19/10/2026):** `PaginaNoEncontrada` alineada al export "12 · Error 404"
+    (mergeada a `develop`, PR #32, `3408e10`). Sin breadcrumb (el export no lo muestra): se
+    mantiene el `Estado tipo="404"` con el título y la bajada del diseño, el botón **"Ir al
+    inicio"** → `/` (antes "Volver al inicio") y se agrega el **formulario "Buscar en el sitio"**
+    (input + "Buscar") que navega a `/buscar?q=…`; el envío vacío va a `/buscar` sin parámetro.
+    Tests: nuevo `src/__tests__/pagina-no-encontrada.test.tsx` (5) → **206 tests verdes**
+    (lint y build OK). Evidencia: `documentacion/screenshots/t15_404.png`.
 - **Revisión del consumo de API (08/10/2026):** los helpers del buscador se renombraron
   (`coincideTexto` / `coincideNullable`); el footer combina el horario confirmado
   "exclusivamente nocturno" (RF-22) con las modalidades reales del backend (Presencial,
@@ -436,7 +445,7 @@ Detalle con dueño y qué se necesita de vuelta en
 
 ## Verificación
 
-- Frontend: `npm run lint` · `npm run build` · `npm run test` (181 tests).
+- Frontend: `npm run lint` · `npm run build` · `npm run test` (206 tests).
 - Sistema documental: `logsayer check` · `logsayer process check` · `logsayer memory index`.
 - Consumo verificado **en navegador** (Firefox, `localhost:5173`) contra un servidor que replica
   la serialización de `app.py:62-92` leyendo de `instance/ifts12.db`: listado, detalle, buscador,
