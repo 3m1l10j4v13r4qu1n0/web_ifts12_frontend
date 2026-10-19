@@ -11,13 +11,12 @@ fase: fase-10
 
 ## Fase actual del roadmap
 
-Fase 10
+Fase 10 cerrada (19/10/2026) · próxima fase a definir
 
 _(Fase 10 = **alineación del frontend a los exports Desktop 1440 del avance de diseño**,
-página por página (tareas T1–T16). Cierra la Fase 9, que había dejado el consumo real de API de
-carreras y novedades. Detalle de avance y pendientes en la sección siguiente.)_
+página por página (tareas T1–T16), cerrada con tag `v1.11.0`. No hay Fase 11 definida todavía.)_
 
-## Alineación al diseño del avance (en curso · próxima sesión)
+## Alineación al diseño del avance (cerrada · 19/10/2026)
 
 Plan de alineación página por página a los **exports Desktop 1440** del avance de diseño
 (`documentacion/driveFrontend/01_analisis_funcional/avance_disenio_sitio_ifts12/`, 14 PDFs) y
@@ -42,7 +41,9 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   "Alineación al diseño del avance" más abajo.
 - **T15 (404, 19/10/2026):** mergeada a `develop` (PR #32, `3408e10`). Detalle en
   "Alineación al diseño del avance" más abajo.
-- **Pendiente (próxima sesión):** T16 (verificación y cierre).
+- **T16 (verificación y cierre, 19/10/2026):** smoke en Firefox de las 14 rutas del plan y
+  cierre de la Fase 10 con tag **`v1.11.0`**. Detalle en "Alineación al diseño del avance"
+  más abajo.
 - **Regla de anotaciones (14/10/2026):** los textos de los exports que son **notas de UX/UI**
   (refs `RF-xx`, `PENDIENTE`, "Se cargan desde el panel admin", "Sin datos inventados", etc.)
   **no se renderizan** en ninguna pantalla: van como **comentario de código** en el componente.
@@ -128,8 +129,8 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   - **Pendiente:** Fase 6+ (responsive e interactivos finos) y tokens de color definitivos de
     UX/UI — el `get_figma_data` de Figma está en rate limit (~4 días), se trabaja con la
     referencia FLACSO + GLOBAL_VARS ya obtenidos.
-- **Alineación al diseño del avance (14/10/2026, en curso):** T1–T15 mergeadas a `develop`;
-  la próxima tarea pendiente es T16 (verificación y cierre).
+- **Alineación al diseño del avance (cerrada, 19/10/2026):** T1–T16 mergeadas a `develop`;
+  Fase 10 cerrada con tag `v1.11.0`.
   - **T1 (header):** top bar con la ubicación `Misiones 26, C1083 ABB, CABA · Atención
     exclusivamente nocturna` (texto del PDF; el plan decía "nocturno") y accesos con etiqueta
     larga (`Campus Virtual Moodle` / `SIU · Autogestión` / `Inscripción GCBA`); constante
@@ -353,6 +354,17 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
     (input + "Buscar") que navega a `/buscar?q=…`; el envío vacío va a `/buscar` sin parámetro.
     Tests: nuevo `src/__tests__/pagina-no-encontrada.test.tsx` (5) → **206 tests verdes**
     (lint y build OK). Evidencia: `documentacion/screenshots/t15_404.png`.
+  - **T16 (verificación y cierre, 19/10/2026):** `npm run lint` · `npm run build` ·
+    `npm run test` (**206 tests**) en verde. Smoke en Firefox (`npm run dev`,
+    `localhost:5173`) de las 14 rutas del plan: `/`, `/carreras`,
+    `/carreras/tecnicatura-superior-en-analisis-de-sistemas`, `/ingresantes`, `/estudiantes`,
+    `/docentes`, `/tutorias`, `/institucional`, `/noticias`,
+    `/noticias/inscripciones-abiertas-para-el-ciclo-lectivo-2026`, `/faq`, `/buscar?q=carreras`,
+    `/contacto` y ruta inexistente (404). Todas renderizan header, contenido y footer; carreras,
+    ficha y novedades muestran sus estados de carga porque el backend local no está corriendo.
+    Sin contenido institucional inventado: solo `localhost:5000` del API y mensajes de proceso
+    (`PENDIENTE`, "se publica cuando esté disponible"); el guard de anotaciones sigue verde.
+    Fase 10 cerrada con tag `v1.11.0`.
 - **Revisión del consumo de API (08/10/2026):** los helpers del buscador se renombraron
   (`coincideTexto` / `coincideNullable`); el footer combina el horario confirmado
   "exclusivamente nocturno" (RF-22) con las modalidades reales del backend (Presencial,

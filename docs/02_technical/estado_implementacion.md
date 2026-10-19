@@ -142,11 +142,11 @@ sobre rutas administrables. La tabla oficial (Swagger/OpenAPI) llega como entreg
 
 ## 7. Pendientes / TODO conocidos
 
-- **Alineación al diseño del avance (14/10/2026, en curso):** referencia = exports Desktop 1440 en
+- **Alineación al diseño del avance (cerrada, 19/10/2026):** referencia = exports Desktop 1440 en
   `documentacion/driveFrontend/01_analisis_funcional/avance_disenio_sitio_ifts12/` + contrato
   `docs/01_global/figma_v2_contrato_visual.md`. Plan en `inbox/plan_diseño_aprobado.md` (T1–T16).
-  **T1–T15 mergeadas a `develop`** (T15: 404, 19/10/2026); **T16 pendiente**
-  (verificación y cierre). El snapshot vigente (incluye el
+  **T1–T16 mergeadas a `develop`** (T16: verificación y cierre, 19/10/2026); Fase 10 cerrada con
+  tag `v1.11.0`. El snapshot vigente (incluye el
   detalle de cada Tn, decisiones y bloqueos) está en `docs/project_state.md`.
   - **Nota de mantenimiento:** este archivo quedó desactualizado respecto de la Fase 9 (consumo
     real de API de carreras/novedades y sistema logsayer). El contrato vigente es
