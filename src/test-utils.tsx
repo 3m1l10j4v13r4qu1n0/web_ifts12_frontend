@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render } from '@testing-library/react';
 import type { ReactElement, ReactNode } from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
 
 /**
  * Fixtures del DTO que devuelve el backend (`app.py:62-92`, `models.py:26-64`), con los
@@ -83,26 +84,29 @@ interface OpcionesRender {
   ruta?: string;
   /** `QueryClient` a usar. Si no se pasa, se crea uno nuevo. */
   queryClient?: QueryClient;
+  /** Envuelve con `AuthProvider` (login, ProtectedRoute, AdminLayout). */
+  conAuth?: boolean;
 }
 
 /**
  * Envuelve un componente con lo que necesita una página que consume la API: router y
- * `QueryClientProvider`.
- *
- * El `QueryClientProvider` va **adentro** del `MemoryRouter`, igual que en `src/App.tsx`.
+ * `QueryClientProvider`. Con `conAuth` agrega también `AuthProvider` (como en
+ * `src/App.tsx`, por fuera del router).
  */
 export function renderConRouter(
   ui: ReactElement,
-  { ruta = '/', queryClient }: OpcionesRender = {},
+  { ruta = '/', queryClient, conAuth = false }: OpcionesRender = {},
 ): ReturnType<typeof render> {
   const cliente = queryClient ?? crearQueryClientDeTest();
 
   function Envoltorio({ children }: { children: ReactNode }) {
-    return (
+    const contenido = (
       <MemoryRouter initialEntries={[ruta]}>
         <QueryClientProvider client={cliente}>{children}</QueryClientProvider>
       </MemoryRouter>
     );
+
+    return conAuth ? <AuthProvider>{contenido}</AuthProvider> : contenido;
   }
 
   return render(<Envoltorio>{ui}</Envoltorio>);

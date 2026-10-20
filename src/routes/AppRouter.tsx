@@ -15,6 +15,7 @@ import NotaCompletaPage from '../pages/NotaCompletaPage';
 import NoticiasPage from '../pages/NoticiasPage';
 import PaginaNoEncontrada from '../pages/PaginaNoEncontrada';
 import TutoriasPage from '../pages/TutoriasPage';
+import ProtectedRoute from './ProtectedRoute';
 
 function AppRouter() {
   return (
@@ -33,7 +34,14 @@ function AppRouter() {
       <Route path="/faq" element={<FaqPage />} />
       <Route path="/contacto" element={<ContactoPage />} />
       <Route path="/admin/login" element={<AdminLoginPage />} />
-      <Route path="/admin" element={<AdminPanelPage />} />
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute>
+            <AdminPanelPage />
+          </ProtectedRoute>
+        }
+      />
       <Route path="*" element={<PaginaNoEncontrada />} />
     </Routes>
   );
