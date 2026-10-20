@@ -20,6 +20,11 @@ project_state.md                                  · nivel 0 · — · — · pr
 04_user_stories/HU-01/hu_01_caso_uso_expandido.md · nivel 2 · borrador · 2026-09-18 · hu-01, hu, caso, uso, expandido
 04_user_stories/HU-01/hu_01_modelos_datos.md      · nivel 2 · borrador · 2026-09-18 · hu-01, hu, modelos, datos
 04_user_stories/HU-01/hu_01_pruevas.md            · nivel 2 · borrador · 2026-09-18 · hu-01, hu, pruevas
+04_user_stories/HU-02/README.md                   · nivel 2 · borrador · 2026-10-20 · hu-02
+04_user_stories/HU-02/hu_02_api.md                · nivel 2 · borrador · 2026-10-20 · hu-02, api, backend, admin
+04_user_stories/HU-02/hu_02_caso_uso_expandido.md · nivel 2 · borrador · 2026-10-20 · hu-02, hu, caso, uso, expandido
+04_user_stories/HU-02/hu_02_modelos_datos.md      · nivel 2 · borrador · 2026-10-20 · hu-02, hu, modelos, datos
+04_user_stories/HU-02/hu_02_pruevas.md            · nivel 2 · borrador · 2026-10-20 · hu-02, hu, pruevas
 03_process/definicion_listo.md                    · nivel 3 · borrador · 2026-09-18 · definicion, listo
 05_agile_methodology/metodoKanban.md              · nivel 3 · — · — · metodokanban
 06_audits/audit_2026-09-09-infraestructura.md     · nivel 3 · — · — · audit, infraestructura
