@@ -107,6 +107,13 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 - Resto del sitio **sigue con datos simulados** en `src/constants/mock-data.ts` (se eliminó el
   bloque `mockComunidades` por B3/I12).
 - HU-01 especificada y **actualizada contra el código** en `docs/04_user_stories/HU-01/`.
+- **HU-02 de administración creada** (20/10/2026) en `docs/04_user_stories/HU-02/`: README
+  con criterios CA-01…CA-14 (+ CA-06b de sesión expirada), `hu_02_api.md` con
+  `POST /api/auth/login` y `GET /api/novedades` ✅ más 7 endpoints CRUD/auth 🔵 propuestos
+  (no existen: DB-03), caso de uso expandido, modelos de datos y plan de pruebas (12
+  escenarios Gherkin). Capturas de documentación del login y del panel (cáscara pre-A2) en
+  `documentacion/screenshots/admin_01_login.png` y `admin_02_panel.png` (1440 × 900).
+  Rama: `feature/admin-frames-figma`.
 - **Correcciones de UX/UI y Frontend** especificadas en Capa 1
   (`docs/01_global/correcciones_ux_ui_frontend.md`, 08/10/2026): 9 bloqueantes (B1–B9), 12
   importantes (I1–I12) y 7 mejoras (M1–M7) de la auditoría UX/UI del 07/10, cada una con criterio
@@ -467,7 +474,7 @@ Detalle con dueño y qué se necesita de vuelta en
 |:---|:---|:---|:---|
 | DB-01 | Tabla oficial de endpoints (parámetros, bodies, códigos) | Grupo 4 | 🟡 **Avanzada**: hay tabla de los 5 endpoints reales, verificada con línea. Faltan las 11 rutas. |
 | DB-02 | Esquemas JSON exactos (DTOs) | Grupo 4 | 🟢 **Resuelta de hecho**: DTOs derivados de `models.py` + Zod + 18 tests. Falta que Backend los confirme. |
-| DB-03 | Alcance de la administración (WF 13, 14, 15) | Grupo 1 | 🔵 Abierta. Sin avance. |
+| DB-03 | Alcance de la administración (WF 13, 14, 15) | Grupo 1 | 🟡 **Avanzada**: HU-02 especificada (20/10/2026). Faltan endpoints CRUD confirmados por Grupo 1. |
 | DB-04 | Definición de la búsqueda global (WF 12): ¿widget o página? | Grupo 2 | 🔵 Abierta. El buscador existe como widget y ya usa datos reales; falta la decisión formal. |
 | DB-05 | HUs de las secciones que solo tienen HU-01 | Frontend | 🔵 Abierta. Sin avance. |
 | DB-14 | 404 de `/carreras/:id` y `/noticias/:id` con `:id` inexistente | Frontend | 🟢 **Resuelta**: el detalle distingue "carrera inexistente" del 404 de ruta, con tests. |
