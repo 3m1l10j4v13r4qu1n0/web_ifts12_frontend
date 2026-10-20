@@ -1,15 +1,21 @@
 import { Menu } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ACCESOS_EXTERNOS, MENU_PRINCIPAL, UBICACION_HEADER } from '../../constants/navegacion';
+import {
+  ACCESO_ADMIN,
+  ACCESOS_EXTERNOS,
+  MENU_PRINCIPAL,
+  UBICACION_HEADER,
+} from '../../constants/navegacion';
 import BuscadorGlobal from './BuscadorGlobal';
 import MobileMenu from './MobileMenu';
 import NavMenu from './NavMenu';
 
 /**
- * Header (B6/I12/RF-03/12/30). Top bar con la ubicación del instituto y los
+ * Header (B6/I12/RF-03/12/30). Top bar con la ubicación del instituto, los
  * accesos Campus Virtual Moodle + SIU · Autogestión + Inscripción GCBA (destinos
- * configurables). Logo → Inicio. Menú de 9 ítems, buscador visible y hamburguesa
+ * configurables) y el link discreto "Administración" al panel (RF-23).
+ * Logo → Inicio. Menú de 9 ítems, buscador visible y hamburguesa
  * de 44×44. SIN ícono de persona.
  */
 function Header() {
@@ -42,6 +48,14 @@ function Header() {
                 </li>
               ),
             )}
+            <li>
+              <Link
+                to={ACCESO_ADMIN.href}
+                className="text-xs font-medium text-slate-200 transition-colors hover:text-white"
+              >
+                {ACCESO_ADMIN.etiqueta}
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

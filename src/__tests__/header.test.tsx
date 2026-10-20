@@ -3,7 +3,12 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { listarCarreras } from '../api/services/carrera.service';
 import { listarNovedades } from '../api/services/novedad.service';
 import Header from '../components/layout/Header';
-import { ACCESOS_EXTERNOS, MENU_PRINCIPAL, UBICACION_HEADER } from '../constants/navegacion';
+import {
+  ACCESO_ADMIN,
+  ACCESOS_EXTERNOS,
+  MENU_PRINCIPAL,
+  UBICACION_HEADER,
+} from '../constants/navegacion';
 import { CARRERAS_API_FIJA, NOVEDADES_API_FIJA, renderConRouter } from '../test-utils';
 import type { CarreraApi } from '../types/api/carrera.types';
 import type { NovedadApi } from '../types/api/novedad.types';
@@ -44,6 +49,15 @@ describe('Header', () => {
     for (const acceso of ACCESOS_EXTERNOS) {
       expect(screen.getByText(acceso.etiqueta)).toBeInTheDocument();
     }
+  });
+
+  it('enlaza el link discreto de Administración al login del panel', () => {
+    renderConRouter(<Header />);
+
+    expect(screen.getByRole('link', { name: ACCESO_ADMIN.etiqueta })).toHaveAttribute(
+      'href',
+      '/admin/login',
+    );
   });
 
   it('se renderiza aunque la API de carreras y novedades falle', async () => {

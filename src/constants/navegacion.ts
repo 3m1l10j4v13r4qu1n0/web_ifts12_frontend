@@ -36,6 +36,15 @@ export const ACCESOS_EXTERNOS: readonly AccesoExterno[] = [
   { id: 'inscripcion', etiqueta: 'Inscripción GCBA', href: ENLACES.inscripcion },
 ];
 
+// Acceso de administracion al panel (RF-23, RN-05): link de texto en la barra
+// superior, junto a los accesos externos. Es una ruta interna, no un servicio
+// externo, por eso vive aparte de ACCESOS_EXTERNOS (decision 20/10/2026: link
+// discreto en la top bar; sigue sin haber icono de persona, regla I12).
+export const ACCESO_ADMIN: ItemNavegacion = {
+  etiqueta: 'Administración',
+  href: '/admin/login',
+};
+
 // Columnas del pie de pagina segun el Mapa del Sitio V2 y los wireframes.
 export const NAV_FOOTER_MAPA: readonly ItemNavegacion[] = [
   { etiqueta: 'Carreras', href: '/carreras' },
