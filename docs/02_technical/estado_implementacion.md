@@ -72,7 +72,8 @@ Tutorías, Docentes, Institucional, Noticias con buscador local, FAQ, Contacto) 
 
 ## 3. Entidades / Modelos de dominio
 
-- `UsuarioSesion` (`contexts/AuthContext.tsx`) — estructura de sesión preparada para auth futura.
+- `UsuarioSesion` (`contexts/AuthContext.tsx`) — sesión del panel: `id`, `nombre`, `email`,
+  `rol`; se reconstruye desde `localStorage` (`auth_usuario`) al refrescar (no hay `/auth/me`).
 - `ApiErrorResponse` (`types/api/error.types.ts`) — forma estándar de error del backend
   (`error`, `mensaje`, `usuario_id?`).
 - `Carrera` (`types/domain/sitio.types.ts`) — `id`, `nombre`, `descripcionBreve`, `modalidad`,
@@ -88,7 +89,10 @@ Tutorías, Docentes, Institucional, Noticias con buscador local, FAQ, Contacto) 
 ## 4. Casos de uso / Servicios implementados
 
 - [x] Navegación entre secciones placeholder (AppRouter).
-- [x] AuthContext y ProtectedRoute **preparados** (sin login real; el backend no lo soporta).
+- [x] AuthContext y ProtectedRoute **activos** (20/10/2026): login real contra
+  `POST /api/auth/login` (`auth.service.ts`), sesión restaurada desde `localStorage` y
+  `/admin` protegida (redirige a `/admin/login`). Logout local: no existen
+  `/auth/logout` ni `/auth/me`.
 - [x] `constants/mock-data.ts` — mocks provisionales tipados (carreras, noticias, FAQ,
   accesos rápidos, comunidades) marcados para validar con Análisis.
 - [x] Componentes reutilizables presentacionales: Header+Nav, Footer, CardCarrera,

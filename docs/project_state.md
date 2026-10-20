@@ -74,7 +74,7 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 ## Qué está construido
 
 - SPA React 19 + Vite + TypeScript strict + Tailwind v4 con `npm run lint · build · test` en verde
-  (**206 tests**, antes 29).
+  (**225 tests**, antes 206).
 - Home navegable según el **Mapa del Sitio V2** (9 ítems de menú + buscador global en el header),
   portada con carrusel institucional, footer V2, secciones de Carreras, Ingresantes,
   Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y Contacto, más rutas de detalle
@@ -92,6 +92,18 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
     secciones de carreras y novedades de la **Home**, y el **buscador global**.
   - Estados de carga, error con reintento y vacío en las cuatro vistas. El mensaje de error lo
     produce el interceptor global de `src/api/client.ts`, no el componente (RN-13).
+- **Login de administración con consumo real (20/10/2026, rama `feature/login-admin-panel`,
+  sin push):** `/admin/login` alineada al frame **A1 Desktop 1440** del Figma v2, con
+  `AdminLayout` propio (header oscuro `#1F2328`, "Volver al sitio público", pie admin; las
+  rutas `/admin*` quedan sin Header/Footer público). `auth.service.ts` consume
+  `POST /api/auth/login` (mapea el campo `token` del backend a la key `auth_token` de
+  `client.ts`); `AuthContext` restaura la sesión síncrona desde `localStorage` (`auth_usuario`
+  con `id`/`nombre`/`email`/`rol`); `ProtectedRoute` redirige a `/admin/login` y protege
+  `/admin`. Acceso: link discreto "Administración" (`ACCESO_ADMIN`) en la top bar del header
+  (sin ícono de persona, I12). `POST /api/auth/logout` y `/auth/me` no existen → logout local.
+  El CRUD del panel sigue sin backend (UI-only); RF-24 (roles) pendiente → mensaje de proceso.
+  Smoke en Firefox con backend caído (toggle y chrome ok); credenciales reales pendientes de
+  backend local (Flask sin instalar). Detalle en bitácora 20/10/2026.
 - Resto del sitio **sigue con datos simulados** en `src/constants/mock-data.ts` (se eliminó el
   bloque `mockComunidades` por B3/I12).
 - HU-01 especificada y **actualizada contra el código** en `docs/04_user_stories/HU-01/`.
@@ -382,6 +394,10 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 
 ## Decisiones activas (últimas 3-5)
 
+- **Acceso al panel por link discreto en la top bar (20/10/2026):** "Administración" como texto
+  junto a los accesos externos del header, sin ícono de persona (I12); checkbox "Mostrar
+  contraseña" en el login (como el Figma A1) y se eliminó "Mantener sesión iniciada". La
+  sesión se restaura desde `localStorage` (no hay `/auth/me`); logout solo local.
 - **Los chips "Secciones" del buscador se arman con los datos (T8, 16/10/2026):** se listan solo
   las secciones presentes en los resultados de la consulta (no los 5 fijos del export), porque el
   alcance buscable sigue pendiente con Análisis (**I4**) y no se quieren filtros que no devuelvan
@@ -426,8 +442,9 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   backend apto para producción. **Dueño: Grupo 4.**
 - **SQLite vs PostgreSQL (P4)** → si el entorno de testing corre SQLite, los tipos del DTO pueden
   diferir. Hoy verificado sobre SQLite.
-- **Nombre del token (🔴):** el login real devuelve `token`, el cliente lee `auth_token`
-  (`src/api/client.ts`). Sin impacto mientras no haya login; hay que alinearlo cuando exista.
+- **Nombre del token (🟡, resuelto de hecho en el frontend):** el backend devuelve `token` y el
+  cliente lee `auth_token` (`src/api/client.ts`); `auth.service.ts` mapea el campo en el login.
+  Queda alinearlo en el backend cuando toque (BE-E01–BE-E06).
 - **Plazos vencidos (P5):** Swagger (~22/09) y DTOs (~29/09) no llegaron. El frontend compensó
   con DTOs derivados del código, pero no es una entrega de Backend.
 - URLs oficiales de Moodle, inscripción y SIU (IFTS/Dirección) → bloquean `enlaces.ts`. Los accesos
@@ -457,7 +474,7 @@ Detalle con dueño y qué se necesita de vuelta en
 
 ## Verificación
 
-- Frontend: `npm run lint` · `npm run build` · `npm run test` (206 tests).
+- Frontend: `npm run lint` · `npm run build` · `npm run test` (225 tests).
 - Sistema documental: `logsayer check` · `logsayer process check` · `logsayer memory index`.
 - Consumo verificado **en navegador** (Firefox, `localhost:5173`) contra un servidor que replica
   la serialización de `app.py:62-92` leyendo de `instance/ifts12.db`: listado, detalle, buscador,
