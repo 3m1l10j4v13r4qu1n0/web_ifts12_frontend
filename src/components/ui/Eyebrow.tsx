@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { cn } from '../../utils/cn';
 
-export type ColorSeccion = 'rojo' | 'verde' | 'ambar' | 'cian' | 'naranja';
+export type ColorSeccion = 'rojo' | 'verde' | 'ambar' | 'cian' | 'naranja' | 'admin';
 
 const colores: Record<ColorSeccion, string> = {
   rojo: 'bg-seccion-rojo',
@@ -9,6 +9,8 @@ const colores: Record<ColorSeccion, string> = {
   ambar: 'bg-seccion-ambar',
   cian: 'bg-seccion-cian',
   naranja: 'bg-seccion-naranja',
+  // Marca oscura del panel de administración (Figma A1: #1F2328).
+  admin: 'bg-[#1f2328]',
 };
 
 interface EyebrowProps {
