@@ -1,6 +1,7 @@
 import { AxiosError, AxiosHeaders } from 'axios';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import apiClient, { normalizarErrorApi } from '../api/client';
+import { iniciarSesion } from '../api/services/auth.service';
 import { listarCarreras } from '../api/services/carrera.service';
 import { listarNovedades } from '../api/services/novedad.service';
 
@@ -168,6 +169,61 @@ describe('listarNovedades', () => {
     await expect(listarNovedades()).rejects.toEqual({
       status: 0,
       mensaje: 'Ocurrió un error inesperado. Intentá de nuevo más tarde.',
+    });
+  });
+});
+
+describe('iniciarSesion', () => {
+  const LOGIN_OK = {
+    token: 'jwt-de-prueba',
+    usuario: {
+      id: 1,
+      nombre: 'Edith',
+      apellido: 'Gómez',
+      email: 'edith@ifts12',
+      rol: 'admin',
+    },
+  };
+
+  it('pide el login al endpoint correcto con email y password', async () => {
+    const spy = vi
+      .spyOn(apiClient, 'post')
+      .mockResolvedValue({ data: LOGIN_OK } as unknown as ReturnType<typeof apiClient.post>);
+
+    await iniciarSesion({ email: 'edith@ifts12', password: 'secreta' });
+
+    // El body usa `email`/`password`, como pide `app.py:34-36`.
+    expect(spy).toHaveBeenCalledWith('/auth/login', {
+      email: 'edith@ifts12',
+      password: 'secreta',
+    });
+  });
+
+  it('devuelve el token y el usuario sin transformarlos', async () => {
+    vi.spyOn(apiClient, 'post').mockResolvedValue({
+      data: LOGIN_OK,
+    } as unknown as ReturnType<typeof apiClient.post>);
+
+    expect(await iniciarSesion({ email: 'edith@ifts12', password: 'secreta' })).toEqual(LOGIN_OK);
+  });
+
+  it('rechaza una respuesta sin token', async () => {
+    vi.spyOn(apiClient, 'post').mockResolvedValue({
+      data: { ...LOGIN_OK, token: '' },
+    } as unknown as ReturnType<typeof apiClient.post>);
+
+    await expect(iniciarSesion({ email: 'a@b', password: 'x' })).rejects.toThrow();
+  });
+
+  it('propaga el error ya normalizado por el interceptor (401)', async () => {
+    vi.spyOn(apiClient, 'post').mockRejectedValue({
+      status: 401,
+      mensaje: 'Credenciales inválidas',
+    });
+
+    await expect(iniciarSesion({ email: 'a@b', password: 'mala' })).rejects.toEqual({
+      status: 401,
+      mensaje: 'Credenciales inválidas',
     });
   });
 });
