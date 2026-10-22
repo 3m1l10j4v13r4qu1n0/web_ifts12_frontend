@@ -1,7 +1,14 @@
 # Estado Actual del Proyecto
 
-Fecha: 2026-09-30 · Estado: vigente
+Fecha: 2026-09-30 · Estado: **OBSOLETO — no usar como estado vigente (actualizado 22/10/2026)**
 
+> **Aviso (auditoría UX/UI 22/10/2026, hallazgo UX-A21):** este documento describe el estado
+> del **30/09/2026** y quedó desactualizado. El código ya consume API real (carreras y
+> novedades), tiene login de administración real, 7 accesos rápidos, la sección "Comunidad"
+> eliminada y las fases 7-10 cerradas. **El estado vigente es `docs/project_state.md`.**
+> Este archivo se conserva como foto histórica; se corrige abajo solo lo que la auditoría
+> marcó como afirmación falsa.
+>
 > Última actualización de contenido: 2026-09-21 (Ajuste Mapa V2: header con accesos externos, footer V2, hero con carrusel, secciones con mocks y rutas de detalle)
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `docs/logbooks/logbook_legado_01.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.

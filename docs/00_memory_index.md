@@ -12,7 +12,7 @@
 project_state.md                                  · nivel 0 · — · — · project, state
 02_technical/contrato_api_backend.md              · nivel 1 · vigente · 2026-10-02 · contrato, api, backend
 02_technical/decisiones_tecnicas.md               · nivel 1 · borrador · 2026-09-18 · decisiones, tecnicas
-02_technical/estado_implementacion.md             · nivel 1 · vigente · 2026-09-30 · estado, implementacion
+02_technical/estado_implementacion.md             · nivel 1 · **OBSOLETO · 2026-09-30 · estado, implementacion
 02_technical/modelo_datos_global.md               · nivel 1 · borrador · 2026-09-18 · modelo, datos, global
 02_technical/revision_consumo_api.md              · nivel 1 · borrador · 2026-10-08 · revision, consumo, api, novedades
 04_user_stories/HU-01/README.md                   · nivel 2 · borrador · 2026-09-18 · hu-01
@@ -34,6 +34,8 @@ project_state.md                                  · nivel 0 · — · — · pr
 06_audits/audit_2026-10-01-backend-readme.md      · nivel 3 · — · — · audit, backend
 06_audits/audit_2026-10-08-ux-ui-frontend.md      · nivel 3 · — · — · audit, ux, ui, frontend
 06_audits/audit_2026-10-09-figma.md               · nivel 3 · — · — · audit, figma
+06_audits/audit_2026-10-22-backend.md             · nivel 3 · — · — · audit, backend
+06_audits/audit_2026-10-22-ux-ui.md               · nivel 3 · — · — · audit, ux, ui
 logbooks/00_index.md                              · nivel 3 · — · —
 logbooks/logbook_fase-10_01.md                    · nivel 3 · — · — · logbook, fase
 logbooks/logbook_fase-7_01.md                     · nivel 3 · — · — · logbook, fase

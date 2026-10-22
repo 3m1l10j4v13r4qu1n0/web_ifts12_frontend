@@ -74,7 +74,7 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 ## Qué está construido
 
 - SPA React 19 + Vite + TypeScript strict + Tailwind v4 con `npm run lint · build · test` en verde
-  (**225 tests**, antes 206).
+  (**226 tests** en 29 archivos, verificado 22/10/2026; antes 206).
 - Home navegable según el **Mapa del Sitio V2** (9 ítems de menú + buscador global en el header),
   portada con carrusel institucional, footer V2, secciones de Carreras, Ingresantes,
   Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y Contacto, más rutas de detalle
@@ -99,10 +99,10 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   `POST /api/auth/login` (mapea el campo `token` del backend a la key `auth_token` de
   `client.ts`); `AuthContext` restaura la sesión síncrona desde `localStorage` (`auth_usuario`
   con `id`/`nombre`/`email`/`rol`); `ProtectedRoute` redirige a `/admin/login` y protege
-  `/admin`.   Acceso: menú de cuenta (ícono de persona, lista `ACCESOS_CUENTA`) en la top bar del
-  header; hoy solo "Panel de administración". Excepción a I12 (20/10/2026, decisión de
-  producto: menú escalable para un futuro login de alumnos sin inventar ítems; pendiente
-  pedir a UX/UI que lo agregue al Figma v2). `POST /api/auth/logout` y `/auth/me` no existen → logout local.
+  `/admin`. _Histórico:_ la excepción del 20/10/2026 había reintroducido un menú de cuenta con
+  ícono de persona en la top bar. **Decisión 22/10/2026 (UX/UI, #0040/I12): se quita el ícono
+  de persona y el menú de cuenta; el panel queda accesible solo por URL directa
+  `/admin/login`.** `POST /api/auth/logout` y `/auth/me` no existen → logout local.
   El CRUD del panel sigue sin backend (UI-only); RF-24 (roles) pendiente → mensaje de proceso.
   Smoke en Firefox con backend caído (toggle y chrome ok); credenciales reales pendientes de
   backend local (Flask sin instalar). Detalle en bitácora 20/10/2026.
@@ -483,7 +483,7 @@ Detalle con dueño y qué se necesita de vuelta en
 
 ## Verificación
 
-- Frontend: `npm run lint` · `npm run build` · `npm run test` (225 tests).
+- Frontend: `npm run lint` · `npm run build` · `npm run test` (226 tests).
 - Sistema documental: `logsayer check` · `logsayer process check` · `logsayer memory index`.
 - Consumo verificado **en navegador** (Firefox, `localhost:5173`) contra un servidor que replica
   la serialización de `app.py:62-92` leyendo de `instance/ifts12.db`: listado, detalle, buscador,
