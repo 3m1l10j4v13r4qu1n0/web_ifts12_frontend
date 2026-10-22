@@ -1,10 +1,11 @@
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { listarCarreras } from '../api/services/carrera.service';
 import { listarNovedades } from '../api/services/novedad.service';
 import Header from '../components/layout/Header';
 import {
-  ACCESO_ADMIN,
+  ACCESOS_CUENTA,
   ACCESOS_EXTERNOS,
   MENU_PRINCIPAL,
   UBICACION_HEADER,
@@ -51,13 +52,45 @@ describe('Header', () => {
     }
   });
 
-  it('enlaza el link discreto de Administración al login del panel', () => {
+  it('ofrece el menú de cuenta con el ingreso al panel de administración', async () => {
+    const usuario = userEvent.setup();
     renderConRouter(<Header />);
 
-    expect(screen.getByRole('link', { name: ACCESO_ADMIN.etiqueta })).toHaveAttribute(
-      'href',
-      '/admin/login',
-    );
+    const botonCuenta = screen.getByRole('button', { name: 'Cuenta' });
+    expect(botonCuenta).toHaveAttribute('aria-haspopup', 'menu');
+    expect(botonCuenta).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.queryByRole('menuitem')).not.toBeInTheDocument();
+
+    await usuario.click(botonCuenta);
+
+    expect(botonCuenta).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByRole('menu', { name: 'Cuenta' })).toBeInTheDocument();
+    for (const acceso of ACCESOS_CUENTA) {
+      expect(screen.getByRole('menuitem', { name: acceso.etiqueta })).toHaveAttribute(
+        'href',
+        acceso.href,
+      );
+    }
+  });
+
+  it('cierra el menú de cuenta con Escape y al clickear afuera', async () => {
+    const usuario = userEvent.setup();
+    renderConRouter(<Header />);
+
+    const botonCuenta = screen.getByRole('button', { name: 'Cuenta' });
+
+    await usuario.click(botonCuenta);
+    expect(screen.getByRole('menuitem', { name: 'Panel de administración' })).toBeInTheDocument();
+
+    await usuario.keyboard('{Escape}');
+    expect(screen.queryByRole('menuitem')).not.toBeInTheDocument();
+    expect(botonCuenta).toHaveAttribute('aria-expanded', 'false');
+
+    await usuario.click(botonCuenta);
+    expect(screen.getByRole('menuitem', { name: 'Panel de administración' })).toBeInTheDocument();
+
+    await usuario.click(screen.getByRole('img', { name: 'IFTS N.º 12' }));
+    expect(screen.queryByRole('menuitem')).not.toBeInTheDocument();
   });
 
   it('se renderiza aunque la API de carreras y novedades falle', async () => {
