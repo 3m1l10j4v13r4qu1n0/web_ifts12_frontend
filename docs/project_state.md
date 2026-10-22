@@ -99,8 +99,10 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   `POST /api/auth/login` (mapea el campo `token` del backend a la key `auth_token` de
   `client.ts`); `AuthContext` restaura la sesión síncrona desde `localStorage` (`auth_usuario`
   con `id`/`nombre`/`email`/`rol`); `ProtectedRoute` redirige a `/admin/login` y protege
-  `/admin`. Acceso: link discreto "Administración" (`ACCESO_ADMIN`) en la top bar del header
-  (sin ícono de persona, I12). `POST /api/auth/logout` y `/auth/me` no existen → logout local.
+  `/admin`.   Acceso: menú de cuenta (ícono de persona, lista `ACCESOS_CUENTA`) en la top bar del
+  header; hoy solo "Panel de administración". Excepción a I12 (20/10/2026, decisión de
+  producto: menú escalable para un futuro login de alumnos sin inventar ítems; pendiente
+  pedir a UX/UI que lo agregue al Figma v2). `POST /api/auth/logout` y `/auth/me` no existen → logout local.
   El CRUD del panel sigue sin backend (UI-only); RF-24 (roles) pendiente → mensaje de proceso.
   Smoke en Firefox con backend caído (toggle y chrome ok); credenciales reales pendientes de
   backend local (Flask sin instalar). Detalle en bitácora 20/10/2026.

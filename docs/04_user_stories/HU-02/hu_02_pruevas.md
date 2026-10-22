@@ -17,8 +17,8 @@ sesión ausente, acciones sin endpoint y datos vacíos o con error.
 - **Dado** que navego a `/admin/login`.
 - **Cuando** se renderiza la pantalla.
 - **Entonces** el login del frame A1 se muestra con `AdminLayout`, sin header, menú ni pie
-  públicos (CA-01) y con el enlace "Administración" disponible en la top bar pública
-  (CA-02).
+  públicos (CA-01) y con el menú de cuenta de la top bar pública (ícono de persona →
+  "Panel de administración") (CA-02).
 
 ### Escenario 2: Autenticación con credenciales válidas (Caso de Éxito)
 

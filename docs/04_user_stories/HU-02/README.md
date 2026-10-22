@@ -43,7 +43,9 @@ del RF-26 (calendario, horarios, autoridades, docentes, concursos) queda fuera p
   veo el login del frame A1 con `AdminLayout` (sin header, menú ni pie públicos) (RF-23;
   RN-05).
 - **CA-02.** Dado que estoy en cualquier página pública, cuando miro la top bar, entonces
-  el acceso "Administración" está visible como enlace discreto, sin ícono de persona (I12).
+  el botón de cuenta (ícono de persona) está visible y su menú muestra "Panel de
+  administración" como única opción por ahora (excepción a I12, 20/10/2026: menú
+  escalable para futuros perfiles con login; sin ítems inventados).
 - **CA-03.** Dado que envío email y contraseña correctos, cuando el backend responde 200
   con token y usuario, entonces la sesión se guarda y entro al panel en `/admin` (RF-23).
 - **CA-04.** Dado que el backend responde 401 "Credenciales inválidas" o 400 "Email y
