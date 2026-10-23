@@ -55,7 +55,7 @@ function CarreraDetallePage() {
           </div>
         </div>
         <div className="mx-auto max-w-contenido px-4 py-14">
-          <AvisoCarga que="la carrera" />
+          <AvisoCarga que="la carrera" variante="ficha" />
         </div>
       </main>
     );
