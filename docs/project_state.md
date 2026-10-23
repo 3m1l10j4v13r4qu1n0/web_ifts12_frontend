@@ -74,7 +74,7 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 ## Qué está construido
 
 - SPA React 19 + Vite + TypeScript strict + Tailwind v4 con `npm run lint · build · test` en verde
-  (**242 tests** en 32 archivos, verificado 23/10/2026; antes 226).
+  (**243 tests** en 32 archivos, verificado 23/10/2026; antes 226).
 - Home navegable según el **Mapa del Sitio V2** (9 ítems de menú + buscador global en el header),
   portada con carrusel institucional, footer V2, secciones de Carreras, Ingresantes,
   Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y Contacto, más rutas de detalle
@@ -97,7 +97,11 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   `novedadesHabilitadas()`, `authHabilitada()` y `contactoHabilitado()` (default on en dev/test,
   off en prod, forzables por `VITE_*`). Con novedades apagadas, `useNovedades` no dispara el
   request y Home, Noticias y la nota completa muestran `ModuloNoDisponible` (la nota no da 404);
-  el buscador global deja de indexar novedades. PR #38 y rama `fix/aislamiento-novedades`.
+  el buscador global deja de indexar novedades. PR #38 y PR #40.
+- **Header sin acceso visible al panel (23/10/2026):** se quitó el ícono de persona y el menú de
+  cuenta (`ACCESOS_CUENTA`); `/admin/login` solo por URL directa. Con auth apagada,
+  `AdminLoginPage` y `ProtectedRoute` muestran `ModuloNoDisponible` y no renderizan el
+  formulario. Rama `fix/aislamiento-auth-header`.
 - **Login de administración con consumo real (20/10/2026, rama `feature/login-admin-panel`,
   sin push):** `/admin/login` alineada al frame **A1 Desktop 1440** del Figma v2, con
   `AdminLayout` propio (header oscuro `#1F2328`, "Volver al sitio público", pie admin; las
