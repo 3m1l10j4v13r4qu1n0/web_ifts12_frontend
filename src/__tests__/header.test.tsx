@@ -1,15 +1,9 @@
 import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { listarCarreras } from '../api/services/carrera.service';
 import { listarNovedades } from '../api/services/novedad.service';
 import Header from '../components/layout/Header';
-import {
-  ACCESOS_CUENTA,
-  ACCESOS_EXTERNOS,
-  MENU_PRINCIPAL,
-  UBICACION_HEADER,
-} from '../constants/navegacion';
+import { ACCESOS_EXTERNOS, MENU_PRINCIPAL, UBICACION_HEADER } from '../constants/navegacion';
 import { CARRERAS_API_FIJA, NOVEDADES_API_FIJA, renderConRouter } from '../test-utils';
 import type { CarreraApi } from '../types/api/carrera.types';
 import type { NovedadApi } from '../types/api/novedad.types';
@@ -52,44 +46,12 @@ describe('Header', () => {
     }
   });
 
-  it('ofrece el menú de cuenta con el ingreso al panel de administración', async () => {
-    const usuario = userEvent.setup();
+  it('no anuncia el panel de administración: el ingreso es solo por URL directa', () => {
     renderConRouter(<Header />);
 
-    const botonCuenta = screen.getByRole('button', { name: 'Cuenta' });
-    expect(botonCuenta).toHaveAttribute('aria-haspopup', 'menu');
-    expect(botonCuenta).toHaveAttribute('aria-expanded', 'false');
-    expect(screen.queryByRole('menuitem')).not.toBeInTheDocument();
-
-    await usuario.click(botonCuenta);
-
-    expect(botonCuenta).toHaveAttribute('aria-expanded', 'true');
-    expect(screen.getByRole('menu', { name: 'Cuenta' })).toBeInTheDocument();
-    for (const acceso of ACCESOS_CUENTA) {
-      expect(screen.getByRole('menuitem', { name: acceso.etiqueta })).toHaveAttribute(
-        'href',
-        acceso.href,
-      );
-    }
-  });
-
-  it('cierra el menú de cuenta con Escape y al clickear afuera', async () => {
-    const usuario = userEvent.setup();
-    renderConRouter(<Header />);
-
-    const botonCuenta = screen.getByRole('button', { name: 'Cuenta' });
-
-    await usuario.click(botonCuenta);
-    expect(screen.getByRole('menuitem', { name: 'Panel de administración' })).toBeInTheDocument();
-
-    await usuario.keyboard('{Escape}');
-    expect(screen.queryByRole('menuitem')).not.toBeInTheDocument();
-    expect(botonCuenta).toHaveAttribute('aria-expanded', 'false');
-
-    await usuario.click(botonCuenta);
-    expect(screen.getByRole('menuitem', { name: 'Panel de administración' })).toBeInTheDocument();
-
-    await usuario.click(screen.getByRole('img', { name: 'IFTS N.º 12' }));
+    expect(screen.queryByRole('button', { name: 'Cuenta' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('menu', { name: 'Cuenta' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /administración/i })).not.toBeInTheDocument();
     expect(screen.queryByRole('menuitem')).not.toBeInTheDocument();
   });
 

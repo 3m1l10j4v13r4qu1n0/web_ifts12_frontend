@@ -1,53 +1,20 @@
-import { Menu, UserRound } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { Menu } from 'lucide-react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  ACCESOS_CUENTA,
-  ACCESOS_EXTERNOS,
-  MENU_PRINCIPAL,
-  UBICACION_HEADER,
-} from '../../constants/navegacion';
+import { ACCESOS_EXTERNOS, MENU_PRINCIPAL, UBICACION_HEADER } from '../../constants/navegacion';
 import BuscadorGlobal from './BuscadorGlobal';
 import MobileMenu from './MobileMenu';
 import NavMenu from './NavMenu';
 
 /**
- * Header (B6/I12/RF-03/12/30). Top bar con la ubicación del instituto, los
+ * Header (B6/I12/RF-03/12/30). Top bar con la ubicación del instituto y los
  * accesos Campus Virtual Moodle + SIU · Autogestión + Inscripción GCBA (destinos
- * configurables) y el menú de cuenta (ícono de persona) que hoy lleva al login
- * del panel de administración (RF-23). Excepción a I12 (20/10/2026): el ícono
- * de persona volvió a la top bar como menú escalable; ver
- * docs/project_state.md. Logo → Inicio. Menú de 9 ítems, buscador visible y
- * hamburguesa de 44×44.
+ * configurables). El panel de administración no se anuncia acá: se accede solo
+ * por URL directa `/admin/login` (decisión UX/UI del 22/10/2026, #0040/I12).
+ * Logo → Inicio. Menú de 9 ítems, buscador visible y hamburguesa de 44×44.
  */
 function Header() {
   const [menuAbierto, setMenuAbierto] = useState(false);
-  const [cuentaAbierta, setCuentaAbierta] = useState(false);
-  const cuentaRef = useRef<HTMLDivElement>(null);
-
-  // El menú de cuenta se cierra al clickear afuera o con Escape (patrón de
-  // menú desplegable accesible; el foco no se roba mientras está abierto).
-  useEffect(() => {
-    if (!cuentaAbierta) {
-      return;
-    }
-    const alClickearFuera = (evento: MouseEvent) => {
-      if (!cuentaRef.current?.contains(evento.target as Node)) {
-        setCuentaAbierta(false);
-      }
-    };
-    const alPresionarTecla = (evento: KeyboardEvent) => {
-      if (evento.key === 'Escape') {
-        setCuentaAbierta(false);
-      }
-    };
-    document.addEventListener('mousedown', alClickearFuera);
-    document.addEventListener('keydown', alPresionarTecla);
-    return () => {
-      document.removeEventListener('mousedown', alClickearFuera);
-      document.removeEventListener('keydown', alPresionarTecla);
-    };
-  }, [cuentaAbierta]);
 
   return (
     <header className="sticky top-0 z-40 border-b border-borde-suave bg-white/95 backdrop-blur">
@@ -76,41 +43,6 @@ function Header() {
                 </li>
               ),
             )}
-            <li>
-              <div ref={cuentaRef} className="relative">
-                <button
-                  type="button"
-                  aria-label="Cuenta"
-                  aria-haspopup="menu"
-                  aria-expanded={cuentaAbierta}
-                  aria-controls="menu-cuenta"
-                  onClick={() => setCuentaAbierta((abierto) => !abierto)}
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-md text-slate-200 transition-colors hover:bg-slate-800 hover:text-white"
-                >
-                  <UserRound aria-hidden="true" className="h-5 w-5" />
-                </button>
-                {cuentaAbierta && (
-                  <div
-                    id="menu-cuenta"
-                    role="menu"
-                    aria-label="Cuenta"
-                    className="absolute right-0 top-full z-50 mt-1 w-56 rounded-md border border-borde-suave bg-white py-1 shadow-lg"
-                  >
-                    {ACCESOS_CUENTA.map((item) => (
-                      <Link
-                        key={item.href}
-                        role="menuitem"
-                        to={item.href}
-                        onClick={() => setCuentaAbierta(false)}
-                        className="block px-4 py-2 text-sm text-texto transition-colors hover:bg-fondo"
-                      >
-                        {item.etiqueta}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </li>
           </ul>
         </div>
       </div>
