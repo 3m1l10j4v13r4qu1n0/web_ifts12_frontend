@@ -10,6 +10,7 @@ import AvisoCarga from '../components/ui/AvisoCarga';
 import AvisoError from '../components/ui/AvisoError';
 import Badge from '../components/ui/Badge';
 import Button from '../components/ui/Button';
+import ModuloNoDisponible from '../components/ui/ModuloNoDisponible';
 import Toast, { type TipoToast } from '../components/ui/Toast';
 import { useNovedades } from '../hooks/useNovedades';
 import { formatearFechaCorta } from '../utils/fecha';
@@ -25,12 +26,37 @@ interface Aviso {
 
 function NotaCompletaPage() {
   const { id } = useParams<{ id: string }>();
-  const { novedades, cargando, error, recargar } = useNovedades();
+  const { novedades, cargando, error, recargar, habilitado } = useNovedades();
   const [aviso, setAviso] = useState<Aviso | null>(null);
 
   // El backend no expone `GET /api/noticias/:id`, así que el detalle se resuelve contra la
   // lista completa. Es la misma consulta que el listado, que TanStack Query cachea.
   const noticia = id === undefined ? undefined : buscarNovedadPorSlug(novedades, id);
+
+  // El recurso no está en el apispec: se muestra un aviso con salida a `/noticias`, no un
+  // 404. La ruta sigue existiendo para cuando Backend publique novedades.
+  if (!habilitado) {
+    return (
+      <main className="min-h-screen">
+        <div className="border-b border-borde-suave bg-fondo">
+          <div className="mx-auto max-w-contenido px-4 py-12">
+            <h1 className="text-4xl font-semibold text-texto">Novedad</h1>
+          </div>
+        </div>
+        <div className="mx-auto max-w-contenido px-4 py-14">
+          <ModuloNoDisponible
+            que="esta novedad"
+            mensaje="Las novedades se publican cuando el recurso esté disponible en el contrato de API."
+            accion={
+              <Button href="/noticias" variante="secundario">
+                Volver a novedades
+              </Button>
+            }
+          />
+        </div>
+      </main>
+    );
+  }
 
   if (cargando) {
     return (

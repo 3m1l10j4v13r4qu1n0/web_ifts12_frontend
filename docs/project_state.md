@@ -74,7 +74,7 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 ## Qué está construido
 
 - SPA React 19 + Vite + TypeScript strict + Tailwind v4 con `npm run lint · build · test` en verde
-  (**226 tests** en 29 archivos, verificado 22/10/2026; antes 206).
+  (**242 tests** en 32 archivos, verificado 23/10/2026; antes 226).
 - Home navegable según el **Mapa del Sitio V2** (9 ítems de menú + buscador global en el header),
   portada con carrusel institucional, footer V2, secciones de Carreras, Ingresantes,
   Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y Contacto, más rutas de detalle
@@ -83,8 +83,9 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   carga y solo se ve con datos del backend (14/10/2026).
 - **Consumo real de API para carreras y novedades** (02/10/2026), contra `GET /api/carreras` y
   `GET /api/novedades`:
-  - `src/api/endpoints.ts` con `VITE_API_BASE_URL` (fallback `localhost:5000`) y solo las 5 rutas
-    que existen en `app.py`.
+  - `src/api/endpoints.ts` con `VITE_API_BASE_URL` (fallback `localhost:5000`). Carreras es
+    contractual; novedades, auth y contacto quedan marcados como **no contractuales** (no
+    figuran en el apispec) y se aíslan por bandera.
   - DTOs + esquemas Zod derivados de `models.py`: `carrera.types.ts`, `novedad.schema.ts`.
   - Servicios `carrera.service.ts` y `novedad.service.ts`, única capa que conoce endpoints.
   - Hooks `useCarreras` / `useNovedades` con TanStack Query (`staleTime` 5 min y 2 min).
@@ -92,6 +93,11 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
     secciones de carreras y novedades de la **Home**, y el **buscador global**.
   - Estados de carga, error con reintento y vacío en las cuatro vistas. El mensaje de error lo
     produce el interceptor global de `src/api/client.ts`, no el componente (RN-13).
+- **Aislamiento de módulos fuera del apispec (23/10/2026):** `src/constants/contrato.ts` expone
+  `novedadesHabilitadas()`, `authHabilitada()` y `contactoHabilitado()` (default on en dev/test,
+  off en prod, forzables por `VITE_*`). Con novedades apagadas, `useNovedades` no dispara el
+  request y Home, Noticias y la nota completa muestran `ModuloNoDisponible` (la nota no da 404);
+  el buscador global deja de indexar novedades. PR #38 y rama `fix/aislamiento-novedades`.
 - **Login de administración con consumo real (20/10/2026, rama `feature/login-admin-panel`,
   sin push):** `/admin/login` alineada al frame **A1 Desktop 1440** del Figma v2, con
   `AdminLayout` propio (header oscuro `#1F2328`, "Volver al sitio público", pie admin; las
