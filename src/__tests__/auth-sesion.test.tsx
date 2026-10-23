@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Route, Routes } from 'react-router-dom';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { NOMBRE_TOKEN } from '../api/client';
 import { useAuth } from '../contexts/AuthContext';
 import ProtectedRoute from '../routes/ProtectedRoute';
@@ -142,6 +142,35 @@ describe('ProtectedRoute', () => {
     );
 
     expect(screen.getByText('Contenido protegido')).toBeInTheDocument();
+    expect(screen.queryByText('Redirigido al login')).not.toBeInTheDocument();
+  });
+});
+
+describe('ProtectedRoute sin contrato de auth', () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  it('muestra el aviso de proceso en vez de redirigir al login', () => {
+    vi.stubEnv('VITE_ADMIN_HABILITADO', 'false');
+
+    renderConRouter(
+      <Routes>
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <p>Panel privado</p>
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/admin/login" element={<p>Redirigido al login</p>} />
+      </Routes>,
+      { ruta: '/admin', conAuth: true },
+    );
+
+    expect(screen.getByText('Contenido en preparación')).toBeInTheDocument();
+    expect(screen.queryByText('Panel privado')).not.toBeInTheDocument();
     expect(screen.queryByText('Redirigido al login')).not.toBeInTheDocument();
   });
 });

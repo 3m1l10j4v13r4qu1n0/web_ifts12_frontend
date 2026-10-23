@@ -36,15 +36,6 @@ export const ACCESOS_EXTERNOS: readonly AccesoExterno[] = [
   { id: 'inscripcion', etiqueta: 'Inscripción GCBA', href: ENLACES.inscripcion },
 ];
 
-// Menú de cuenta de la barra superior: ícono de persona con opciones de
-// ingreso (RF-23, RN-05). Excepción a I12 (decisión 20/10/2026): antes era un
-// link de texto "Administración" sin ícono; ahora es un menú escalable. Hoy
-// solo admin: la lista es el punto de extensión si en el futuro hay otro perfil
-// con login propio. No se agregan ítems sin requisito formal (I12).
-export const ACCESOS_CUENTA: readonly ItemNavegacion[] = [
-  { etiqueta: 'Panel de administración', href: '/admin/login' },
-];
-
 // Columnas del pie de pagina segun el Mapa del Sitio V2 y los wireframes.
 export const NAV_FOOTER_MAPA: readonly ItemNavegacion[] = [
   { etiqueta: 'Carreras', href: '/carreras' },

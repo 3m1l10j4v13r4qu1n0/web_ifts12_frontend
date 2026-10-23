@@ -7,6 +7,8 @@ import Button from '../components/ui/Button';
 import Checkbox from '../components/ui/Checkbox';
 import Eyebrow from '../components/ui/Eyebrow';
 import { FormField, Input } from '../components/ui/FormField';
+import ModuloNoDisponible from '../components/ui/ModuloNoDisponible';
+import { authHabilitada } from '../constants/contrato';
 import { useAuth } from '../contexts/AuthContext';
 import type { ApiError } from '../types/api/error.types';
 
@@ -32,6 +34,23 @@ function AdminLoginPage() {
   const [error, setError] = useState<string | null>(null);
   const { login } = useAuth();
   const navigate = useNavigate();
+
+  // `POST /api/auth/login` no figura en el apispec: con auth apagada no se muestra el
+  // formulario ni se puede llamar al servicio. El acceso vuelve cuando Backend lo publique.
+  if (!authHabilitada()) {
+    return (
+      <AdminLayout>
+        <div className="px-4 py-10 sm:px-8 lg:px-[120px]">
+          <div className="mx-auto w-full max-w-[480px]">
+            <ModuloNoDisponible
+              que="el panel de administración"
+              mensaje="El acceso se habilita cuando el inicio de sesión esté incluido en el contrato de API."
+            />
+          </div>
+        </div>
+      </AdminLayout>
+    );
+  }
 
   async function enviar(evento: FormEvent<HTMLFormElement>) {
     evento.preventDefault();

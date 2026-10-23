@@ -1,7 +1,7 @@
 import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Route, Routes } from 'react-router-dom';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { iniciarSesion } from '../api/services/auth.service';
 import AdminLoginPage from '../pages/AdminLoginPage';
 import { renderConRouter } from '../test-utils';
@@ -132,5 +132,25 @@ describe('AdminLoginPage', () => {
       screen.getByText(/¿Olvidaste tu contraseña\? Contactá a quien administra el sitio/),
     ).toBeInTheDocument();
     expect(screen.getByText('Roles y permisos')).toBeInTheDocument();
+  });
+});
+
+describe('AdminLoginPage sin contrato de auth', () => {
+  beforeEach(() => {
+    vi.stubEnv('VITE_ADMIN_HABILITADO', 'false');
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  it('muestra el aviso de proceso y no renderiza el formulario', () => {
+    renderizar();
+
+    expect(screen.getByText('Contenido en preparación')).toBeInTheDocument();
+    expect(screen.queryByLabelText(/Usuario o correo/)).not.toBeInTheDocument();
+    expect(screen.queryByLabelText(/^Contraseña/)).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Iniciar sesión' })).not.toBeInTheDocument();
+    expect(iniciarSesionMock).not.toHaveBeenCalled();
   });
 });
