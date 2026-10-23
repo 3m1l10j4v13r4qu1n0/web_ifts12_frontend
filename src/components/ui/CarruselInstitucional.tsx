@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Button from './Button';
+import Skeleton from './Skeleton';
 
 export interface SlideCarrusel {
   id: string;
@@ -127,11 +128,11 @@ function CarruselInstitucional({
             className="mt-10 rounded-2xl border border-slate-600 bg-white/10 p-8 backdrop-blur sm:p-12"
           >
             <span className="sr-only">Cargando novedades destacadas</span>
-            <div className="h-3 w-24 animate-pulse rounded bg-white/20" />
-            <div className="mt-4 h-6 w-11/12 animate-pulse rounded bg-white/30" />
-            <div className="mt-3 h-4 w-full animate-pulse rounded bg-white/20" />
-            <div className="mt-2 h-4 w-3/4 animate-pulse rounded bg-white/20" />
-            <div className="mt-6 h-10 w-40 animate-pulse rounded-lg bg-white/20" />
+            <Skeleton tono="oscuro" className="h-3 w-24" />
+            <Skeleton tono="oscuro" className="mt-4 h-6 w-11/12" />
+            <Skeleton tono="oscuro" className="mt-3 h-4 w-full" />
+            <Skeleton tono="oscuro" className="mt-2 h-4 w-3/4" />
+            <Skeleton tono="oscuro" className="mt-6 h-10 w-40 rounded-lg" />
           </section>
         ) : null}
       </div>

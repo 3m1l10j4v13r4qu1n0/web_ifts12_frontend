@@ -108,7 +108,7 @@ function DocentesPage() {
           <p className="mt-2 text-texto-suave">Organizado por carrera.</p>
 
           {cargando ? (
-            <AvisoCarga que="el cuerpo docente" />
+            <AvisoCarga que="el cuerpo docente" variante="docentes" />
           ) : error !== null ? (
             <AvisoError que="el cuerpo docente" mensaje={error} alReintentar={recargar} />
           ) : carreras.length > 0 ? (

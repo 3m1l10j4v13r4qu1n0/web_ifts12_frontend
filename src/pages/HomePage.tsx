@@ -110,7 +110,7 @@ function HomePage() {
           El backend ya ordena por fecha DESC; el título ya expresa "del último mes".
         */}
         {cargandoNovedades ? (
-          <AvisoCarga que="las novedades" />
+          <AvisoCarga que="las novedades" variante="noticias" />
         ) : errorNovedades !== null ? (
           <AvisoError
             que="las novedades"

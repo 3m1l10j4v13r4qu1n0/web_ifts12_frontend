@@ -37,7 +37,7 @@ function CarrerasPage() {
         */}
 
         {cargando ? (
-          <AvisoCarga que="las carreras" />
+          <AvisoCarga que="las carreras" variante="grilla" />
         ) : error !== null ? (
           <AvisoError que="las carreras" mensaje={error} alReintentar={recargar} />
         ) : carreras.length === 0 ? (
@@ -77,7 +77,7 @@ function CarrerasPage() {
           */}
 
           {cargando ? (
-            <AvisoCarga que="el resumen de carreras" />
+            <AvisoCarga que="el resumen de carreras" variante="tabla" />
           ) : error !== null ? (
             <AvisoError que="el resumen de carreras" mensaje={error} alReintentar={recargar} />
           ) : carreras.length === 0 ? (
