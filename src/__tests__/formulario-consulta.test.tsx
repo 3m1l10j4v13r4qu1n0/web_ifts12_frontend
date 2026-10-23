@@ -1,7 +1,15 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import FormularioConsulta from '../components/ui/FormularioConsulta';
 
 describe('FormularioConsulta', () => {
+  beforeEach(() => {
+    vi.stubEnv('VITE_CONTACTO_HABILITADO', 'true');
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
   it('muestra errores al enviar el formulario vacío', () => {
     render(<FormularioConsulta />);
 
@@ -82,5 +90,29 @@ describe('FormularioConsulta', () => {
     expect(screen.getByLabelText('Nombre y apellido')).toHaveValue('');
     expect(screen.getByLabelText('Asunto')).toHaveValue('');
     expect(screen.getByRole('checkbox', { name: /política de privacidad/i })).not.toBeChecked();
+  });
+});
+
+
+describe('FormularioConsulta sin contrato de contacto', () => {
+  beforeEach(() => {
+    vi.stubEnv('VITE_CONTACTO_HABILITADO', 'false');
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  it('muestra el aviso de proceso, deshabilita los campos y no confirma envío', () => {
+    render(<FormularioConsulta />);
+
+    expect(screen.getByText('Contenido en preparación')).toBeInTheDocument();
+    expect(screen.getByLabelText('Nombre y apellido')).toBeDisabled();
+    expect(screen.getByLabelText('Correo electrónico')).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Enviar consulta' })).toBeDisabled();
+    expect(screen.queryByText(/consulta registrada/i)).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Enviar consulta' }));
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   });
 });
