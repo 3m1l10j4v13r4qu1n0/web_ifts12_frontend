@@ -10,6 +10,7 @@ import CardNoticia from '../components/ui/CardNoticia';
 import type { SlideCarrusel } from '../components/ui/CarruselInstitucional';
 import CarruselInstitucional from '../components/ui/CarruselInstitucional';
 import FaqAcordeon from '../components/ui/FaqAcordeon';
+import ModuloNoDisponible from '../components/ui/ModuloNoDisponible';
 import { ENLACES } from '../constants/enlaces';
 import { mockAccesosDestacados, mockAccesosRapidos, mockFaqs } from '../constants/mock-data';
 import { useCarreras } from '../hooks/useCarreras';
@@ -33,6 +34,7 @@ function HomePage() {
     cargando: cargandoNovedades,
     error: errorNovedades,
     recargar: recargarNovedades,
+    habilitado: novedadesDisponibles,
   } = useNovedades();
 
   const noticias = useMemo(() => mapNovedadesApiANoticias(novedades), [novedades]);
@@ -69,6 +71,11 @@ function HomePage() {
         subtitulo="Formación técnica superior, pública y de calidad."
         slides={slidesNovedades}
         cargando={cargandoNovedades}
+        mensajeVacio={
+          novedadesDisponibles
+            ? undefined
+            : 'Las novedades se publican cuando el recurso esté disponible en el contrato de API.'
+        }
       />
 
       {ENLACES.moodle !== '' && (
@@ -116,6 +123,11 @@ function HomePage() {
             que="las novedades"
             mensaje={errorNovedades}
             alReintentar={recargarNovedades}
+          />
+        ) : !novedadesDisponibles ? (
+          <ModuloNoDisponible
+            que="las novedades"
+            mensaje="Las novedades se publican cuando el recurso esté disponible en el contrato de API."
           />
         ) : noticiasOrdenadas.length > 0 ? (
           <>

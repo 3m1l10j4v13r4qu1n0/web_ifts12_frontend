@@ -1,10 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import { listarNovedades } from '../api/services/novedad.service';
+import { novedadesHabilitadas } from '../constants/contrato';
 import type { NovedadApi } from '../types/api/novedad.types';
 import { mensajeDeConsulta } from '../utils/mensajeDeConsulta';
 
 /**
  * Estado de la consulta de novedades, con los tres estados que la UI tiene que manejar.
+ *
+ * `GET /api/novedades` no figura en el apispec (BE-N03), así que la consulta queda detrás de
+ * `novedadesHabilitadas()`. Con el módulo apagado no se dispara el request y el hook devuelve
+ * `cargando: false`, `error: null` y la lista vacía; la UI muestra un aviso de proceso.
  *
  * A diferencia de `useCarreras`, devuelve el **DTO crudo** y no el tipo de dominio. La
  * razón: la página de detalle necesita `contenido`, que el tipo `Noticia` (el de las
@@ -15,6 +20,8 @@ export interface EstadoNovedades {
   novedades: NovedadApi[];
   cargando: boolean;
   error: string | null;
+  /** `false` cuando el módulo está aislado por no figurar en el apispec. */
+  habilitado: boolean;
   recargar: () => void;
 }
 
@@ -24,18 +31,26 @@ export interface EstadoNovedades {
  * algo nuevo.
  */
 export function useNovedades(): EstadoNovedades {
+  const habilitado = novedadesHabilitadas();
   const consulta = useQuery({
     queryKey: ['novedades'],
     queryFn: listarNovedades,
     staleTime: 2 * 60 * 1000,
+    enabled: habilitado,
   });
 
   return {
-    novedades: consulta.data ?? [],
-    cargando: consulta.isPending,
-    error: consulta.error === null ? null : mensajeDeConsulta(consulta.error, 'las novedades'),
+    novedades: habilitado ? (consulta.data ?? []) : [],
+    cargando: habilitado && consulta.isPending,
+    error:
+      !habilitado || consulta.error === null
+        ? null
+        : mensajeDeConsulta(consulta.error, 'las novedades'),
+    habilitado,
     recargar: () => {
-      void consulta.refetch();
+      if (habilitado) {
+        void consulta.refetch();
+      }
     },
   };
 }

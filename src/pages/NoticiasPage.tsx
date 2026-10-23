@@ -8,6 +8,7 @@ import Button from '../components/ui/Button';
 import CardNoticia from '../components/ui/CardNoticia';
 import FiltroTag from '../components/ui/FiltroTag';
 import { FormField, Input, Select } from '../components/ui/FormField';
+import ModuloNoDisponible from '../components/ui/ModuloNoDisponible';
 import Paginacion from '../components/ui/Paginacion';
 import { useNovedades } from '../hooks/useNovedades';
 
@@ -42,7 +43,7 @@ function NoticiasPage() {
   const [mes, setMes] = useState('');
   const [categoria, setCategoria] = useState('');
   const [pagina, setPagina] = useState(1);
-  const { novedades, cargando, error, recargar } = useNovedades();
+  const { novedades, cargando, error, recargar, habilitado } = useNovedades();
 
   const noticias = useMemo(() => mapNovedadesApiANoticias(novedades), [novedades]);
 
@@ -106,6 +107,28 @@ function NoticiasPage() {
     (paginaActual - 1) * NOVEDADES_POR_PAGINA,
     paginaActual * NOVEDADES_POR_PAGINA,
   );
+
+  // `GET /api/novedades` no figura en el apispec: con el módulo apagado se conservan el
+  // encabezado y el breadcrumb, y se ocultan filtros, contador, grilla y paginación.
+  if (!habilitado) {
+    return (
+      <main className="min-h-screen">
+        <EncabezadoPagina
+          breadcrumb={[{ etiqueta: 'Inicio', href: '/' }, { etiqueta: 'Novedades' }]}
+          eyebrow="Novedades"
+          seccion="naranja"
+          titulo="Novedades"
+          descripcion="Gacetillas, avisos y comunicaciones del instituto, de la más reciente a la más antigua."
+        />
+        <div className="mx-auto max-w-contenido px-4 py-12">
+          <ModuloNoDisponible
+            que="las novedades"
+            mensaje="Las novedades se publican cuando el recurso esté disponible en el contrato de API."
+          />
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen">

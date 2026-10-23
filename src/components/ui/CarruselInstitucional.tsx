@@ -16,6 +16,11 @@ interface CarruselInstitucionalProps {
   etiquetaAccion?: string;
   /** `true` mientras se consultan las novedades: muestra un esqueleto en vez de dejar vacío. */
   cargando?: boolean;
+  /**
+   * Aviso de proceso para cuando el módulo está apagado por no figurar en el contrato de
+   * API. Se muestra en el lugar del set de novedades, conservando el título y la bajada.
+   */
+  mensajeVacio?: string;
 }
 
 /**
@@ -31,6 +36,7 @@ function CarruselInstitucional({
   slides,
   etiquetaAccion = 'Ver la nota',
   cargando = false,
+  mensajeVacio,
 }: CarruselInstitucionalProps) {
   const [indice, setIndice] = useState(0);
 
@@ -133,6 +139,10 @@ function CarruselInstitucional({
             <div className="mt-2 h-4 w-3/4 animate-pulse rounded bg-white/20" />
             <div className="mt-6 h-10 w-40 animate-pulse rounded-lg bg-white/20" />
           </section>
+        ) : mensajeVacio !== undefined ? (
+          <p className="mt-10 rounded-2xl border border-slate-600 bg-white/10 p-8 text-base text-slate-200 backdrop-blur sm:p-12">
+            {mensajeVacio}
+          </p>
         ) : null}
       </div>
     </section>
