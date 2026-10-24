@@ -10,7 +10,7 @@
 01_global/reglas_negocio.md                       · nivel 0 · borrador · 2026-09-18 · reglas, negocio
 01_global/vision.md                               · nivel 0 · borrador · 2026-09-18 · vision
 project_state.md                                  · nivel 0 · — · — · project, state
-02_technical/contrato_api_backend.md              · nivel 1 · vigente · 2026-10-02 · contrato, api, backend
+02_technical/contrato_api_backend.md              · nivel 1 · **superado**. · 2026-10-02 · contrato, api, backend
 02_technical/decisiones_tecnicas.md               · nivel 1 · borrador · 2026-09-18 · decisiones, tecnicas
 02_technical/estado_implementacion.md             · nivel 1 · **OBSOLETO · 2026-09-30 · estado, implementacion
 02_technical/modelo_datos_global.md               · nivel 1 · borrador · 2026-09-18 · modelo, datos, global

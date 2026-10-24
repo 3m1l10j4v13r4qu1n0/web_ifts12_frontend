@@ -8,12 +8,12 @@ tags:
 
 # Contrato de API del backend
 
-> Documento de Capa 1 — Especificación. Registra el contrato técnico derivado del README de
-> instalación del repositorio `backend_ifts12` (01/10/2026) y de la **auditoría del código
-> fuente** de ese repositorio (02/10/2026).
+> Documento de Capa 1 — Especificación.  
+> **Superado por:** `inbox/apispec_1.json` (Swagger 2.0, API institucional IFTS N.º 12, v1.0.0, recibido 22/10/2026).  
+> Ver auditoría: `docs/06_audits/audit_2026-10-22-backend.md`.  
+> Este documento queda como antecedente histórico.
 
-Fecha: 2026-10-02 · Estado: vigente para `GET /carreras` y `GET /novedades`; el resto del mapa
-sigue bloqueado por ausencia de endpoints.
+Fecha: 2026-10-02 · Estado: **superado**. Los módulos fuera del apispec (`/api/novedades`, `/api/auth/login`, `/api/contacto`) quedan **aislados por bandera** en el frontend hasta que Backend los publique en el contrato vigente.
 
 ## Resumen
 
