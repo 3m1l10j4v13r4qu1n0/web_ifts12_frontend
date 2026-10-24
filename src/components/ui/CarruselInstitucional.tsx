@@ -54,7 +54,9 @@ function CarruselInstitucional({
     >
       <div className="mx-auto flex min-h-[75vh] max-w-contenido flex-col justify-center px-4 py-20">
         <div className="max-w-3xl">
-          <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">{titulo}</h1>
+          <h1 className="text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
+            {titulo}
+          </h1>
           {subtitulo !== undefined && <p className="mt-3 text-lg text-slate-300">{subtitulo}</p>}
         </div>
 

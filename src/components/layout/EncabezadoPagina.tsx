@@ -33,7 +33,9 @@ function EncabezadoPagina({
           </div>
         )}
         {eyebrow !== undefined && <Eyebrow seccion={seccion}>{eyebrow}</Eyebrow>}
-        <h1 className="mt-3 text-4xl font-semibold leading-tight text-texto">{titulo}</h1>
+        <h1 className="mt-3 text-3xl font-semibold leading-tight text-texto md:text-4xl lg:text-5xl">
+          {titulo}
+        </h1>
         {descripcion !== undefined && (
           <p className="mt-3 max-w-2xl text-lg text-texto-suave">{descripcion}</p>
         )}
