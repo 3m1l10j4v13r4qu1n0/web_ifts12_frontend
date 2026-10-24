@@ -67,6 +67,13 @@ wireframes HTML y el estado real del código (navegación, enlaces y estilos).
   HTML (`documentacion/wireframes/`), `src/constants/navegacion.ts`,
   `src/constants/enlaces.ts`, `src/styles/index.css`.
 
+## Breakpoints
+
+- Tablet: desde 768px (`--breakpoint-sm: 48rem`).
+- Escritorio: desde 1024px (`--breakpoint-md: 64rem`).
+- Se aplicaron en Tailwind v4 (`src/styles/index.css`) y en `NavMenu`, `MobileMenu`, `Header`.
+- Móvil: < 768px.
+
 ## Historial
 
 - 2026-10-09: auditoría del Figma viejo y plan del v2 (fuentes a considerar).

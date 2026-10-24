@@ -21,7 +21,7 @@ function Header() {
       <div className="bg-slate-900">
         <div className="mx-auto flex max-w-contenido flex-wrap items-center gap-x-4 gap-y-1 px-4 py-1.5">
           <p className="text-xs text-slate-300">{UBICACION_HEADER}</p>
-          <ul className="flex flex-wrap items-center gap-x-3 gap-y-1 sm:ml-auto">
+          <ul className="flex flex-wrap items-center gap-x-3 gap-y-1 md:ml-auto">
             {ACCESOS_EXTERNOS.map((acceso) =>
               acceso.href === '' ? (
                 <li
@@ -57,7 +57,7 @@ function Header() {
           <img src="/apple-touch-icon.png" alt="IFTS N.º 12" className="h-10 w-auto" />
         </Link>
 
-        <div className="ml-auto hidden w-full max-w-xs sm:block lg:w-72">
+        <div className="ml-auto hidden w-full max-w-xs md:block md:w-72">
           <BuscadorGlobal />
         </div>
 
@@ -66,7 +66,7 @@ function Header() {
           aria-expanded={menuAbierto}
           aria-controls="menu-principal-mobile"
           onClick={() => setMenuAbierto(true)}
-          className="ml-auto inline-flex h-11 w-11 items-center justify-center rounded-md text-texto transition-colors hover:bg-fondo lg:hidden"
+          className="ml-auto inline-flex h-11 w-11 items-center justify-center rounded-md text-texto transition-colors hover:bg-fondo md:hidden"
         >
           <span className="sr-only">Abrir menú</span>
           <Menu aria-hidden="true" className="h-6 w-6" />
@@ -75,7 +75,7 @@ function Header() {
 
       <nav
         aria-label="Navegación principal"
-        className="hidden border-t border-borde-suave lg:block"
+        className="hidden border-t border-borde-suave md:block"
       >
         <div className="mx-auto max-w-contenido px-4">
           <NavMenu items={MENU_PRINCIPAL} />

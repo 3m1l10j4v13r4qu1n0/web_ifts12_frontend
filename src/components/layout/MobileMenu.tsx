@@ -44,7 +44,7 @@ function MobileMenu({ abierto, onCerrar }: MobileMenuProps) {
   // fixed/absolute y encerraba al overlay dentro del header (solo se veía ahí).
   // Con el portal, `fixed inset-0` se resuelve contra el viewport.
   return createPortal(
-    <div className="fixed inset-0 z-50 lg:hidden">
+    <div className="fixed inset-0 z-50 md:hidden">
       <button
         type="button"
         aria-label="Cerrar menú"
