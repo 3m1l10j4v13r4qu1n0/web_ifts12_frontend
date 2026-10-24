@@ -6,15 +6,14 @@ Reemplaza el espacio actual alojado en Moodle por un sitio web institucional acc
 claro y fácilmente administrable por el propio instituto. El backend se integra luego
 con APIs y la web se despliega como build estático en un VPS independiente del Moodle.
 
-> **Estado:** completadas las 10 fases (`develop` cierra la Fase 10 con `v1.11.0`): las 5
-> fases iniciales del plan (`v1.0.0`…`v1.4.0`), la Fase 6 de brechas de auditoría (`v1.5.0`),
-> el refactor del Mapa del Sitio V2 (menú de 9 ítems + buscador global, `v1.6.0`), la
-> infraestructura y la adopción del sistema documental **logsayer** de 5 capas, el cierre del
-> ticket 0000010 (`v1.10.0`), la Fase 9 de **consumo real de API** de carreras y novedades y la
-> Fase 10 de **alineación del frontend a los exports Desktop 1440** del avance de diseño
-> (T1–T16). El sitio tiene **16 rutas** (14 del sitio + 2 de administración solo-UI), consumo
-> real de API para carreras/novedades y **206 tests** en verde. El resto del sitio sigue con
-> datos simulados. La evidencia de navegación está en `documentacion/screenshots/`.
+> **Estado:** completadas las 10 fases (`develop` cierra la Fase 10 con `v1.11.0`) y el
+> aislamiento de módulos fuera del apispec (23/10/2026): novedades, autenticación y contacto
+> quedan **deshabilitados por bandera** hasta que figuren en el contrato vigente
+> (`inbox/apispec_1.json`). Se actualizó el header (sin menú de cuenta), se agregaron
+> breakpoints 768/1024, mejoras de accesibilidad/táctiles, focus trap en menú móvil y FAQ en
+> el footer. El sitio tiene **32 archivos de test**, **244 tests** en verde, lint y build OK.
+> Carreras se consume en modo real; el resto del sitio sigue con datos simulados. La evidencia
+> de navegación está en `documentacion/screenshots/`.
 
 ## Tecnología
 
@@ -107,10 +106,11 @@ comentados están en el [instructivo de mockups](documentacion/mockups/README.md
 
 ## Estado del frontend
 
-- **Consumo real de API** para carreras y novedades (`GET /api/carreras`, `GET /api/novedades`):
-  listados, fichas, notas completas, buscador global y secciones de la Home, con estados de
-  carga, error y vacío. El resto del sitio sigue con datos simulados en
-  `constants/mock-data.ts`.
+- **Consumo real de API** para carreras (`GET /api/carreras`). Novedades (`GET /api/novedades`),
+  autenticación (`POST /api/auth/login`) y contacto (`POST /api/contacto`) **no figuran en
+  el apispec**: se aíslan por banderas (`VITE_NOVEDADES_HABILITADAS`, `VITE_ADMIN_HABILITADO`,
+  `VITE_CONTACTO_HABILITADO`) y muestran avisos de proceso. El resto del sitio sigue con datos
+  simulados en `constants/mock-data.ts`.
 - URLs de Moodle e inscripción como placeholders en `constants/enlaces.ts`; los enlaces externos
   se muestran solo cuando existe URL oficial.
 - Endpoints documentados por historia de usuario (`docs/04_user_stories/HU-XX/hu_xx_api.md`,
