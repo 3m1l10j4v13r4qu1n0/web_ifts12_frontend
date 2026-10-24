@@ -233,14 +233,14 @@ function FormularioConsulta({
           <div className="flex flex-wrap items-center gap-3">
             <button
               type="submit"
-              className="inline-flex items-center justify-center rounded-lg bg-acento-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-acento-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-acento-700"
+              className="inline-flex min-h-[44px] items-center justify-center rounded-lg bg-acento-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-acento-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-acento-700"
             >
               Enviar consulta
             </button>
             <button
               type="button"
               onClick={limpiar}
-              className="inline-flex items-center justify-center rounded-lg border border-borde bg-white px-5 py-2.5 text-sm font-medium text-texto transition-colors hover:border-acento-600 hover:text-acento-700"
+              className="inline-flex min-h-[44px] items-center justify-center rounded-lg border border-borde bg-white px-5 py-2.5 text-sm font-medium text-texto transition-colors hover:border-acento-600 hover:text-acento-700"
             >
               Limpiar
             </button>

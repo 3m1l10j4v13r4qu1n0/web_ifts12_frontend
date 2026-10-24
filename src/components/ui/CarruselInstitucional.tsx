@@ -1,3 +1,4 @@
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 import Button from './Button';
 
@@ -87,18 +88,18 @@ function CarruselInstitucional({
                   aria-label="Novedad anterior"
                   disabled={esAnterior}
                   onClick={() => setIndice(indiceActual - 1)}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-500 text-white transition-colors hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="inline-flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-slate-500 text-white transition-colors hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  ‹
+                  <ChevronLeft aria-hidden="true" className="h-5 w-5" />
                 </button>
                 <button
                   type="button"
                   aria-label="Novedad siguiente"
                   disabled={esSiguiente}
                   onClick={() => setIndice(indiceActual + 1)}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-500 text-white transition-colors hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="inline-flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-slate-500 text-white transition-colors hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  ›
+                  <ChevronRight aria-hidden="true" className="h-5 w-5" />
                 </button>
               </div>
 
@@ -113,8 +114,8 @@ function CarruselInstitucional({
                       aria-current={activa ? 'true' : undefined}
                       aria-label={`Ir a la novedad ${posicion + 1} de ${slides.length}`}
                       onClick={() => setIndice(posicion)}
-                      className={`h-2.5 rounded-full transition-all ${
-                        activa ? 'w-7 bg-white' : 'w-2.5 bg-slate-500 hover:bg-slate-400'
+                      className={`h-11 w-11 min-h-[44px] min-w-[44px] flex items-center justify-center ${
+                        activa ? '' : ''
                       }`}
                     />
                   );
