@@ -8,7 +8,7 @@ interface AccesosRapidosProps {
 
 function AccesosRapidos({ items }: AccesosRapidosProps) {
   return (
-    <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <ul className="grid grid-cols-1 gap-4 min-[360px]:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
       {items.map((item) => {
         if (item.href === '') {
           return (
