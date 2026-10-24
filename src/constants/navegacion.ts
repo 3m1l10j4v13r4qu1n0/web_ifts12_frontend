@@ -43,6 +43,7 @@ export const NAV_FOOTER_MAPA: readonly ItemNavegacion[] = [
   { etiqueta: 'Estudiantes', href: '/estudiantes' },
   { etiqueta: 'Institucional', href: '/institucional' },
   { etiqueta: 'Novedades', href: '/noticias' },
+  { etiqueta: 'Preguntas frecuentes', href: '/faq' },
   { etiqueta: 'Contacto', href: '/contacto' },
 ];
 
