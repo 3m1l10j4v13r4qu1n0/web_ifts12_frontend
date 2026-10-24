@@ -1,3 +1,4 @@
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { AccesoRapido } from '../../types/domain/sitio.types';
 
@@ -26,8 +27,12 @@ function AccesosDestacados({ items }: AccesosDestacadosProps) {
           <>
             <h3 className="text-base font-semibold text-white">{item.titulo}</h3>
             <p className="mt-1 text-sm text-acento-100">{item.descripcion}</p>
-            <span aria-hidden="true" className="mt-3 text-sm font-medium text-acento-100">
-              Ver más →
+            <span
+              aria-hidden="true"
+              className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-acento-100"
+            >
+              Ver más
+              <ArrowRight className="h-4 w-4" />
             </span>
           </>
         );

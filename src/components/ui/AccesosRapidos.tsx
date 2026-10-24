@@ -1,3 +1,4 @@
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { AccesoRapido } from '../../types/domain/sitio.types';
 
@@ -36,8 +37,12 @@ function AccesosRapidos({ items }: AccesosRapidosProps) {
           <li key={item.id}>
             <Link to={item.href} className={clasesEnlace}>
               {contenido}
-              <span aria-hidden="true" className="mt-3 text-sm font-medium text-acento-700">
-                Ver más →
+              <span
+                aria-hidden="true"
+                className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-acento-700"
+              >
+                Ver más
+                <ArrowRight className="h-4 w-4" />
               </span>
             </Link>
           </li>
@@ -45,8 +50,12 @@ function AccesosRapidos({ items }: AccesosRapidosProps) {
           <li key={item.id}>
             <a href={item.href} className={clasesEnlace} rel="noopener noreferrer">
               {contenido}
-              <span aria-hidden="true" className="mt-3 text-sm font-medium text-acento-700">
-                Ver más →
+              <span
+                aria-hidden="true"
+                className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-acento-700"
+              >
+                Ver más
+                <ArrowRight className="h-4 w-4" />
               </span>
             </a>
           </li>

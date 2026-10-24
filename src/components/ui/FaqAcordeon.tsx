@@ -1,3 +1,4 @@
+import { ChevronDown } from 'lucide-react';
 import { useId, useState } from 'react';
 import type { FaqItem } from '../../types/domain/sitio.types';
 
@@ -56,9 +57,10 @@ function FaqAcordeon({ items, mostrarCategoria = true }: FaqAcordeonProps) {
                   )}
                   <span className="font-medium text-texto">{item.pregunta}</span>
                 </span>
-                <span aria-hidden="true" className="text-texto-suave">
-                  {abierto ? '−' : '+'}
-                </span>
+                <ChevronDown
+                  aria-hidden="true"
+                  className={`h-5 w-5 text-texto-suave transition-transform ${abierto ? 'rotate-180' : ''}`}
+                />
               </button>
             </h3>
             {abierto && (
