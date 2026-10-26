@@ -93,7 +93,6 @@ describe('FormularioConsulta', () => {
   });
 });
 
-
 describe('FormularioConsulta sin contrato de contacto', () => {
   beforeEach(() => {
     vi.stubEnv('VITE_CONTACTO_HABILITADO', 'false');
