@@ -74,7 +74,7 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 ## Qué está construido
 
 - SPA React 19 + Vite + TypeScript strict + Tailwind v4 con `npm run lint · build · test` en verde
-  (**266 tests** en 34 archivos, verificado 26/10/2026; antes 264).
+  (**266 tests** en 34 archivos, verificado 26/10/2026; antes 244).
 - Home navegable según el **Mapa del Sitio V2** (9 ítems de menú + buscador global en el header),
   portada con carrusel institucional, footer V2, secciones de Carreras, Ingresantes,
   Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y Contacto, más rutas de detalle
