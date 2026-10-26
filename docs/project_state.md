@@ -74,7 +74,7 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 ## Qué está construido
 
 - SPA React 19 + Vite + TypeScript strict + Tailwind v4 con `npm run lint · build · test` en verde
-  (**244 tests** en 32 archivos, verificado 23/10/2026; antes 243).
+  (**266 tests** en 34 archivos, verificado 26/10/2026; antes 244).
 - Home navegable según el **Mapa del Sitio V2** (9 ítems de menú + buscador global en el header),
   portada con carrusel institucional, footer V2, secciones de Carreras, Ingresantes,
   Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y Contacto, más rutas de detalle
@@ -105,6 +105,13 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 - **Aislamiento de contacto (23/10/2026):** `FormularioConsulta` queda deshabilitado con
   `fieldset disabled` y aviso cuando `contactoHabilitado()` es false; no se simula un envío
   exitoso. Aplica a Footer, Tutorías y la página Contacto. Rama `fix/aislamiento-contacto`.
+- **Correcciones UX/UI del plan 22/10 (cerradas 26/10/2026):** breakpoints 768/1024, áreas
+  táctiles de 44×44, grilla móvil de 2 columnas, H1 48/32, focus trap del menú móvil y
+  "Preguntas frecuentes" en el footer. El carrusel suma contador visible «Slide N de M»,
+  contrato de imagen (`src`, `alt`, recorte y punto focal por breakpoint) y pausa opt-in;
+  la Home sigue **sin autoplay**. Pendiente de UX/UI: assets y valores finales de recorte y
+  punto focal (`documentacion/driveFrontend/02_ux_ui/pendientes_carrusel_assets_recorte_punto_focal.md`).
+  Último PR del plan: #51.
 - **Login de administración con consumo real (20/10/2026, rama `feature/login-admin-panel`,
   sin push):** `/admin/login` alineada al frame **A1 Desktop 1440** del Figma v2, con
   `AdminLayout` propio (header oscuro `#1F2328`, "Volver al sitio público", pie admin; las
@@ -132,17 +139,21 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 - **Correcciones de UX/UI y Frontend** especificadas en Capa 1
   (`docs/01_global/correcciones_ux_ui_frontend.md`, 08/10/2026): 9 bloqueantes (B1–B9), 12
   importantes (I1–I12) y 7 mejoras (M1–M7) de la auditoría UX/UI del 07/10, cada una con criterio
-  de aceptación. Pendiente de priorización/implementación.
+  de aceptación. Las tareas de código derivadas se ejecutaron en el plan del 22/10/2026 (ver
+  «Correcciones UX/UI del plan 22/10»). Queda pendiente la definición de assets del carrusel por
+  UX/UI.
 - **Plan de correcciones UX/UI y Frontend (faseado):** Capa 1 define el **orden y fases** para
   abordar esos hallazgos en `docs/01_global/plan_correcciones_uxui_frontend.md` (08/10/2026),
   complementando los criterios por corrección de
-  `docs/01_global/correcciones_ux_ui_frontend.md`.
+  `docs/01_global/correcciones_ux_ui_frontend.md`. El plan de ejecución del 22/10/2026
+  (`inbox/plan_aislamiento_apispec_2026-10-22.md`, no versionado) cerró sus 13 tareas de código;
+  la única deuda abierta es la definición visual de assets del carrusel.
 - **Revisión del consumo de API (técnica):** Capa 2 registra el único punto pendiente
   (guard defensivo de `contenido` en `NotaCompletaPage`) en
   `docs/02_technical/revision_consumo_api.md` (08/10/2026), sujeto a validación con
   Backend/Contenidos.
-- **Rediseño alineado al Figma v2 «IFTS 12 v2 - alineado a contratos» (en curso, rama
-  `feature/figma-v2-contrato-visual`):** el Figma nuevo quedó registrado como contrato visual
+- **Rediseño alineado al Figma v2 «IFTS 12 v2 - alineado a contratos» (base cerrada, rama
+  histórica `feature/figma-v2-contrato-visual`):** el Figma nuevo quedó registrado como contrato visual
   vigente en Capa 1 (`docs/01_global/figma_v2_contrato_visual.md`, da de baja al Figma anterior)
   y las dos auditorías asociadas viven en Capa 4 (`docs/06_audits/audit_2026-10-08-ux-ui-frontend.md`
   y `audit_2026-10-09-figma.md`). Ejecutadas las **Fases 2–5** del plan:
@@ -160,9 +171,10 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
     (`/admin` y `/admin/login` con acciones deshabilitadas y PENDIENTE), 404 con `Estado`, y se
     eliminó el bloque "Comunidad de alumnos" (B3/I12: `Comunidades.tsx`, `mockComunidades`, tipo y
     test). Pantallas alineadas a tokens y `EncabezadoPagina` en todo el sitio.
-  - **Pendiente:** Fase 6+ (responsive e interactivos finos) y tokens de color definitivos de
-    UX/UI — el `get_figma_data` de Figma está en rate limit (~4 días), se trabaja con la
-    referencia FLACSO + GLOBAL_VARS ya obtenidos.
+  - **Continuación:** las fases responsive e interactivos finos se completaron en el plan del
+    22/10/2026 (breakpoints 768/1024, táctil 44×44, grilla móvil, H1 48/32). Sigue pendiente la
+    paleta definitiva de UX/UI: se conserva `acento-600` (`#2563EB`) y el `acento-700` del Figma
+    queda sin adoptar.
 - **Alineación al diseño del avance (cerrada, 19/10/2026):** T1–T16 mergeadas a `develop`;
   Fase 10 cerrada con tag `v1.11.0`.
   - **T1 (header):** top bar con la ubicación `Misiones 26, C1083 ABB, CABA · Atención
@@ -416,6 +428,10 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 
 ## Decisiones activas (últimas 3-5)
 
+- **Carrusel sin autoplay con pausa opt-in (26/10/2026):** la Home no avanza sola; el control
+  Pausar/Reanudar aparece solo si se pasa `autoAvanceMs`. El avance respeta
+  `prefers-reduced-motion`. Los valores finales de recorte y punto focal quedan a cargo de UX/UI
+  (`documentacion/driveFrontend/02_ux_ui/pendientes_carrusel_assets_recorte_punto_focal.md`).
 - **Acceso al panel por link discreto en la top bar (20/10/2026):** "Administración" como texto
   junto a los accesos externos del header, sin ícono de persona (I12); checkbox "Mostrar
   contraseña" en el login (como el Figma A1) y se eliminó "Mantener sesión iniciada". La
@@ -496,7 +512,7 @@ Detalle con dueño y qué se necesita de vuelta en
 
 ## Verificación
 
-- Frontend: `npm run lint` · `npm run build` · `npm run test` (226 tests).
+- Frontend: `npm run lint` · `npm run build` · `npm run test` (266 tests en 34 archivos).
 - Sistema documental: `logsayer check` · `logsayer process check` · `logsayer memory index`.
 - Consumo verificado **en navegador** (Firefox, `localhost:5173`) contra un servidor que replica
   la serialización de `app.py:62-92` leyendo de `instance/ifts12.db`: listado, detalle, buscador,
