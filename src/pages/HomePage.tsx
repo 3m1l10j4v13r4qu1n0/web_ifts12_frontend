@@ -57,6 +57,10 @@ function HomePage() {
       resumen: noticia.resumen,
       fecha: noticia.fecha,
       enlace: `/noticias/${noticia.id}`,
+      imagen:
+        noticia.imagenUrl === undefined
+          ? undefined
+          : { src: noticia.imagenUrl, alt: noticia.titulo },
     }));
   }, [noticiasOrdenadas]);
 
