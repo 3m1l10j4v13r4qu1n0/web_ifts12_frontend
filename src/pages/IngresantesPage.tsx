@@ -96,7 +96,7 @@ function IngresantesPage() {
           </div>
 
           {cargando ? (
-            <AvisoCarga que="las carreras" />
+            <AvisoCarga que="las carreras" variante="grilla" />
           ) : error !== null ? (
             <AvisoError que="las carreras" mensaje={error} alReintentar={recargar} />
           ) : carreras.length > 0 ? (

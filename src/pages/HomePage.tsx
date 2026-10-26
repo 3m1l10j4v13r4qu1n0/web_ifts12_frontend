@@ -117,7 +117,7 @@ function HomePage() {
           El backend ya ordena por fecha DESC; el título ya expresa "del último mes".
         */}
         {cargandoNovedades ? (
-          <AvisoCarga que="las novedades" />
+          <AvisoCarga que="las novedades" variante="noticias" />
         ) : errorNovedades !== null ? (
           <AvisoError
             que="las novedades"
@@ -175,7 +175,7 @@ function HomePage() {
             "Todas en turno exclusivamente nocturno. Modalidad y horarios por carrera: PENDIENTE."
           */}
           {cargandoCarreras ? (
-            <AvisoCarga que="las carreras" />
+            <AvisoCarga que="las carreras" variante="grilla" />
           ) : errorCarreras !== null ? (
             <AvisoError
               que="las carreras"

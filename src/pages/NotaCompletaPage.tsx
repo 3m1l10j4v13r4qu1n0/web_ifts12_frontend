@@ -67,7 +67,7 @@ function NotaCompletaPage() {
           </div>
         </div>
         <div className="mx-auto max-w-contenido px-4 py-14">
-          <AvisoCarga que="la novedad" />
+          <AvisoCarga que="la novedad" variante="nota" />
         </div>
       </main>
     );

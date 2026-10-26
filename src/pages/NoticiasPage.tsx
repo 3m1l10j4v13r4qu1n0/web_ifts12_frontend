@@ -210,7 +210,7 @@ function NoticiasPage() {
         </fieldset>
 
         {cargando ? (
-          <AvisoCarga que="las novedades" />
+          <AvisoCarga que="las novedades" variante="noticias" />
         ) : error !== null ? (
           <AvisoError que="las novedades" mensaje={error} alReintentar={recargar} />
         ) : (
