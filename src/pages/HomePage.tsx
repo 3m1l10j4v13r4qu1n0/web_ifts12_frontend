@@ -175,7 +175,7 @@ function HomePage() {
             "Todas en turno exclusivamente nocturno. Modalidad y horarios por carrera: PENDIENTE."
           */}
           {cargandoCarreras ? (
-            <AvisoCarga que="las carreras" />
+            <AvisoCarga que="las carreras" variante="grilla" />
           ) : errorCarreras !== null ? (
             <AvisoError
               que="las carreras"
