@@ -1,7 +1,40 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useState } from 'react';
+import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { cn } from '../../utils/cn';
 import Button from './Button';
 import Skeleton from './Skeleton';
+
+/** Proporciones de recorte admitidas por el carrusel. */
+export type RecorteCarrusel = '16/9' | '4/3' | '1/1' | '21/9';
+
+/** Puntos focales admitidos, equivalentes a `object-position`. */
+export type PuntoFocalCarrusel = 'centro' | 'arriba' | 'abajo' | 'izquierda' | 'derecha';
+
+/**
+ * Contrato de imagen de un slide.
+ *
+ * `alt` es obligatorio para que quien carga el contenido decida si la imagen aporta
+ * información (texto descriptivo) o es decorativa (`''`). `recorte` y `puntoFocal` aceptan
+ * un valor por breakpoint: `base` (móvil), `tablet` (desde 768 px) y `escritorio` (desde
+ * 1024 px). Sin valores, se usa 16/9 centrado.
+ *
+ * Los recortes y puntos focales definitivos dependen de los assets de UX/UI; este contrato
+ * permite cargarlos sin volver a tocar el componente.
+ */
+export interface ImagenCarrusel {
+  src: string;
+  alt: string;
+  recorte?: {
+    base?: RecorteCarrusel;
+    tablet?: RecorteCarrusel;
+    escritorio?: RecorteCarrusel;
+  };
+  puntoFocal?: {
+    base?: PuntoFocalCarrusel;
+    tablet?: PuntoFocalCarrusel;
+    escritorio?: PuntoFocalCarrusel;
+  };
+}
 
 export interface SlideCarrusel {
   id: string;
@@ -9,6 +42,77 @@ export interface SlideCarrusel {
   resumen: string;
   fecha?: string;
   enlace?: string;
+  imagen?: ImagenCarrusel;
+}
+
+const CLASES_RECORTE: Record<RecorteCarrusel, string> = {
+  '16/9': 'aspect-video',
+  '4/3': 'aspect-[4/3]',
+  '1/1': 'aspect-square',
+  '21/9': 'aspect-[21/9]',
+};
+
+const CLASES_RECORTE_TABLET: Record<RecorteCarrusel, string> = {
+  '16/9': 'sm:aspect-video',
+  '4/3': 'sm:aspect-[4/3]',
+  '1/1': 'sm:aspect-square',
+  '21/9': 'sm:aspect-[21/9]',
+};
+
+const CLASES_RECORTE_ESCRITORIO: Record<RecorteCarrusel, string> = {
+  '16/9': 'md:aspect-video',
+  '4/3': 'md:aspect-[4/3]',
+  '1/1': 'md:aspect-square',
+  '21/9': 'md:aspect-[21/9]',
+};
+
+const CLASES_PUNTO_FOCAL: Record<PuntoFocalCarrusel, string> = {
+  centro: 'object-center',
+  arriba: 'object-top',
+  abajo: 'object-bottom',
+  izquierda: 'object-left',
+  derecha: 'object-right',
+};
+
+const CLASES_PUNTO_FOCAL_TABLET: Record<PuntoFocalCarrusel, string> = {
+  centro: 'sm:object-center',
+  arriba: 'sm:object-top',
+  abajo: 'sm:object-bottom',
+  izquierda: 'sm:object-left',
+  derecha: 'sm:object-right',
+};
+
+const CLASES_PUNTO_FOCAL_ESCRITORIO: Record<PuntoFocalCarrusel, string> = {
+  centro: 'md:object-center',
+  arriba: 'md:object-top',
+  abajo: 'md:object-bottom',
+  izquierda: 'md:object-left',
+  derecha: 'md:object-right',
+};
+
+function clasesImagen(imagen: ImagenCarrusel): string {
+  const recorteBase = imagen.recorte?.base ?? '16/9';
+  const puntoFocalBase = imagen.puntoFocal?.base ?? 'centro';
+
+  return cn(
+    'w-full rounded-xl object-cover',
+    CLASES_RECORTE[recorteBase],
+    CLASES_PUNTO_FOCAL[puntoFocalBase],
+    imagen.recorte?.tablet !== undefined && CLASES_RECORTE_TABLET[imagen.recorte.tablet],
+    imagen.recorte?.escritorio !== undefined &&
+      CLASES_RECORTE_ESCRITORIO[imagen.recorte.escritorio],
+    imagen.puntoFocal?.tablet !== undefined && CLASES_PUNTO_FOCAL_TABLET[imagen.puntoFocal.tablet],
+    imagen.puntoFocal?.escritorio !== undefined &&
+      CLASES_PUNTO_FOCAL_ESCRITORIO[imagen.puntoFocal.escritorio],
+  );
+}
+
+function prefiereReducirMovimiento(): boolean {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+    return false;
+  }
+
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
 interface CarruselInstitucionalProps {
@@ -23,6 +127,12 @@ interface CarruselInstitucionalProps {
    * API. Se muestra en el lugar del set de novedades, conservando el título y la bajada.
    */
   mensajeVacio?: string;
+  /**
+   * Rotación automática opt-in. Sin valor (default) el carrusel no avanza solo: la decisión
+   * vigente es mantenerlo sin autoplay. Cuando se define, aparece el control Pausar/Reanudar
+   * y el avance se detiene si la persona prefiere movimiento reducido.
+   */
+  autoAvanceMs?: number;
 }
 
 /**
@@ -39,14 +149,29 @@ function CarruselInstitucional({
   etiquetaAccion = 'Ver la nota',
   cargando = false,
   mensajeVacio,
+  autoAvanceMs,
 }: CarruselInstitucionalProps) {
   const [indice, setIndice] = useState(0);
+  const [pausado, setPausado] = useState(prefiereReducirMovimiento);
 
   const haySlides = slides.length > 0;
   const indiceActual = haySlides ? (indice + slides.length) % slides.length : 0;
   const slide = haySlides ? slides[indiceActual] : undefined;
   const esAnterior = !haySlides || indiceActual === 0;
   const esSiguiente = !haySlides || indiceActual === slides.length - 1;
+  const autoAvanceActivo = autoAvanceMs !== undefined && autoAvanceMs > 0 && slides.length > 1;
+
+  useEffect(() => {
+    if (autoAvanceMs === undefined || autoAvanceMs <= 0 || pausado || slides.length <= 1) {
+      return;
+    }
+
+    const intervalo = window.setInterval(() => {
+      setIndice((actual) => (actual + 1) % slides.length);
+    }, autoAvanceMs);
+
+    return () => window.clearInterval(intervalo);
+  }, [autoAvanceMs, pausado, slides.length]);
 
   return (
     <section
@@ -69,6 +194,13 @@ function CarruselInstitucional({
               className="mt-10 rounded-2xl border border-slate-600 bg-white/10 p-8 backdrop-blur sm:p-12"
             >
               <div aria-live="polite">
+                {slide.imagen !== undefined && (
+                  <img
+                    src={slide.imagen.src}
+                    alt={slide.imagen.alt}
+                    className={cn('mb-6', clasesImagen(slide.imagen))}
+                  />
+                )}
                 <p className="text-sm font-medium uppercase tracking-wide text-acento-200">
                   {slide.fecha !== undefined && slide.fecha !== '' ? slide.fecha : 'Novedad'}
                 </p>
@@ -85,7 +217,25 @@ function CarruselInstitucional({
             </section>
 
             <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                {autoAvanceActivo && (
+                  <button
+                    type="button"
+                    aria-label={
+                      pausado ? 'Reanudar rotación automática' : 'Pausar rotación automática'
+                    }
+                    aria-pressed={pausado}
+                    onClick={() => setPausado((actual) => !actual)}
+                    className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-slate-500 px-3 text-sm font-medium text-white transition-colors hover:bg-white/10"
+                  >
+                    {pausado ? (
+                      <Play aria-hidden="true" className="h-4 w-4" />
+                    ) : (
+                      <Pause aria-hidden="true" className="h-4 w-4" />
+                    )}
+                    {pausado ? 'Reanudar' : 'Pausar'}
+                  </button>
+                )}
                 <button
                   type="button"
                   aria-label="Novedad anterior"
@@ -125,8 +275,8 @@ function CarruselInstitucional({
                 })}
               </fieldset>
 
-              <p className="text-sm text-slate-300" aria-hidden="true">
-                {indiceActual + 1} / {slides.length}
+              <p className="text-sm text-slate-300">
+                Slide {indiceActual + 1} de {slides.length}
               </p>
             </div>
           </>
