@@ -6,14 +6,14 @@ import CardCarrera from '../components/ui/CardCarrera';
 import { useCarreras } from '../hooks/useCarreras';
 
 function CarrerasPage() {
-  const { carreras, cargando, error, recargar } = useCarreras();
+  const { carreras, total, cargando, error, recargar } = useCarreras();
 
   // Bajada del diseño (`02 · Carreras`). El número de carreras sale del backend, no se
   // fija en el copy: el export muestra 5, pero la cantidad real la manda la API.
   const descripcion =
-    !cargando && error === null && carreras.length > 0
-      ? `Oferta académica del IFTS N.º 12: ${carreras.length} ${
-          carreras.length === 1 ? 'carrera' : 'carreras'
+    !cargando && error === null && total > 0
+      ? `Oferta académica del IFTS N.º 12: ${total} ${
+          total === 1 ? 'carrera' : 'carreras'
         } en turno exclusivamente nocturno. Ingresá a cada carrera para ver plan de estudios, correlatividades, programas, resoluciones y cuerpo docente.`
       : undefined;
 
@@ -62,8 +62,8 @@ function CarrerasPage() {
 
       {/*
         Resumen por carrera (diseño Desktop 1440). El turno es siempre nocturno (RN-07). La
-        modalidad sale del dato real del backend; los horarios no existen todavía en el DTO
-        (hallazgo BE-E07/DB-14), así que se marcan PENDIENTE sin inventar.
+        modalidad no existe en el apispec y los horarios tampoco, así que se marcan PENDIENTE
+        con mensaje de proceso, sin inventar.
       */}
       <section aria-labelledby="titulo-turnos" className="border-y border-borde-suave bg-fondo">
         <div className="mx-auto max-w-contenido px-4 py-14">
@@ -115,7 +115,7 @@ function CarrerasPage() {
                       </th>
                       <td className="px-4 py-3 align-top text-texto-suave">Nocturno</td>
                       <td className="px-4 py-3 align-top text-texto-suave">
-                        {carrera.modalidad !== '' ? carrera.modalidad : 'PENDIENTE'}
+                        PENDIENTE
                       </td>
                       <td className="px-4 py-3 align-top text-texto-suave">PENDIENTE</td>
                       <td className="px-4 py-3 align-top">

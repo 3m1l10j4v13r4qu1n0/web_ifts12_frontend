@@ -1,23 +1,22 @@
 import { screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { listarCarreras } from '../api/services/carrera.service';
+import { listarTodasLasCarreras } from '../api/services/carrera.service';
 import { listarNovedades } from '../api/services/novedad.service';
 import Header from '../components/layout/Header';
 import { ACCESOS_EXTERNOS, MENU_PRINCIPAL, UBICACION_HEADER } from '../constants/navegacion';
-import { CARRERAS_API_FIJA, NOVEDADES_API_FIJA, renderConRouter } from '../test-utils';
-import type { CarreraApi } from '../types/api/carrera.types';
+import { PAGINA_CARRERAS_API_FIJA, NOVEDADES_API_FIJA, renderConRouter } from '../test-utils';
 import type { NovedadApi } from '../types/api/novedad.types';
 
 vi.mock('../api/services/carrera.service');
 vi.mock('../api/services/novedad.service');
 
-const listarCarrerasMock = vi.mocked(listarCarreras);
+const listarTodasLasCarrerasMock = vi.mocked(listarTodasLasCarreras);
 const listarNovedadesMock = vi.mocked(listarNovedades);
 
 describe('Header', () => {
   beforeEach(() => {
-    listarCarrerasMock.mockReset();
-    listarCarrerasMock.mockResolvedValue(CARRERAS_API_FIJA as CarreraApi[]);
+    listarTodasLasCarrerasMock.mockReset();
+    listarTodasLasCarrerasMock.mockResolvedValue(PAGINA_CARRERAS_API_FIJA);
     listarNovedadesMock.mockReset();
     listarNovedadesMock.mockResolvedValue(NOVEDADES_API_FIJA as NovedadApi[]);
   });
@@ -58,7 +57,7 @@ describe('Header', () => {
   it('se renderiza aunque la API de carreras y novedades falle', async () => {
     // El header es chrome: si el backend no responde, el sitio tiene que seguir siendo
     // navegable. El buscador queda vacío, pero la estructura no se cae.
-    listarCarrerasMock.mockRejectedValue({ status: 0, mensaje: 'sin conexión' });
+    listarTodasLasCarrerasMock.mockRejectedValue({ status: 0, mensaje: 'sin conexión' });
     listarNovedadesMock.mockRejectedValue({ status: 0, mensaje: 'sin conexión' });
 
     renderConRouter(<Header />);

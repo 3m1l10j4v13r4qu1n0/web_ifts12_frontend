@@ -4,16 +4,16 @@ export interface Carrera {
   id: string;
   nombre: string;
   descripcionBreve: string;
-  modalidad: string;
-  horarios?: string;
   /**
-   * Campos oficiales del DTO (`titulo_otorgado`, `duracion_anios`, `resolucion` en
-   * `models.py:25-36`). Quedan `undefined` cuando el backend los trae en `null`: la UI
-   * los muestra en "Datos oficiales" de la ficha y degrada a PENDIENTE sin inventar.
+   * Datos oficiales del plan vigente (`CarreraPlanSummary` del apispec). Quedan
+   * `undefined` cuando no hay plan activo o el campo viene en `null`: la UI los muestra
+   * en "Datos oficiales" de la ficha y degrada a PENDIENTE sin inventar.
    */
   tituloOtorgado?: string;
   duracionAnios?: number;
   resolucion?: string;
+  planNombre?: string;
+  planCodigo?: string;
 }
 
 export interface Noticia {

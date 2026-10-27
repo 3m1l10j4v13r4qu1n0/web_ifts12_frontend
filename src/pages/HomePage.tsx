@@ -25,6 +25,7 @@ function HomePage() {
   // no vuelve a pedir los datos.
   const {
     carreras,
+    total: totalCarreras,
     cargando: cargandoCarreras,
     error: errorCarreras,
     recargar: recargarCarreras,
@@ -158,9 +159,9 @@ function HomePage() {
 
       <section aria-labelledby="titulo-carreras" className="border-y border-borde-suave bg-fondo">
         <div className="mx-auto max-w-contenido px-4 py-16">
-          {!cargandoCarreras && errorCarreras === null && carreras.length > 0 && (
+          {!cargandoCarreras && errorCarreras === null && totalCarreras > 0 && (
             <p className="text-xs font-medium uppercase tracking-wide text-acento-700">
-              Oferta académica · {carreras.length} carreras
+              Oferta académica · {totalCarreras} carreras
             </p>
           )}
           <div className="mt-2 flex flex-wrap items-center justify-between gap-4">

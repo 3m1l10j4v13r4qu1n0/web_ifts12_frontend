@@ -1,17 +1,16 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { listarCarreras } from '../api/services/carrera.service';
+import { listarTodasLasCarreras } from '../api/services/carrera.service';
 import { listarNovedades } from '../api/services/novedad.service';
 import BusquedaPage from '../pages/BusquedaPage';
-import { CARRERAS_API_FIJA, NOVEDADES_API_FIJA, renderConRouter } from '../test-utils';
-import type { CarreraApi } from '../types/api/carrera.types';
+import { PAGINA_CARRERAS_API_FIJA, NOVEDADES_API_FIJA, renderConRouter } from '../test-utils';
 import type { NovedadApi } from '../types/api/novedad.types';
 
 vi.mock('../api/services/carrera.service');
 vi.mock('../api/services/novedad.service');
 
-const listarCarrerasMock = vi.mocked(listarCarreras);
+const listarTodasLasCarrerasMock = vi.mocked(listarTodasLasCarreras);
 const listarNovedadesMock = vi.mocked(listarNovedades);
 
 function renderizar(ruta = '/buscar') {
@@ -20,8 +19,8 @@ function renderizar(ruta = '/buscar') {
 
 describe('BusquedaPage', () => {
   beforeEach(() => {
-    listarCarrerasMock.mockReset();
-    listarCarrerasMock.mockResolvedValue(CARRERAS_API_FIJA as CarreraApi[]);
+    listarTodasLasCarrerasMock.mockReset();
+    listarTodasLasCarrerasMock.mockResolvedValue(PAGINA_CARRERAS_API_FIJA);
     listarNovedadesMock.mockReset();
     listarNovedadesMock.mockResolvedValue(NOVEDADES_API_FIJA as NovedadApi[]);
   });

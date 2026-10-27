@@ -1,14 +1,13 @@
 import { screen, within } from '@testing-library/react';
 import { Route, Routes } from 'react-router-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { listarCarreras } from '../api/services/carrera.service';
+import { listarTodasLasCarreras } from '../api/services/carrera.service';
 import CarreraDetallePage from '../pages/CarreraDetallePage';
-import { CARRERAS_API_FIJA, renderConRouter } from '../test-utils';
-import type { CarreraApi } from '../types/api/carrera.types';
+import { PAGINA_CARRERAS_API_FIJA, renderConRouter } from '../test-utils';
 
 vi.mock('../api/services/carrera.service');
 
-const listarCarrerasMock = vi.mocked(listarCarreras);
+const listarTodasLasCarrerasMock = vi.mocked(listarTodasLasCarreras);
 
 /** El slug sale del nombre real de la fila 1: `Tecnicatura Superior en Análisis de Sistemas`. */
 const SLUG_ANALISIS = 'analisis-de-sistemas';
@@ -26,8 +25,8 @@ function renderizarConRuta(ruta: string) {
 
 describe('CarreraDetallePage', () => {
   beforeEach(() => {
-    listarCarrerasMock.mockReset();
-    listarCarrerasMock.mockResolvedValue(CARRERAS_API_FIJA as CarreraApi[]);
+    listarTodasLasCarrerasMock.mockReset();
+    listarTodasLasCarrerasMock.mockResolvedValue(PAGINA_CARRERAS_API_FIJA);
   });
 
   it('muestra la ficha de la carrera solicitada', async () => {
@@ -51,12 +50,11 @@ describe('CarreraDetallePage', () => {
     expect(await screen.findByText(/desarrollo de software/)).toBeInTheDocument();
   });
 
-  it('muestra la modalidad real del backend', async () => {
+  it('muestra modalidad PENDIENTE porque no existe en el contrato', async () => {
     renderizarConRuta(`/carreras/${SLUG_ANALISIS}`);
 
-    // La fila 1 declara "Híbrida / Presencial". Antes esta etiqueta decía "exclusivamente
-    // nocturno" para todas, lo que contradecía las filas que dicen "A Distancia / Híbrida".
-    expect(await screen.findByText('Modalidad: Híbrida / Presencial')).toBeInTheDocument();
+    // El apispec del 22/10/2026 no expone `modalidad`: se muestra PENDIENTE sin inventar.
+    expect(await screen.findByText('Modalidad: PENDIENTE')).toBeInTheDocument();
   });
 
   it('muestra los datos oficiales reales del backend', async () => {
@@ -141,7 +139,7 @@ describe('CarreraDetallePage', () => {
   });
 
   it('muestra el estado de carga antes de resolver la consulta', () => {
-    listarCarrerasMock.mockReturnValue(new Promise(() => undefined));
+    listarTodasLasCarrerasMock.mockReturnValue(new Promise(() => undefined));
 
     renderizarConRuta(`/carreras/${SLUG_ANALISIS}`);
 
@@ -149,7 +147,7 @@ describe('CarreraDetallePage', () => {
   });
 
   it('muestra el error normalizado con opción de reintentar', async () => {
-    listarCarrerasMock.mockRejectedValue({ status: 0, mensaje: 'Ocurrió un error inesperado.' });
+    listarTodasLasCarrerasMock.mockRejectedValue({ status: 0, mensaje: 'Ocurrió un error inesperado.' });
 
     renderizarConRuta(`/carreras/${SLUG_ANALISIS}`);
 

@@ -1,4 +1,4 @@
-import type { CarreraApi } from '../../types/api/carrera.types';
+import type { CarreraApi, CarreraPlanSummaryApi } from '../../types/api/carrera.types';
 import type { Carrera } from '../../types/domain/sitio.types';
 
 /**
@@ -6,29 +6,31 @@ import type { Carrera } from '../../types/domain/sitio.types';
  *
  * Son dos identificadores con propósitos distintos y **no se deben confundir**:
  *
- * - **`id` de la API:** `number`. Es `db.Integer` primary key (`models.py:28`). Verificado:
- *   la base real tiene 3 carreras con `id` 1, 2, 3. Nunca es string.
+ * - **`id` de la API:** `number` (`int64`). Es la primary key de `carreras`.
  * - **`id` de dominio:** `string`. Es el **slug de navegación**, el que aparece en la URL
  *   (`/carreras/administracion-y-gestion-de-politicas-culturales`). Lo deriva este mapper
- *   del `nombre`, porque el backend no expone ningún slug.
+ *   del `nombre`, porque el backend no expone slug.
  *
  * La razón para mantener el slug es que las URLs del sitio ya son legibles y están
  * linkeadas; cambiar `/carreras/gestion-parlamentaria` por `/carreras/1` sería una
- * regresión de usabilidad. El detalle de carrera se resuelve con la lista completa, no
- * con un endpoint de detalle, porque **`GET /api/carreras/:id` no existe en el backend**
- * (solo figura en el archivo muerto `routes.py:61`, con `<int:carrera_id>`). Ver DB-14.
+ * regresión de usabilidad. El detalle se resuelve contra la lista completa (todas las
+ * páginas), no contra el endpoint de detalle, para no depender de la página cargada.
  */
 
 const GENERICOS_INICIO = /^tecnicatura (superior )?(en|de) /;
+
+const fechaOrdenable = (fecha: string | null): number => {
+  if (fecha === null) return 0;
+  const tiempo = Date.parse(`${fecha}T12:00:00`);
+  return Number.isNaN(tiempo) ? 0 : tiempo;
+};
 
 /**
  * Deriva el slug de navegación a partir del nombre de la carrera.
  *
  * "Tecnicatura Superior en Administración y Gestión de Políticas Culturales" se vuelve
  * `administracion-y-gestion-de-politicas-culturales`: se quitan los términos genéricos
- * ("Tecnicatura Superior en") que no aportan a distinguir una carrera de otra, porque el
- * `nombre` del backend es siempre un título completo y los slugs anteriores del sitio eran
- * nombres cortos.
+ * ("Tecnicatura Superior en") que no aportan a distinguir una carrera de otra.
  */
 export function slugDesdeCarrera(carrera: Pick<CarreraApi, 'nombre'>): string {
   return carrera.nombre
@@ -41,30 +43,54 @@ export function slugDesdeCarrera(carrera: Pick<CarreraApi, 'nombre'>): string {
 }
 
 /**
+ * Elige el plan vigente de una carrera.
+ *
+ * Regla provisoria hasta que Análisis/Backend la confirmen (BE-N08):
+ * 1. Planes `activo` y sin `vigente_hasta` (o con fecha de fin futura).
+ * 2. Si no hay, planes `activo` aunque tengan fecha de fin.
+ * 3. Entre los candidatos, el `vigente_desde` más reciente y, como desempate, el `id` más alto.
+ *
+ * Un plan con `vigente_hasta` vencido no se considera vigente. Si no hay ningún plan
+ * activo, devuelve `undefined` y la ficha muestra PENDIENTE sin inventar datos.
+ */
+export function planVigente(
+  planes: CarreraPlanSummaryApi[],
+  hoy: string = new Date().toISOString().slice(0, 10),
+): CarreraPlanSummaryApi | undefined {
+  const abiertos = planes.filter(
+    (plan) => plan.activo && (plan.vigente_hasta === null || plan.vigente_hasta >= hoy),
+  );
+  const candidatos = abiertos.length > 0 ? abiertos : planes.filter((plan) => plan.activo);
+
+  return [...candidatos].sort((a, b) => {
+    const diferencia = fechaOrdenable(b.vigente_desde) - fechaOrdenable(a.vigente_desde);
+    return diferencia !== 0 ? diferencia : b.id - a.id;
+  })[0];
+}
+
+/**
  * Traduce un `CarreraApi` al tipo de dominio de la UI.
  *
- * `horarios` queda `undefined` a propósito: **el backend no lo expone**. Existe una tabla
- * `horario` en su Postgres de diseño, sin modelo Flask ni ruta, así que no hay de dónde
- * sacarlo y rellenarlo sería inventar (regla anti-alucinación). La UI ya trata el campo
- * como opcional en `CardCarrera`.
+ * `modalidad` y `horarios` ya no existen en el contrato: el apispec no tiene esos campos
+ * (BE-N02). La UI los muestra como PENDIENTE con mensaje de proceso, no se inventan.
  *
- * `descripcionBreve` recibe el `descripcion` del backend, que es un `Text` completo
- * (`models.py:32`). Es el mejor texto disponible; el nombre "breve" es histórico.
+ * `duracionAnios` y `resolucion` se leen del **plan vigente**, no de la raíz. Si no hay
+ * plan o el campo viene en `null`, quedan `undefined` y la ficha degrada a PENDIENTE.
  *
- * Los campos oficiales (`titulo_otorgado`, `duracion_anios`, `resolucion`) se traducen a
- * camelCase y pasan a `undefined` cuando el backend los trae en `null`: la ficha de carrera
- * los muestra en "Datos oficiales" y degrada a PENDIENTE sin inventar el dato.
+ * `descripcionBreve` recibe el `descripcion` del backend, que es un `Text` completo.
  */
 export function mapCarreraApiACarrera(carrera: CarreraApi): Carrera {
+  const plan = planVigente(carrera.planes);
+
   return {
     id: slugDesdeCarrera(carrera),
     nombre: carrera.nombre,
     descripcionBreve: carrera.descripcion ?? '',
-    modalidad: carrera.modalidad ?? '',
-    horarios: undefined,
     tituloOtorgado: carrera.titulo_otorgado ?? undefined,
-    duracionAnios: carrera.duracion_anios ?? undefined,
-    resolucion: carrera.resolucion ?? undefined,
+    duracionAnios: plan?.duracion_anios ?? undefined,
+    resolucion: plan?.resolucion ?? undefined,
+    planNombre: plan?.nombre ?? undefined,
+    planCodigo: plan?.codigo ?? undefined,
   };
 }
 

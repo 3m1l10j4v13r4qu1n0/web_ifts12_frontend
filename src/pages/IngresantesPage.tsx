@@ -49,9 +49,9 @@ const INFOCARDS_INGRESO = [
 
 function IngresantesPage() {
   const inscripcionDisponible = ENLACES.inscripcion !== '';
-  const { carreras, cargando, error, recargar } = useCarreras();
+  const { carreras, total, cargando, error, recargar } = useCarreras();
 
-  const hayCarreras = !cargando && error === null && carreras.length > 0;
+  const hayCarreras = !cargando && error === null && total > 0;
 
   return (
     <main className="min-h-screen">
@@ -82,7 +82,7 @@ function IngresantesPage() {
             <div>
               {hayCarreras && (
                 <p className="text-sm text-texto-suave">
-                  {carreras.length} {carreras.length === 1 ? 'carrera' : 'carreras'} · turno
+                  {total} {total === 1 ? 'carrera' : 'carreras'} · turno
                   nocturno
                 </p>
               )}
@@ -91,7 +91,7 @@ function IngresantesPage() {
               </h2>
             </div>
             <Button variante="fantasma" tamano="sm" href="/carreras">
-              {hayCarreras ? `Ver las ${carreras.length} carreras` : 'Ver carreras'}
+              {hayCarreras ? `Ver las ${total} carreras` : 'Ver carreras'}
             </Button>
           </div>
 
