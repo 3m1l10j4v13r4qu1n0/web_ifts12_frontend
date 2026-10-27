@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { ApiError, ApiErrorResponse } from '../types/api/error.types';
+import type { ApiError } from '../types/api/error.types';
 import { API_BASE_URL } from './endpoints';
 
 export const NOMBRE_TOKEN = 'auth_token';

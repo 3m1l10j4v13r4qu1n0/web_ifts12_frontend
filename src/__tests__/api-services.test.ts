@@ -80,7 +80,9 @@ describe('listarCarreras', () => {
   it('pide el listado al endpoint correcto', async () => {
     const spy = vi
       .spyOn(apiClient, 'get')
-      .mockResolvedValue({ data: CARRERAS_PAGINADAS } as unknown as ReturnType<typeof apiClient.get>);
+      .mockResolvedValue({ data: CARRERAS_PAGINADAS } as unknown as ReturnType<
+        typeof apiClient.get
+      >);
 
     await listarCarreras();
 
@@ -238,9 +240,10 @@ describe('iniciarSesion', () => {
       mensaje: 'Credenciales inválidas',
     });
 
-    await expect(
-      iniciarSesion({ email: 'demo@ifts12.edu.ar', password: 'mala' }),
-    ).rejects.toEqual({ status: 401, mensaje: 'Credenciales inválidas' });
+    await expect(iniciarSesion({ email: 'demo@ifts12.edu.ar', password: 'mala' })).rejects.toEqual({
+      status: 401,
+      mensaje: 'Credenciales inválidas',
+    });
   });
 });
 

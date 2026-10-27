@@ -4,7 +4,7 @@ import { listarTodasLasCarreras } from '../api/services/carrera.service';
 import { listarNovedades } from '../api/services/novedad.service';
 import Header from '../components/layout/Header';
 import { ACCESOS_EXTERNOS, MENU_PRINCIPAL, UBICACION_HEADER } from '../constants/navegacion';
-import { PAGINA_CARRERAS_API_FIJA, NOVEDADES_API_FIJA, renderConRouter } from '../test-utils';
+import { NOVEDADES_API_FIJA, PAGINA_CARRERAS_API_FIJA, renderConRouter } from '../test-utils';
 import type { NovedadApi } from '../types/api/novedad.types';
 
 vi.mock('../api/services/carrera.service');

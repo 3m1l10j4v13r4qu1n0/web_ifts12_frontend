@@ -82,8 +82,7 @@ function IngresantesPage() {
             <div>
               {hayCarreras && (
                 <p className="text-sm text-texto-suave">
-                  {total} {total === 1 ? 'carrera' : 'carreras'} · turno
-                  nocturno
+                  {total} {total === 1 ? 'carrera' : 'carreras'} · turno nocturno
                 </p>
               )}
               <h2 id="titulo-carreras" className="text-2xl font-bold text-texto">

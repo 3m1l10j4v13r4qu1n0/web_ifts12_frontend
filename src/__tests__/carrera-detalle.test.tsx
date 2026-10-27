@@ -147,7 +147,10 @@ describe('CarreraDetallePage', () => {
   });
 
   it('muestra el error normalizado con opción de reintentar', async () => {
-    listarTodasLasCarrerasMock.mockRejectedValue({ status: 0, mensaje: 'Ocurrió un error inesperado.' });
+    listarTodasLasCarrerasMock.mockRejectedValue({
+      status: 0,
+      mensaje: 'Ocurrió un error inesperado.',
+    });
 
     renderizarConRuta(`/carreras/${SLUG_ANALISIS}`);
 

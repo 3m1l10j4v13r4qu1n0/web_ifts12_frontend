@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { listarTodasLasCarreras } from '../api/services/carrera.service';
 import { listarNovedades } from '../api/services/novedad.service';
 import BuscadorGlobal from '../components/layout/BuscadorGlobal';
-import { PAGINA_CARRERAS_API_FIJA, NOVEDADES_API_FIJA, renderConRouter } from '../test-utils';
+import { NOVEDADES_API_FIJA, PAGINA_CARRERAS_API_FIJA, renderConRouter } from '../test-utils';
 import type { NovedadApi } from '../types/api/novedad.types';
 
 vi.mock('../api/services/carrera.service');

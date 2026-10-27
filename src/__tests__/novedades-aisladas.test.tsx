@@ -8,7 +8,7 @@ import { useNovedades } from '../hooks/useNovedades';
 import HomePage from '../pages/HomePage';
 import NotaCompletaPage from '../pages/NotaCompletaPage';
 import NoticiasPage from '../pages/NoticiasPage';
-import { PAGINA_CARRERAS_API_FIJA, NOVEDADES_API_FIJA, renderConRouter } from '../test-utils';
+import { NOVEDADES_API_FIJA, PAGINA_CARRERAS_API_FIJA, renderConRouter } from '../test-utils';
 import type { NovedadApi } from '../types/api/novedad.types';
 
 vi.mock('../api/services/carrera.service');

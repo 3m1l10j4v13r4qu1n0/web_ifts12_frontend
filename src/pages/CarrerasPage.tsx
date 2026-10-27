@@ -114,9 +114,7 @@ function CarrerasPage() {
                         {carrera.nombre}
                       </th>
                       <td className="px-4 py-3 align-top text-texto-suave">Nocturno</td>
-                      <td className="px-4 py-3 align-top text-texto-suave">
-                        PENDIENTE
-                      </td>
+                      <td className="px-4 py-3 align-top text-texto-suave">PENDIENTE</td>
                       <td className="px-4 py-3 align-top text-texto-suave">PENDIENTE</td>
                       <td className="px-4 py-3 align-top">
                         <Link

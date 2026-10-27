@@ -155,8 +155,8 @@ describe('mapCarrerasApiACarreras', () => {
   it('no agrega modalidad ni horarios (ya no existen en el contrato)', () => {
     const [primera] = mapCarrerasApiACarreras([CARRERA_SIN_OPCIONALES]);
 
-    expect((primera as Record<string, unknown>).modalidad).toBeUndefined();
-    expect((primera as Record<string, unknown>).horarios).toBeUndefined();
+    expect((primera as unknown as Record<string, unknown>).modalidad).toBeUndefined();
+    expect((primera as unknown as Record<string, unknown>).horarios).toBeUndefined();
   });
 
   it('deja los campos oficiales en undefined cuando el backend los trae en null', () => {
