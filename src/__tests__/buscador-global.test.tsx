@@ -1,16 +1,15 @@
 import { fireEvent, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { listarCarreras } from '../api/services/carrera.service';
+import { listarTodasLasCarreras } from '../api/services/carrera.service';
 import { listarNovedades } from '../api/services/novedad.service';
 import BuscadorGlobal from '../components/layout/BuscadorGlobal';
-import { CARRERAS_API_FIJA, NOVEDADES_API_FIJA, renderConRouter } from '../test-utils';
-import type { CarreraApi } from '../types/api/carrera.types';
+import { NOVEDADES_API_FIJA, PAGINA_CARRERAS_API_FIJA, renderConRouter } from '../test-utils';
 import type { NovedadApi } from '../types/api/novedad.types';
 
 vi.mock('../api/services/carrera.service');
 vi.mock('../api/services/novedad.service');
 
-const listarCarrerasMock = vi.mocked(listarCarreras);
+const listarTodasLasCarrerasMock = vi.mocked(listarTodasLasCarreras);
 const listarNovedadesMock = vi.mocked(listarNovedades);
 
 function renderizarBuscador() {
@@ -26,8 +25,8 @@ function escribir(texto: string) {
 
 describe('BuscadorGlobal', () => {
   beforeEach(() => {
-    listarCarrerasMock.mockReset();
-    listarCarrerasMock.mockResolvedValue(CARRERAS_API_FIJA as CarreraApi[]);
+    listarTodasLasCarrerasMock.mockReset();
+    listarTodasLasCarrerasMock.mockResolvedValue(PAGINA_CARRERAS_API_FIJA);
     listarNovedadesMock.mockReset();
     listarNovedadesMock.mockResolvedValue(NOVEDADES_API_FIJA as NovedadApi[]);
   });
@@ -78,7 +77,7 @@ describe('BuscadorGlobal', () => {
   it('igual sigue buscando secciones y FAQs si la API falla', async () => {
     // El buscador está en el header de todas las páginas: si el backend no responde, el
     // sitio no puede quedar sin navegación.
-    listarCarrerasMock.mockRejectedValue({ status: 0, mensaje: 'sin conexión' });
+    listarTodasLasCarrerasMock.mockRejectedValue({ status: 0, mensaje: 'sin conexión' });
     listarNovedadesMock.mockRejectedValue({ status: 0, mensaje: 'sin conexión' });
 
     renderizarBuscador();

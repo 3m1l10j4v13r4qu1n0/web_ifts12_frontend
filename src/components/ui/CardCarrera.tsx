@@ -9,8 +9,7 @@ function CardCarrera({ carrera }: CardCarreraProps) {
     <article className="flex flex-col rounded-xl border border-borde-suave bg-white p-6 shadow-suave">
       <h3 className="text-lg font-semibold text-texto">{carrera.nombre}</h3>
       <p className="mt-1 text-xs font-medium uppercase tracking-wide text-acento-700">
-        {carrera.modalidad}
-        {carrera.horarios ? ` · ${carrera.horarios}` : ''}
+        Turno nocturno
       </p>
       <p className="mt-2 text-sm text-texto-suave">{carrera.descripcionBreve}</p>
     </article>

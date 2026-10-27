@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { mapCarrerasApiACarreras } from '../api/mappers/carrera.mapper';
-import { listarCarreras } from '../api/services/carrera.service';
+import { listarTodasLasCarreras } from '../api/services/carrera.service';
 import type { Carrera } from '../types/domain/sitio.types';
 import { mensajeDeConsulta } from '../utils/mensajeDeConsulta';
 
@@ -10,9 +10,14 @@ import { mensajeDeConsulta } from '../utils/mensajeDeConsulta';
  * `datos` sale ya mapeado al tipo de dominio, así que el componente no conoce ni el DTO ni
  * el nombre `snake_case` del backend (regla de separación de responsabilidades del skill
  * `fe-architect-scaffold`).
+ *
+ * `total` es el total del servidor, no `carreras.length`: la lista se trae completa hoy,
+ * pero el contrato es paginado (BE-N01/BE-N07) y los contadores no deben depender de que
+ * entren todas en una página.
  */
 export interface EstadoCarreras {
   carreras: Carrera[];
+  total: number;
   cargando: boolean;
   error: string | null;
   recargar: () => void;
@@ -24,13 +29,14 @@ export interface EstadoCarreras {
  */
 export function useCarreras(): EstadoCarreras {
   const consulta = useQuery({
-    queryKey: ['carreras'],
-    queryFn: listarCarreras,
+    queryKey: ['carreras', 'todas'],
+    queryFn: listarTodasLasCarreras,
     staleTime: 5 * 60 * 1000,
   });
 
   return {
-    carreras: consulta.data === undefined ? [] : mapCarrerasApiACarreras(consulta.data),
+    carreras: consulta.data === undefined ? [] : mapCarrerasApiACarreras(consulta.data.items),
+    total: consulta.data?.total ?? 0,
     cargando: consulta.isPending,
     error: consulta.error === null ? null : mensajeDeConsulta(consulta.error, 'las carreras'),
     recargar: () => {

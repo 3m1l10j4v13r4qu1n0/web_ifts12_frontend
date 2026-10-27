@@ -8,56 +8,102 @@ import type { CarreraApi } from '../types/api/carrera.types';
 
 /**
  * Las tres filas reales de la tabla `carreras` de `instance/ifts12.db`, con los mismos
- * nombres de campo que devuelve `GET /api/carreras` (`app.py:62-75`, `models.py:26-38`).
- *
- * Se usan los nombres reales, no inventados, porque el slug de navegación se deriva de ahí:
- * un test con "Técnico Superior en ..." pasaría con un regex que no matchea la realidad
- * ("Tecnicatura Superior en ...") y dejaría el bug escondido.
+ * nombres de campo que devuelve `GET /api/carreras` (`inbox/apispec_1.json`).
  */
 const CARRERAS: CarreraApi[] = [
   {
     id: 1,
     nombre: 'Tecnicatura Superior en Análisis de Sistemas',
-    codigo: 'AS-2023',
-    resolucion: 'RS-2023-6336-GCABA-MEDGC',
     descripcion:
       'Formación profesional orientada al desarrollo de software, análisis funcional, bases de datos e infraestructura tecnológica.',
-    duracion_anios: 3,
     titulo_otorgado: 'Técnico Superior en Análisis de Sistemas',
-    modalidad: 'Híbrida / Presencial',
+    activa: true,
+    created_at: '2026-01-01T00:00:00',
+    updated_at: '2026-01-01T00:00:00',
+    planes: [
+      {
+        id: 1,
+        carrera_id: 1,
+        nombre: 'Plan 2023',
+        codigo: 'AS-2023',
+        resolucion: 'RS-2023-6336-GCABA-MEDGC',
+        duracion_anios: 3,
+        vigente_desde: '2023-03-01',
+        vigente_hasta: null,
+        activo: true,
+        created_at: '2026-01-01T00:00:00',
+        updated_at: '2026-01-01T00:00:00',
+      },
+    ],
   },
   {
     id: 2,
     nombre: 'Tecnicatura Superior en Administración Pública',
-    codigo: 'AP-2025',
-    resolucion: 'Resolución Ministerial 2025',
     descripcion:
       'Formación especializada en la gestión estatal, políticas públicas, modernización administrativa y normativas del sector público.',
-    duracion_anios: 3,
     titulo_otorgado: 'Técnico Superior en Administración Pública',
-    modalidad: 'A Distancia / Híbrida',
+    activa: true,
+    created_at: '2026-01-01T00:00:00',
+    updated_at: '2026-01-01T00:00:00',
+    planes: [
+      {
+        id: 2,
+        carrera_id: 2,
+        nombre: 'Plan 2025',
+        codigo: 'AP-2025',
+        resolucion: 'Resolución Ministerial 2025',
+        duracion_anios: 3,
+        vigente_desde: '2025-03-01',
+        vigente_hasta: null,
+        activo: true,
+        created_at: '2026-01-01T00:00:00',
+        updated_at: '2026-01-01T00:00:00',
+      },
+    ],
   },
   {
     id: 3,
     nombre: 'Tecnicatura Superior en Administración y Gestión de Políticas Culturales',
-    codigo: 'AGPC-2023',
-    resolucion: 'Resolución Plan Cultural',
     descripcion:
       'Gestión de proyectos culturales, desarrollo comunitario, industrias creativas y administración de instituciones culturales.',
-    duracion_anios: 3,
     titulo_otorgado: 'Técnico Superior en Gestión Cultural',
-    modalidad: 'Híbrida',
+    activa: true,
+    created_at: '2026-01-01T00:00:00',
+    updated_at: '2026-01-01T00:00:00',
+    planes: [
+      {
+        id: 3,
+        carrera_id: 3,
+        nombre: 'Plan 2023',
+        codigo: 'AGPC-2023',
+        resolucion: 'Resolución Plan Cultural',
+        duracion_anios: 3,
+        vigente_desde: '2023-03-01',
+        vigente_hasta: null,
+        activo: true,
+        created_at: '2026-01-01T00:00:00',
+        updated_at: '2026-01-01T00:00:00',
+      },
+    ],
   },
 ];
 
 /** La segunda carrera con todos los opcionales en `null`, como los devuelve el backend. */
 const CARRERA_SIN_OPCIONALES: CarreraApi = {
   ...CARRERAS[1],
-  resolucion: null,
   descripcion: null,
-  duracion_anios: null,
   titulo_otorgado: null,
-  modalidad: null,
+  planes: [
+    {
+      ...CARRERAS[1].planes[0],
+      nombre: null,
+      codigo: null,
+      resolucion: null,
+      duracion_anios: null,
+      vigente_desde: null,
+      vigente_hasta: null,
+    },
+  ],
 };
 
 describe('slugDesdeCarrera', () => {
@@ -90,11 +136,11 @@ describe('mapCarrerasApiACarreras', () => {
       nombre: 'Tecnicatura Superior en Análisis de Sistemas',
       descripcionBreve:
         'Formación profesional orientada al desarrollo de software, análisis funcional, bases de datos e infraestructura tecnológica.',
-      modalidad: 'Híbrida / Presencial',
-      horarios: undefined,
       tituloOtorgado: 'Técnico Superior en Análisis de Sistemas',
       duracionAnios: 3,
       resolucion: 'RS-2023-6336-GCABA-MEDGC',
+      planNombre: 'Plan 2023',
+      planCodigo: 'AS-2023',
     });
   });
 
@@ -106,10 +152,11 @@ describe('mapCarrerasApiACarreras', () => {
     expect(primera.descripcionBreve).toBe('');
   });
 
-  it('deja la modalidad vacía cuando el backend no la trae', () => {
+  it('no agrega modalidad ni horarios (ya no existen en el contrato)', () => {
     const [primera] = mapCarrerasApiACarreras([CARRERA_SIN_OPCIONALES]);
 
-    expect(primera.modalidad).toBe('');
+    expect((primera as unknown as Record<string, unknown>).modalidad).toBeUndefined();
+    expect((primera as unknown as Record<string, unknown>).horarios).toBeUndefined();
   });
 
   it('deja los campos oficiales en undefined cuando el backend los trae en null', () => {
@@ -120,6 +167,8 @@ describe('mapCarrerasApiACarreras', () => {
     expect(primera.tituloOtorgado).toBeUndefined();
     expect(primera.duracionAnios).toBeUndefined();
     expect(primera.resolucion).toBeUndefined();
+    expect(primera.planNombre).toBeUndefined();
+    expect(primera.planCodigo).toBeUndefined();
   });
 
   it('genera slugs únicos para las tres carreras reales', () => {

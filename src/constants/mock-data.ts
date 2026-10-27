@@ -13,44 +13,32 @@ export const mockCarreras: Carrera[] = [
     id: 'gestion-parlamentaria',
     nombre: 'Gestión parlamentaria',
     descripcionBreve: 'Formación en procedimientos legislativos y gestión parlamentaria.',
-    modalidad: 'Presencial',
-    horarios: 'Turno nocturno',
   },
   {
     id: 'politicas-culturales',
     nombre: 'Administración y gestión de políticas culturales',
     descripcionBreve: 'Gestión cultural, gestión de proyectos y políticas públicas en cultura.',
-    modalidad: 'Presencial',
-    horarios: 'Turno nocturno',
   },
   {
     id: 'administracion-publica',
     nombre: 'Administración pública',
     descripcionBreve:
       'Gestión de organismos públicos, políticas públicas y administración estatal.',
-    modalidad: 'Presencial',
-    horarios: 'Turno nocturno',
   },
   {
     id: 'desarrollo-comunitario',
     nombre: 'Desarrollo comunitario',
     descripcionBreve: 'Intervención social, gestión comunitaria y desarrollo local.',
-    modalidad: 'Presencial',
-    horarios: 'Turno nocturno',
   },
   {
     id: 'salud-mental',
     nombre: 'Intervención en salud mental comunitaria',
     descripcionBreve: 'Abordaje interdisciplinario de la salud mental en contextos comunitarios.',
-    modalidad: 'Presencial',
-    horarios: 'Turno nocturno',
   },
   {
     id: 'educacion-popular',
     nombre: 'Educación popular y comunitaria',
     descripcionBreve: 'Metodologías de educación popular, inclusión y mediación cultural.',
-    modalidad: 'Presencial',
-    horarios: 'Turno nocturno',
   },
 ];
 

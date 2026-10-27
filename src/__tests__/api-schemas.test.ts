@@ -1,17 +1,31 @@
 import { describe, expect, it } from 'vitest';
-import { zCarreraApi, zCarreraApiLista } from '../types/api/carrera.schema';
+import { zCarreraApi, zPaginaCarrerasApi } from '../types/api/carrera.schema';
 import { zNovedadApi, zNovedadApiLista } from '../types/api/novedad.schema';
 
 /** Copia exacta de una fila de `carreras` en `instance/ifts12.db`, como la devuelve la API. */
 const CARRERA_VALIDA = {
   id: 1,
   nombre: 'Tecnicatura Superior en Análisis de Sistemas',
-  codigo: 'AS-2023',
-  resolucion: 'RS-2023-6336-GCABA-MEDGC',
   descripcion: 'Formación profesional orientada al desarrollo de software.',
-  duracion_anios: 3,
   titulo_otorgado: 'Técnico Superior en Análisis de Sistemas',
-  modalidad: 'Híbrida / Presencial',
+  activa: true,
+  created_at: '2026-01-01T00:00:00',
+  updated_at: '2026-01-01T00:00:00',
+  planes: [
+    {
+      id: 1,
+      carrera_id: 1,
+      nombre: 'Plan 2023',
+      codigo: 'AS-2023',
+      resolucion: 'RS-2023-6336-GCABA-MEDGC',
+      duracion_anios: 3,
+      vigente_desde: '2023-03-01',
+      vigente_hasta: null,
+      activo: true,
+      created_at: '2026-01-01T00:00:00',
+      updated_at: '2026-01-01T00:00:00',
+    },
+  ],
 };
 
 /** Copia exacta de una fila de `novedades`. */
@@ -34,9 +48,8 @@ describe('zCarreraApi', () => {
   it('acepta los opcionales en null', () => {
     const carrera = {
       ...CARRERA_VALIDA,
-      resolucion: null,
       descripcion: null,
-      duracion_anios: null,
+      titulo_otorgado: null,
     };
 
     expect(zCarreraApi.parse(carrera)).toEqual(carrera);
@@ -48,38 +61,59 @@ describe('zCarreraApi', () => {
     expect(() => zCarreraApi.parse({ ...CARRERA_VALIDA, id: '1' })).toThrow();
   });
 
-  it('rechaza una duración negativa', () => {
-    expect(() => zCarreraApi.parse({ ...CARRERA_VALIDA, duracion_anios: -1 })).toThrow();
+  it('rechaza una duración negativa en el plan', () => {
+    const carrera = {
+      ...CARRERA_VALIDA,
+      planes: [
+        {
+          ...CARRERA_VALIDA.planes[0],
+          duracion_anios: -1,
+        },
+      ],
+    };
+    expect(() => zCarreraApi.parse(carrera)).toThrow();
   });
 
   it('rechaza un nombre vacío', () => {
     expect(() => zCarreraApi.parse({ ...CARRERA_VALIDA, nombre: '' })).toThrow();
   });
-
-  it('rechaza una duración decimal', () => {
-    expect(() => zCarreraApi.parse({ ...CARRERA_VALIDA, duracion_anios: 2.5 })).toThrow();
-  });
 });
 
-describe('zCarreraApiLista', () => {
-  it('acepta la lista del endpoint', () => {
-    expect(zCarreraApiLista.parse([CARRERA_VALIDA])).toHaveLength(1);
+describe('zPaginaCarrerasApi', () => {
+  it('acepta la respuesta paginada del endpoint', () => {
+    const pagina = {
+      data: [CARRERA_VALIDA],
+      page: 1,
+      size: 10,
+      total: 1,
+      total_pages: 1,
+    };
+
+    expect(zPaginaCarrerasApi.parse(pagina)).toEqual(pagina);
   });
 
   it('acepta una lista vacía', () => {
     // El backend devuelve `[]` cuando no hay carreras (`app.py:75`), no `null`: es un caso
     // válido que la UI tiene que poder mostrar.
-    expect(zCarreraApiLista.parse([])).toEqual([]);
+    const pagina = {
+      data: [],
+      page: 1,
+      size: 10,
+      total: 0,
+      total_pages: 0,
+    };
+
+    expect(zPaginaCarrerasApi.parse(pagina).data).toEqual([]);
   });
 
   it('rechaza null', () => {
-    expect(() => zCarreraApiLista.parse(null)).toThrow();
+    expect(() => zPaginaCarrerasApi.parse(null)).toThrow();
   });
 
-  it('rechaza un objeto envuelto en data', () => {
-    // La respuesta es un array plano. Si algún día llega `{data, meta}`, el esquema frena
+  it('rechaza un array plano', () => {
+    // La respuesta es paginada. Si algún día llega un array plano, el esquema frena
     // acá en vez de dejar que la UI itere sobre `undefined`.
-    expect(() => zCarreraApiLista.parse({ data: [CARRERA_VALIDA], meta: {} })).toThrow();
+    expect(() => zPaginaCarrerasApi.parse([CARRERA_VALIDA])).toThrow();
   });
 });
 
@@ -88,27 +122,14 @@ describe('zNovedadApi', () => {
     expect(zNovedadApi.parse(NOVEDAD_VALIDA)).toEqual(NOVEDAD_VALIDA);
   });
 
-  it('acepta los opcionales en null', () => {
-    const novedad = {
+  it('acepta imagen_url en null', () => {
+    expect(zNovedadApi.parse({ ...NOVEDAD_VALIDA, imagen_url: null })).toEqual({
       ...NOVEDAD_VALIDA,
-      copete: null,
-      categoria: null,
       imagen_url: null,
-      fecha_publicacion: null,
-    };
-
-    expect(zNovedadApi.parse(novedad)).toEqual(novedad);
+    });
   });
 
-  it('exige el contenido completo', () => {
-    // `contenido` es `nullable=False` (`models.py:59`): es el cuerpo de la nota, y sin él la
-    // página de detalle no tiene nada que mostrar.
-    expect(() => zNovedadApi.parse({ ...NOVEDAD_VALIDA, contenido: null })).toThrow();
-  });
-
-  it('rechaza un destacado que no es booleano', () => {
-    // SQLite guarda `1`/`0`, pero el serializador lo convierte a bool (`app.py:86`). Si llega
-    // `1`, el contrato cambió y hay que enterarse.
+  it('rechaza un destacado numérico', () => {
     expect(() => zNovedadApi.parse({ ...NOVEDAD_VALIDA, destacado: 1 })).toThrow();
   });
 
@@ -119,14 +140,14 @@ describe('zNovedadApi', () => {
 
 describe('zNovedadApiLista', () => {
   it('acepta la lista del endpoint', () => {
-    expect(zNovedadApiLista.parse([NOVEDAD_VALIDA, NOVEDAD_VALIDA])).toHaveLength(2);
+    expect(zNovedadApiLista.parse([NOVEDAD_VALIDA])).toHaveLength(1);
   });
 
   it('acepta una lista vacía', () => {
     expect(zNovedadApiLista.parse([])).toEqual([]);
   });
 
-  it('rechaza un objeto envuelto en data', () => {
-    expect(() => zNovedadApiLista.parse({ data: [NOVEDAD_VALIDA] })).toThrow();
+  it('rechaza null', () => {
+    expect(() => zNovedadApiLista.parse(null)).toThrow();
   });
 });

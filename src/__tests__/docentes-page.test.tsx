@@ -1,13 +1,12 @@
 import { screen, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { listarCarreras } from '../api/services/carrera.service';
+import { listarTodasLasCarreras } from '../api/services/carrera.service';
 import DocentesPage from '../pages/DocentesPage';
-import { CARRERAS_API_FIJA, renderConRouter } from '../test-utils';
-import type { CarreraApi } from '../types/api/carrera.types';
+import { PAGINA_CARRERAS_API_FIJA, renderConRouter } from '../test-utils';
 
 vi.mock('../api/services/carrera.service');
 
-const listarCarrerasMock = vi.mocked(listarCarreras);
+const listarTodasLasCarrerasMock = vi.mocked(listarTodasLasCarreras);
 
 function renderizarPagina() {
   return renderConRouter(<DocentesPage />, { ruta: '/docentes' });
@@ -15,8 +14,8 @@ function renderizarPagina() {
 
 describe('DocentesPage', () => {
   beforeEach(() => {
-    listarCarrerasMock.mockReset();
-    listarCarrerasMock.mockResolvedValue(CARRERAS_API_FIJA as CarreraApi[]);
+    listarTodasLasCarrerasMock.mockReset();
+    listarTodasLasCarrerasMock.mockResolvedValue(PAGINA_CARRERAS_API_FIJA);
   });
 
   it('muestra breadcrumb, título y bajada del diseño', () => {

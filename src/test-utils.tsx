@@ -3,6 +3,8 @@ import { render } from '@testing-library/react';
 import type { ReactElement, ReactNode } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import type { CarreraApi } from './types/api/carrera.types';
+import type { PaginaApi } from './types/api/paginacion.types';
 
 /**
  * Fixtures del DTO que devuelve el backend (`app.py:62-92`, `models.py:26-64`), con los
@@ -16,29 +18,66 @@ import { AuthProvider } from './contexts/AuthContext';
  * Las filas copian la DB sembrada (`instance/ifts12.db`): nombres, slugs derivados y fechas
  * reales, para que un test no valide un caso que el backend nunca produce.
  */
-export const CARRERAS_API_FIJA = [
+export const CARRERAS_API_FIJA: CarreraApi[] = [
   {
     id: 1,
     nombre: 'Tecnicatura Superior en Análisis de Sistemas',
-    codigo: 'AS-2023',
-    resolucion: 'RS-2023-6336-GCABA-MEDGC',
     descripcion:
       'Formación profesional orientada al desarrollo de software, análisis funcional, bases de datos e infraestructura tecnológica.',
-    duracion_anios: 3,
     titulo_otorgado: 'Técnico Superior en Análisis de Sistemas',
-    modalidad: 'Híbrida / Presencial',
+    activa: true,
+    created_at: '2026-01-01T00:00:00',
+    updated_at: '2026-01-01T00:00:00',
+    planes: [
+      {
+        id: 1,
+        carrera_id: 1,
+        nombre: 'Plan 2023',
+        codigo: 'AS-2023',
+        resolucion: 'RS-2023-6336-GCABA-MEDGC',
+        duracion_anios: 3,
+        vigente_desde: '2023-03-01',
+        vigente_hasta: null,
+        activo: true,
+        created_at: '2026-01-01T00:00:00',
+        updated_at: '2026-01-01T00:00:00',
+      },
+    ],
   },
   {
     id: 2,
     nombre: 'Tecnicatura Superior en Administración Pública',
-    codigo: 'AP-2025',
-    resolucion: null,
     descripcion: null,
-    duracion_anios: null,
     titulo_otorgado: null,
-    modalidad: null,
+    activa: true,
+    created_at: '2026-01-01T00:00:00',
+    updated_at: '2026-01-01T00:00:00',
+    planes: [
+      {
+        id: 2,
+        carrera_id: 2,
+        nombre: null,
+        codigo: null,
+        resolucion: null,
+        duracion_anios: null,
+        vigente_desde: null,
+        vigente_hasta: null,
+        activo: true,
+        created_at: '2026-01-01T00:00:00',
+        updated_at: '2026-01-01T00:00:00',
+      },
+    ],
   },
 ];
+
+/** Respuesta paginada de `GET /api/carreras`, tal como la arma el apispec. */
+export const PAGINA_CARRERAS_API_FIJA: PaginaApi<CarreraApi> = {
+  items: CARRERAS_API_FIJA,
+  page: 1,
+  size: 100,
+  total: CARRERAS_API_FIJA.length,
+  totalPages: 1,
+};
 
 export const NOVEDADES_API_FIJA = [
   {

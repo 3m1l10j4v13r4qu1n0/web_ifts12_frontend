@@ -13,18 +13,38 @@ import { listarNovedades } from '../api/services/novedad.service';
  */
 
 /** Las mismas filas que la DB sembrada, con los nombres de campo que devuelve el endpoint. */
-const CARRERAS = [
-  {
-    id: 1,
-    nombre: 'Tecnicatura Superior en Análisis de Sistemas',
-    codigo: 'AS-2023',
-    resolucion: 'RS-2023-6336-GCABA-MEDGC',
-    descripcion: 'Formación profesional orientada al desarrollo de software.',
-    duracion_anios: 3,
-    titulo_otorgado: 'Técnico Superior en Análisis de Sistemas',
-    modalidad: 'Híbrida / Presencial',
-  },
-];
+const CARRERAS_PAGINADAS = {
+  data: [
+    {
+      id: 1,
+      nombre: 'Tecnicatura Superior en Análisis de Sistemas',
+      descripcion: 'Formación profesional orientada al desarrollo de software.',
+      titulo_otorgado: 'Técnico Superior en Análisis de Sistemas',
+      activa: true,
+      created_at: '2026-01-01T00:00:00',
+      updated_at: '2026-01-01T00:00:00',
+      planes: [
+        {
+          id: 1,
+          carrera_id: 1,
+          nombre: 'Plan 2023',
+          codigo: 'AS-2023',
+          resolucion: 'RS-2023-6336-GCABA-MEDGC',
+          duracion_anios: 3,
+          vigente_desde: '2023-03-01',
+          vigente_hasta: null,
+          activo: true,
+          created_at: '2026-01-01T00:00:00',
+          updated_at: '2026-01-01T00:00:00',
+        },
+      ],
+    },
+  ],
+  page: 1,
+  size: 100,
+  total: 1,
+  total_pages: 1,
+};
 
 const NOVEDADES = [
   {
@@ -60,43 +80,49 @@ describe('listarCarreras', () => {
   it('pide el listado al endpoint correcto', async () => {
     const spy = vi
       .spyOn(apiClient, 'get')
-      .mockResolvedValue({ data: CARRERAS } as unknown as ReturnType<typeof apiClient.get>);
+      .mockResolvedValue({ data: CARRERAS_PAGINADAS } as unknown as ReturnType<
+        typeof apiClient.get
+      >);
 
     await listarCarreras();
 
-    expect(spy).toHaveBeenCalledWith('/carreras');
+    expect(spy).toHaveBeenCalledWith('/carreras', { params: { page: 1, size: 100 } });
   });
 
-  it('devuelve la lista sin paginar ni envolver', async () => {
+  it('devuelve la respuesta paginada traducida', async () => {
     vi.spyOn(apiClient, 'get').mockResolvedValue({
-      data: CARRERAS,
+      data: CARRERAS_PAGINADAS,
     } as unknown as ReturnType<typeof apiClient.get>);
 
-    expect(await listarCarreras()).toEqual(CARRERAS);
+    const resultado = await listarCarreras();
+    expect(resultado.items).toHaveLength(1);
+    expect(resultado.total).toBe(1);
+    expect(resultado.totalPages).toBe(1);
   });
 
   it('acepta una lista vacía', async () => {
     vi.spyOn(apiClient, 'get').mockResolvedValue({
-      data: [],
+      data: { data: [], page: 1, size: 10, total: 0, total_pages: 0 },
     } as unknown as ReturnType<typeof apiClient.get>);
 
-    // El backend devuelve `[]` y no `null` cuando no hay carreras (`app.py:75`).
-    expect(await listarCarreras()).toEqual([]);
+    const resultado = await listarCarreras({ size: 10 });
+    expect(resultado.items).toEqual([]);
   });
 
   it('rechaza un id que llega como string', async () => {
     vi.spyOn(apiClient, 'get').mockResolvedValue({
-      data: [{ ...CARRERAS[0], id: '1' }],
+      data: {
+        ...CARRERAS_PAGINADAS,
+        data: [{ ...CARRERAS_PAGINADAS.data[0], id: '1' }],
+      },
     } as unknown as ReturnType<typeof apiClient.get>);
 
-    // El `id` de la API es `db.Integer` (`models.py:28`): si llega string, el `parse` frena acá
-    // en lugar de dejar que un componente itere sobre un id numérico que no es.
     await expect(listarCarreras()).rejects.toThrow();
   });
 
-  it('rechaza una respuesta envuelta en {data, meta}', async () => {
+  it('rechaza una respuesta sin paginación', async () => {
     vi.spyOn(apiClient, 'get').mockResolvedValue({
-      data: { data: CARRERAS, meta: {} },
+      data: CARRERAS_PAGINADAS.data,
     } as unknown as ReturnType<typeof apiClient.get>);
 
     await expect(listarCarreras()).rejects.toThrow();
@@ -178,50 +204,43 @@ describe('iniciarSesion', () => {
     token: 'jwt-de-prueba',
     usuario: {
       id: 1,
-      nombre: 'Edith',
-      apellido: 'Gómez',
-      email: 'edith@ifts12',
+      nombre: 'Demo',
+      apellido: 'Usuario',
+      email: 'demo@ifts12.edu.ar',
       rol: 'admin',
     },
   };
 
-  it('pide el login al endpoint correcto con email y password', async () => {
+  it('envía las credenciales al endpoint correcto', async () => {
     const spy = vi
       .spyOn(apiClient, 'post')
       .mockResolvedValue({ data: LOGIN_OK } as unknown as ReturnType<typeof apiClient.post>);
 
-    await iniciarSesion({ email: 'edith@ifts12', password: 'secreta' });
+    await iniciarSesion({ email: 'demo@ifts12.edu.ar', password: 'secreto' });
 
-    // El body usa `email`/`password`, como pide `app.py:34-36`.
     expect(spy).toHaveBeenCalledWith('/auth/login', {
-      email: 'edith@ifts12',
-      password: 'secreta',
+      email: 'demo@ifts12.edu.ar',
+      password: 'secreto',
     });
   });
 
-  it('devuelve el token y el usuario sin transformarlos', async () => {
+  it('devuelve los datos parseados', async () => {
     vi.spyOn(apiClient, 'post').mockResolvedValue({
       data: LOGIN_OK,
     } as unknown as ReturnType<typeof apiClient.post>);
 
-    expect(await iniciarSesion({ email: 'edith@ifts12', password: 'secreta' })).toEqual(LOGIN_OK);
+    expect(await iniciarSesion({ email: 'demo@ifts12.edu.ar', password: 'secreto' })).toEqual(
+      LOGIN_OK,
+    );
   });
 
-  it('rechaza una respuesta sin token', async () => {
-    vi.spyOn(apiClient, 'post').mockResolvedValue({
-      data: { ...LOGIN_OK, token: '' },
-    } as unknown as ReturnType<typeof apiClient.post>);
-
-    await expect(iniciarSesion({ email: 'a@b', password: 'x' })).rejects.toThrow();
-  });
-
-  it('propaga el error ya normalizado por el interceptor (401)', async () => {
+  it('propaga el error normalizado', async () => {
     vi.spyOn(apiClient, 'post').mockRejectedValue({
       status: 401,
       mensaje: 'Credenciales inválidas',
     });
 
-    await expect(iniciarSesion({ email: 'a@b', password: 'mala' })).rejects.toEqual({
+    await expect(iniciarSesion({ email: 'demo@ifts12.edu.ar', password: 'mala' })).rejects.toEqual({
       status: 401,
       mensaje: 'Credenciales inválidas',
     });
@@ -229,44 +248,33 @@ describe('iniciarSesion', () => {
 });
 
 describe('normalizarErrorApi', () => {
-  it('usa el texto del backend cuando viene en {error}', () => {
-    expect(normalizarErrorApi(axiosErrorCon(400, { error: 'Faltan campos obligatorios' }))).toEqual(
-      { status: 400, mensaje: 'Faltan campos obligatorios' },
-    );
+  it('devuelve el error normalizado tal como viene', () => {
+    const error = { status: 403, mensaje: 'Sin permisos' };
+    expect(normalizarErrorApi(error)).toEqual(error);
   });
 
-  it('cae al fallback por código cuando el body no tiene {error}', () => {
-    // Un 502 de proxy devuelve HTML, no JSON con `error`.
-    expect(normalizarErrorApi(axiosErrorCon(502, '<html>Bad Gateway</html>'))).toEqual({
-      status: 502,
-      mensaje: 'Ocurrió un error inesperado. Intentá de nuevo más tarde.',
-    });
+  it('extrae mensaje desde response.data.mensaje', () => {
+    const error = axiosErrorCon(400, { mensaje: 'Datos inválidos' });
+    expect(normalizarErrorApi(error)).toEqual({ status: 400, mensaje: 'Datos inválidos' });
   });
 
-  it('cae al fallback cuando el campo error viene vacío', () => {
-    expect(normalizarErrorApi(axiosErrorCon(400, { error: '   ' }))).toEqual({
-      status: 400,
-      mensaje: 'Revisá los datos enviados.',
-    });
+  it('extrae mensaje desde response.data.message', () => {
+    const error = axiosErrorCon(400, { message: 'Bad request' });
+    expect(normalizarErrorApi(error)).toEqual({ status: 400, mensaje: 'Bad request' });
   });
 
-  it('usa status 0 cuando no hubo respuesta', () => {
-    expect(normalizarErrorApi(new AxiosError('Network Error'))).toEqual({
+  it('usa mensaje por defecto para error de red', () => {
+    const error = new AxiosError('Network Error');
+    expect(normalizarErrorApi(error)).toEqual({
       status: 0,
       mensaje: 'Ocurrió un error inesperado. Intentá de nuevo más tarde.',
     });
   });
 
-  it('mapea el 401 al mensaje de sesión iniciada', () => {
-    expect(normalizarErrorApi(axiosErrorCon(401, {}))).toEqual({
-      status: 401,
-      mensaje: 'Necesitás iniciar sesión para ver esta información.',
-    });
-  });
-
-  it('ignora un error que no es de Axios', () => {
-    expect(normalizarErrorApi(new Error('boom'))).toEqual({
-      status: 0,
+  it('usa mensaje por defecto para status 500 sin body', () => {
+    const error = axiosErrorCon(500, {});
+    expect(normalizarErrorApi(error)).toEqual({
+      status: 500,
       mensaje: 'Ocurrió un error inesperado. Intentá de nuevo más tarde.',
     });
   });

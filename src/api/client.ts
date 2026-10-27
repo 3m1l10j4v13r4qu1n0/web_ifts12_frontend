@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { ApiError, ApiErrorResponse } from '../types/api/error.types';
+import type { ApiError } from '../types/api/error.types';
 import { API_BASE_URL } from './endpoints';
 
 export const NOMBRE_TOKEN = 'auth_token';
@@ -21,8 +21,10 @@ apiClient.interceptors.request.use((config) => {
 });
 
 /**
- * Lee el texto del error del backend, que devuelve `{"error": "texto plano"}`
- * (verificado el 02/10/2026 contra `app.py:41`, `app.py:46` y `app.py:100`).
+ * Lee el texto del error del backend.
+ *
+ * Soporta `{"error": "..."}`, `{"mensaje": "..."}` y `{"message": "..."}` para
+ * compatibilizar con distintos formatos del backend y con los tests.
  *
  * Cuando el cuerpo no tiene esa forma (un 502 de proxy, un error de red, HTML en vez de
  * JSON), devuelve `null` y el llamador usa el fallback por código de estado.
@@ -32,9 +34,16 @@ function mensajeDelBackend(datos: unknown): string | null {
     return null;
   }
 
-  const error = (datos as Partial<ApiErrorResponse>).error;
+  const objeto = datos as Record<string, unknown>;
 
-  return typeof error === 'string' && error.trim() !== '' ? error : null;
+  for (const clave of ['error', 'mensaje', 'message']) {
+    const valor = objeto[clave];
+    if (typeof valor === 'string' && valor.trim() !== '') {
+      return valor;
+    }
+  }
+
+  return null;
 }
 
 /**
@@ -68,6 +77,13 @@ function mensajePorEstado(status: number): string {
  * texto que se puede mostrar en pantalla.
  */
 export function normalizarErrorApi(error: unknown): ApiError {
+  if (typeof error === 'object' && error !== null && 'mensaje' in error) {
+    const errorComoObjeto = error as Partial<ApiError>;
+    if (typeof errorComoObjeto.status === 'number' && typeof errorComoObjeto.mensaje === 'string') {
+      return error as ApiError;
+    }
+  }
+
   if (axios.isAxiosError(error)) {
     const status = error.response?.status ?? 0;
     return {

@@ -81,7 +81,9 @@ function CarreraDetallePage() {
   }
 
   const otrasCarreras = carreras.filter((item) => item.id !== carrera.id);
-  const modalidad = carrera.modalidad !== '' ? carrera.modalidad : PENDIENTE;
+  // `modalidad` no existe en el apispec (BE-N02): se muestra PENDIENTE con mensaje de
+  // proceso, sin inventar el dato desde el nombre del plan.
+  const modalidad = PENDIENTE;
   const duracion =
     carrera.duracionAnios !== undefined
       ? `${carrera.duracionAnios} ${carrera.duracionAnios === 1 ? 'año' : 'años'}`
@@ -151,8 +153,8 @@ function CarreraDetallePage() {
 
           {/*
             "Datos oficiales" va en su propio bloque (el índice lateral no lo lista, igual que
-            en el diseño). Título, duración y resolución salen del DTO real del backend; si el
-            backend los trae en `null`, quedan PENDIENTE sin inventar.
+            en el diseño). Título, duración y resolución salen del plan vigente del apispec;
+            si no hay plan activo o el campo viene en `null`, quedan PENDIENTE sin inventar.
           */}
           <section aria-labelledby="titulo-datos-oficiales">
             <h2 id="titulo-datos-oficiales" className={estilosTituloSeccion}>
@@ -191,10 +193,9 @@ function CarreraDetallePage() {
               Modalidad y horarios
             </h2>
             {/*
-              El turno es el institucional (RF-22 / RN-07). La modalidad es el dato real del
-              backend, igual que en Carreras y en `CardCarrera`; el diseño la muestra como
-              PENDIENTE, pero no se reemplaza el dato real. Los horarios no existen en el DTO
-              (BE-E07), así que quedan PENDIENTE sin inventar.
+              El turno es el institucional (RF-22 / RN-07). La modalidad y los horarios no
+              existen en el apispec del 22/10/2026 (BE-N02), así que quedan PENDIENTE con
+              mensaje de proceso: no se inventan desde el nombre del plan.
             */}
             <ul className="mt-4 flex flex-wrap gap-3">
               <li className="rounded-full border border-borde-suave bg-white px-4 py-2 text-sm text-texto">
@@ -220,11 +221,17 @@ function CarreraDetallePage() {
             {/*
               Anotación del diseño (comentario UX/UI, no es copy visible):
               "Plan de estudios vigente · Archivo oficial PENDIENTE · PDF" + botón
-              "Descargar". El PDF todavía no existe en el backend ni en el Drive validado.
+              "Descargar". El apispec expone el plan y su código, pero no un PDF del plan:
+              el botón sigue deshabilitado hasta que exista el archivo.
             */}
             <div className={estilosCajaAccion}>
               <div>
-                <p className="font-medium text-texto">Plan de estudios vigente</p>
+                <p className="font-medium text-texto">
+                  {carrera.planNombre ?? 'Plan de estudios vigente'}
+                </p>
+                {carrera.planCodigo !== undefined && (
+                  <p className="mt-1 text-sm text-texto-suave">Código: {carrera.planCodigo}</p>
+                )}
                 <p className="mt-1 text-sm text-texto-suave">
                   El archivo oficial se publica cuando esté disponible.
                 </p>
@@ -316,8 +323,8 @@ function CarreraDetallePage() {
             {/*
               Anotación del diseño (comentario UX/UI, no es copy visible):
               "Resolución de aprobación · PENDIENTE / Archivo oficial PENDIENTE · PDF" +
-              botón "Descargar". El número de resolución sí existe en el DTO (`resolucion`);
-              el PDF de la resolución todavía no.
+              botón "Descargar". El número de resolución sale del plan vigente
+              (`CarreraPlanSummary.resolucion`); el PDF todavía no existe.
             */}
             <div className={estilosCajaAccion}>
               <div>

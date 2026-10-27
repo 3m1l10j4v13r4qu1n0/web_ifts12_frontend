@@ -1,21 +1,20 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { Route, Routes } from 'react-router-dom';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { listarCarreras } from '../api/services/carrera.service';
+import { listarTodasLasCarreras } from '../api/services/carrera.service';
 import { listarNovedades } from '../api/services/novedad.service';
 import BuscadorGlobal from '../components/layout/BuscadorGlobal';
 import { useNovedades } from '../hooks/useNovedades';
 import HomePage from '../pages/HomePage';
 import NotaCompletaPage from '../pages/NotaCompletaPage';
 import NoticiasPage from '../pages/NoticiasPage';
-import { CARRERAS_API_FIJA, NOVEDADES_API_FIJA, renderConRouter } from '../test-utils';
-import type { CarreraApi } from '../types/api/carrera.types';
+import { NOVEDADES_API_FIJA, PAGINA_CARRERAS_API_FIJA, renderConRouter } from '../test-utils';
 import type { NovedadApi } from '../types/api/novedad.types';
 
 vi.mock('../api/services/carrera.service');
 vi.mock('../api/services/novedad.service');
 
-const listarCarrerasMock = vi.mocked(listarCarreras);
+const listarTodasLasCarrerasMock = vi.mocked(listarTodasLasCarreras);
 const listarNovedadesMock = vi.mocked(listarNovedades);
 
 /** Sonda mínima para leer el estado del hook sin depender del marcado de una página. */
@@ -34,8 +33,8 @@ function SondaNovedades() {
 describe('novedades aisladas por contrato', () => {
   beforeEach(() => {
     vi.stubEnv('VITE_NOVEDADES_HABILITADAS', 'false');
-    listarCarrerasMock.mockReset();
-    listarCarrerasMock.mockResolvedValue(CARRERAS_API_FIJA as CarreraApi[]);
+    listarTodasLasCarrerasMock.mockReset();
+    listarTodasLasCarrerasMock.mockResolvedValue(PAGINA_CARRERAS_API_FIJA);
     listarNovedadesMock.mockReset();
     listarNovedadesMock.mockResolvedValue(NOVEDADES_API_FIJA as NovedadApi[]);
   });
@@ -102,7 +101,7 @@ describe('novedades aisladas por contrato', () => {
     });
 
     expect(screen.queryByText('Inscripciones abiertas para el ciclo lectivo 2026')).toBeNull();
-    expect(listarCarrerasMock).toHaveBeenCalled();
+    expect(listarTodasLasCarrerasMock).toHaveBeenCalled();
     expect(listarNovedadesMock).not.toHaveBeenCalled();
   });
 });
