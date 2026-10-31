@@ -170,8 +170,8 @@ function AdminLoginPage() {
             </form>
 
             <p className="mt-4 text-xs text-texto-suave">
-              ¿Olvidaste tu contraseña? Contactá a quien administra el sitio (procedimiento de
-              recuperación pendiente).
+              ¿Olvidaste tu contraseña? Contactá a quien administra el sitio para recuperar el
+              acceso.
             </p>
 
             {/* Bloque "Roles y permisos (RF-24)" del frame: mensaje de proceso, sin
@@ -179,8 +179,7 @@ function AdminLoginPage() {
             <div className="mt-4 rounded-lg border border-borde-suave bg-white p-4">
               <p className="text-sm font-semibold text-texto">Roles y permisos</p>
               <p className="mt-2 rounded border border-dashed border-aviso bg-amber-50 px-3 py-2 text-xs text-aviso">
-                Los roles y permisos se definen con Análisis Funcional; todavía no se muestran
-                perfiles en este formulario.
+                Acceso para Administrador y Editor. Cada persona debe utilizar su cuenta autorizada.
               </p>
             </div>
           </section>

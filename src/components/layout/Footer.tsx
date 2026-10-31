@@ -72,7 +72,7 @@ function EnlacePlataforma({ acceso }: { acceso: AccesoExterno }) {
 const ISOLOGOTIPOS = [
   { src: '/logoCABA.png', alt: 'Gobierno de la Ciudad de Buenos Aires' },
   { src: '/IFTS12.jpg', alt: 'IFTS N.º 12' },
-  { src: '/logoUpcn.png', alt: 'UPCN' },
+  { src: '/logoUpcn-oficial.png', alt: 'UPCN' },
 ];
 
 function Footer() {
@@ -125,16 +125,24 @@ function Footer() {
           <FormularioConsulta titulo="¿Tenés dudas? Escribinos" />
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-6 border-t border-slate-800 pt-8">
+        <section
+          aria-label="Identidad institucional"
+          className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-8 rounded-xl bg-white px-6 py-8 sm:px-10"
+        >
           {ISOLOGOTIPOS.map((logo) => (
             <img
               key={logo.src}
               src={logo.src}
               alt={logo.alt}
-              className="h-10 w-auto bg-white/90 p-1"
+              className={
+                logo.alt === 'UPCN'
+                  ? 'h-auto w-64 max-w-full object-contain'
+                  : 'h-32 w-36 object-contain sm:h-40 sm:w-44'
+              }
+              loading="lazy"
             />
           ))}
-        </div>
+        </section>
 
         <div className="mt-8 border-t border-slate-800 pt-4 text-center">
           <p className="text-xs text-slate-500">

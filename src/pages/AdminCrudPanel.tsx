@@ -247,6 +247,7 @@ function CrudAcademico({ seccion }: { seccion: SeccionAdmin }) {
         )
       )}
       <ModalBaja
+        etiquetaConfirmar={seccion.estado ? 'Dar de baja' : 'Quitar vínculo'}
         abierto={baja !== null}
         titulo={seccion.estado ? '¿Dar de baja este registro?' : '¿Quitar este vínculo?'}
         mensaje={

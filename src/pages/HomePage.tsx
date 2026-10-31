@@ -83,6 +83,7 @@ function HomePage() {
         titulo="Instituto de Formación Técnica Superior N.º 12"
         subtitulo="Formación técnica superior, pública y de calidad."
         slides={slidesInstitucionales.length ? slidesInstitucionales : slidesNovedades}
+        etiquetaContenido={slidesInstitucionales.length ? 'Actividad institucional' : 'Novedad'}
         cargando={cargandoNovedades}
         mensajeVacio={
           novedadesDisponibles

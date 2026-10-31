@@ -12,7 +12,7 @@ export default function ContenidoAcademico({ slug }: { slug: string }) {
   ];
   return (
     <>
-      <section id="materias-y-correlatividades" className="scroll-mt-24">
+      <section id="materias-y-correlatividades" className="scroll-mt-52">
         <h2 className="text-2xl font-bold">Materias y correlatividades</h2>
         {consulta.isError || materias.isError ? (
           <p role="alert">
@@ -51,7 +51,7 @@ export default function ContenidoAcademico({ slug }: { slug: string }) {
           Para consultar las correlatividades, revisá la documentación de la carrera.
         </p>
       </section>
-      <section id="programas" className="scroll-mt-24">
+      <section id="programas" className="scroll-mt-52">
         <h2 className="text-2xl font-bold">Programas</h2>
         <ul className="mt-4 space-y-3">
           {detalles
@@ -72,7 +72,7 @@ export default function ContenidoAcademico({ slug }: { slug: string }) {
           <p className="mt-4">Los programas individuales se publican cuando estén disponibles.</p>
         )}
       </section>
-      <section id="cuerpo-docente" className="scroll-mt-24">
+      <section id="cuerpo-docente" className="scroll-mt-52">
         <h2 className="text-2xl font-bold">Cuerpo docente</h2>
         {docentes.length ? (
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">

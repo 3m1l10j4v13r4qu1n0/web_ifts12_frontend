@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import type { Carrera } from '../../types/domain/sitio.types';
 
 interface CardCarreraProps {
@@ -12,6 +13,13 @@ function CardCarrera({ carrera }: CardCarreraProps) {
         Turno nocturno
       </p>
       <p className="mt-2 text-sm text-texto-suave">{carrera.descripcionBreve}</p>
+      <Link
+        to={`/carreras/${carrera.id}`}
+        className="mt-4 inline-flex min-h-11 items-center font-medium text-acento-700 underline underline-offset-2"
+        aria-label={`Ver carrera: ${carrera.nombre}`}
+      >
+        Ver carrera →
+      </Link>
     </article>
   );
 }

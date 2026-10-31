@@ -32,7 +32,7 @@ const ACCIONES_INSCRIPCION = {
   queda: ENLACES.inscripcion === '',
 };
 
-const estilosSeccion = 'scroll-mt-24';
+const estilosSeccion = 'scroll-mt-52';
 const estilosTituloSeccion = 'text-2xl font-bold text-texto';
 const estilosCajaAccion =
   'mt-4 flex flex-col gap-4 rounded-xl border border-borde-suave bg-white p-5 sm:flex-row sm:items-center sm:justify-between';

@@ -47,14 +47,14 @@ function Header() {
         </div>
       </div>
 
-      <div className="mx-auto flex h-16 max-w-contenido items-center gap-4 px-4">
-        <Link to="/" className="flex shrink-0 items-center gap-2">
+      <div className="mx-auto flex min-h-24 max-w-contenido items-center gap-4 px-4 py-3 sm:min-h-28">
+        <Link to="/" className="flex shrink-0 items-center gap-4">
           <img
             src="/logoCABA.png"
             alt="Gobierno de la Ciudad de Buenos Aires"
-            className="h-10 w-auto"
+            className="h-16 w-auto object-contain sm:h-20"
           />
-          <img src="/apple-touch-icon.png" alt="IFTS N.º 12" className="h-10 w-auto" />
+          <img src="/IFTS12.jpg" alt="IFTS N.º 12" className="h-16 w-auto object-contain sm:h-20" />
         </Link>
 
         <div className="ml-auto hidden w-full max-w-xs md:block md:w-72">

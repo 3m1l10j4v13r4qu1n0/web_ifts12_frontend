@@ -120,6 +120,7 @@ interface CarruselInstitucionalProps {
   subtitulo?: string;
   slides: SlideCarrusel[];
   etiquetaAccion?: string;
+  etiquetaContenido?: string;
   /** `true` mientras se consultan las novedades: muestra un esqueleto en vez de dejar vacío. */
   cargando?: boolean;
   /**
@@ -147,6 +148,7 @@ function CarruselInstitucional({
   subtitulo,
   slides,
   etiquetaAccion = 'Ver la nota',
+  etiquetaContenido = 'Novedad',
   cargando = false,
   mensajeVacio,
   autoAvanceMs,
@@ -202,7 +204,9 @@ function CarruselInstitucional({
                   />
                 )}
                 <p className="text-sm font-medium uppercase tracking-wide text-acento-200">
-                  {slide.fecha !== undefined && slide.fecha !== '' ? slide.fecha : 'Novedad'}
+                  {slide.fecha !== undefined && slide.fecha !== ''
+                    ? slide.fecha
+                    : etiquetaContenido}
                 </p>
                 <h2 className="mt-2 text-2xl font-semibold text-white">{slide.titulo}</h2>
                 <p className="mt-3 max-w-2xl text-base text-slate-200">{slide.resumen}</p>

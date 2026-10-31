@@ -5,6 +5,7 @@ interface ModalBajaProps {
   abierto: boolean;
   titulo?: string;
   mensaje?: string;
+  etiquetaConfirmar?: string;
   onCancelar: () => void;
   onConfirmar: () => void;
 }
@@ -18,6 +19,7 @@ function ModalBaja({
   abierto,
   titulo = '¿Eliminar este contenido?',
   mensaje = 'Dejará de verse en el sitio. Esta acción no se puede deshacer.',
+  etiquetaConfirmar = 'Eliminar',
   onCancelar,
   onConfirmar,
 }: ModalBajaProps) {
@@ -57,7 +59,7 @@ function ModalBaja({
             Cancelar
           </Button>
           <Button variante="primario" onClick={onConfirmar}>
-            Eliminar
+            {etiquetaConfirmar}
           </Button>
         </div>
       </div>

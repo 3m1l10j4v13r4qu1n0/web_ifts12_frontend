@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { useConsulta } from '../../hooks/useConsulta';
 import Checkbox from './Checkbox';
 import ModuloNoDisponible from './ModuloNoDisponible';
@@ -39,6 +39,7 @@ function FormularioConsulta({
   conPrivacidad = false,
   etiquetaMensaje = 'Consulta',
 }: FormularioConsultaProps) {
+  const formularioId = useId();
   const [nombre, setNombre] = useState('');
   const [correo, setCorreo] = useState('');
   const [asunto, setAsunto] = useState('');
@@ -134,11 +135,14 @@ function FormularioConsulta({
       <form onSubmit={enviar} noValidate className="mt-4" aria-live="polite">
         <fieldset disabled={!habilitado || enviando} className="space-y-4">
           <div>
-            <label htmlFor="consulta-nombre" className="block text-sm font-medium text-texto">
+            <label
+              htmlFor={`${formularioId}-nombre`}
+              className="block text-sm font-medium text-texto"
+            >
               Nombre y apellido
             </label>
             <input
-              id="consulta-nombre"
+              id={`${formularioId}-nombre`}
               type="text"
               value={nombre}
               onChange={(evento) => setNombre(evento.target.value)}
@@ -153,11 +157,14 @@ function FormularioConsulta({
           </div>
 
           <div>
-            <label htmlFor="consulta-correo" className="block text-sm font-medium text-texto">
+            <label
+              htmlFor={`${formularioId}-correo`}
+              className="block text-sm font-medium text-texto"
+            >
               Correo electrónico
             </label>
             <input
-              id="consulta-correo"
+              id={`${formularioId}-correo`}
               type="email"
               value={correo}
               onChange={(evento) => setCorreo(evento.target.value)}
@@ -173,11 +180,14 @@ function FormularioConsulta({
 
           {conAsunto && (
             <div>
-              <label htmlFor="consulta-asunto" className="block text-sm font-medium text-texto">
+              <label
+                htmlFor={`${formularioId}-asunto`}
+                className="block text-sm font-medium text-texto"
+              >
                 Asunto
               </label>
               <select
-                id="consulta-asunto"
+                id={`${formularioId}-asunto`}
                 value={asunto}
                 onChange={(evento) => setAsunto(evento.target.value)}
                 aria-invalid={errores.asunto !== undefined}
@@ -199,11 +209,14 @@ function FormularioConsulta({
           )}
 
           <div>
-            <label htmlFor="consulta-mensaje" className="block text-sm font-medium text-texto">
+            <label
+              htmlFor={`${formularioId}-mensaje`}
+              className="block text-sm font-medium text-texto"
+            >
               {etiquetaMensaje}
             </label>
             <textarea
-              id="consulta-mensaje"
+              id={`${formularioId}-mensaje`}
               rows={3}
               value={consulta}
               onChange={(evento) => setConsulta(evento.target.value)}
@@ -220,7 +233,7 @@ function FormularioConsulta({
           {conPrivacidad && (
             <div>
               <Checkbox
-                id="consulta-privacidad"
+                id={`${formularioId}-privacidad`}
                 checked={privacidad}
                 onChange={(evento) => setPrivacidad(evento.target.checked)}
                 aria-invalid={errores.privacidad !== undefined}

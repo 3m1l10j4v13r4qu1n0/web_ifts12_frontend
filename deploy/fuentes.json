@@ -45,5 +45,29 @@
   {
     "datos": "Cinco respuestas sin marcadores pendientes; ALUMNOS 22/10/2026",
     "fuente": "https://docs.google.com/document/d/1s4LuLUPXMJnNWmrFnJi-xxO0PI6gK-WjFqM1a0UidLo/edit"
+  },
+  {
+    "archivo": "logoUpcn.png",
+    "sha256": "c6546210fbd987e4ef7e01d2bc9ec848ef808d95a542be5368d1920a982ca286",
+    "fuente": "https://drive.google.com/file/d/1Rk8W4Cdb2jtMrTHmpIn4YWxshLzYdhzK/view",
+    "uso": "Identidad institucional, proporciones originales sobre blanco"
+  },
+  {
+    "archivo": "logoCABA.png",
+    "sha256": "0e6ecf7e64fc93761668df1f05715ce9cb0688d2c7ec8bc40b9c60675cb85586",
+    "fuente": "https://drive.google.com/file/d/1QUkt4Y9ZJw3PCMzqMQnrf38N1mEE3-Xz/view",
+    "uso": "Identidad institucional, proporciones originales sobre blanco"
+  },
+  {
+    "archivo": "IFTS12.jpg",
+    "sha256": "28b593204b486aaa6b937d29a7b75a6fb160ec4574c0577d869de8d042385a13",
+    "fuente": "https://drive.google.com/file/d/1ir2yJ-iSrPXOtjk0DJ1zpb3SM7e3E9n5/view",
+    "uso": "Identidad institucional, proporciones originales sobre blanco"
+  },
+  {
+    "archivo": "logoUpcn-oficial.png",
+    "fuente": "https://upcndigital.org/template/2014/imgs/logos/UPCN-19.png",
+    "sha256": "ec16782620bd542efcd1fe72800609ede4f1797b12c2998db16d590080b5dd8a",
+    "uso": "Logo solicitado expresamente por el profesor; sustituye la versión anterior del pie."
   }
 ]
