@@ -145,6 +145,15 @@ function Footer() {
         </section>
 
         <div className="mt-8 border-t border-slate-800 pt-4 text-center">
+          {/* Acceso temporal solicitado por el profesor; se oculta desde la configuración del build. */}
+          {import.meta.env.VITE_MOSTRAR_ACCESO_ADMIN === 'true' && (
+            <Link
+              to="/admin/login"
+              className="mb-4 inline-flex min-h-11 items-center rounded-md border border-slate-600 px-4 text-xs text-slate-200 transition-colors hover:border-white hover:text-white"
+            >
+              Administración
+            </Link>
+          )}
           <p className="text-xs text-slate-500">
             © {new Date().getFullYear()} {DATOS_INSTITUCIONALES.nombre} · Gobierno de la Ciudad de
             Buenos Aires
