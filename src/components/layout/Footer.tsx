@@ -136,8 +136,8 @@ function Footer() {
               alt={logo.alt}
               className={
                 logo.alt === 'UPCN'
-                  ? 'h-auto w-56 max-w-full object-contain grayscale invert contrast-[10] mix-blend-screen'
-                  : 'h-20 w-24 object-contain grayscale invert contrast-[10] mix-blend-screen sm:h-24 sm:w-28'
+                  ? 'h-auto w-[202px] max-w-full object-contain grayscale invert contrast-[10] mix-blend-screen'
+                  : 'h-[72px] w-[86px] object-contain grayscale invert contrast-[10] mix-blend-screen sm:h-[86px] sm:w-[101px]'
               }
               loading="lazy"
             />
