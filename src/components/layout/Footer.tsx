@@ -18,7 +18,7 @@ const DATOS_INSTITUCIONALES = {
 function EnlaceColumna({ item }: { item: ItemNavegacion }) {
   if (item.href === '') {
     return (
-      <li aria-disabled="true" className="cursor-default text-sm text-slate-600">
+      <li aria-disabled="true" className="cursor-default text-sm text-slate-400">
         {item.etiqueta}
       </li>
     );
@@ -27,10 +27,7 @@ function EnlaceColumna({ item }: { item: ItemNavegacion }) {
   if (item.href.startsWith('/')) {
     return (
       <li>
-        <Link
-          to={item.href}
-          className="text-sm text-slate-700 transition-colors hover:text-acento-700"
-        >
+        <Link to={item.href} className="text-sm text-slate-300 transition-colors hover:text-white">
           {item.etiqueta}
         </Link>
       </li>
@@ -41,7 +38,7 @@ function EnlaceColumna({ item }: { item: ItemNavegacion }) {
     <li>
       <a
         href={item.href}
-        className="text-sm text-slate-700 transition-colors hover:text-acento-700"
+        className="text-sm text-slate-300 transition-colors hover:text-white"
         rel="noopener noreferrer"
       >
         {item.etiqueta}
@@ -53,7 +50,7 @@ function EnlaceColumna({ item }: { item: ItemNavegacion }) {
 function EnlacePlataforma({ acceso }: { acceso: AccesoExterno }) {
   if (acceso.href === '') {
     return (
-      <li aria-disabled="true" className="cursor-default text-sm text-slate-600">
+      <li aria-disabled="true" className="cursor-default text-sm text-slate-400">
         {acceso.etiqueta}
       </li>
     );
@@ -63,7 +60,7 @@ function EnlacePlataforma({ acceso }: { acceso: AccesoExterno }) {
     <li>
       <a
         href={acceso.href}
-        className="text-sm text-slate-700 transition-colors hover:text-acento-700"
+        className="text-sm text-slate-300 transition-colors hover:text-white"
         rel="noopener noreferrer"
       >
         {acceso.etiqueta}
@@ -80,20 +77,20 @@ const ISOLOGOTIPOS = [
 
 function Footer() {
   return (
-    <footer className="border-t border-slate-200 bg-white text-slate-700">
+    <footer className="bg-slate-900 text-slate-300">
       <div className="mx-auto max-w-contenido px-4 py-10">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <h2 className="text-lg font-semibold text-slate-900">{DATOS_INSTITUCIONALES.nombre}</h2>
-            <p className="mt-2 text-sm text-slate-600">{DATOS_INSTITUCIONALES.organismo}</p>
+            <h2 className="text-lg font-semibold text-white">{DATOS_INSTITUCIONALES.nombre}</h2>
+            <p className="mt-2 text-sm text-slate-400">{DATOS_INSTITUCIONALES.organismo}</p>
             <address className="mt-4 not-italic">
-              <p className="text-sm text-slate-700">{DATOS_INSTITUCIONALES.direccion}</p>
-              <p className="text-sm text-slate-700">{DATOS_INSTITUCIONALES.horario}</p>
+              <p className="text-sm text-slate-300">{DATOS_INSTITUCIONALES.direccion}</p>
+              <p className="text-sm text-slate-300">{DATOS_INSTITUCIONALES.horario}</p>
             </address>
           </div>
 
           <nav aria-label="Mapa del sitio en el pie">
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-900">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-white">
               Mapa del sitio
             </h2>
             <ul className="mt-3 space-y-2">
@@ -104,9 +101,7 @@ function Footer() {
           </nav>
 
           <nav aria-label="Servicios en el pie">
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-900">
-              Servicios
-            </h2>
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-white">Servicios</h2>
             <ul className="mt-3 space-y-2">
               {NAV_FOOTER_SERVICIOS.map((item) => (
                 <EnlaceColumna key={item.etiqueta} item={item} />
@@ -115,7 +110,7 @@ function Footer() {
           </nav>
 
           <nav aria-label="Plataformas externas en el pie">
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-900">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-white">
               Plataformas externas
             </h2>
             <ul className="mt-3 space-y-2">
@@ -126,13 +121,13 @@ function Footer() {
           </nav>
         </div>
 
-        <div className="mt-10 border-t border-slate-200 pt-8">
+        <div className="mt-10 border-t border-slate-800 pt-8">
           <FormularioConsulta titulo="¿Tenés dudas? Escribinos" />
         </div>
 
         <section
           aria-label="Identidad institucional"
-          className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-8 border-t border-slate-200 py-8"
+          className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-8 border-t border-slate-800 py-8"
         >
           {ISOLOGOTIPOS.map((logo) => (
             <img
@@ -141,29 +136,29 @@ function Footer() {
               alt={logo.alt}
               className={
                 logo.alt === 'UPCN'
-                  ? 'h-auto w-56 max-w-full object-contain'
-                  : 'h-20 w-24 object-contain sm:h-24 sm:w-28'
+                  ? 'h-auto w-56 max-w-full object-contain grayscale invert contrast-[10] mix-blend-screen'
+                  : 'h-20 w-24 object-contain grayscale invert contrast-[10] mix-blend-screen sm:h-24 sm:w-28'
               }
               loading="lazy"
             />
           ))}
         </section>
 
-        <div className="mt-8 border-t border-slate-200 pt-4 text-center">
+        <div className="mt-8 border-t border-slate-800 pt-4 text-center">
           {/* Acceso temporal solicitado por el profesor; se oculta desde la configuración del build. */}
           {import.meta.env.VITE_MOSTRAR_ACCESO_ADMIN === 'true' && (
             <Link
               to="/admin/login"
-              className="mb-4 inline-flex min-h-11 items-center rounded-md border border-slate-300 px-4 text-xs text-slate-600 transition-colors hover:border-acento-600 hover:text-acento-700"
+              className="mb-4 inline-flex min-h-11 items-center rounded-md border border-slate-600 px-4 text-xs text-slate-200 transition-colors hover:border-white hover:text-white"
             >
               Administración
             </Link>
           )}
-          <p className="text-xs text-slate-600">
+          <p className="text-xs text-slate-400">
             © {new Date().getFullYear()} {DATOS_INSTITUCIONALES.nombre} · Gobierno de la Ciudad de
             Buenos Aires
           </p>
-          <p className="mt-1 text-xs text-slate-600">
+          <p className="mt-1 text-xs text-slate-400">
             Sitio en construcción: los contenidos institucionales se validan con el equipo de UX/UI.
           </p>
         </div>
