@@ -52,9 +52,13 @@ function Header() {
           <img
             src="/logoCABA.png"
             alt="Gobierno de la Ciudad de Buenos Aires"
-            className="h-16 w-auto object-contain sm:h-20"
+            className="h-[59px] w-auto object-contain sm:h-[74px]"
           />
-          <img src="/IFTS12.jpg" alt="IFTS N.º 12" className="h-16 w-auto object-contain sm:h-20" />
+          <img
+            src="/IFTS12.jpg"
+            alt="IFTS N.º 12"
+            className="h-[59px] w-auto object-contain sm:h-[74px]"
+          />
         </Link>
 
         <div className="ml-auto hidden w-full max-w-xs md:block md:w-72">
