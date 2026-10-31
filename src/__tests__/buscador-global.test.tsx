@@ -1,4 +1,6 @@
 import { fireEvent, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { useLocation } from 'react-router-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { listarTodasLasCarreras } from '../api/services/carrera.service';
 import { listarNovedades } from '../api/services/novedad.service';
@@ -13,7 +15,17 @@ const listarTodasLasCarrerasMock = vi.mocked(listarTodasLasCarreras);
 const listarNovedadesMock = vi.mocked(listarNovedades);
 
 function renderizarBuscador() {
-  return renderConRouter(<BuscadorGlobal />);
+  return renderConRouter(
+    <>
+      <BuscadorGlobal />
+      <RutaActual />
+    </>,
+  );
+}
+
+function RutaActual() {
+  const ruta = useLocation();
+  return <output data-testid="ruta-actual">{ruta.pathname + ruta.search}</output>;
 }
 
 function escribir(texto: string) {
@@ -72,6 +84,28 @@ describe('BuscadorGlobal', () => {
     escribir('textoquenoexiste');
 
     expect(await screen.findByText(/Sin resultados/)).toBeInTheDocument();
+  });
+
+  it('mantiene las sugerencias al tabular y abre la seleccionada con Enter', async () => {
+    const user = userEvent.setup();
+    renderizarBuscador();
+    await user.type(screen.getByRole('combobox'), 'sistemas');
+    const sugerencia = await screen.findByRole('button', {
+      name: /Tecnicatura Superior en Análisis de Sistemas/,
+    });
+    await user.tab();
+    expect(sugerencia).toHaveFocus();
+    await user.keyboard('{Enter}');
+    expect(screen.getByTestId('ruta-actual')).toHaveTextContent('/carreras/analisis-de-sistemas');
+    expect(sugerencia).not.toBeInTheDocument();
+  });
+
+  it('abre todos los resultados sin desmontar el enlace antes del clic', async () => {
+    const user = userEvent.setup();
+    renderizarBuscador();
+    await user.type(screen.getByRole('combobox'), 'sistemas');
+    await user.click(screen.getByRole('link', { name: 'Ver todos los resultados' }));
+    expect(screen.getByTestId('ruta-actual')).toHaveTextContent('/buscar?q=sistemas');
   });
 
   it('igual sigue buscando secciones y FAQs si la API falla', async () => {

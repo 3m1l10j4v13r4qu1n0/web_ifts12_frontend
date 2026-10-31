@@ -1,4 +1,4 @@
-import { useId, useMemo, useRef, useState } from 'react';
+import { useId, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCarreras } from '../../hooks/useCarreras';
 import { useNovedades } from '../../hooks/useNovedades';
@@ -12,7 +12,6 @@ function BuscadorGlobal() {
   const [abierto, setAbierto] = useState(false);
   const inputId = useId();
   const resultadosId = useId();
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const navigate = useNavigate();
 
   // El buscador indexa lo mismo que muestran las páginas: si siguiera sobre los mocks,
@@ -30,11 +29,6 @@ function BuscadorGlobal() {
     setAbierto(true);
   };
 
-  const cerrarConRetraso = () => {
-    window.clearTimeout(timeoutRef.current);
-    timeoutRef.current = window.setTimeout(() => setAbierto(false), 150);
-  };
-
   const irAPrimerResultado = (evento: React.FormEvent<HTMLFormElement>) => {
     evento.preventDefault();
 
@@ -45,7 +39,13 @@ function BuscadorGlobal() {
   };
 
   return (
-    <form onSubmit={irAPrimerResultado} className="relative">
+    <form
+      onSubmit={irAPrimerResultado}
+      onBlur={(evento) => {
+        if (!evento.currentTarget.contains(evento.relatedTarget)) setAbierto(false);
+      }}
+      className="relative"
+    >
       <label htmlFor={inputId} className="sr-only">
         Buscar en el sitio
       </label>
@@ -61,7 +61,6 @@ function BuscadorGlobal() {
           abrir();
         }}
         onFocus={abrir}
-        onBlur={cerrarConRetraso}
         aria-expanded={mostrarResultados}
         aria-autocomplete="list"
         aria-controls={mostrarResultados ? resultadosId : undefined}
@@ -81,7 +80,10 @@ function BuscadorGlobal() {
                 <li key={resultado.id}>
                   <button
                     type="button"
-                    onMouseDown={() => navigate(resultado.href)}
+                    onClick={() => {
+                      navigate(resultado.href);
+                      setAbierto(false);
+                    }}
                     className="flex w-full flex-col gap-0.5 px-4 py-3 text-left transition-colors hover:bg-fondo"
                   >
                     <span className="text-sm font-medium text-texto">{resultado.titulo}</span>
@@ -98,7 +100,7 @@ function BuscadorGlobal() {
           )}
           <Link
             to={`/buscar?q=${encodeURIComponent(consulta)}`}
-            onMouseDown={() => setAbierto(false)}
+            onClick={() => setAbierto(false)}
             className="block border-t border-borde-suave px-4 py-3 text-center text-sm font-medium text-acento-700 transition-colors hover:bg-fondo"
           >
             Ver todos los resultados

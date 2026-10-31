@@ -6,14 +6,13 @@ Reemplaza el espacio actual alojado en Moodle por un sitio web institucional acc
 claro y fácilmente administrable por el propio instituto. El backend se integra luego
 con APIs y la web se despliega como build estático en un VPS independiente del Moodle.
 
-> **Estado:** completadas las 10 fases (`develop` cierra la Fase 10 con `v1.11.0`) y el
-> aislamiento de módulos fuera del apispec (23/10/2026): novedades, autenticación y contacto
-> quedan **deshabilitados por bandera** hasta que figuren en el contrato vigente
-> (`inbox/apispec_1.json`). Se actualizó el header (sin menú de cuenta), se agregaron
-> breakpoints 768/1024, mejoras de accesibilidad/táctiles, focus trap en menú móvil y FAQ en
-> el footer. El sitio tiene **32 archivos de test**, **244 tests** en verde, lint y build OK.
-> Carreras se consume en modo real; el resto del sitio sigue con datos simulados. La evidencia
-> de navegación está en `documentacion/screenshots/`.
+> **Estado TEST al 31/10/2026:** primer despliegue integrado en
+> https://ifts12-test.tail5bd71a.ts.net/. Carreras, planes, materias, docentes,
+> novedades, slider, login y contacto usan la API real `/api/v1`.
+> Panel académico básico con Administrador y Editor; ambos tienen temporalmente
+> los mismos permisos de contenido. Persistencia SQLite en el ODROID.
+> Los módulos se habilitan con `deploy/test.env`; no contiene secretos.
+> Ver `docs/project_state.md` para validación y pendientes; QA integral todavía pendiente.
 
 ## Tecnología
 
@@ -52,8 +51,8 @@ npm run build    # produce dist/ listo para servir desde Nginx
 ```
 
 El `dist/` resultante es estático: requiere la regla de fallback SPA (`try_files ... /index.html`)
-en Nginx. Las variables de entorno del build (`VITE_*`) se están coordinando con Infra; al
-cerrarse esa definición se documentarán acá los valores y el `.env.example` correspondiente.
+en Nginx. Las variables públicas verificadas están en `deploy/test.env`; cargarlas en el entorno
+antes de ejecutar el build. No incluir contraseñas ni tokens en variables `VITE_*`.
 
 ## Estructura del proyecto
 

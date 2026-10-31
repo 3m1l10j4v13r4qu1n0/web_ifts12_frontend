@@ -144,6 +144,7 @@ function FormularioConsulta({
             <input
               id={`${formularioId}-nombre`}
               type="text"
+              maxLength={100}
               value={nombre}
               onChange={(evento) => setNombre(evento.target.value)}
               aria-invalid={errores.nombre !== undefined}
@@ -166,6 +167,7 @@ function FormularioConsulta({
             <input
               id={`${formularioId}-correo`}
               type="email"
+              maxLength={120}
               value={correo}
               onChange={(evento) => setCorreo(evento.target.value)}
               aria-invalid={errores.correo !== undefined}
