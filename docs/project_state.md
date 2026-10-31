@@ -11,6 +11,27 @@ fase: fase-10
 
 ## Fase actual del roadmap
 
+### Integración TEST del 31 de octubre de 2026
+
+Rama de integración autorizada `fix/integracion-test-20261031`, desde Front
+`33f995448f31e94895db1f40497004a940848b8f` y el contrato real del Back
+`dff587c1a716008d5c8149cb98d07a7b0dc88a2e`. Se corrigieron origen relativo y
+prefijo `/api/v1`, login con `{data: {access_token, usuario}}`, novedades
+paginadas (`cuerpo`, `fecha`) y envío real de contacto con confirmación solamente
+después de una respuesta válida. `deploy/test.env` habilita esos módulos y
+configura los enlaces Moodle/SIU que constan en ALUMNOS del paquete del profesor.
+
+Por ampliación expresa del profesor, se implementó un panel CRUD básico de
+carreras, planes, materias, docentes y relaciones. Administrador y Editor tienen
+provisionalmente los mismos permisos. El panel guarda mediante la API real;
+las fichas públicas consultan materias/docentes del plan. Se incorporaron cinco
+PDF oficiales, dos fotografías y cinco respuestas de ALUMNOS con trazabilidad
+en deploy/fuentes.json. El carrusel consume /slider. La carga inicial conserva
+los modelos del Git y no ejecuta el seed destructivo de ejemplos. Permanecen
+pendientes la definición fina del rol Editor, otros contenidos sin información
+completa y la revisión integral de QA. Las secciones históricas siguientes
+describen la situación anterior a esta integración.
+
 Fase 10 cerrada (19/10/2026) · próxima fase a definir
 
 _(Fase 10 = **alineación del frontend a los exports Desktop 1440 del avance de diseño**,

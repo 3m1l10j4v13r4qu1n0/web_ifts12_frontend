@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useConsulta } from '../../hooks/useConsulta';
 import Checkbox from './Checkbox';
 import ModuloNoDisponible from './ModuloNoDisponible';
 
@@ -44,7 +45,7 @@ function FormularioConsulta({
   const [consulta, setConsulta] = useState('');
   const [privacidad, setPrivacidad] = useState(false);
   const [errores, setErrores] = useState<ErroresCampos>({});
-  const [enviada, setEnviada] = useState(false);
+  const { enviada, enviando, error, enviarConsulta, limpiarEstado } = useConsulta();
   const habilitado =
     import.meta.env.VITE_CONTACTO_HABILITADO !== undefined
       ? import.meta.env.VITE_CONTACTO_HABILITADO === 'true' ||
@@ -78,7 +79,7 @@ function FormularioConsulta({
 
   function enviar(evento: React.FormEvent<HTMLFormElement>) {
     evento.preventDefault();
-    setEnviada(false);
+    limpiarEstado();
 
     if (!habilitado) {
       return;
@@ -88,7 +89,11 @@ function FormularioConsulta({
     setErrores(camposInvalidos);
 
     if (Object.keys(camposInvalidos).length === 0) {
-      setEnviada(true);
+      enviarConsulta({
+        nombre: nombre.trim(),
+        email: correo.trim(),
+        mensaje: asunto ? `${asunto}\n\n${consulta.trim()}` : consulta.trim(),
+      });
     }
   }
 
@@ -99,7 +104,7 @@ function FormularioConsulta({
     setConsulta('');
     setPrivacidad(false);
     setErrores({});
-    setEnviada(false);
+    limpiarEstado();
   }
 
   const estadoInput = (invalido: boolean) =>
@@ -127,7 +132,7 @@ function FormularioConsulta({
       )}
 
       <form onSubmit={enviar} noValidate className="mt-4" aria-live="polite">
-        <fieldset disabled={!habilitado} className="space-y-4">
+        <fieldset disabled={!habilitado || enviando} className="space-y-4">
           <div>
             <label htmlFor="consulta-nombre" className="block text-sm font-medium text-texto">
               Nombre y apellido
@@ -233,6 +238,7 @@ function FormularioConsulta({
           <div className="flex flex-wrap items-center gap-3">
             <button
               type="submit"
+              disabled={enviando}
               className="inline-flex min-h-[44px] items-center justify-center rounded-lg bg-acento-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-acento-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-acento-700"
             >
               Enviar consulta
@@ -251,13 +257,13 @@ function FormularioConsulta({
             confirma solo lo que responda la API: no promete envío de correo si solo se registra
             la consulta." El envío real depende del backend (`POST /api/contacto`, HU-01).
           */}
+          {error && <p role="alert">{error}</p>}
           {enviada && (
             <p
               role="status"
               className="rounded-lg border border-green-300 bg-green-50 px-4 py-3 text-sm text-green-800"
             >
-              Consulta registrada. El envío real estará disponible cuando el backend habilite el
-              canal oficial de contacto.
+              Consulta registrada.
             </p>
           )}
         </fieldset>

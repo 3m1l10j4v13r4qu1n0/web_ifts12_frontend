@@ -1,0 +1,49 @@
+[
+  {
+    "archivo": "plan-ap.pdf",
+    "sha256": "3fa8a2a509e5f6df5db63e178292f0baaf89c41809e0c4f1ab46c9043b501f29",
+    "fuente": "https://drive.google.com/file/d/1jqivwPM2DHjRTvDoyPPuarmUfHiK-v93/view"
+  },
+  {
+    "archivo": "plan-as.pdf",
+    "sha256": "c0f09dbe79e4540f03ec4745cdf9bd08292bc51fbfa8d542a2d198e9f7218003",
+    "fuente": "https://drive.google.com/file/d/1-F5dQf6JADoiPzYOPbFcIWHgkW3rnEuC/view"
+  },
+  {
+    "archivo": "plan-cdia.pdf",
+    "sha256": "b541dfc88cf644f4227a9ae42a05c2ff8dbbdffa719853cf15e1def4979e98a3",
+    "fuente": "https://drive.google.com/file/d/1gqkPegNbudiICH2lI7EvOemYalF2OiFw/view"
+  },
+  {
+    "archivo": "plan-cultura.pdf",
+    "sha256": "0beb051f2d5f9a5623908549f2cd4474ca0592ae528305a0de017e85a3759f2e",
+    "fuente": "https://drive.google.com/file/d/1d8bKuODGotMliJ4xsU6Ce4QU-ZCpxPqP/view"
+  },
+  {
+    "archivo": "plan-gp.pdf",
+    "sha256": "6dd2fd81dfa5e8912d1d38ab6c9226b7e24fa4bab0af0911d21f3497552d1c61",
+    "fuente": "https://drive.google.com/file/d/1Ag-h7OzY1TLcOXd5J--XBdOlGFkpKQyK/view"
+  },
+  {
+    "archivo": "visita-cipper-1.jpg",
+    "sha256": "065c49603ff11a346d8b86007137ffc943f4bdebc711ed30c8de9ef3b5e1cba2",
+    "fuente": "https://drive.google.com/file/d/1pq63dUh_tB6e9U1q5CkpjD-mnOeui63r/view"
+  },
+  {
+    "archivo": "visita-cipper-2.jpg",
+    "sha256": "e64385dafc2786ae4d12f929ea94250a53adc37853fb2ffb06040b7755af9557",
+    "fuente": "https://drive.google.com/file/d/1Rc6lT1nLZraHtUJQiwGTzIJRlYoW1h8H/view"
+  },
+  {
+    "datos": "Materias, años, cuatrimestres y docentes AS",
+    "fuente": "https://drive.google.com/file/d/1m_M3wUOtcCSzRVqRc7WmSjlgBhRn9A3h/view"
+  },
+  {
+    "datos": "Materias y docentes Cultura; sin asignar año/plan porque la nómina no los indica",
+    "fuente": "https://docs.google.com/spreadsheets/d/1XE0wn9IMKaY4x2Y13DydR9zuW0obGku2rQopkdParzI/edit"
+  },
+  {
+    "datos": "Cinco respuestas sin marcadores pendientes; ALUMNOS 22/10/2026",
+    "fuente": "https://docs.google.com/document/d/1s4LuLUPXMJnNWmrFnJi-xxO0PI6gK-WjFqM1a0UidLo/edit"
+  }
+]

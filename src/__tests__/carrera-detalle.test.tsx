@@ -6,6 +6,10 @@ import CarreraDetallePage from '../pages/CarreraDetallePage';
 import { PAGINA_CARRERAS_API_FIJA, renderConRouter } from '../test-utils';
 
 vi.mock('../api/services/carrera.service');
+vi.mock('../api/services/contenido.service', () => ({
+  listarMateriasPublicas: vi.fn().mockResolvedValue([]),
+  obtenerPlanPublico: vi.fn().mockResolvedValue({ id: 1, materias: [] }),
+}));
 
 const listarTodasLasCarrerasMock = vi.mocked(listarTodasLasCarreras);
 
@@ -73,7 +77,8 @@ describe('CarreraDetallePage', () => {
     const datos = await screen.findByRole('region', { name: 'Datos oficiales' });
     // Sin título, duración, resolución ni modalidad no se inventa ningún valor oficial:
     // los cuatro campos quedan en PENDIENTE (el turno es institucional y siempre sale).
-    expect(within(datos).getAllByText('PENDIENTE')).toHaveLength(4);
+    expect(within(datos).getAllByText('PENDIENTE')).toHaveLength(3);
+    expect(within(datos).getByText('5 cuatrimestres')).toBeInTheDocument();
   });
 
   it('ofrece el índice "En esta carrera" con anclas a cada bloque', async () => {
@@ -90,29 +95,20 @@ describe('CarreraDetallePage', () => {
     expect(within(indice).getAllByRole('link')).toHaveLength(7);
   });
 
-  it('muestra la tabla de materias con estado vacío (sin filas inventadas)', async () => {
+  it('informa un plan sin materias cargadas sin inventar filas', async () => {
     renderizarConRuta(`/carreras/${SLUG_ANALISIS}`);
-
-    const tabla = await screen.findByRole('table', {
-      name: /materias y correlatividades del plan/i,
-    });
-    expect(within(tabla).getByRole('columnheader', { name: 'Año' })).toBeInTheDocument();
     expect(
-      within(tabla).getByRole('columnheader', { name: 'Correlativas para rendir' }),
+      await screen.findByText(/Las materias se publican cuando estén cargadas/),
     ).toBeInTheDocument();
-    // Una sola fila de aviso: el plan vigente todavía no está validado.
-    expect(within(tabla).getAllByRole('row')).toHaveLength(2);
   });
 
-  it('deja los archivos descargables deshabilitados mientras no existan', async () => {
+  it('permite descargar el plan oficial incorporado y conserva pendientes no recibidos', async () => {
     renderizarConRuta(`/carreras/${SLUG_ANALISIS}`);
-
-    // Plan de estudios, programas y resoluciones: los tres PDF siguen pendientes.
-    const botones = await screen.findAllByRole('button', { name: 'Descargar' });
-    expect(botones).toHaveLength(3);
-    for (const boton of botones) {
-      expect(boton).toBeDisabled();
-    }
+    expect(await screen.findByRole('link', { name: 'Descargar plan (PDF)' })).toHaveAttribute(
+      'href',
+      '/documentos/plan-as.pdf',
+    );
+    expect(screen.getByRole('button', { name: 'Descargar' })).toBeDisabled();
   });
 
   it('enlaza a la inscripción oficial atenuada mientras no haya URL', async () => {

@@ -4,7 +4,9 @@ import AvisoCarga from '../components/ui/AvisoCarga';
 import AvisoError from '../components/ui/AvisoError';
 import Breadcrumb from '../components/ui/Breadcrumb';
 import Button from '../components/ui/Button';
+import ContenidoAcademico from '../components/ui/ContenidoAcademico';
 import Eyebrow from '../components/ui/Eyebrow';
+import { DOCUMENTOS_CARRERAS } from '../constants/documentosInstitucionales';
 import { ENLACES } from '../constants/enlaces';
 import { useCarreras } from '../hooks/useCarreras';
 import PaginaNoEncontrada from './PaginaNoEncontrada';
@@ -32,7 +34,6 @@ const ACCIONES_INSCRIPCION = {
 
 const estilosSeccion = 'scroll-mt-24';
 const estilosTituloSeccion = 'text-2xl font-bold text-texto';
-const estilosCaja = 'mt-4 rounded-xl border border-borde-suave bg-white p-5';
 const estilosCajaAccion =
   'mt-4 flex flex-col gap-4 rounded-xl border border-borde-suave bg-white p-5 sm:flex-row sm:items-center sm:justify-between';
 
@@ -80,6 +81,7 @@ function CarreraDetallePage() {
     return <PaginaNoEncontrada />;
   }
 
+  const documento = DOCUMENTOS_CARRERAS[carrera.id];
   const otrasCarreras = carreras.filter((item) => item.id !== carrera.id);
   // `modalidad` no existe en el apispec (BE-N02): se muestra PENDIENTE con mensaje de
   // proceso, sin inventar el dato desde el nombre del plan.
@@ -87,7 +89,7 @@ function CarreraDetallePage() {
   const duracion =
     carrera.duracionAnios !== undefined
       ? `${carrera.duracionAnios} ${carrera.duracionAnios === 1 ? 'año' : 'años'}`
-      : PENDIENTE;
+      : (documento?.duracion ?? PENDIENTE);
 
   return (
     <main className="min-h-screen">
@@ -129,12 +131,6 @@ function CarreraDetallePage() {
               "Imagen de la carrera · PENDIENTE (M1)" — la foto oficial se toma de los
               archivos del Drive en alta resolución.
             */}
-            <div
-              aria-hidden="true"
-              className="mt-4 flex min-h-[200px] items-center justify-center rounded-xl border border-dashed border-borde-suave bg-fondo text-sm text-texto-suave"
-            >
-              Imagen de la carrera
-            </div>
             {/*
               El texto de presentación del diseño está marcado "PENDIENTE INSTITUCIONAL
               (fuente: ficha oficial del Drive)". El backend ya expone `descripcion`
@@ -233,84 +229,29 @@ function CarreraDetallePage() {
                   <p className="mt-1 text-sm text-texto-suave">Código: {carrera.planCodigo}</p>
                 )}
                 <p className="mt-1 text-sm text-texto-suave">
-                  El archivo oficial se publica cuando esté disponible.
+                  {documento
+                    ? 'Documento compartido por el instituto.'
+                    : 'El archivo oficial se publica cuando esté disponible.'}
                 </p>
               </div>
-              <Button variante="secundario" disabled>
-                Descargar
-              </Button>
+              {documento ? (
+                <a
+                  className="inline-flex min-h-11 items-center rounded-md border border-borde px-4 text-sm font-medium text-acento-700"
+                  href={documento.archivo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Descargar plan (PDF)
+                </a>
+              ) : (
+                <Button variante="secundario" disabled>
+                  Descargar
+                </Button>
+              )}
             </div>
           </section>
 
-          <section
-            id="materias-y-correlatividades"
-            aria-labelledby="titulo-materias-y-correlatividades"
-            className={estilosSeccion}
-          >
-            <h2 id="titulo-materias-y-correlatividades" className={estilosTituloSeccion}>
-              Materias y correlatividades
-            </h2>
-            {/*
-              Anotación del diseño (comentario UX/UI, no es copy visible):
-              "Tabla de datos legible y accesible (no captura de imagen). En mobile cada
-              materia se apila como tarjeta." El plan vigente todavía no está validado
-              (las filas del export son de ejemplo: "Materia · PENDIENTE"), así que la
-              tabla queda con sus columnas y sin filas inventadas.
-            */}
-            <div className="mt-4 overflow-x-auto rounded-xl border border-borde-suave bg-white">
-              <table className="w-full min-w-[640px] border-collapse text-left text-sm">
-                <caption className="sr-only">
-                  Materias y correlatividades del plan de estudios vigente
-                </caption>
-                <thead className="bg-fondo">
-                  <tr>
-                    <th scope="col" className="px-4 py-3 font-semibold text-texto">
-                      Año
-                    </th>
-                    <th scope="col" className="px-4 py-3 font-semibold text-texto">
-                      Materia
-                    </th>
-                    <th scope="col" className="px-4 py-3 font-semibold text-texto">
-                      Correlativas para cursar
-                    </th>
-                    <th scope="col" className="px-4 py-3 font-semibold text-texto">
-                      Correlativas para rendir
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td colSpan={4} className="px-4 py-8 text-center text-texto-suave">
-                      La tabla de materias y correlatividades se publica cuando IFTS valide el plan
-                      de la carrera.
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <section id="programas" aria-labelledby="titulo-programas" className={estilosSeccion}>
-            <h2 id="titulo-programas" className={estilosTituloSeccion}>
-              Programas
-            </h2>
-            {/*
-              Anotación del diseño (comentario UX/UI, no es copy visible):
-              "Programa de la materia · PENDIENTE / Archivo oficial PENDIENTE · PDF" + botón
-              "Descargar", repetido por materia.
-            */}
-            <div className={estilosCajaAccion}>
-              <div>
-                <p className="font-medium text-texto">Programa de la materia</p>
-                <p className="mt-1 text-sm text-texto-suave">
-                  Los programas se publican junto con el plan de estudios vigente.
-                </p>
-              </div>
-              <Button variante="secundario" disabled>
-                Descargar
-              </Button>
-            </div>
-          </section>
+          <ContenidoAcademico slug={carrera.id} />
 
           <section
             id="resoluciones"
@@ -334,28 +275,6 @@ function CarreraDetallePage() {
               <Button variante="secundario" disabled>
                 Descargar
               </Button>
-            </div>
-          </section>
-
-          <section
-            id="cuerpo-docente"
-            aria-labelledby="titulo-cuerpo-docente"
-            className={estilosSeccion}
-          >
-            <h2 id="titulo-cuerpo-docente" className={estilosTituloSeccion}>
-              Cuerpo docente
-            </h2>
-            {/*
-              Anotación del diseño (comentario UX/UI, no es copy visible):
-              "Nómina del cuerpo docente a cargo (RF-16). Se administra desde el panel."
-              "PENDIENTE INSTITUCIONAL · nómina oficial por carrera". Sin backend de
-              docentes no hay nómina que mostrar.
-            */}
-            <div className={estilosCaja}>
-              <p className="font-medium text-texto">Nómina del cuerpo docente</p>
-              <p className="mt-1 text-sm text-texto-suave">
-                La nómina se publica cuando esté disponible.
-              </p>
             </div>
           </section>
         </div>

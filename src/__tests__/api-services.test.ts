@@ -52,12 +52,30 @@ const NOVEDADES = [
     titulo: 'Inscripciones abiertas para el ciclo lectivo 2026',
     copete: 'Inicia el proceso de preingreso.',
     contenido: 'Te invitamos a inscribirte en nuestras tecnicaturas superiores oficiales.',
-    categoria: 'Ingresantes',
+    categoria: null,
     imagen_url: null,
     destacado: true,
     fecha_publicacion: '2026-09-28T19:54:25.920870',
   },
 ];
+
+const PAGINA_NOVEDADES = {
+  data: [
+    {
+      id: 1,
+      titulo: NOVEDADES[0].titulo,
+      copete: NOVEDADES[0].copete,
+      cuerpo: NOVEDADES[0].contenido,
+      fecha: NOVEDADES[0].fecha_publicacion,
+      imagen_url: null,
+      destacado: true,
+    },
+  ],
+  page: 1,
+  size: 100,
+  total: 1,
+  total_pages: 1,
+};
 
 /** Construye un `AxiosError` con respuesta, como el que produce el backend ante un 4xx/5xx. */
 function axiosErrorCon(status: number, data: unknown): AxiosError {
@@ -142,20 +160,36 @@ describe('listarCarreras', () => {
 });
 
 describe('listarNovedades', () => {
+  it('recorre todas las páginas sin perder novedades', async () => {
+    vi.spyOn(apiClient, 'get')
+      .mockResolvedValueOnce({ data: { ...PAGINA_NOVEDADES, total: 2, total_pages: 2 } })
+      .mockResolvedValueOnce({
+        data: {
+          ...PAGINA_NOVEDADES,
+          page: 2,
+          total: 2,
+          total_pages: 2,
+          data: [{ ...PAGINA_NOVEDADES.data[0], id: 2, cuerpo: null, fecha: '2026-10-31' }],
+        },
+      });
+    const lista = await listarNovedades();
+    expect(lista.map((item) => item.id)).toEqual([1, 2]);
+    expect(lista[1].contenido).toBe('');
+  });
   it('pide el listado al endpoint correcto', async () => {
     const spy = vi
       .spyOn(apiClient, 'get')
-      .mockResolvedValue({ data: NOVEDADES } as unknown as ReturnType<typeof apiClient.get>);
+      .mockResolvedValue({ data: PAGINA_NOVEDADES } as unknown as ReturnType<typeof apiClient.get>);
 
     await listarNovedades();
 
     // Ojo con el nombre: el endpoint es `novedades`, no `noticias`.
-    expect(spy).toHaveBeenCalledWith('/novedades');
+    expect(spy).toHaveBeenCalledWith('/novedades', { params: { page: 1, size: 100 } });
   });
 
   it('devuelve la lista sin transformarla', async () => {
     vi.spyOn(apiClient, 'get').mockResolvedValue({
-      data: NOVEDADES,
+      data: PAGINA_NOVEDADES,
     } as unknown as ReturnType<typeof apiClient.get>);
 
     // El mapeo a `Noticia` lo hace el hook, no el servicio: acá sale el DTO crudo.
@@ -164,7 +198,7 @@ describe('listarNovedades', () => {
 
   it('acepta una lista vacía', async () => {
     vi.spyOn(apiClient, 'get').mockResolvedValue({
-      data: [],
+      data: { data: [], page: 1, size: 100, total: 0, total_pages: 0 },
     } as unknown as ReturnType<typeof apiClient.get>);
 
     expect(await listarNovedades()).toEqual([]);
@@ -172,7 +206,7 @@ describe('listarNovedades', () => {
 
   it('rechaza un destacado numérico en vez de booleano', async () => {
     vi.spyOn(apiClient, 'get').mockResolvedValue({
-      data: [{ ...NOVEDADES[0], destacado: 1 }],
+      data: { ...PAGINA_NOVEDADES, data: [{ ...PAGINA_NOVEDADES.data[0], destacado: 1 }] },
     } as unknown as ReturnType<typeof apiClient.get>);
 
     await expect(listarNovedades()).rejects.toThrow();
@@ -205,16 +239,16 @@ describe('iniciarSesion', () => {
     usuario: {
       id: 1,
       nombre: 'Demo',
-      apellido: 'Usuario',
       email: 'demo@ifts12.edu.ar',
       rol: 'admin',
     },
   };
+  const LOGIN_API = { data: { access_token: LOGIN_OK.token, usuario: LOGIN_OK.usuario } };
 
   it('envía las credenciales al endpoint correcto', async () => {
     const spy = vi
       .spyOn(apiClient, 'post')
-      .mockResolvedValue({ data: LOGIN_OK } as unknown as ReturnType<typeof apiClient.post>);
+      .mockResolvedValue({ data: LOGIN_API } as unknown as ReturnType<typeof apiClient.post>);
 
     await iniciarSesion({ email: 'demo@ifts12.edu.ar', password: 'secreto' });
 
@@ -226,7 +260,7 @@ describe('iniciarSesion', () => {
 
   it('devuelve los datos parseados', async () => {
     vi.spyOn(apiClient, 'post').mockResolvedValue({
-      data: LOGIN_OK,
+      data: LOGIN_API,
     } as unknown as ReturnType<typeof apiClient.post>);
 
     expect(await iniciarSesion({ email: 'demo@ifts12.edu.ar', password: 'secreto' })).toEqual(

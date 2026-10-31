@@ -14,12 +14,20 @@ import ModuloNoDisponible from '../components/ui/ModuloNoDisponible';
 import { ENLACES } from '../constants/enlaces';
 import { mockAccesosDestacados, mockAccesosRapidos, mockFaqs } from '../constants/mock-data';
 import { useCarreras } from '../hooks/useCarreras';
+import { useSliderInstitucional } from '../hooks/useContenidoPublico';
 import { useNovedades } from '../hooks/useNovedades';
 
 // FAQ destacadas de la Home: el diseño muestra 4 destacadas + "Ver todas".
 const FAQ_DESTACADAS = mockFaqs.slice(0, 4);
 
 function HomePage() {
+  const slider = useSliderInstitucional();
+  const slidesInstitucionales = (slider.data ?? []).map((item) => ({
+    id: `slider-${item.id}`,
+    titulo: item.titulo ?? '',
+    resumen: item.subtitulo ?? '',
+    imagen: { src: item.imagen_url, alt: item.titulo ?? 'Actividad del instituto' },
+  }));
   // Carreras y novedades vienen del backend; el resto de la Home sigue en mocks. Las dos
   // consultas comparten cache con `/carreras` y `/noticias`, así que navegar a esas rutas
   // no vuelve a pedir los datos.
@@ -74,7 +82,7 @@ function HomePage() {
       <CarruselInstitucional
         titulo="Instituto de Formación Técnica Superior N.º 12"
         subtitulo="Formación técnica superior, pública y de calidad."
-        slides={slidesNovedades}
+        slides={slidesInstitucionales.length ? slidesInstitucionales : slidesNovedades}
         cargando={cargandoNovedades}
         mensajeVacio={
           novedadesDisponibles

@@ -97,7 +97,7 @@ describe('novedades aisladas por contrato', () => {
     fireEvent.change(input, { target: { value: 'inscripciones' } });
 
     await waitFor(() => {
-      expect(screen.getByText('Sin resultados para «inscripciones».')).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: 'Ver todos los resultados' })).toBeInTheDocument();
     });
 
     expect(screen.queryByText('Inscripciones abiertas para el ciclo lectivo 2026')).toBeNull();
@@ -105,3 +105,7 @@ describe('novedades aisladas por contrato', () => {
     expect(listarNovedadesMock).not.toHaveBeenCalled();
   });
 });
+
+vi.mock('../api/services/contenido.service', () => ({
+  listarSlider: vi.fn().mockResolvedValue([]),
+}));

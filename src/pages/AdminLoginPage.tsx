@@ -73,7 +73,7 @@ function AdminLoginPage() {
       login(
         {
           id: respuesta.usuario.id,
-          nombre: `${respuesta.usuario.nombre} ${respuesta.usuario.apellido}`.trim(),
+          nombre: respuesta.usuario.nombre,
           email: respuesta.usuario.email,
           rol: respuesta.usuario.rol,
         },

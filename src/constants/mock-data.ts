@@ -90,7 +90,8 @@ export const mockFaqs: FaqItem[] = [
     id: 'faq-ing-equivalencias',
     categoria: 'ingresantes',
     pregunta: '¿Puedo presentar equivalencias?',
-    respuesta: RESPUESTA_PENDIENTE,
+    respuesta:
+      'Debés contar con el programa de la materia aprobada y la constancia de materias aprobadas de la institución de origen. Para iniciar el trámite, escribí a equivalencias.ifts12@gmail.com.',
   },
   {
     id: 'faq-ing-pase',
@@ -108,7 +109,8 @@ export const mockFaqs: FaqItem[] = [
     id: 'faq-est-regularidad',
     categoria: 'estudiantes',
     pregunta: '¿Cómo mantengo la condición de regularidad?',
-    respuesta: RESPUESTA_PENDIENTE,
+    respuesta:
+      'Se exige un mínimo del 75% de asistencia a las clases presenciales y sincrónicas, y la aprobación de los trabajos integradores o parciales con nota 4 o superior para regularizar, o 7 o superior para promocionar, según la materia.',
   },
   {
     id: 'faq-est-constancia',
@@ -120,13 +122,15 @@ export const mockFaqs: FaqItem[] = [
     id: 'faq-est-mesa',
     categoria: 'estudiantes',
     pregunta: '¿Cómo me presento a una mesa de examen?',
-    respuesta: RESPUESTA_PENDIENTE,
+    respuesta:
+      'Las inscripciones se gestionan exclusivamente por SIU-Guaraní, dentro de los períodos establecidos por el calendario académico. Conservá tu constancia de inscripción. Las materias de las tecnicaturas del instituto no se pueden rendir en condición de libre.',
   },
   {
     id: 'faq-est-campus',
     categoria: 'estudiantes',
     pregunta: '¿Cómo accedo al Campus Virtual?',
-    respuesta: RESPUESTA_PENDIENTE,
+    respuesta:
+      'Para acceder al contenido de las asignaturas en las que te inscribiste, ingresá al Moodle del instituto: https://ifts12online.com.ar/login/index.php',
   },
   {
     id: 'faq-inst-bedeles',
@@ -138,7 +142,8 @@ export const mockFaqs: FaqItem[] = [
     id: 'faq-inst-siu',
     categoria: 'institucional',
     pregunta: '¿Qué es el SIU?',
-    respuesta: RESPUESTA_PENDIENTE,
+    respuesta:
+      'SIU Guaraní es el sistema de autogestión académica. Permite inscribirte a las cursadas y a las mesas de exámenes, consultar tu historia académica y revisar el avance del plan de estudios. Acceso: https://guarani-autogestionagencia.bue.edu.ar/.',
   },
   {
     id: 'faq-inst-titulos',
@@ -186,13 +191,13 @@ export const mockAccesosRapidos: AccesoRapido[] = [
   {
     id: 'campus-virtual',
     titulo: 'Campus Virtual Moodle',
-    descripcion: 'Externo · URL PENDIENTE',
+    descripcion: 'Aula virtual del instituto',
     href: ENLACES.moodle,
   },
   {
     id: 'siu',
     titulo: 'SIU · Autogestión',
-    descripcion: 'Externo · nombre y URL a confirmar',
+    descripcion: 'Sistema de autogestión académica',
     href: ENLACES.siu,
   },
   {

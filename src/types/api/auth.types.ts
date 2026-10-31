@@ -18,7 +18,7 @@ export interface LoginRequest {
 export interface UsuarioApi {
   id: number;
   nombre: string;
-  apellido: string;
+  apellido?: string;
   email: string;
   /** Columna nullable con default 'estudiante' (`models.py:14`). */
   rol: string | null;
