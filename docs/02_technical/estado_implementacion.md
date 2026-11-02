@@ -155,7 +155,7 @@ sobre rutas administrables. La tabla oficial (Swagger/OpenAPI) llega como entreg
 
 - **Alineación al diseño del avance (cerrada, 19/10/2026):** referencia = exports Desktop 1440 en
   `documentacion/driveFrontend/01_analisis_funcional/avance_disenio_sitio_ifts12/` + contrato
-  `docs/01_global/figma_v2_contrato_visual.md`. Plan en `inbox/plan_diseño_aprobado.md` (T1–T16).
+  `docs/01_global/figma_v2_contrato_visual.md`. Plan en `inbox/_done/plan_diseño_aprobado.md` (T1–T16).
   **T1–T16 mergeadas a `develop`** (T16: verificación y cierre, 19/10/2026); Fase 10 cerrada con
   tag `v1.11.0`. El snapshot vigente (incluye el
   detalle de cada Tn, decisiones y bloqueos) está en `docs/project_state.md`.

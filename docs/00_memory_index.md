@@ -15,6 +15,7 @@ project_state.md                                                     · nivel 0 
 02_technical/estado_implementacion.md                                · nivel 1 · **OBSOLETO · 2026-09-30 · estado, implementacion
 02_technical/modelo_datos_global.md                                  · nivel 1 · borrador · 2026-09-18 · modelo, datos, global
 02_technical/revision_consumo_api.md                                 · nivel 1 · borrador · 2026-10-08 · revision, consumo, api, novedades
+02_technical/ticket_0000073_correcciones_integracion_test.md         · nivel 1 · borrador · 2026-11-02 · ticket, correcciones, integracion, test
 02_technical/ticket_0000077_diseno_definitivo_crud_administrativo.md · nivel 1 · borrador · 2026-11-02 · ticket, uxui, crud, diseno
 04_user_stories/HU-01/README.md                                      · nivel 2 · borrador · 2026-09-18 · hu-01
 04_user_stories/HU-01/hu_01_api.md                                   · nivel 2 · — · 2026-09-18 · hu-01, api, backend

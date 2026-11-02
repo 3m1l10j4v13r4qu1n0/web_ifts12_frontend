@@ -1,6 +1,6 @@
 /**
  * DTO de `Carrera`, espejo exacto de `GET /api/carreras` del apispec del 22/10/2026
- * (`inbox/apispec_1.json`, definiciones `Carrera` y `CarreraPlanSummary`).
+ * (`inbox/_done/apispec_1.json`, definiciones `Carrera` y `CarreraPlanSummary`).
  *
  * Diferencias con el contrato viejo:
  * - El listado es paginado: la respuesta es `PaginatedCarreras`, no un array plano.

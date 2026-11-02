@@ -8,7 +8,7 @@ import type { CarreraApi } from '../types/api/carrera.types';
 
 /**
  * Las tres filas reales de la tabla `carreras` de `instance/ifts12.db`, con los mismos
- * nombres de campo que devuelve `GET /api/carreras` (`inbox/apispec_1.json`).
+ * nombres de campo que devuelve `GET /api/carreras` (`inbox/_done/apispec_1.json`).
  */
 const CARRERAS: CarreraApi[] = [
   {

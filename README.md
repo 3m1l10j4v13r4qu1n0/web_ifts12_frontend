@@ -9,7 +9,7 @@ con APIs y la web se despliega como build estático en un VPS independiente del 
 > **Estado:** completadas las 10 fases (`develop` cierra la Fase 10 con `v1.11.0`) y el
 > aislamiento de módulos fuera del apispec (23/10/2026): novedades, autenticación y contacto
 > quedan **deshabilitados por bandera** hasta que figuren en el contrato vigente
-> (`inbox/apispec_1.json`). Se actualizó el header (sin menú de cuenta), se agregaron
+> (`inbox/_done/apispec_1.json`). Se actualizó el header (sin menú de cuenta), se agregaron
 > breakpoints 768/1024, mejoras de accesibilidad/táctiles, focus trap en menú móvil y FAQ en
 > el footer. El sitio tiene **32 archivos de test**, **244 tests** en verde, lint y build OK.
 > Carreras se consume en modo real; el resto del sitio sigue con datos simulados. La evidencia
