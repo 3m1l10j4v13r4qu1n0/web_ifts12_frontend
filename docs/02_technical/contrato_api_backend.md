@@ -9,7 +9,7 @@ tags:
 # Contrato de API del backend
 
 > Documento de Capa 1 — Especificación.  
-> **Superado por:** `inbox/apispec_1.json` (Swagger 2.0, API institucional IFTS N.º 12, v1.0.0, recibido 22/10/2026).  
+> **Superado por:** `inbox/_done/apispec_1.json` (Swagger 2.0, API institucional IFTS N.º 12, v1.0.0, recibido 22/10/2026).  
 > Ver auditoría: `docs/06_audits/audit_2026-10-22-backend.md`.  
 > Este documento queda como antecedente histórico.
 

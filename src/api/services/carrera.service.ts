@@ -15,7 +15,7 @@ export interface OpcionesListarCarreras {
 /**
  * Servicio de carreras. Única capa que conoce el endpoint.
  *
- * Contrato vigente: apispec del 22/10/2026 (`inbox/apispec_1.json`).
+ * Contrato vigente: apispec del 22/10/2026 (`inbox/_done/apispec_1.json`).
  * - Ruta: `GET /api/carreras`.
  * - Query: `page` (1-based, default 1) y `size` (default 10).
  * - Respuesta: `{data, page, size, total, total_pages}`.

@@ -6,7 +6,7 @@
 const urlBaseCruda = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5000';
 
 /**
- * Prefijo de rutas del backend. El apispec del 22/10/2026 (`inbox/apispec_1.json`, Swagger
+ * Prefijo de rutas del backend. El apispec del 22/10/2026 (`inbox/_done/apispec_1.json`, Swagger
  * 2.0) declara las rutas con prefijo `/api` y también una familia `/api/v1`; ninguna de las
  * dos está marcada como canónica (BE-N05). El frontend usa `/api`.
  */
@@ -15,7 +15,7 @@ export const API_BASE_URL = `${urlBaseCruda.replace(/\/+$/, '')}/api`;
 /**
  * Endpoints de la capa API.
  *
- * **Fuente de verdad:** `inbox/apispec_1.json` (22/10/2026). Solo los recursos que figuran
+ * **Fuente de verdad:** `inbox/_done/apispec_1.json` (22/10/2026). Solo los recursos que figuran
  * ahí son contractuales y se pueden consumir:
  *
  * | Método | Path                | Estado |
