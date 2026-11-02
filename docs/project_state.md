@@ -16,12 +16,18 @@ Fase 10 cerrada (19/10/2026) · próxima fase a definir
 _(Fase 10 = **alineación del frontend a los exports Desktop 1440 del avance de diseño**,
 página por página (tareas T1–T16), cerrada con tag `v1.11.0`. No hay Fase 11 definida todavía.)_
 
+**Situación 02/11/2026:** la rama de integración TEST `fix/integracion-test-20261031`
+(`d1afcf8`, base `33f9954` = `develop`) está descargada y revisada pero **sin merge** a
+`main` ni `develop`: la rama oficial se decide en la reunión del ticket **0000079** y el QA
+corre por separado en **0000075**. Detalle en "Qué está construido" más abajo y en
+`docs/02_technical/ticket_0000073_correcciones_integracion_test.md`.
+
 ## Alineación al diseño del avance (cerrada · 19/10/2026)
 
 Plan de alineación página por página a los **exports Desktop 1440** del avance de diseño
 (`documentacion/driveFrontend/01_analisis_funcional/avance_disenio_sitio_ifts12/`, 14 PDFs) y
 al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
-`inbox/plan_diseño_aprobado.md` (tareas **T1–T16**, no versionado). Estado al 19/10/2026:
+`inbox/_done/plan_diseño_aprobado.md` (tareas **T1–T16**, no versionado). Estado al 19/10/2026:
 
 - **Hechas y mergeadas a `develop`:** T1 (header), T2 (home), T3 (carreras), T4 (ficha de
   carrera, 15/10/2026) y T5 (novedades, 15/10/2026).
@@ -49,7 +55,7 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   **no se renderizan** en ninguna pantalla: van como **comentario de código** en el componente.
   Ya corregido en Home y Carreras (`fix/alineacion-disenio-anotaciones`, merge `dca04ed`). Los
   mensajes de proceso tipo "sitio en construcción" sí se mantienen. La regla quedó en
-  `inbox/plan_diseño_aprobado.md` y ahora tiene **guard mecánico**:
+  `inbox/_done/plan_diseño_aprobado.md` y ahora tiene **guard mecánico**:
   `src/__tests__/anotaciones-no-renderizadas.test.ts` (15/10/2026) recorre las fuentes de
   `src/` y falla si una anotación quedó renderizada.
 - **Texto propio fuera de la UI (15/10/2026):** se quitaron del render y quedaron como
@@ -402,9 +408,10 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 - **Revisión del consumo de API (08/10/2026):** los helpers del buscador se renombraron
   (`coincideTexto` / `coincideNullable`); el footer combina el horario confirmado
   "exclusivamente nocturno" (RF-22) con las modalidades reales del backend (Presencial,
-  Híbrida y a distancia), absorbido por **RN-07** (`reglas_negocio.md`) y el contrato. Queda en
-  `inbox/` el feedback sobre el guard de `contenido` en `NotaCompletaPage` (depende de una
-  fuente de verdad de Backend/Contenidos).
+  Híbrida y a distancia), absorbido por **RN-07** (`reglas_negocio.md`) y el contrato. El
+  feedback sobre el guard de `contenido` en `NotaCompletaPage` quedó archivado en
+  `inbox/_done/feedback_review_consumo_api_2026-10-08.md` (depende de una fuente de verdad
+  de Backend/Contenidos).
 - Contrato de API reescrito sobre el código fuente: `docs/02_technical/contrato_api_backend.md`
   (§3.1 DTOs con línea, §3.2 errores reales, §3.3 lo que no existe).
 - Anexo de auditoría del backend en
@@ -413,9 +420,43 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 - **Evidencia del ticket 0000010** (01/10/2026) sigue vigente: 13 rutas verificadas en navegador,
   15 capturas en `documentacion/screenshots/`.
 - Cinco auditorías cerradas en `docs/06_audits/`.
+- **Rama de integración TEST descargada y revisada, sin merge (02/11/2026):**
+  `fix/integracion-test-20261031` (local y publicada en el Git central como
+  `infra/fix/integracion-test-20261031`, SHA `d1afcf8`, base `33f9954` = `develop` actual)
+  trae consumo real de `/api/v1` (carreras, planes, materias, docentes, novedades, slider,
+  login, contacto), CRUD admin visual, PDFs/logos con `deploy/fuentes.json` y suite de **268
+  tests**. Está desplegada en https://ifts12-test.tail5bd71a.ts.net/. **No se mergeó a `main`
+  ni `develop`** por indicación del profesor (02/11/2026): la decisión de rama oficial queda
+  para la reunión del ticket **0000079** y el QA corre por separado en **0000075**; `develop`
+  **no contiene** esos cambios. Detalle operativo en
+  `docs/02_technical/ticket_0000073_correcciones_integracion_test.md`.
+- **Bandeja de entrada procesada (02/11/2026):** 7 archivos → vacía. El ticket 0000073 quedó
+  como doc de Capa 1 (`docs/02_technical/ticket_0000073_correcciones_integracion_test.md`);
+  los cinco archivos antiguos (plan y análisis de aislamiento apispec, `apispec_1.json`,
+  pendientes UX/UI Mantis y plan de diseño) y el parche `frontend-correcciones.patch` pasaron
+  a `inbox/_done/` **sin documento**, por decisión del usuario (estaban desactualizados). Se
+  reapuntaron 14 referencias vivas a `inbox/_done/...` en README, `.env.example`,
+  `estado_implementacion.md`, `contrato_api_backend.md`, este snapshot y 5 archivos de `src/`
+  (solo comentarios). Logbooks y `docs/06_audits/` no se tocaron (históricos). **A las 12:00
+  del 02/11/2026 llegaron 3 tickets Mantis nuevos** (`0000075` QA, `0000077` diseño del CRUD,
+  `0000079` rama oficial) que siguen **sin ubicar** en la bandeja (pendiente
+  `logsayer doc route` → Mentat).
+- **Pendientes vivos (02/11/2026):** los módulos siguen detrás de las banderas `VITE_*` de
+  `src/constants/contrato.ts` (en el entorno TEST se cargan con `deploy/test.env`); la FAQ
+  segmentada sigue con el catálogo local (`mockFaqs`; falta contrato de categorías); el CRUD
+  del panel es **provisional** (el diseño final se coordina con UX/UI en **0000077**);
+  contenidos institucionales y controles pendientes de sus fuentes; paquete JS **~551 kB**
+  (evaluar división por rutas); **QA completo pendiente (0000075)**. Estos puntos viven sobre
+  todo en la rama TEST, no mergeada; detalle en el doc del ticket 0000073.
 
 ## Decisiones activas (últimas 3-5)
 
+- **Sin merge de la rama TEST hasta la reunión 0000079 (02/11/2026):** la rama
+  `fix/integracion-test-20261031` (`d1afcf8`) queda descargada, revisada y desplegada en el
+  sitio TEST, pero **no se mergea a `main` ni `develop`** por indicación del profesor; la
+  rama oficial se define en la reunión del ticket 0000079 y el QA corre por separado en
+  0000075. Ante cambios locales o divergencias: detenerse y coordinar, sin `reset --hard` ni
+  `push --force`.
 - **Acceso al panel por link discreto en la top bar (20/10/2026):** "Administración" como texto
   junto a los accesos externos del header, sin ícono de persona (I12); checkbox "Mostrar
   contraseña" en el login (como el Figma A1) y se eliminó "Mantener sesión iniciada". La
@@ -427,7 +468,7 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   y FAQ.
 - **Los exports Desktop 1440 del avance de diseño son la referencia visual vigente** para la
   alineación en curso (junto al contrato `figma_v2_contrato_visual.md`). El plan está en
-  `inbox/plan_diseño_aprobado.md`; se trabaja una tarea por rama. (14/10/2026)
+  `inbox/_done/plan_diseño_aprobado.md`; se trabaja una tarea por rama. (14/10/2026)
 - **La Home conserva la sección "Carreras" (Oferta académica)** tal como el diseño, revirtiendo
   la decisión del plan original de quitarla. "Comunidades" sigue fuera (B3/I12). (14/10/2026)
 - **Modalidad desde el backend, no PENDIENTE:** aunque el diseño muestre "Modalidad: PENDIENTE",
@@ -505,6 +546,11 @@ Detalle con dueño y qué se necesita de vuelta en
   `instance/ifts12.db`. Los nombres reales (`Tecnicatura Superior en Análisis de Sistemas`) **no
   coinciden** con los mocks del sitio (`Gestión Parlamentaria`), por eso se quitaron los mocks de
   estas dos secciones.
+- **Rama `fix/integracion-test-20261031` verificada (02/11/2026):** identidad SHA `d1afcf8`
+  confirmada (`git rev-parse HEAD`), checklist en verde (`npm ci` sin vulnerabilidades, lint,
+  build y **268/268 tests** en 35 archivos, coincidentes con lo informado en el ticket 0000073)
+  y parche `inbox/_done/frontend-correcciones.patch` verificado 1:1 contra la rama (57 archivos
+  en ambos).
 
 ## HUs cerradas desde la última auditoría
 
