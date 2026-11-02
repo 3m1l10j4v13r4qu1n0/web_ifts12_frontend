@@ -438,9 +438,20 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   reapuntaron 14 referencias vivas a `inbox/_done/...` en README, `.env.example`,
   `estado_implementacion.md`, `contrato_api_backend.md`, este snapshot y 5 archivos de `src/`
   (solo comentarios). Logbooks y `docs/06_audits/` no se tocaron (históricos). **A las 12:00
-  del 02/11/2026 llegaron 3 tickets Mantis nuevos** (`0000075` QA, `0000077` diseño del CRUD,
-  `0000079` rama oficial) que siguen **sin ubicar** en la bandeja (pendiente
-  `logsayer doc route` → Mentat).
+  del 02/11/2026 llegaron 3 tickets Mantis nuevos**; el **0000077** (diseño definitivo del
+  CRUD para UX/UI) ya se procesó con el flujo (PDF → Markdown →
+  `docs/02_technical/ticket_0000077_diseno_definitivo_crud_administrativo.md`) y quedan
+  **2 sin ubicar** en la bandeja: `0000075` (QA) y `0000079` (Infra, rama oficial).
+- **Pack de insumos para UX/UI (02/11/2026):** `documentacion/ux_ui/pack_insumos_crud_0000077.md`
+  (222 líneas, listo para compartir, sin credenciales) concentra lo que el diseño del CRUD
+  necesita saber: matriz de los 6 apartados × campos (fuente `src/constants/admin.ts` de la
+  rama `fix/integracion-test-20261031`), operaciones y errores reales de HU-02, catálogo de
+  estados, qué **no** diseñar (escritura de novedades/FAQ/slider, consultas, cuentas, carga
+  de archivos, permisos del Editor), restricciones del contrato visual (breakpoints
+  1440/768/375 y 7 componentes verificados en el Figma v2), **6 preguntas abiertas** (frame
+  `A2` desalineado, adjuntos `14/15-admin*.png`, paginación, selects de referencia,
+  permisos, filtros) y checklist de validación de la entrega. Diseño **pendiente**;
+  implementación sujeta a 0000079.
 - **Pendientes vivos (02/11/2026):** los módulos siguen detrás de las banderas `VITE_*` de
   `src/constants/contrato.ts` (en el entorno TEST se cargan con `deploy/test.env`); la FAQ
   segmentada sigue con el catálogo local (`mockFaqs`; falta contrato de categorías); el CRUD
