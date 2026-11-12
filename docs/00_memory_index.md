@@ -2,43 +2,45 @@
 
 <!-- Generado por 'logsayer memory index'. No editar a mano. -->
 
-01_global/actores.md                              · nivel 0 · borrador · 2026-09-18 · actores
-01_global/alcance.md                              · nivel 0 · borrador · 2026-09-18 · alcance
-01_global/correcciones_ux_ui_frontend.md          · nivel 0 · borrador · 2026-10-08 · correcciones, ux, ui, frontend
-01_global/figma_v2_contrato_visual.md             · nivel 0 · vigente · 2026-10-13 · figma, contrato, visual, ux, ui
-01_global/plan_correcciones_uxui_frontend.md      · nivel 0 · borrador · 2026-10-08 · plan, correcciones, ux, ui, frontend
-01_global/reglas_negocio.md                       · nivel 0 · borrador · 2026-09-18 · reglas, negocio
-01_global/vision.md                               · nivel 0 · borrador · 2026-09-18 · vision
-project_state.md                                  · nivel 0 · — · — · project, state
-02_technical/contrato_api_backend.md              · nivel 1 · **superado**. · 2026-10-02 · contrato, api, backend
-02_technical/decisiones_tecnicas.md               · nivel 1 · borrador · 2026-09-18 · decisiones, tecnicas
-02_technical/estado_implementacion.md             · nivel 1 · **OBSOLETO · 2026-09-30 · estado, implementacion
-02_technical/modelo_datos_global.md               · nivel 1 · borrador · 2026-09-18 · modelo, datos, global
-02_technical/revision_consumo_api.md              · nivel 1 · borrador · 2026-10-08 · revision, consumo, api, novedades
-04_user_stories/HU-01/README.md                   · nivel 2 · borrador · 2026-09-18 · hu-01
-04_user_stories/HU-01/hu_01_api.md                · nivel 2 · — · — · hu-01, api, backend
-04_user_stories/HU-01/hu_01_caso_uso_expandido.md · nivel 2 · borrador · 2026-09-18 · hu-01, hu, caso, uso, expandido
-04_user_stories/HU-01/hu_01_modelos_datos.md      · nivel 2 · borrador · 2026-09-18 · hu-01, hu, modelos, datos
-04_user_stories/HU-01/hu_01_pruevas.md            · nivel 2 · borrador · 2026-09-18 · hu-01, hu, pruevas
-04_user_stories/HU-02/README.md                   · nivel 2 · borrador · 2026-10-20 · hu-02
-04_user_stories/HU-02/hu_02_api.md                · nivel 2 · — · — · hu-02, api, backend, admin
-04_user_stories/HU-02/hu_02_caso_uso_expandido.md · nivel 2 · borrador · 2026-10-20 · hu-02, hu, caso, uso, expandido
-04_user_stories/HU-02/hu_02_modelos_datos.md      · nivel 2 · borrador · 2026-10-20 · hu-02, hu, modelos, datos
-04_user_stories/HU-02/hu_02_pruevas.md            · nivel 2 · borrador · 2026-10-20 · hu-02, hu, pruevas
-03_process/definicion_listo.md                    · nivel 3 · borrador · 2026-09-18 · definicion, listo
-05_agile_methodology/metodoKanban.md              · nivel 3 · — · — · metodokanban
-06_audits/audit_2026-09-09-infraestructura.md     · nivel 3 · — · — · audit, infraestructura
-06_audits/audit_2026-09-15-backend.md             · nivel 3 · — · — · audit, backend
-06_audits/audit_2026-09-18-analisis-funcional.md  · nivel 3 · — · — · audit, analisis, funcional
-06_audits/audit_2026-09-21-ux-ui.md               · nivel 3 · — · — · audit, ux, ui
-06_audits/audit_2026-10-01-backend-readme.md      · nivel 3 · — · — · audit, backend
-06_audits/audit_2026-10-08-ux-ui-frontend.md      · nivel 3 · — · — · audit, ux, ui, frontend
-06_audits/audit_2026-10-09-figma.md               · nivel 3 · — · — · audit, figma
-06_audits/audit_2026-10-22-backend.md             · nivel 3 · — · — · audit, backend
-06_audits/audit_2026-10-22-ux-ui.md               · nivel 3 · — · — · audit, ux, ui
-logbooks/00_index.md                              · nivel 3 · — · —
-logbooks/logbook_fase-10_01.md                    · nivel 3 · — · — · logbook, fase
-logbooks/logbook_fase-7_01.md                     · nivel 3 · — · — · logbook, fase
-logbooks/logbook_fase-8_01.md                     · nivel 3 · — · — · logbook, fase
-logbooks/logbook_fase-9_01.md                     · nivel 3 · — · — · logbook, fase
-logbooks/logbook_legado_01.md                     · nivel 3 · — · — · logbook, legado
+01_global/actores.md                                                 · nivel 0 · borrador · 2026-09-18 · actores
+01_global/alcance.md                                                 · nivel 0 · borrador · 2026-09-18 · alcance
+01_global/correcciones_ux_ui_frontend.md                             · nivel 0 · borrador · 2026-10-08 · correcciones, ux, ui, frontend
+01_global/figma_v2_contrato_visual.md                                · nivel 0 · vigente · 2026-10-13 · figma, contrato, visual, ux, ui
+01_global/plan_correcciones_uxui_frontend.md                         · nivel 0 · borrador · 2026-10-08 · plan, correcciones, ux, ui, frontend
+01_global/reglas_negocio.md                                          · nivel 0 · borrador · 2026-09-18 · reglas, negocio
+01_global/vision.md                                                  · nivel 0 · borrador · 2026-09-18 · vision
+project_state.md                                                     · nivel 0 · — · — · project, state
+02_technical/contrato_api_backend.md                                 · nivel 1 · **superado**. · 2026-10-02 · contrato, api, backend
+02_technical/decisiones_tecnicas.md                                  · nivel 1 · borrador · 2026-09-18 · decisiones, tecnicas
+02_technical/estado_implementacion.md                                · nivel 1 · **OBSOLETO · 2026-09-30 · estado, implementacion
+02_technical/modelo_datos_global.md                                  · nivel 1 · borrador · 2026-09-18 · modelo, datos, global
+02_technical/revision_consumo_api.md                                 · nivel 1 · borrador · 2026-10-08 · revision, consumo, api, novedades
+02_technical/ticket_0000073_correcciones_integracion_test.md         · nivel 1 · borrador · 2026-11-02 · ticket, correcciones, integracion, test
+02_technical/ticket_0000077_diseno_definitivo_crud_administrativo.md · nivel 1 · borrador · 2026-11-02 · ticket, uxui, crud, diseno
+04_user_stories/HU-01/README.md                                      · nivel 2 · borrador · 2026-09-18 · hu-01
+04_user_stories/HU-01/hu_01_api.md                                   · nivel 2 · — · — · hu-01, api, backend
+04_user_stories/HU-01/hu_01_caso_uso_expandido.md                    · nivel 2 · borrador · 2026-09-18 · hu-01, hu, caso, uso, expandido
+04_user_stories/HU-01/hu_01_modelos_datos.md                         · nivel 2 · borrador · 2026-09-18 · hu-01, hu, modelos, datos
+04_user_stories/HU-01/hu_01_pruevas.md                               · nivel 2 · borrador · 2026-09-18 · hu-01, hu, pruevas
+04_user_stories/HU-02/README.md                                      · nivel 2 · borrador · 2026-10-20 · hu-02
+04_user_stories/HU-02/hu_02_api.md                                   · nivel 2 · — · — · hu-02, api, backend, admin
+04_user_stories/HU-02/hu_02_caso_uso_expandido.md                    · nivel 2 · borrador · 2026-10-20 · hu-02, hu, caso, uso, expandido
+04_user_stories/HU-02/hu_02_modelos_datos.md                         · nivel 2 · borrador · 2026-10-20 · hu-02, hu, modelos, datos
+04_user_stories/HU-02/hu_02_pruevas.md                               · nivel 2 · borrador · 2026-10-20 · hu-02, hu, pruevas
+03_process/definicion_listo.md                                       · nivel 3 · borrador · 2026-09-18 · definicion, listo
+05_agile_methodology/metodoKanban.md                                 · nivel 3 · — · — · metodokanban
+06_audits/audit_2026-09-09-infraestructura.md                        · nivel 3 · — · — · audit, infraestructura
+06_audits/audit_2026-09-15-backend.md                                · nivel 3 · — · — · audit, backend
+06_audits/audit_2026-09-18-analisis-funcional.md                     · nivel 3 · — · — · audit, analisis, funcional
+06_audits/audit_2026-09-21-ux-ui.md                                  · nivel 3 · — · — · audit, ux, ui
+06_audits/audit_2026-10-01-backend-readme.md                         · nivel 3 · — · — · audit, backend
+06_audits/audit_2026-10-08-ux-ui-frontend.md                         · nivel 3 · — · — · audit, ux, ui, frontend
+06_audits/audit_2026-10-09-figma.md                                  · nivel 3 · — · — · audit, figma
+06_audits/audit_2026-10-22-backend.md                                · nivel 3 · — · — · audit, backend
+06_audits/audit_2026-10-22-ux-ui.md                                  · nivel 3 · — · — · audit, ux, ui
+logbooks/00_index.md                                                 · nivel 3 · — · —
+logbooks/logbook_fase-10_01.md                                       · nivel 3 · — · — · logbook, fase
+logbooks/logbook_fase-7_01.md                                        · nivel 3 · — · — · logbook, fase
+logbooks/logbook_fase-8_01.md                                        · nivel 3 · — · — · logbook, fase
+logbooks/logbook_fase-9_01.md                                        · nivel 3 · — · — · logbook, fase
+logbooks/logbook_legado_01.md                                        · nivel 3 · — · — · logbook, legado

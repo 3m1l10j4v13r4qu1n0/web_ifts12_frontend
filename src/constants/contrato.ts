@@ -1,10 +1,10 @@
 /**
  * Banderas de módulos cuya API todavía no está en el contrato.
  *
- * Fuente de verdad de endpoints: `inbox/apispec_1.json` (Swagger 2.0). Mientras un recurso
+ * Fuente de verdad de endpoints: `inbox/_done/apispec_1.json` (Swagger 2.0). Mientras un recurso
  * no figure ahí, el frontend no lo consume: muestra un aviso de proceso en lugar de llamar
  * a un endpoint inexistente. Ver `docs/06_audits/audit_2026-10-22-backend.md` (BE-N03 y
- * BE-N04) y `inbox/plan_aislamiento_apispec_2026-10-22.md` §2.1.
+ * BE-N04) y `inbox/_done/plan_aislamiento_apispec_2026-10-22.md` §2.1.
  *
  * Defaults:
  * - **Desarrollo y test:** habilitados (`true`).
