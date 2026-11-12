@@ -46,6 +46,9 @@ se hace con merge local y push al remoto `infra`.
    por cuenta propia ni reescribir historia.
 8. **Si `develop` avanzara** con autorización de Infra, sincronizar la rama de test con
    `develop` antes de seguir; nunca al revés.
+9. **Al terminar un merge, el repo queda parado en `fix/integracion-test-20261031`**, no en
+   la rama mergeada. Recién después se borra la rama ya integrada (local y, si existe, en
+   `origin`).
 
 ## Flujo de una tarea
 
@@ -68,6 +71,9 @@ git merge infra/fix/integracion-test-20261031
 git switch fix/integracion-test-20261031
 git merge --no-ff feature/<tema>
 git push infra fix/integracion-test-20261031
+
+# 6. Quedar parado en la rama de test (no volver a la rama mergeada) y borrar la integrada
+git branch -d feature/<tema>
 ```
 
 ## Verificación rápida
