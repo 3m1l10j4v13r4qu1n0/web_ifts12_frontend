@@ -98,7 +98,8 @@ logsayer quedó archivado en `docs/logbooks/logbook_legado_01.md` y **no se edit
 - Base de documentación completada (18/09/2026): `docs/01_global`, `docs/02_technical`,
   `docs/03_process` y `docs/04_user_stories/HU-01`; skill `fe-architect-scaffold` con
   endpoints genéricos por historia de usuario.
-- Ramas `feature/`/`fix/` se crean siempre desde `develop` (una rama = una tarea).
+- Ramas `feature/`/`fix/` se crean siempre desde `develop` (una rama = una tarea),
+  **salvo modo test vigente**: ver `.opencode/rules/integracion-test.md`.
 - Siempre ejecutar `npm run lint` · `npm run build` · `npm run test` al tocar código.
 
 ## Fuente de verdad y anti-alucinación
@@ -122,6 +123,12 @@ logsayer quedó archivado en `docs/logbooks/logbook_legado_01.md` y **no se edit
 
 ## Git (regla dura: `.opencode/rules/flujo-git.md`)
 
+- **Modo test vigente (regla dura del proyecto:
+  `.opencode/rules/integracion-test.md`):** con el sitio TEST desplegado, `develop` y
+  `main` quedan **congeladas** (sin commits, merges ni push) y todo se integra en
+  `fix/integracion-test-20261031` (base de ramas y destino de merge). El push va al remoto
+  `infra` y el merge a `develop` solo con autorización escrita de Infra (ticket 0000079) y
+  aprobación del usuario.
 - Prohibido trabajar directo sobre `main` o `develop`. Ramas `feature/`/`fix/`
   siempre desde `develop`, una rama = una tarea.
 - **Base de la rama:** cada tarea se crea desde el `develop` **del momento**

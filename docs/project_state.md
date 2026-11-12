@@ -4,7 +4,15 @@ fase: fase-10
 
 # Estado del proyecto — IFTS N.º 12
 
-Snapshot verificado el 31 de octubre de 2026. El histórico permanece en Git y bitácoras.
+Snapshot verificado el 12 de noviembre de 2026; los datos del despliegue TEST provienen del
+31 de octubre de 2026. El histórico permanece en Git y bitácoras.
+
+## Regla operativa vigente: modo test (12/11/2026)
+
+- Rige `.opencode/rules/integracion-test.md`: `develop` y `main` quedan **congeladas** hasta
+  el cierre de los tickets 0000079 (coordinación de ramas) y 0000075 (QA).
+- Base de ramas y destino de merge: `fix/integracion-test-20261031` (`d1afcf8`, remoto
+  `infra`). Merge a `develop` solo con autorización escrita de Infra y aprobación del usuario.
 
 ## Fase actual del roadmap
 
