@@ -210,13 +210,3 @@ Frontend va a revisar la entrega contra esto antes de implementar:
 - [ ] Criterios de accesibilidad incluidos (44×44, foco, contraste).
 
 ---
-
-## 9. Referencias
-
-- Diseño: Figma "IFTS 12 v2 - alineado a contratos", fileKey `MHBgrLD9g8ka6sX6ezkO1l`.
-- Contrato visual: `docs/01_global/figma_v2_contrato_visual.md`.
-- Contrato de API de administración: `docs/04_user_stories/HU-02/hu_02_api.md`.
-- Ticket 0000077 procesado: `docs/02_technical/ticket_0000077_diseno_definitivo_crud_administrativo.md`.
-- Rama con la implementación actual: `fix/integracion-test-20261031` (SHA `d1afcf8`),
-  desplegada en el sitio TEST.
-- Coordinación: 0000079 (ramas, reunión del 02/11/2026) · 0000075 (QA) · 0000073 (Front).
