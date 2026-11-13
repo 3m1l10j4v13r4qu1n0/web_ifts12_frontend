@@ -469,6 +469,16 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 
 ## Decisiones activas (últimas 3-5)
 
+- **Devolución de Edith y prototipo de Claude (13/11/2026):** la devolución del instituto
+  (PDF del 08/11, 14 secciones) quedó como documento de Capa 1 en
+  `docs/01_global/devolucion_edith_2026_11_13.md`, y el prototipo navegable se archivó en
+  `documentacion/driveFrontend/02_ux_ui/prototipo_claude_2026_11_13/` (HTML + texto
+  renderizado + README; carpeta no versionada).
+  La auditoría (`docs/06_audits/audit_2026-11-13-prototipo-claude-ux-ui.md`) concluye que el
+  prototipo cierra #0040 y #0037 y el menú de 7 pestañas, pero **toma 15 decisiones que el
+  instituto nunca confirmó**: no se consideran especificación hasta que haya acta. El
+  prototipo no es handoff ni reemplaza al Figma v2. El PDF y la transcripción de Edith quedaron
+  archivados en `inbox/_done/`.
 - **Sin merge de la rama TEST hasta la reunión 0000079 (02/11/2026):** la rama
   `fix/integracion-test-20261031` (`d1afcf8`) queda descargada, revisada y desplegada en el
   sitio TEST, pero **no se mergea a `main` ni `develop`** por indicación del profesor; la
@@ -512,6 +522,13 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 
 ## Bloqueos abiertos (no resolver sin fuente)
 
+- **15 decisiones de la devolución de Edith (13/11/2026)** → Docentes en el pie vs pestaña,
+  listado de Novedades, formulario de contacto, categoría Docentes en FAQ, Becas/Boleto,
+  Enlaces de interés, Eventos de Tutoría en la v1, modalidad de Gestión Parlamentaria, correos
+  docentes, formato de los regímenes y ubicación del título de validez. El prototipo de Claude
+  eligió una opción por su cuenta; falta confirmación escrita del instituto antes de tocar
+  `src/`. **Dueño: Análisis + UX/UI.** Tabla completa en
+  `docs/06_audits/audit_2026-11-13-prototipo-claude-ux-ui.md`, §6.
 - **URL del backend en el entorno de testing (P9)** → bloquean el build de despliegue. `.env.example`
   lo tiene marcado con `@TODO`; hoy solo hay `localhost:5000`.
 - **Las 11 rutas restantes** (`/faqs`, `/slider`, `/calendario`, `/docentes`, `/autoridades`,
@@ -557,6 +574,10 @@ Detalle con dueño y qué se necesita de vuelta en
 
 - Frontend: `npm run lint` · `npm run build` · `npm run test` (226 tests).
 - Sistema documental: `logsayer check` · `logsayer process check` · `logsayer memory index`.
+- **Auditoría del prototipo de Claude (13/11/2026):** 31 tickets y 14 secciones de la
+  devolución cruzados contra el artefacto archivado, medido en Firefox a 1440/1024/768/375.
+  Resultado: 10 ✅, 15 🟡, 1 🔵, 5 ⏳ en tickets; 12 hallazgos PROTO-01…PROTO-12. Informe en
+  `docs/06_audits/audit_2026-11-13-prototipo-claude-ux-ui.md`.
 - Consumo verificado **en navegador** (Firefox, `localhost:5173`) contra un servidor que replica
   la serialización de `app.py:62-92` leyendo de `instance/ifts12.db`: listado, detalle, buscador,
   y los tres estados (con datos, con backend caído, y reintento funcionando).
