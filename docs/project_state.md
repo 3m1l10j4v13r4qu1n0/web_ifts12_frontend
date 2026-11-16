@@ -23,11 +23,14 @@ Fase 10 cerrada (19/10/2026) · próxima fase a definir
 _(Fase 10 = **alineación del frontend a los exports Desktop 1440 del avance de diseño**,
 página por página (tareas T1–T16), cerrada con tag `v1.11.0`. No hay Fase 11 definida todavía.)_
 
-**Situación 02/11/2026:** la rama de integración TEST `fix/integracion-test-20261031`
-(`d1afcf8`, base `33f9954` = `develop`) está descargada y revisada pero **sin merge** a
-`main` ni `develop`: la rama oficial se decide en la reunión del ticket **0000079** y el QA
-corre por separado en **0000075**. Detalle en "Qué está construido" más abajo y en
-`docs/02_technical/ticket_0000073_correcciones_integracion_test.md`.
+**Situación 16/11/2026:** la devolución de Edith quedó especificada en Capa 1 —Mapa del
+Sitio V3 y HU-03…HU-06— y **sin implementar**. La rama de integración TEST
+`fix/integracion-test-20261031` (base `d1afcf8`) es la base y el destino de trabajo; `main` y
+`develop` siguen congeladas hasta el cierre de **0000079** (ramas) y **0000075** (QA). El
+push al remoto `infra` está bloqueado por el host caído en Tailscale.
+
+_(Detalle en "Qué está construido" y en
+`docs/02_technical/ticket_0000073_correcciones_integracion_test.md`.)_
 
 ## Alineación al diseño del avance (cerrada · 19/10/2026)
 
@@ -145,6 +148,15 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   escenarios Gherkin). Capturas de documentación del login y del panel (cáscara pre-A2) en
   `documentacion/screenshots/admin_01_login.png` y `admin_02_panel.png` (1440 × 900).
   Rama: `feature/admin-frames-figma`.
+- **HUs de la devolución de Edith creadas (16/11/2026)** en `docs/04_user_stories/`, con
+  README y plan de pruebas cada una, y con la sección "Reemplaza" para que la auditoría no
+  las lea como hallazgos: **HU-03** navegación V3 (0000088), **HU-04** horarios y Tutoría
+  (0000089 + 0000090), **HU-05** Ingresantes y Alumnos (0000091 + 0000092) y **HU-06**
+  fichas de carrera (0000093 + 0000095 + 0000096). Cada una separa CA verificables hoy de
+  pendientes ⏳ con dueño. Los tickets que no son funcionalidad (ronda QA 0000075, ramas
+  0000079 y el bug responsive 0000087) quedaron en
+  `docs/02_technical/tickets_operativos_ronda_test_2026_11.md`. **Ninguna HU está
+  implementada todavía.**
 - **Correcciones de UX/UI y Frontend** especificadas en Capa 1
   (`docs/01_global/correcciones_ux_ui_frontend.md`, 08/10/2026): 9 bloqueantes (B1–B9), 12
   importantes (I1–I12) y 7 mejoras (M1–M7) de la auditoría UX/UI del 07/10, cada una con criterio
@@ -588,6 +600,12 @@ Detalle con dueño y qué se necesita de vuelta en
   `figma_v2_contrato_visual.md`, `estado_implementacion.md`, HU-01, `AGENTS.md` y las reglas
   y skills de navegación. `logsayer check` y `logsayer process check` en verde; índice de
   memoria regenerado (45 documentos).
+- **HUs de la devolución de Edith (16/11/2026):** HU-03…HU-06 creadas con README y plan de
+  pruebas, cada una con la sección "Reemplaza", CA verificables y pendientes ⏳ con dueño
+  (0000099, 0000080, 0000081 y material del instituto). Los tickets operativos 0000075,
+  0000079 y el bug 0000087 quedaron fuera de las HUs, en
+  `docs/02_technical/tickets_operativos_ronda_test_2026_11.md`. Índice de memoria
+  regenerado (54 documentos); `logsayer check` y `logsayer process check` en verde.
 - **Auditoría del prototipo de Claude (13/11/2026):** 31 tickets y 14 secciones de la
   devolución cruzados contra el artefacto archivado, medido en Firefox a 1440/1024/768/375.
   Resultado: 10 ✅, 15 🟡, 1 🔵, 5 ⏳ en tickets; 12 hallazgos PROTO-01…PROTO-12. Informe en
