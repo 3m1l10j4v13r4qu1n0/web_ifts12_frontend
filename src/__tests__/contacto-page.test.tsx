@@ -1,5 +1,6 @@
-import { screen, within } from '@testing-library/react';
+import { fireEvent, screen, within } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
+import { HORARIO_ATENCION } from '../constants/navegacion';
 import ContactoPage from '../pages/ContactoPage';
 import { renderConRouter } from '../test-utils';
 
@@ -16,9 +17,7 @@ describe('ContactoPage', () => {
     expect(within(nav).getByText('Contacto')).toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 1, name: 'Contacto' })).toBeInTheDocument();
     expect(
-      screen.getByText(
-        /Consultas generales, de ingreso y de tutorías\. También podés usar la consulta directa/,
-      ),
+      screen.getByText(/Consultas generales y de ingreso\. También podés usar la consulta directa/),
     ).toBeInTheDocument();
   });
 
@@ -42,7 +41,6 @@ describe('ContactoPage', () => {
       'Seleccionar asunto',
       'Consulta general',
       'Ingreso',
-      'Tutorías',
     ]);
   });
 
@@ -53,7 +51,8 @@ describe('ContactoPage', () => {
       screen.getByRole('heading', { level: 2, name: 'Datos institucionales' }),
     ).toBeInTheDocument();
     expect(screen.getByText('Misiones 26, C1083 ABB, CABA')).toBeInTheDocument();
-    expect(screen.getByText('Horario de atención: exclusivamente nocturno.')).toBeInTheDocument();
+    expect(screen.getByText(`Horario de atención: ${HORARIO_ATENCION}.`)).toBeInTheDocument();
+    expect(screen.queryByText(/exclusivamente nocturn/i)).not.toBeInTheDocument();
     expect(
       screen.getByText('El correo institucional se publica cuando esté disponible.'),
     ).toBeInTheDocument();
@@ -91,5 +90,18 @@ describe('ContactoPage', () => {
     for (const pregunta of preguntas) {
       expect(botones.some((boton) => boton.textContent?.includes(pregunta))).toBe(true);
     }
+  });
+
+  it('la FAQ de tutorías indica el correo y el asunto oficiales', () => {
+    renderizarPagina();
+
+    const pregunta = screen.getByRole('button', { name: /¿Cómo contacto al equipo de tutorías\?/ });
+    fireEvent.click(pregunta);
+
+    expect(
+      screen.getByText(
+        /clara\.moroni@bue\.edu\.ar con el asunto «Sitio Web - Tutorías - Tu Nombre y Apellido», indicando tu año y carrera/,
+      ),
+    ).toBeInTheDocument();
   });
 });

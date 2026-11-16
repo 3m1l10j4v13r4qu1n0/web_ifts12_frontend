@@ -26,9 +26,13 @@ export const MENU_PRINCIPAL: readonly ItemNavegacion[] = [
   { etiqueta: 'FAQ', href: '/faq' },
 ];
 
-// Direccion y horario institucional que muestra la barra superior del header
-// (diseno Desktop 1440, export "Avance del diseno del sitio IFTS N.º 12").
-export const UBICACION_HEADER = 'Misiones 26, C1083 ABB, CABA · Atención exclusivamente nocturna';
+// Datos institucionales validados por el instituto (devolución de Edith §11; RN-07):
+// domicilio y dos franjas de atención. Reemplazan "Atención exclusivamente nocturna".
+export const DIRECCION_INSTITUTO = 'Misiones 26, C1083 ABB, CABA';
+export const HORARIO_ATENCION = 'lunes a viernes de 9:00 a 13:00 y de 18:30 a 22:30';
+
+// Dirección y horario institucional que muestra la barra superior del header.
+export const UBICACION_HEADER = `${DIRECCION_INSTITUTO} · ${HORARIO_ATENCION}`;
 
 // Accesos directos a plataformas externas en la barra superior del header
 // (Mapa del Sitio V3 §1: el buscador y los 3 accesos se mantienen). Las URLs

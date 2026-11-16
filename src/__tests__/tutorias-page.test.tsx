@@ -1,5 +1,7 @@
 import { screen, within } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
+import { HORARIO_ATENCION } from '../constants/navegacion';
+import { ASUNTO_TUTORIAS, CORREO_TUTORIAS, ENLACE_CORREO_TUTORIAS } from '../constants/tutorias';
 import TutoriasPage from '../pages/TutoriasPage';
 import { renderConRouter } from '../test-utils';
 
@@ -31,60 +33,48 @@ describe('TutoriasPage', () => {
     ).toBeInTheDocument();
   });
 
-  it('muestra la tabla de atención con las filas PENDIENTE del diseño', () => {
+  it('ya no muestra la tabla de días, horarios y modalidades', () => {
     renderizarPagina();
 
-    const tabla = screen.getByRole('table', { name: 'Turnos de atención de tutorías' });
-    const encabezados = within(tabla).getAllByRole('columnheader');
-    expect(encabezados.map((th) => th.textContent)).toEqual(['Día', 'Horario', 'Modalidad']);
-
-    const filas = within(tabla).getAllByRole('row').slice(1);
-    expect(filas).toHaveLength(2);
-    for (const fila of filas) {
-      expect(within(fila).getAllByText('PENDIENTE')).toHaveLength(3);
-    }
+    expect(screen.queryByRole('table')).not.toBeInTheDocument();
+    expect(screen.queryByText(/Días, horarios y modalidades de atención/)).not.toBeInTheDocument();
   });
 
-  it('muestra las tres tarjetas de contacto y enlaza a Contacto', () => {
+  it('publica el correo del equipo con el asunto oficial y el mailto precargado', () => {
+    renderizarPagina();
+
+    const enlace = screen.getByRole('link', { name: CORREO_TUTORIAS });
+
+    expect(enlace).toHaveAttribute('href', ENLACE_CORREO_TUTORIAS);
+    expect(enlace.getAttribute('href')).toContain(`subject=${encodeURIComponent(ASUNTO_TUTORIAS)}`);
+    expect(screen.getByText(ASUNTO_TUTORIAS)).toBeInTheDocument();
+    expect(screen.getByText(/indicá tu año y carrera/i)).toBeInTheDocument();
+  });
+
+  it('muestra la dirección con las dos franjas de atención vigentes', () => {
     renderizarPagina();
 
     expect(
-      screen.getByRole('heading', { level: 3, name: 'Correo de tutorías' }),
+      screen.getByText(`Misiones 26, C1083 ABB, CABA · ${HORARIO_ATENCION}.`),
     ).toBeInTheDocument();
-    expect(
-      screen.getByText('El correo oficial del equipo se publica cuando esté disponible.'),
-    ).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 3, name: 'Dónde' })).toBeInTheDocument();
-    expect(
-      screen.getByText(/Misiones 26, C1083 ABB, CABA · Atención exclusivamente nocturna/),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', { level: 3, name: '¿Tenés una consulta?' }),
-    ).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Ir a Contacto' })).toHaveAttribute(
-      'href',
-      '/contacto',
-    );
+    expect(screen.getByText(`Horario de atención: ${HORARIO_ATENCION}.`)).toBeInTheDocument();
+    expect(screen.queryByText(/exclusivamente nocturn/i)).not.toBeInTheDocument();
   });
 
-  it('muestra los datos del instituto con el correo como mensaje de proceso', () => {
+  it('ya no deriva las consultas al formulario de contacto', () => {
+    renderizarPagina();
+
+    expect(screen.queryByText(/asunto\s*“?Tutorías”?/i)).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'Ir a Contacto' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('region', { name: 'Consulta directa' })).not.toBeInTheDocument();
+  });
+
+  it('mantiene el correo institucional como mensaje de proceso', () => {
     renderizarPagina();
 
     expect(screen.getByRole('heading', { level: 3, name: 'IFTS N.º 12' })).toBeInTheDocument();
-    expect(screen.getByText('Horario de atención: exclusivamente nocturno.')).toBeInTheDocument();
     expect(
       screen.getByText('Correo institucional: se publica cuando esté disponible.'),
     ).toBeInTheDocument();
-  });
-
-  it('muestra el formulario de consulta directa', () => {
-    renderizarPagina();
-
-    const formulario = screen.getByRole('region', { name: 'Consulta directa' });
-    expect(within(formulario).getByLabelText('Nombre y apellido')).toBeInTheDocument();
-    expect(within(formulario).getByLabelText('Correo electrónico')).toBeInTheDocument();
-    expect(within(formulario).getByLabelText('Consulta')).toBeInTheDocument();
-    expect(within(formulario).getByRole('button', { name: 'Enviar consulta' })).toBeInTheDocument();
-    expect(within(formulario).getByRole('button', { name: 'Limpiar' })).toBeInTheDocument();
   });
 });

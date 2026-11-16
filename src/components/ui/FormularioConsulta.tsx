@@ -7,10 +7,10 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /**
  * Asuntos del select del formulario de Contacto (export `09 · Contacto`). El diseño trae
- * "Seleccionar asunto" como placeholder y la bajada de la página menciona consultas
- * generales, de ingreso y de tutorías (mismo criterio que el CTA de Tutorías, T12).
+ * "Seleccionar asunto" como placeholder. Las consultas de tutorías no entran por acá: van al
+ * correo del equipo (devolución de Edith §7; ticket 0000090).
  */
-const ASUNTOS = ['Consulta general', 'Ingreso', 'Tutorías'];
+const ASUNTOS = ['Consulta general', 'Ingreso'];
 
 interface FormularioConsultaProps {
   titulo?: string;

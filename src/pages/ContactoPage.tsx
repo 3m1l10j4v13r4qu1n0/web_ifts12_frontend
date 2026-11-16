@@ -2,6 +2,8 @@ import EncabezadoPagina from '../components/layout/EncabezadoPagina';
 import Button from '../components/ui/Button';
 import FaqAcordeon from '../components/ui/FaqAcordeon';
 import FormularioConsulta from '../components/ui/FormularioConsulta';
+import { DIRECCION_INSTITUTO, HORARIO_ATENCION } from '../constants/navegacion';
+import { ASUNTO_TUTORIAS, CORREO_TUTORIAS } from '../constants/tutorias';
 import type { FaqItem } from '../types/domain/sitio.types';
 
 /**
@@ -26,7 +28,7 @@ const FAQ_CONTACTO: FaqItem[] = [
     id: 'faq-contacto-tutorias',
     categoria: 'institucional',
     pregunta: '¿Cómo contacto al equipo de tutorías?',
-    respuesta: 'La respuesta oficial se publica cuando esté disponible.',
+    respuesta: `Escribí a ${CORREO_TUTORIAS} con el asunto «${ASUNTO_TUTORIAS}», indicando tu año y carrera.`,
   },
 ];
 
@@ -38,7 +40,7 @@ function ContactoPage() {
         eyebrow="Contacto"
         seccion="rojo"
         titulo="Contacto"
-        descripcion="Consultas generales, de ingreso y de tutorías. También podés usar la consulta directa del pie de página."
+        descripcion="Consultas generales y de ingreso. También podés usar la consulta directa del pie de página."
       />
 
       <div className="mx-auto grid max-w-contenido grid-cols-1 gap-10 px-4 py-12 lg:grid-cols-3">
@@ -66,10 +68,8 @@ function ContactoPage() {
             <h2 id="titulo-datos" className="text-lg font-semibold text-texto">
               Datos institucionales
             </h2>
-            <address className="mt-3 not-italic text-texto-suave">
-              Misiones 26, C1083 ABB, CABA
-            </address>
-            <p className="mt-2 text-texto-suave">Horario de atención: exclusivamente nocturno.</p>
+            <address className="mt-3 not-italic text-texto-suave">{DIRECCION_INSTITUTO}</address>
+            <p className="mt-2 text-texto-suave">Horario de atención: {HORARIO_ATENCION}.</p>
             {/*
               Anotaciones del diseño (comentario UX/UI, no es copy visible): "PENDIENTE
               INSTITUCIONAL · correo institucional" y "PENDIENTE INSTITUCIONAL · teléfono (si

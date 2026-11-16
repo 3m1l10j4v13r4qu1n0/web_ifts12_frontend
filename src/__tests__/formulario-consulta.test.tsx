@@ -78,9 +78,9 @@ describe('FormularioConsulta', () => {
     fireEvent.change(screen.getByLabelText('Correo electrónico'), {
       target: { value: 'ana@example.com' },
     });
-    fireEvent.change(screen.getByLabelText('Asunto'), { target: { value: 'Tutorías' } });
+    fireEvent.change(screen.getByLabelText('Asunto'), { target: { value: 'Ingreso' } });
     fireEvent.change(screen.getByLabelText('Mensaje'), {
-      target: { value: '¿Cómo contacto con tutorías?' },
+      target: { value: '¿Cuándo abre la inscripción?' },
     });
     fireEvent.click(screen.getByRole('checkbox', { name: /política de privacidad/i }));
     fireEvent.click(screen.getByRole('button', { name: 'Enviar consulta' }));
@@ -89,7 +89,7 @@ describe('FormularioConsulta', () => {
     expect(registrarConsulta).toHaveBeenCalledWith({
       nombre: 'Ana',
       email: 'ana@example.com',
-      mensaje: 'Tutorías\n\n¿Cómo contacto con tutorías?',
+      mensaje: 'Ingreso\n\n¿Cuándo abre la inscripción?',
     });
   });
 
