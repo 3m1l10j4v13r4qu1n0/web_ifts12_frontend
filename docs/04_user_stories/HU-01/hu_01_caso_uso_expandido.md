@@ -10,12 +10,12 @@ sin requerir autenticación (RN-05).
 ## Flujo Principal (Éxito)
 
 1. El visitante ingresa a la URL principal del sitio y el sistema renderiza la Home.
-2. La Home muestra la portada con el menú principal del Mapa del Sitio V2 (9 ítems) y el
+2. La Home muestra la portada con el menú principal del Mapa del Sitio V3 (7 pestañas) y el
    buscador global persistente.
 3. La Home presenta los accesos destacados (Campus Virtual Moodle, inscripción oficial del
    GCBA y carreras) cuando existen URLs oficiales (RF-03, RF-12, RF-28; RN-01, RN-10).
-4. La Home presenta los accesos rápidos confirmados (7: Moodle, SIU, inscripción GCBA,
-   becas, constancias, mesas de examen y calendario académico) (RN-08).
+4. La Home presenta los accesos rápidos que defina el instituto (⏳); la barra superior
+   mantiene Moodle, SIU e inscripción GCBA (RN-08).
 5. La Home lista las carreras (6) con nombre, modalidad y horarios cuando existen (RF-01,
    RF-04).
 6. La Home muestra el slider de novedades con las noticias ordenadas de la más reciente a

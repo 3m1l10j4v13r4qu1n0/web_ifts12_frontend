@@ -16,9 +16,9 @@ o con error de API.
 
 - **Dado** que ingreso a la URL principal del sitio.
 - **Cuando** se renderiza la Home.
-- **Entonces** se muestran portada, accesos destacados y rápidos, carreras, slider de
-  noticias, comunidades y preguntas frecuentes.
-- **Y** el menú principal muestra los 9 ítems del Mapa del Sitio V2 con el buscador global.
+- **Entonces** se muestran portada, accesos destacados y rápidos, carreras, novedades y
+  preguntas frecuentes.
+- **Y** el menú principal muestra las 7 pestañas del Mapa del Sitio V3 con el buscador global.
 
 ### Escenario 2: Acceso destacado a Moodle e inscripción (Caso de Éxito)
 

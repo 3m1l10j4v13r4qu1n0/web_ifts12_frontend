@@ -15,17 +15,17 @@ inscripción oficial del GCBA y a la información clave del instituto.
 La Home es la pantalla principal y de mayor prioridad del sitio (etapa A). Reúne los
 contenidos administrables y fijos de mayor prioridad del mapa funcional: slider
 institucional, noticias recientes (último mes visible), FAQ destacadas por segmento y los
-accesos directos a Moodle, SIU e inscripción oficial, más los 7 accesos rápidos
-confirmados. La navegación sigue el Mapa del Sitio V2 de UX/UI (menú de 9 ítems y buscador
-global). Los accesos a servicios externos (Moodle e inscripción) se muestran **solo cuando
+accesos directos a Moodle, SIU e inscripción oficial, más los accesos rápidos que defina el
+instituto (⏳). La navegación sigue el Mapa del Sitio V3 (7 pestañas y buscador global;
+RN-14). Los accesos a servicios externos (Moodle e inscripción) se muestran **solo cuando
 existe URL oficial**: con placeholder vacío, el CTA se oculta o se atenúa (RN-10;
 anticipa el estado real `src/constants/enlaces.ts`).
 
 ## Criterios de Aceptación
 
 - **Dado** que ingreso a la Home, **cuando** se renderiza la página, **entonces** se
-  muestran la portada, los accesos destacados y rápidos, las carreras, el slider de
-  noticias, las comunidades y las preguntas frecuentes.
+  muestran la portada, los accesos destacados y rápidos, las carreras, las novedades y las
+  preguntas frecuentes.
 - **Dado** que existe una URL oficial del Campus Virtual, **cuando** se renderiza la Home,
   **entonces** el acceso destacado a Moodle se muestra visible y clicable (RF-12, RF-28;
   RN-01).
@@ -40,8 +40,9 @@ anticipa el estado real `src/constants/enlaces.ts`).
   se ven el nombre y la modalidad de cada una, y los horarios cuando existen (RF-01, RF-04).
 - **Dado** que se cargan preguntas frecuentes, **cuando** se abre la sección, **entonces**
   se muestran organizadas por segmento/categoría (RF-06, RF-14).
-- **Dado** que el menú sigue el Mapa del Sitio V2, **cuando** navego la Home, **entonces**
-  veo el menú principal de 9 ítems y el buscador global persistente.
+- **Dado** que el menú sigue el Mapa del Sitio V3, **cuando** navego la Home, **entonces**
+  veo las 7 pestañas (Inicio, Instituto, Carreras, Ingresantes, Alumnos, Tutoría y FAQ) y el
+  buscador global persistente (RN-14).
 
 ## Specification by Example
 
@@ -55,7 +56,7 @@ anticipa el estado real `src/constants/enlaces.ts`).
 ## Acceptance TDD
 
 - Verificar el render de la Home con todas sus secciones (portada, accesos, carreras,
-  slider de noticias, comunidades y FAQ).
+  novedades y FAQ).
 - Verificar que las noticias se ordenan de la más reciente a la más antigua.
 - Verificar la visibilidad condicional de los CTA externos según exista o no URL oficial.
 - Verificar que cada card de carrera muestra nombre, modalidad y horarios cuando existen.
@@ -65,5 +66,7 @@ anticipa el estado real `src/constants/enlaces.ts`).
 IFTS N.º 12. (2026). Análisis funcional validado. `documentacion/frontend/analisis_funcional_validado.md`.
 
 Equipo de UX/UI. (2026). Mapa del Sitio V2. `documentacion/driveFrontend/02_ux_ui/mapa_sitio_ifts12_(V2).md`.
+
+Equipo de UX/UI y Frontend. (2026). Mapa del Sitio V3. `docs/01_global/mapa_sitio_ifts12_v3.md`.
 
 Equipo de Frontend. (2026). Estado actual del proyecto. `docs/02_technical/estado_implementacion.md`.
