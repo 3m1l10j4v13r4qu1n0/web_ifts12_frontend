@@ -4,12 +4,12 @@ Fuente: "Simple Ways to Improve Website Navigation"
 
 ## Menú
 
-- **Menú definido por el Mapa del Sitio V2 de UX/UI** (fuente de verdad, 15/09/2026): 9 items
-  (Inicio, Carreras, Ingresantes, Estudiantes, Tutorías, Docentes, Institucional, Novedades,
-  Contacto). La regla previa de "máx. 4-5 items" quedó reemplazada por la propuesta aprobada de
-  UX/UI; si el menú cambia, coordinar con UX/UI antes de implementar
+- **Menú definido por el Mapa del Sitio V3** (`docs/01_global/mapa_sitio_ifts12_v3.md`,
+  13/11/2026): 7 pestañas (Inicio, Instituto, Carreras, Ingresantes, Alumnos, Tutoría y FAQ)
+  más buscador. Docentes, Novedades y Contacto quedan ⏳ (ticket 0000099). Reemplaza al menú
+  de 9 items de la V2 (15/09/2026); si el menú cambia, coordinar con UX/UI antes de implementar
 - Usar botón "hamburger" si hay más items
-- Logo enlazado a home — el item "Inicio" lo define el mapa V2 (se mantiene además del logo)
+- Logo enlazado a home — el item "Inicio" lo define el mapa V3 (se mantiene además del logo)
 - Menú fijo: siempre visible al hacer scroll
 - Item activo resaltado: cambiar peso/opacidad/color
 

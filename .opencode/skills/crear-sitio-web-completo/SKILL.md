@@ -41,7 +41,8 @@ Cuando se necesita crear un sitio web desde cero.
 - Armar el sitio según el prototipo; no editar contenido en el builder, solo diseño
 - **90% blanco y negro, 10% color de acento**
 - Logo horizontal (no vertical); en el menú, recortado
-- **Menú según el Mapa del Sitio V2 de UX/UI** (fuente de verdad 15/09/2026): 9 items aprobados
+- **Menú según el Mapa del Sitio V3 de UX/UI** (7 pestañas aprobadas por el instituto,
+  13/11/2026): Inicio, Instituto, Carreras, Ingresantes, Alumnos, Tutoría y FAQ
 - Fuentes: Sans o combinar serif + sans-serif ( Sans+PT Serif, Georgia+Roboto, etc.)
 - Sin clip-art no imagenes genéricas
 - Portada (first screen) con imagenes de calidad + titular atractivo

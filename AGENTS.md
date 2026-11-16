@@ -168,7 +168,8 @@ logsayer quedó archivado en `docs/logbooks/logbook_legado_01.md` y **no se edit
   `crear-sitio-web-completo`, `aplicar-estilos-disenio-web`,
   `mejorar-navegacion-web`, `storytelling-dijital`) y las `.opencode/rules/reglas-*.md`
   definen los criterios visuales del sitio (regla 90/10 de color, menú según el Mapa del Sitio
-  V2 de UX/UI — 9 items aprobados el 15/09/2026 —, logo enlazado a home, portada 1680×900, etc.).
+  V3 de UX/UI — 7 pestañas aprobadas por el instituto el 13/11/2026 —, logo enlazado a home,
+  portada 1680×900, etc.).
   Se activan a pedido
   del usuario (en su mayoría están `disable-model-invocation`).
 - **Anotaciones de diseño:** los textos de los exports que son notas de UX/UI (refs `RF-xx`,

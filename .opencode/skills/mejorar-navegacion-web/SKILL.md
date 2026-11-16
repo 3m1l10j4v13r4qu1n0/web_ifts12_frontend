@@ -12,8 +12,9 @@ Cuando se necesita optimizar la navegación de un sitio web existente o crear un
 ## Checklist de navegación
 
 ### Menú principal
-- [ ] Menú definido por el Mapa del Sitio V2 de UX/UI (fuente de verdad 15/09/2026): 9 items
-      aprobados; antes del cambio la regla era máx. 4-5 items
+- [ ] Menú definido por el Mapa del Sitio V3 (`docs/01_global/mapa_sitio_ifts12_v3.md`,
+      13/11/2026): 7 pestañas aprobadas (Inicio, Instituto, Carreras, Ingresantes, Alumnos,
+      Tutoría y FAQ) más buscador; reemplaza al menú de 9 items de la V2
 - [ ] Logo enlazado a home (sin botón "Inicio")
 - [ ] Menú fijo (sticky) al hacer scroll
 - [ ] Item activo resaltado (peso/opacidad/color, subrayado o tachado) — no exagerar: 1-2 opciones
