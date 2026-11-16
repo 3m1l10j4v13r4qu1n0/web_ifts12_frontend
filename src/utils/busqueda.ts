@@ -1,6 +1,6 @@
 import { slugDesdeNovedad } from '../api/mappers/novedad.mapper';
 import { mockFaqs } from '../constants/mock-data';
-import { MENU_PRINCIPAL } from '../constants/navegacion';
+import { SECCIONES_BUSCABLES } from '../constants/navegacion';
 import type { NovedadApi } from '../types/api/novedad.types';
 import type { Carrera } from '../types/domain/sitio.types';
 
@@ -50,7 +50,7 @@ export function buscarContenidoLocal(
   const coincideTexto = (valor: string) => normalizar(valor).includes(termino);
   const resultados: ResultadoBusqueda[] = [];
 
-  for (const item of MENU_PRINCIPAL) {
+  for (const item of SECCIONES_BUSCABLES) {
     if (coincideTexto(item.etiqueta)) {
       resultados.push({
         id: `seccion-${item.href}`,

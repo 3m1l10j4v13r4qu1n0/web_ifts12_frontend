@@ -69,10 +69,10 @@ function InstitucionalPage() {
   return (
     <main className="min-h-screen">
       <EncabezadoPagina
-        breadcrumb={[{ etiqueta: 'Inicio', href: '/' }, { etiqueta: 'Institucional' }]}
+        breadcrumb={[{ etiqueta: 'Inicio', href: '/' }, { etiqueta: 'Instituto' }]}
         eyebrow="El instituto"
         seccion="rojo"
-        titulo="Institucional"
+        titulo="Instituto"
         descripcion="Historia, autoridades, bedelía, normativa y enlaces de interés del IFTS N.º 12."
       />
 

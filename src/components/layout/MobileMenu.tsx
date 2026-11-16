@@ -11,8 +11,9 @@ interface MobileMenuProps {
 }
 
 /**
- * Menú móvil (B6). Overlay con buscador + los 9 ítems. Cierra al elegir una
- * opción, con la X o con Esc. Bloquea el scroll del cuerpo mientras está abierto.
+ * Menú móvil (B6). Overlay con buscador + los 7 ítems del Mapa del Sitio V3.
+ * Cierra al elegir una opción, con la X o con Esc. Bloquea el scroll del cuerpo
+ * mientras está abierto.
  */
 function MobileMenu({ abierto, onCerrar }: MobileMenuProps) {
   const panelRef = useRef<HTMLElement>(null);

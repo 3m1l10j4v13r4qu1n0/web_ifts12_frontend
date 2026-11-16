@@ -19,13 +19,13 @@ const RESULTADOS_POR_PAGINA = 4;
  * todavía no está confirmado con Análisis (I4), así que no se ofrecen filtros que no devolverían
  * nada. Las secciones fuera de este orden van después, alfabéticas.
  */
-const ORDEN_SECCIONES_DISENO = ['Carreras', 'Institucional', 'Novedades', 'Normativa'];
+const ORDEN_SECCIONES_DISENO = ['Carreras', 'Instituto', 'Novedades', 'Normativa'];
 
 /** Accesos directos del estado sin resultados (`11b`). */
 const ACCESOS_SIN_RESULTADOS = [
   { etiqueta: 'Carreras', href: '/carreras' },
   { etiqueta: 'Ingresantes', href: '/ingresantes' },
-  { etiqueta: 'Estudiantes', href: '/estudiantes' },
+  { etiqueta: 'Alumnos', href: '/estudiantes' },
   { etiqueta: 'Preguntas frecuentes', href: '/faq' },
   { etiqueta: 'Contacto', href: '/contacto' },
 ];

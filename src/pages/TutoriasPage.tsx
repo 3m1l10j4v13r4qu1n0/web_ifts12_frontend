@@ -16,10 +16,10 @@ function TutoriasPage() {
   return (
     <main className="min-h-screen">
       <EncabezadoPagina
-        breadcrumb={[{ etiqueta: 'Inicio', href: '/' }, { etiqueta: 'Tutorías' }]}
-        eyebrow="Tutorías"
+        breadcrumb={[{ etiqueta: 'Inicio', href: '/' }, { etiqueta: 'Tutoría' }]}
+        eyebrow="Tutoría"
         seccion="ambar"
-        titulo="Tutorías"
+        titulo="Tutoría"
         descripcion="Espacio de acompañamiento al estudiante. Información institucional del servicio de tutorías."
       />
 

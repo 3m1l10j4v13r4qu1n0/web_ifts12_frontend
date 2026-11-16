@@ -118,10 +118,10 @@ function EstudiantesPage() {
   return (
     <main className="min-h-screen">
       <EncabezadoPagina
-        breadcrumb={[{ etiqueta: 'Inicio', href: '/' }, { etiqueta: 'Estudiantes' }]}
-        eyebrow="Estudiantes"
+        breadcrumb={[{ etiqueta: 'Inicio', href: '/' }, { etiqueta: 'Alumnos' }]}
+        eyebrow="Alumnos"
         seccion="cian"
-        titulo="Estudiantes"
+        titulo="Alumnos"
         descripcion="Información y trámites para estudiantes actuales: regularidad, constancias, mesas, calendario, becas, boleto y títulos/traspasos."
       />
 

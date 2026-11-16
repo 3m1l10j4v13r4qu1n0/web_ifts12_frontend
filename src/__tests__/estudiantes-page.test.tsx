@@ -13,7 +13,7 @@ describe('EstudiantesPage', () => {
 
     const nav = screen.getByRole('navigation', { name: 'Ruta de navegación' });
     expect(within(nav).getByRole('link', { name: 'Inicio' })).toHaveAttribute('href', '/');
-    expect(screen.getByRole('heading', { level: 1, name: 'Estudiantes' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: 'Alumnos' })).toBeInTheDocument();
     expect(
       screen.getByText(/Información y trámites para estudiantes actuales/),
     ).toBeInTheDocument();

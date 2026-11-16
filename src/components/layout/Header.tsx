@@ -11,7 +11,8 @@ import NavMenu from './NavMenu';
  * accesos Campus Virtual Moodle + SIU · Autogestión + Inscripción GCBA (destinos
  * configurables). El panel de administración no se anuncia acá: se accede solo
  * por URL directa `/admin/login` (decisión UX/UI del 22/10/2026, #0040/I12).
- * Logo → Inicio. Menú de 9 ítems, buscador visible y hamburguesa de 44×44.
+ * Logo → Inicio. Menú de 7 ítems (Mapa del Sitio V3), buscador visible y
+ * hamburguesa de 44×44.
  */
 function Header() {
   const [menuAbierto, setMenuAbierto] = useState(false);

@@ -13,8 +13,8 @@ describe('InstitucionalPage', () => {
 
     const nav = screen.getByRole('navigation', { name: 'Ruta de navegación' });
     expect(within(nav).getByRole('link', { name: 'Inicio' })).toHaveAttribute('href', '/');
-    expect(within(nav).getByText('Institucional')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 1, name: 'Institucional' })).toBeInTheDocument();
+    expect(within(nav).getByText('Instituto')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: 'Instituto' })).toBeInTheDocument();
     expect(
       screen.getByText(
         /Historia, autoridades, bedelía, normativa y enlaces de interés del IFTS N.º 12/,

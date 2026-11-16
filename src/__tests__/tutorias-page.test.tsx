@@ -13,8 +13,8 @@ describe('TutoriasPage', () => {
 
     const nav = screen.getByRole('navigation', { name: 'Ruta de navegación' });
     expect(within(nav).getByRole('link', { name: 'Inicio' })).toHaveAttribute('href', '/');
-    expect(within(nav).getByText('Tutorías')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 1, name: 'Tutorías' })).toBeInTheDocument();
+    expect(within(nav).getByText('Tutoría')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: 'Tutoría' })).toBeInTheDocument();
     expect(screen.getByText(/Espacio de acompañamiento al estudiante/)).toBeInTheDocument();
   });
 
