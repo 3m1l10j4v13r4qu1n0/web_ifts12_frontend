@@ -24,7 +24,9 @@ _(Fase 10 = **alineación del frontend a los exports Desktop 1440 del avance de 
 página por página (tareas T1–T16), cerrada con tag `v1.11.0`. No hay Fase 11 definida todavía.)_
 
 **Situación 16/11/2026:** la devolución de Edith quedó especificada en Capa 1 —Mapa del
-Sitio V3 y HU-03…HU-06— y **sin implementar**. La rama de integración TEST
+Sitio V3 y HU-03…HU-06— con **HU-03 (navegación) y HU-04 (horarios y Tutoría) ya
+implementadas y verificadas**; HU-05 (Ingresantes y Alumnos) y HU-06 (fichas de carrera)
+siguen pendientes. La rama de integración TEST
 `fix/integracion-test-20261031` (base `d1afcf8`) es la base y el destino de trabajo; `main` y
 `develop` siguen congeladas hasta el cierre de **0000079** (ramas) y **0000075** (QA). El
 push al remoto `infra` está bloqueado por el host caído en Tailscale.
@@ -155,8 +157,18 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   fichas de carrera (0000093 + 0000095 + 0000096). Cada una separa CA verificables hoy de
   pendientes ⏳ con dueño. Los tickets que no son funcionalidad (ronda QA 0000075, ramas
   0000079 y el bug responsive 0000087) quedaron en
-  `docs/02_technical/tickets_operativos_ronda_test_2026_11.md`. **Ninguna HU está
-  implementada todavía.**
+  `docs/02_technical/tickets_operativos_ronda_test_2026_11.md`.
+- **HU-03 y HU-04 implementadas (16/11/2026)** sobre `fix/integracion-test-20261031`:
+  menú de 7 pestañas con FAQ como pestaña (las rutas `/institucional`, `/estudiantes` y
+  `/tutorias` no migran; Docentes, Novedades y Contacto salen del menú y Novedades y
+  Contacto se alcanzan desde el pie), títulos Instituto / Alumnos / Tutoría, y horarios de
+  atención en dos franjas (9:00–13:00 y 18:30–22:30) en barra superior, pie, Contacto y
+  Tutoría. Tutoría ya no tiene tabla de turnos ni formulario: el canal es
+  `clara.moroni@bue.edu.ar` con el asunto «Sitio Web - Tutorías - Tu Nombre y Apellido»; el
+  asunto «Tutorías» salió del formulario de Contacto y su FAQ tiene la respuesta oficial.
+  El buscador usa `SECCIONES_BUSCABLES`, que suma Docentes, Novedades y Contacto al menú.
+  Tests: 280 en 37 archivos. **HU-05 (Ingresantes y Alumnos) y HU-06 (fichas de carrera)
+  siguen sin implementar.**
 - **Correcciones de UX/UI y Frontend** especificadas en Capa 1
   (`docs/01_global/correcciones_ux_ui_frontend.md`, 08/10/2026): 9 bloqueantes (B1–B9), 12
   importantes (I1–I12) y 7 mejoras (M1–M7) de la auditoría UX/UI del 07/10, cada una con criterio
@@ -591,7 +603,7 @@ Detalle con dueño y qué se necesita de vuelta en
 
 ## Verificación
 
-- Frontend: `npm run lint` · `npm run build` · `npm run test` (226 tests).
+- Frontend: `npm run lint` · `npm run build` · `npm run test` (280 tests en 37 archivos).
 - Sistema documental: `logsayer check` · `logsayer process check` · `logsayer memory index`.
 - **Mapa del Sitio V3 (13/11/2026):** creado en Capa 1
   (`docs/01_global/mapa_sitio_ifts12_v3.md`) con la devolución de Edith y los tickets
@@ -606,6 +618,12 @@ Detalle con dueño y qué se necesita de vuelta en
   0000079 y el bug 0000087 quedaron fuera de las HUs, en
   `docs/02_technical/tickets_operativos_ronda_test_2026_11.md`. Índice de memoria
   regenerado (54 documentos); `logsayer check` y `logsayer process check` en verde.
+- **Implementación de HU-03 y HU-04 (16/11/2026):** lint, build y 280 tests en verde
+  (37 archivos). Nuevos: `src/constants/tutorias.ts`, `src/__tests__/navegacion-v3.test.tsx`
+  y `src/__tests__/horarios-atencion.test.tsx`. Queda con el literal viejo
+  «exclusivamente nocturno» `IngresantesPage.tsx` (HU-05) y `CarreraDetallePage.tsx` más la
+  bajada de `CarrerasPage.tsx` (HU-06). Los contenidos ⏳ de Tutoría (texto de presentación,
+  imagen, material de apoyo y eventos) siguen como mensaje de proceso.
 - **Auditoría del prototipo de Claude (13/11/2026):** 31 tickets y 14 secciones de la
   devolución cruzados contra el artefacto archivado, medido en Firefox a 1440/1024/768/375.
   Resultado: 10 ✅, 15 🟡, 1 🔵, 5 ⏳ en tickets; 12 hallazgos PROTO-01…PROTO-12. Informe en

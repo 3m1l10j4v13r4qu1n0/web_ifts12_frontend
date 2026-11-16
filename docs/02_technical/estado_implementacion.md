@@ -9,8 +9,8 @@ Fecha: 2026-09-30 · Estado: **OBSOLETO — no usar como estado vigente (actuali
 > Este archivo se conserva como foto histórica; se corrige abajo solo lo que la auditoría
 > marcó como afirmación falsa.
 >
-> Última actualización de contenido: 2026-11-13 (Mapa del Sitio V3: 7 pestañas, nombres
-> Instituto/Alumnos/Tutoría y 3 bloques ⏳; el código de `src/` sigue en la V2).
+> Última actualización de contenido: 2026-11-16 (HU-03 y HU-04 implementadas: menú de 7
+> pestañas, nombres Instituto/Alumnos/Tutoría y horarios en dos franjas; falta HU-05 y HU-06).
 > Anterior: 2026-09-21 (Ajuste Mapa V2: header con accesos externos, footer V2, hero con
 > carrusel, secciones con mocks y rutas de detalle).
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `docs/logbooks/logbook_legado_01.md`.
@@ -67,9 +67,15 @@ Tutorías, Docentes, Institucional, Noticias con buscador local, FAQ, Contacto) 
 0000088–0000093 / 0000095–0000096 **reemplazan** la navegación de la V2 por
 `docs/01_global/mapa_sitio_ifts12_v3.md`: 7 pestañas (Inicio, Instituto, Carreras,
 Ingresantes, Alumnos, Tutoría y FAQ) más buscador y los 3 accesos externos. Docentes,
-Novedades y Contacto quedan ⏳ con dueño en el ticket 0000099. El código de `src/` **todavía
-no está migrado** a la V3: sigue con el menú de 9 ítems y los nombres Institucional /
-Estudiantes / Tutorías hasta que se implementen las HUs correspondientes.
+Novedades y Contacto quedan ⏳ con dueño en el ticket 0000099. **Implementado el 16/11/2026
+(HU-03 y HU-04):** `MENU_PRINCIPAL` tiene las 7 pestañas con FAQ como pestaña propia,
+`NAV_FOOTER_MAPA`/`NAV_FOOTER_SERVICIOS` usan los nombres nuevos y las páginas afectadas ya
+dicen Instituto / Alumnos / Tutoría. Las rutas no migran (V3 §15). El buscador indexa
+`SECCIONES_BUSCABLES` (menú + Docentes, Novedades y Contacto, que siguen publicadas sin ser
+pestaña). Los horarios de atención son las dos franjas (9:00–13:00 y 18:30–22:30) en la barra
+superior, el pie, Contacto y Tutoría. Pendiente: el literal «exclusivamente nocturno» en
+`IngresantesPage.tsx` (HU-05) y en `CarreraDetallePage.tsx` más la bajada de `CarrerasPage.tsx`
+(HU-06).
 
 ## 2. Arquitectura
 
