@@ -24,11 +24,11 @@ gestionada por el backend (Análisis Funcional, 2026).
 
 | Sección | Funcionalidades | Requisitos |
 |---|---|---|
-| Futuros ingresantes | Listado de las 6 carreras con modalidad y horarios; requisitos y fechas de inscripción; enlace oficial GCBA visible; equivalencias y pases informativos; FAQ de ingreso | RF-01…RF-06 |
-| Estudiantes actuales | Condiciones de regularidad; constancias; mesas de examen; becas; calendario académico; acceso visible al Campus Virtual (Moodle); boleto estudiantil informativo; FAQ de trámites | RF-07…RF-14 |
-| Docentes | Concursos docentes; cuerpo docente por carrera; accesos de interés docente | RF-15…RF-17 |
-| Institucional | Historia, autoridades, normativa, logos; contacto con dirección y horario nocturno (Misiones 26, C1083 ABB, CABA); bedeles; acceso visible a SIU (pendiente de confirmación); títulos y traspasos informativos; enlaces de interés (Ciudad Bilingüe, Centro de Simulación) | RF-18…RF-22, RF-29…RF-33 |
-| Home | Portada/slider institucional; noticias recientes (último mes visible); FAQ destacadas; accesos destacados y rápidos (7 confirmados) | RF-25, RF-28, RF-34 |
+| Futuros ingresantes | Acceso al listado de las 6 carreras con modalidad y horarios (en Carreras); requisitos e inscripción por preinscripción del GCBA; enlace oficial visible; FAQ de ingreso. La sección Ingresantes no muestra listado de carreras, fechas clave, modalidad, horarios, equivalencias ni pases (Mapa V3) | RF-01…RF-06 |
+| Alumnos (estudiantes actuales) | Calendario académico primero, con las mesas de examen y los eventos clave destacados; preguntas frecuentes desplegables (regularidad, constancias, inscripción a materias y finales, pases, contacto con Bedelía); acceso visible al Campus Virtual (Moodle); horarios y modalidad; FAQ de trámites. Becas, boleto y títulos quedan ⏳ (Mapa V3) | RF-07…RF-14 |
+| Docentes | Concursos docentes; comunicados y accesos de interés docente; apto médico y gestión de DDJJ y licencias (Mapa V3). El listado del cuerpo docente queda solo en cada ficha de carrera; ⏳ ubicación de la sección | RF-15…RF-17 |
+| Instituto (institucional) | Nosotros, autoridades, plantel administrativo, régimen de estudios y enseñanza y régimen de convivencia; logos; contacto con dirección y horario 9–13 y 18:30–22:30 (Misiones 26, C1083 ABB, CABA); acceso visible a SIU (pendiente de confirmación); títulos y traspasos informativos; enlaces de interés (⏳ Ciudad Bilingüe, Centro de Simulación) | RF-18…RF-22, RF-29…RF-33 |
+| Home | Portada/slider institucional; noticias recientes integradas (último mes visible); FAQ destacadas; accesos destacados y rápidos (⏳ cuáles quedan; Becas, Boleto y Mesas dejan de ser secciones propias) | RF-25, RF-28, RF-34 |
 | Administración | Login exclusivo para el personal que administra contenidos; roles y permisos por tipo de contenido; CRUD de noticias/novedades; actualización de calendario, horarios, autoridades, docentes, información de carreras y concursos; contenidos persistidos en base de datos; actualización de imágenes del slider | RF-23…RF-27, RF-34 |
 
 > Tabla 1. Funcionalidades incluidas por sección y requisitos asociados (fuente: Análisis
@@ -43,7 +43,8 @@ gestionada por el backend (Análisis Funcional, 2026).
   la gestión como trámite online se prevé en la etapa B.
 - **Integraciones profundas con SIU:** etapa C.
 - **Diseño de identidad visual definitivo:** responsabilidad del equipo de UX/UI (wireframes,
-  paleta y sistema de diseño); el sitio sigue la navegación del Mapa del Sitio V2.
+  paleta y sistema de diseño); el sitio sigue la navegación del Mapa del Sitio V3
+  (`docs/01_global/mapa_sitio_ifts12_v3.md`, 13/11/2026).
 
 ## 4. Límites del sistema
 
@@ -59,8 +60,10 @@ gestionada por el backend (Análisis Funcional, 2026).
 
 El alcance de la etapa A se considerará cumplido cuando:
 
-- La Home muestre portada/slider, accesos directos a Moodle, SIU e inscripción GCBA, los 7
-  accesos rápidos confirmados, noticias recientes, carreras y FAQ.
+- La Home muestre portada/slider, accesos directos a Moodle, SIU e inscripción GCBA, los
+  accesos rápidos que se definan (⏳), noticias recientes, carreras y FAQ.
+- La navegación principal tenga las 7 pestañas del Mapa del Sitio V3 (Inicio, Instituto,
+  Carreras, Ingresantes, Alumnos, Tutoría y FAQ), con los nombres aprobados por el instituto.
 - El listado de carreras incluya las 6 carreras con modalidad y horarios.
 - Las noticias se muestren de la más reciente a la más antigua, con el último mes visible.
 - El panel de administración permita gestionar noticias y otros contenidos dinámicos con
@@ -73,3 +76,7 @@ El alcance de la etapa A se considerará cumplido cuando:
 IFTS N.º 12. (2026). Análisis funcional validado. `documentacion/frontend/analisis_funcional_validado.md`.
 
 Equipo de Backend. (2026). Respuesta a definiciones técnicas formales. `documentacion/driveFrontend/04_backend/respuesta.md`.
+
+IFTS N.º 12. (2026). Devolución de Edith — pendientes del sitio TEST. `docs/01_global/devolucion_edith_2026_11_13.md`.
+
+Equipo de UX/UI y Frontend. (2026). Mapa del Sitio V3. `docs/01_global/mapa_sitio_ifts12_v3.md`.

@@ -9,7 +9,10 @@ Fecha: 2026-09-30 · Estado: **OBSOLETO — no usar como estado vigente (actuali
 > Este archivo se conserva como foto histórica; se corrige abajo solo lo que la auditoría
 > marcó como afirmación falsa.
 >
-> Última actualización de contenido: 2026-09-21 (Ajuste Mapa V2: header con accesos externos, footer V2, hero con carrusel, secciones con mocks y rutas de detalle)
+> Última actualización de contenido: 2026-11-13 (Mapa del Sitio V3: 7 pestañas, nombres
+> Instituto/Alumnos/Tutoría y 3 bloques ⏳; el código de `src/` sigue en la V2).
+> Anterior: 2026-09-21 (Ajuste Mapa V2: header con accesos externos, footer V2, hero con
+> carrusel, secciones con mocks y rutas de detalle).
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `docs/logbooks/logbook_legado_01.md`.
 > El agente debe leer este archivo completo al iniciar cualquier tarea sobre el proyecto.
 
@@ -59,6 +62,15 @@ Tutorías, Docentes, Institucional, Noticias con buscador local, FAQ, Contacto) 
 `/api/contacto` (BE-A6). Se eliminaron `Portada.tsx`, `PaginaPlaceholder.tsx` y `SliderNoticias.tsx`
 (quedaron sin uso).
 
+**Navegación vigente (13/11/2026): Mapa del Sitio V3.** La devolución de Edith del 08/11/2026
+(transcripta en `docs/01_global/devolucion_edith_2026_11_13.md`) y los tickets de Mantis
+0000088–0000093 / 0000095–0000096 **reemplazan** la navegación de la V2 por
+`docs/01_global/mapa_sitio_ifts12_v3.md`: 7 pestañas (Inicio, Instituto, Carreras,
+Ingresantes, Alumnos, Tutoría y FAQ) más buscador y los 3 accesos externos. Docentes,
+Novedades y Contacto quedan ⏳ con dueño en el ticket 0000099. El código de `src/` **todavía
+no está migrado** a la V3: sigue con el menú de 9 ítems y los nombres Institucional /
+Estudiantes / Tutorías hasta que se implementen las HUs correspondientes.
+
 ## 2. Arquitectura
 
 - Frontend SPA con estructura de carpetas estricta del contrato: `api/` (única capa que conoce
@@ -72,10 +84,14 @@ Tutorías, Docentes, Institucional, Noticias con buscador local, FAQ, Contacto) 
 - Páginas por sección con estructura navegable y datos de mocks (no más placeholders): Home,
   Carreras + detalle, Ingresantes, Estudiantes, Docentes, Tutorías, Institucional, Noticias +
   detalle, FAQ, Contacto + 404.
-- Navegación según el Mapa del Sitio V2 (UX/UI, 15/09/2026): menú principal de 9 items +
-  buscador global persistente en el header (`BuscadorGlobal`, índice local de mocks) +
-  barra superior de accesos externos (Moodle/SIU/Inscripción, atenuados sin URL) +
-  accesos destacados y rápidos separados en la Home + footer V2 (columnas, formulario e isologotipos).
+- Navegación según el **Mapa del Sitio V3** (`docs/01_global/mapa_sitio_ifts12_v3.md`,
+  13/11/2026): menú principal de 7 pestañas + buscador global persistente en el header
+  (`BuscadorGlobal`, índice local de mocks) + barra superior de accesos externos
+  (Moodle/SIU/Inscripción, atenuados sin URL) + accesos destacados y rápidos en la Home +
+  footer con columnas, formulario e isologotipos.
+  _Estado del código:_ todavía muestra el menú de 9 ítems de la V2 (Inicio, Carreras,
+  Ingresantes, Estudiantes, Tutorías, Docentes, Institucional, Novedades, Contacto); la
+  migración a la V3 es parte de las HUs de la devolución de Edith.
 
 ## 3. Entidades / Modelos de dominio
 
@@ -241,6 +257,9 @@ sobre rutas administrables. La tabla oficial (Swagger/OpenAPI) llega como entreg
     `mapa_inicial_sitio_web_ifts12_2026_v2.md`): menú de 9 ítems + buscador global + **accesos
     directos a Moodle, SIU e Inscripción GCBA en la barra superior**. Ahora el V2 **incluye SIU**
     → ajusta la tensión AF-A6 (antes "V2 sin SIU"); SIU pasa a la cabecera.
+    **Reemplazado como navegación vigente por el Mapa del Sitio V3 (13/11/2026,
+    `docs/01_global/mapa_sitio_ifts12_v3.md`);** el archivo del Drive se conserva como
+    entregable fechado de UX/UI y no se edita.
   - **Wireframes (nueva ubicación versionable):** `documentacion/wireframes/` — 16 pantallas HTML de
     baja fidelidad alineadas al **Mapa del Sitio V2 (21/09/2026)** (13 públicas + 3 de
     administración: login, panel, formulario). CSS embebido autocontenido, escala de grises.

@@ -7,6 +7,7 @@
 01_global/correcciones_ux_ui_frontend.md                             · nivel 0 · borrador · 2026-10-08 · correcciones, ux, ui, frontend
 01_global/devolucion_edith_2026_11_13.md                             · nivel 0 · borrador · 2026-11-13 · devolucion, edith, instituto, ux, ui, contenidos, pendientes
 01_global/figma_v2_contrato_visual.md                                · nivel 0 · vigente · 2026-10-13 · figma, contrato, visual, ux, ui
+01_global/mapa_sitio_ifts12_v3.md                                    · nivel 0 · borrador · 2026-11-13 · mapa, sitio, ifts12, v3
 01_global/plan_correcciones_uxui_frontend.md                         · nivel 0 · borrador · 2026-10-08 · plan, correcciones, ux, ui, frontend
 01_global/reglas_negocio.md                                          · nivel 0 · borrador · 2026-09-18 · reglas, negocio
 01_global/vision.md                                                  · nivel 0 · borrador · 2026-09-18 · vision

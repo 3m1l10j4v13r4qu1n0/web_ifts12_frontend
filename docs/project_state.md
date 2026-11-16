@@ -88,10 +88,13 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 
 - SPA React 19 + Vite + TypeScript strict + Tailwind v4 con `npm run lint · build · test` en verde
   (**244 tests** en 32 archivos, verificado 23/10/2026; antes 243).
-- Home navegable según el **Mapa del Sitio V2** (9 ítems de menú + buscador global en el header),
-  portada con carrusel institucional, footer V2, secciones de Carreras, Ingresantes,
-  Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y Contacto, más rutas de detalle
-  `/carreras/:id` y `/noticias/:id` y 404. La **portada de la Home siempre se muestra** (título +
+- Home navegable con el **menú de 9 ítems de la V2** (Inicio, Carreras, Ingresantes, Estudiantes,
+  Tutorías, Docentes, Institucional, Noticias y Contacto) y buscador global en el header. La
+  navegación vigente es el **Mapa del Sitio V3** (7 pestañas: Inicio, Instituto, Carreras,
+  Ingresantes, Alumnos, Tutoría y FAQ), **todavía no implementada en `src/`**. Portada con
+  carrusel institucional, footer con datos, columnas, formulario e isologotipos, secciones de
+  Carreras, Ingresantes, Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y
+  Contacto, más rutas de detalle `/carreras/:id` y `/noticias/:id` y 404. La **portada de la Home siempre se muestra** (título +
   subtítulo institucionales); el set de novedades del carrusel muestra un **skeleton** mientras
   carga y solo se ve con datos del backend (14/10/2026).
 - **Consumo real de API para carreras y novedades** (02/10/2026), contra `GET /api/carreras` y
@@ -517,8 +520,12 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   `logsayer process check`. Índice de memoria generado con `logsayer memory index`.
 - **Rutas en inglés, contenido en español.** La fuente de verdad de endpoints sigue siendo **por
   historia de usuario**: `docs/04_user_stories/HU-XX/*_api.md`.
-- **Mapa del Sitio V2 manda en navegación** (9 ítems + buscador). Tensión **AF-A6 abierta**:
-  Análisis validó 7 accesos rápidos y el V2 tiene 9 (incluye SIU) — falta cierre con UX/UI.
+- **Mapa del Sitio V3 en navegación (13/11/2026):** `docs/01_global/mapa_sitio_ifts12_v3.md`
+  reemplaza al V2 (que queda como entregable fechado en el Drive, sin editar): 7 pestañas
+  (Inicio, Instituto, Carreras, Ingresantes, Alumnos, Tutoría y FAQ) + buscador + 3 accesos
+  externos. Docentes, Novedades y Contacto quedan ⏳ con dueño en el ticket 0000099. RN-07,
+  RN-08 y RN-14 se actualizaron; el código de `src/` sigue con el menú de 9 ítems de la V2
+  hasta que se implementen las HUs de la devolución de Edith.
 
 ## Bloqueos abiertos (no resolver sin fuente)
 
@@ -574,6 +581,13 @@ Detalle con dueño y qué se necesita de vuelta en
 
 - Frontend: `npm run lint` · `npm run build` · `npm run test` (226 tests).
 - Sistema documental: `logsayer check` · `logsayer process check` · `logsayer memory index`.
+- **Mapa del Sitio V3 (13/11/2026):** creado en Capa 1
+  (`docs/01_global/mapa_sitio_ifts12_v3.md`) con la devolución de Edith y los tickets
+  0000088–0000096 como fuente, la tabla de reemplazos V2 → V3 y los 3 bloques ⏳ con dueño
+  en el ticket 0000099. Cascada aplicada a RN-07/RN-08/RN-14, `alcance.md`,
+  `figma_v2_contrato_visual.md`, `estado_implementacion.md`, HU-01, `AGENTS.md` y las reglas
+  y skills de navegación. `logsayer check` y `logsayer process check` en verde; índice de
+  memoria regenerado (45 documentos).
 - **Auditoría del prototipo de Claude (13/11/2026):** 31 tickets y 14 secciones de la
   devolución cruzados contra el artefacto archivado, medido en Firefox a 1440/1024/768/375.
   Resultado: 10 ✅, 15 🟡, 1 🔵, 5 ⏳ en tickets; 12 hallazgos PROTO-01…PROTO-12. Informe en

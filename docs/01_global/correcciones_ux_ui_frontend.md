@@ -14,6 +14,11 @@ tags:
 
 Fecha: 2026-10-08 · Estado: borrador
 
+> **Nota de lectura (13/11/2026):** las referencias a la navegación de este documento citan
+> el Mapa del Sitio V2, vigente cuando se escribió. La navegación actual es el **Mapa del
+> Sitio V3** (`docs/01_global/mapa_sitio_ifts12_v3.md`): "Institucional" es **Instituto**,
+> "Estudiantes" es **Alumnos** y "Tutorías" es **Tutoría**. Los criterios B/I/M no cambian.
+
 ## Resumen
 
 Coordinación del IFTS N.º 12 devuelve al grupo UX/UI y Frontend **9 correcciones bloqueantes

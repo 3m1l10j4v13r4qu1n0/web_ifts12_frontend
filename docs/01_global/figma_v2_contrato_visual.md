@@ -27,8 +27,16 @@ descalificó como contrato por desvíos bloqueantes (B1–B4, B6–B8, I8, I11, 
 incompleto y diseño solo para PC.
 
 El v2 se construyó alineado a los contratos vigentes: análisis funcional validado
-(RF-01…RF-34), Mapa del Sitio V2 (9 ítems + buscador), correcciones B1–B9 / I1–I12 / M1–M7,
-wireframes HTML y el estado real del código (navegación, enlaces y estilos).
+(RF-01…RF-34), Mapa del Sitio V2 (9 ítems + buscador; hoy reemplazado por el Mapa V3),
+correcciones B1–B9 / I1–I12 / M1–M7, wireframes HTML y el estado real del código
+(navegación, enlaces y estilos).
+
+> **Nota de vigencia (13/11/2026):** el Figma v2 se construyó con la navegación del Mapa del
+> Sitio V2. La navegación vigente es el **Mapa del Sitio V3**
+> (`docs/01_global/mapa_sitio_ifts12_v3.md`): 7 pestañas y los nombres Instituto, Alumnos y
+> Tutoría. El Figma sigue siendo la referencia visual (tokens, layout y componentes), pero
+> las pantallas afectadas por el cambio de navegación quedan pendientes de realineación por
+> UX/UI; este documento no se reescribe.
 
 ## Qué establece
 
@@ -63,7 +71,8 @@ wireframes HTML y el estado real del código (navegación, enlaces y estilos).
   `docs/06_audits/audit_2026-10-09-figma.md` (2026-10-09).
 - Contratos de origen: `documentacion/frontend/analisis_funcional_validado.md`
   (2026-09-18), `documentacion/driveFrontend/02_ux_ui/mapa_sitio_ifts12_(V2).md`
-  (2026-09-15), `docs/01_global/correcciones_ux_ui_frontend.md` (2026-10-08), wireframes
+  (2026-09-15), `docs/01_global/mapa_sitio_ifts12_v3.md` (2026-11-13, navegación vigente),
+  `docs/01_global/correcciones_ux_ui_frontend.md` (2026-10-08), wireframes
   HTML (`documentacion/wireframes/`), `src/constants/navegacion.ts`,
   `src/constants/enlaces.ts`, `src/styles/index.css`.
 
