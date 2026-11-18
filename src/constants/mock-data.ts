@@ -66,14 +66,20 @@ export const mockNoticias: Noticia[] = [
   },
 ];
 
-// Preguntas del export `10 · Preguntas frecuentes (segmentada)`, segmento Ingresantes, más las
-// 4 de estudiantes del export `04 · Estudiantes`. Las respuestas oficiales están PENDIENTES (las
-// carga Análisis Funcional; no inventar): se reemplazan por el mensaje de proceso
-// `RESPUESTA_PENDIENTE`. Las FAQ institucionales no tienen tab en el diseño (quedan accesibles
-// solo desde el buscador global del header).
-const RESPUESTA_PENDIENTE = 'Respuesta oficial pendiente de validación institucional.';
+// Preguntas del export `10 · Preguntas frecuentes (segmentada)` y de la devolución de Edith §5 y
+// §6 (Mapa del Sitio V3). Se publican solo las respuestas con contenido validado; lo que el
+// instituto todavía no confirmó queda con el mensaje de proceso `RESPUESTA_PENDIENTE` y no se
+// redacta por cuenta propia. Las FAQ institucionales no tienen tab en el diseño (quedan
+// accesibles solo desde el buscador global del header).
+export const RESPUESTA_PENDIENTE = 'Respuesta oficial pendiente de validación institucional.';
+
+/** Escala de turnos validada por el instituto (devolución de Edith §4 y §6). */
+const TURNOS_CURSADA =
+  'Los turnos son vespertino, de 18:30 a 22:30, y matutino, de 9:00 a 13:00; el turno de cada carrera se indica en su ficha.';
 
 export const mockFaqs: FaqItem[] = [
+  // Ingresantes (V3 §5). Los requisitos y la preinscripción se explican en la propia sección:
+  // acá quedan las preguntas que dependen de contenido institucional pendiente.
   {
     id: 'faq-ing-carreras',
     categoria: 'ingresantes',
@@ -87,22 +93,55 @@ export const mockFaqs: FaqItem[] = [
     respuesta: RESPUESTA_PENDIENTE,
   },
   {
-    id: 'faq-ing-equivalencias',
+    id: 'faq-ing-titulos',
     categoria: 'ingresantes',
-    pregunta: '¿Puedo presentar equivalencias?',
-    respuesta:
-      'Debés contar con el programa de la materia aprobada y la constancia de materias aprobadas de la institución de origen. Para iniciar el trámite, escribí a equivalencias.ifts12@gmail.com.',
+    pregunta: '¿Los títulos tienen validez nacional?',
+    respuesta: RESPUESTA_PENDIENTE,
   },
+  // Alumnos (V3 §6): las diez preguntas de la devolución de Edith, en su orden, más el acceso al
+  // campus y las equivalencias (que Edith ubica en Alumnos sin respuesta oficial nueva).
   {
-    id: 'faq-ing-pase',
-    categoria: 'ingresantes',
-    pregunta: '¿Cómo hago un pase o cambio de carrera?',
+    id: 'faq-est-inscripcion-materias',
+    categoria: 'estudiantes',
+    pregunta: '¿Cómo me inscribo a las materias?',
     respuesta: RESPUESTA_PENDIENTE,
   },
   {
-    id: 'faq-ing-modalidad',
-    categoria: 'ingresantes',
-    pregunta: '¿Cuál es la modalidad y el horario de las carreras?',
+    id: 'faq-est-correlativas',
+    categoria: 'estudiantes',
+    pregunta: '¿Qué son las correlativas y dónde las consulto?',
+    respuesta:
+      'El plan de estudios de cada carrera detalla el régimen de correlatividades de sus asignaturas. Podés consultarlo en la ficha de la carrera, en la sección Plan de estudios.',
+  },
+  {
+    id: 'faq-est-inscripcion-finales',
+    categoria: 'estudiantes',
+    pregunta: '¿Cómo me inscribo a los finales?',
+    respuesta:
+      'Las inscripciones se gestionan exclusivamente por SIU-Guaraní, dentro de los períodos establecidos por el calendario académico. Conservá tu constancia de inscripción. Las materias de las tecnicaturas del instituto no se pueden rendir en condición de libre.',
+  },
+  {
+    id: 'faq-est-constancia-examen',
+    categoria: 'estudiantes',
+    pregunta: '¿Cómo solicito la constancia de examen?',
+    respuesta: RESPUESTA_PENDIENTE,
+  },
+  {
+    id: 'faq-est-constancia-regular',
+    categoria: 'estudiantes',
+    pregunta: '¿Cómo obtengo la constancia de alumno regular?',
+    respuesta: RESPUESTA_PENDIENTE,
+  },
+  {
+    id: 'faq-est-pase',
+    categoria: 'estudiantes',
+    pregunta: '¿Cómo hago un pase a otro IFTS?',
+    respuesta: RESPUESTA_PENDIENTE,
+  },
+  {
+    id: 'faq-est-bedelia',
+    categoria: 'estudiantes',
+    pregunta: '¿A qué correo escribo para contactar a Bedelía?',
     respuesta: RESPUESTA_PENDIENTE,
   },
   {
@@ -113,17 +152,17 @@ export const mockFaqs: FaqItem[] = [
       'Se exige un mínimo del 75% de asistencia a las clases presenciales y sincrónicas, y la aprobación de los trabajos integradores o parciales con nota 4 o superior para regularizar, o 7 o superior para promocionar, según la materia.',
   },
   {
-    id: 'faq-est-constancia',
+    id: 'faq-est-horarios',
     categoria: 'estudiantes',
-    pregunta: '¿Dónde solicito una constancia?',
-    respuesta: RESPUESTA_PENDIENTE,
+    pregunta: '¿Cuáles son los horarios y la modalidad de cursada?',
+    respuesta: `${TURNOS_CURSADA} La modalidad es híbrida: clases presenciales y virtuales, sincrónicas o asincrónicas en el campus.`,
   },
   {
-    id: 'faq-est-mesa',
+    id: 'faq-est-docentes',
     categoria: 'estudiantes',
-    pregunta: '¿Cómo me presento a una mesa de examen?',
+    pregunta: '¿Cómo contacto a los docentes?',
     respuesta:
-      'Las inscripciones se gestionan exclusivamente por SIU-Guaraní, dentro de los períodos establecidos por el calendario académico. Conservá tu constancia de inscripción. Las materias de las tecnicaturas del instituto no se pueden rendir en condición de libre.',
+      'Podés comunicarte con tus docentes por la mensajería y los foros del Campus Virtual.',
   },
   {
     id: 'faq-est-campus',
@@ -131,6 +170,13 @@ export const mockFaqs: FaqItem[] = [
     pregunta: '¿Cómo accedo al Campus Virtual?',
     respuesta:
       'Para acceder al contenido de las asignaturas en las que te inscribiste, ingresá al Moodle del instituto: https://ifts12online.com.ar/login/index.php',
+  },
+  {
+    id: 'faq-est-equivalencias',
+    categoria: 'estudiantes',
+    pregunta: '¿Puedo presentar equivalencias?',
+    respuesta:
+      'Debés contar con el programa de la materia aprobada y la constancia de materias aprobadas de la institución de origen. Para iniciar el trámite, escribí a equivalencias.ifts12@gmail.com.',
   },
   {
     id: 'faq-inst-bedeles',

@@ -17,7 +17,7 @@ describe('FaqPage', () => {
       screen.getByRole('heading', { level: 1, name: 'Preguntas frecuentes' }),
     ).toBeInTheDocument();
     expect(
-      screen.getByText('Respuestas por perfil: ingresantes, estudiantes y docentes.'),
+      screen.getByText('Respuestas por perfil: ingresantes, alumnos y docentes.'),
     ).toBeInTheDocument();
   });
 
@@ -29,9 +29,7 @@ describe('FaqPage', () => {
       'true',
     );
     expect(screen.getByText('¿Qué carreras ofrece el instituto?')).toBeInTheDocument();
-    expect(
-      screen.getByText('¿Cuál es la modalidad y el horario de las carreras?'),
-    ).toBeInTheDocument();
+    expect(screen.getByText('¿Los títulos tienen validez nacional?')).toBeInTheDocument();
   });
 
   it('solo tiene los tres segmentos del diseño (sin Todas ni Institucional)', () => {

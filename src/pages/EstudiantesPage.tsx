@@ -1,120 +1,67 @@
 import EncabezadoPagina from '../components/layout/EncabezadoPagina';
-import Button, { type VarianteBoton } from '../components/ui/Button';
+import Button from '../components/ui/Button';
 import FaqAcordeon from '../components/ui/FaqAcordeon';
-import { ENLACES } from '../constants/enlaces';
 import { mockFaqs } from '../constants/mock-data';
 
-const faqEstudiantes = mockFaqs.filter((item) => item.categoria === 'estudiantes');
+const faqAlumnos = mockFaqs.filter((item) => item.categoria === 'estudiantes');
 
-interface Tramite {
+interface FilaCalendario {
   id: string;
-  titulo: string;
-  descripcion: string;
-  cta: string;
-  /** Ruta interna (`/…`) o ancla (`#…`) del CTA; `undefined` deja el botón deshabilitado. */
-  href?: string;
-  variante?: VarianteBoton;
+  periodo: string;
+  actividad: string;
+  desde: string;
+  hasta: string;
+  /** Evento clave del calendario (mesas de examen): se destaca en negrita (V3 §6). */
+  destacado?: boolean;
 }
 
 /**
- * Trámites e información del export `04 · Estudiantes`. Las descripciones son las del diseño
- * sin las refs de requisitos (RF-07…RF-31), que quedan como anotación de código. Los destinos de
- * cada trámite todavía no existen como página: el CTA se muestra deshabilitado salvo el de mesas,
- * que baja a la tabla de la propia página, y el de Moodle, que es un servicio externo.
+ * Calendario académico (Mapa del Sitio V3 §6; devolución de Edith §6). Las mesas de examen no
+ * tienen apartado propio: van dentro del calendario como evento clave. Las fechas quedan
+ * PENDIENTE hasta que el instituto publique el calendario oficial: no se inventan fechas
+ * (I8 · RF-11). ⏳ Formato definitivo: tabla, PDF descargable o ambos.
  */
-const TRAMITES: Tramite[] = [
+const CALENDARIO: FilaCalendario[] = [
   {
-    id: 'regularidad',
-    titulo: 'Regularidad',
-    descripcion: 'Condiciones para mantener la regularidad.',
-    cta: 'Ver condiciones',
+    id: 'cuatrimestre-1',
+    periodo: '1.er cuatrimestre',
+    actividad: 'Cursada',
+    desde: 'PENDIENTE',
+    hasta: 'PENDIENTE',
   },
   {
-    id: 'constancias',
-    titulo: 'Constancias',
-    descripcion: 'Cómo se solicitan.',
-    cta: 'Ver procedimiento',
+    id: 'mesas-1',
+    periodo: 'Mesas de examen final',
+    actividad: 'Turno de examen · todas las carreras',
+    desde: 'PENDIENTE',
+    hasta: 'PENDIENTE',
+    destacado: true,
   },
   {
-    id: 'mesas-examen',
-    titulo: 'Mesas de examen',
-    descripcion: 'Fechas y modalidad.',
-    cta: 'Ver mesas',
-    href: '#mesas-de-examen-final',
+    id: 'receso',
+    periodo: 'Receso',
+    actividad: '—',
+    desde: 'PENDIENTE',
+    hasta: 'PENDIENTE',
   },
   {
-    id: 'becas',
-    titulo: 'Becas',
-    descripcion: 'Tipos, requisitos y procedimiento.',
-    cta: 'Ver becas',
+    id: 'cuatrimestre-2',
+    periodo: '2.º cuatrimestre',
+    actividad: 'Cursada',
+    desde: 'PENDIENTE',
+    hasta: 'PENDIENTE',
   },
   {
-    id: 'boleto-estudiantil',
-    titulo: 'Boleto estudiantil',
-    descripcion: 'Información del boleto.',
-    cta: 'Cómo tramitar',
-  },
-  {
-    id: 'titulos',
-    titulo: 'Trámite de títulos',
-    descripcion: 'Procedimiento de solicitud. Informativo en v1.',
-    cta: 'Ver procedimiento',
-  },
-  {
-    id: 'traspasos',
-    titulo: 'Traspasos entre IFTS',
-    descripcion: 'Procedimiento de traspaso. Informativo en v1.',
-    cta: 'Ver requisitos',
-  },
-  {
-    id: 'campus-virtual',
-    titulo: 'Campus Virtual Moodle',
-    descripcion: 'Aulas virtuales. Servicio externo.',
-    cta: 'Ingresar a Moodle',
-    variante: 'secundario',
-  },
-];
-
-/**
- * Estructura del ciclo lectivo del export `04 · Estudiantes`. Las fechas quedan PENDIENTE hasta
- * que el instituto publique el calendario oficial: no se inventan fechas (I8 · RF-11).
- */
-const CALENDARIO: { periodo: string; actividad: string; desde: string; hasta: string }[] = [
-  { periodo: '1.er cuatrimestre', actividad: 'Cursada', desde: 'PENDIENTE', hasta: 'PENDIENTE' },
-  { periodo: 'Receso', actividad: '—', desde: 'PENDIENTE', hasta: 'PENDIENTE' },
-  { periodo: '2.º cuatrimestre', actividad: 'Cursada', desde: 'PENDIENTE', hasta: 'PENDIENTE' },
-];
-
-/**
- * Mesas de examen final del export: cronograma por turno (RF-09). La estructura de ejemplo del
- * diseño se repite con todos los datos PENDIENTE.
- */
-const MESAS_EXAMEN: {
-  id: string;
-  turno: string;
-  carrera: string;
-  fecha: string;
-  modalidad: string;
-}[] = [
-  {
-    id: 'mesa-1',
-    turno: 'Turno de examen',
-    carrera: 'Todas',
-    fecha: 'PENDIENTE',
-    modalidad: 'PENDIENTE',
-  },
-  {
-    id: 'mesa-2',
-    turno: 'Turno de examen',
-    carrera: 'Todas',
-    fecha: 'PENDIENTE',
-    modalidad: 'PENDIENTE',
+    id: 'mesas-2',
+    periodo: 'Mesas de examen final',
+    actividad: 'Turno de examen · todas las carreras',
+    desde: 'PENDIENTE',
+    hasta: 'PENDIENTE',
+    destacado: true,
   },
 ];
 
 function EstudiantesPage() {
-  const campusDisponible = ENLACES.moodle !== '';
-
   return (
     <main className="min-h-screen">
       <EncabezadoPagina
@@ -122,7 +69,7 @@ function EstudiantesPage() {
         eyebrow="Alumnos"
         seccion="cian"
         titulo="Alumnos"
-        descripcion="Información y trámites para estudiantes actuales: regularidad, constancias, mesas, calendario, becas, boleto y títulos/traspasos."
+        descripcion="Calendario académico y respuestas a las dudas más frecuentes de los alumnos del IFTS N.º 12."
       />
 
       <div className="mx-auto max-w-contenido space-y-14 px-4 py-12">
@@ -133,65 +80,24 @@ function EstudiantesPage() {
           GCBA). No hay cuentas ni perfiles de estudiantes en este sitio."
         */}
 
-        <section aria-labelledby="titulo-tramites">
-          <h2 id="titulo-tramites" className="text-2xl font-bold text-texto">
-            Trámites e información
-          </h2>
-          <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {TRAMITES.map((tramite) => {
-              const esMoodle = tramite.id === 'campus-virtual';
-
-              return (
-                <li
-                  key={tramite.id}
-                  className="flex flex-col rounded-xl border border-borde-suave bg-white p-5 shadow-suave"
-                >
-                  <h3 className="text-base font-semibold text-texto">{tramite.titulo}</h3>
-                  <p className="mt-1 flex-1 text-sm text-texto-suave">{tramite.descripcion}</p>
-                  <div className="mt-4">
-                    {esMoodle ? (
-                      campusDisponible ? (
-                        <Button variante="secundario" tamano="sm" href={ENLACES.moodle}>
-                          {tramite.cta}
-                        </Button>
-                      ) : (
-                        <span
-                          aria-disabled="true"
-                          className="inline-flex min-h-11 items-center rounded-md border border-borde bg-fondo px-3 text-sm font-medium text-texto-suave"
-                        >
-                          Enlace oficial próximamente
-                        </span>
-                      )
-                    ) : (
-                      <Button
-                        variante={tramite.variante ?? 'fantasma'}
-                        tamano="sm"
-                        href={tramite.href}
-                        disabled={tramite.href === undefined}
-                      >
-                        {tramite.cta}
-                      </Button>
-                    )}
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </section>
-
+        {/*
+          V3 §6: el calendario va primero y las mesas de examen se integran como evento clave.
+          Se retiran las tarjetas de trámites (Regularidad, Constancias, Becas, Boleto, Títulos y
+          Traspasos): su contenido pasa a las preguntas frecuentes desplegables.
+        */}
         <section aria-labelledby="titulo-calendario">
           <h2 id="titulo-calendario" className="text-2xl font-bold text-texto">
             Calendario académico
           </h2>
-          {/*
-            Anotación del diseño (comentario UX/UI, no es copy visible):
-            "Estructura del ciclo lectivo (RF-11). Sin fechas inventadas (I8)."
-          */}
-          <p className="mt-2 text-texto-suave">Estructura del ciclo lectivo.</p>
+          <p className="mt-2 text-texto-suave">
+            Ciclo lectivo y mesas de examen final. Los eventos clave se destacan en negrita.
+          </p>
 
           <div className="mt-6 overflow-x-auto rounded-xl border border-borde-suave bg-white">
             <table className="w-full border-collapse text-left text-sm">
-              <caption className="sr-only">Estructura del ciclo lectivo</caption>
+              <caption className="sr-only">
+                Estructura del ciclo lectivo y mesas de examen final
+              </caption>
               <thead className="bg-fondo">
                 <tr>
                   <th scope="col" className="px-4 py-3 font-semibold text-texto">
@@ -210,13 +116,29 @@ function EstudiantesPage() {
               </thead>
               <tbody>
                 {CALENDARIO.map((fila) => (
-                  <tr key={fila.periodo} className="border-t border-borde-suave">
+                  <tr key={fila.id} className="border-t border-borde-suave">
                     <th scope="row" className="px-4 py-3 align-top font-medium text-texto">
-                      {fila.periodo}
+                      {fila.destacado === true ? <strong>{fila.periodo}</strong> : fila.periodo}
                     </th>
                     <td className="px-4 py-3 align-top text-texto-suave">{fila.actividad}</td>
-                    <td className="px-4 py-3 align-top text-texto-suave">{fila.desde}</td>
-                    <td className="px-4 py-3 align-top text-texto-suave">{fila.hasta}</td>
+                    <td
+                      className={
+                        fila.destacado === true
+                          ? 'px-4 py-3 align-top font-semibold text-texto'
+                          : 'px-4 py-3 align-top text-texto-suave'
+                      }
+                    >
+                      {fila.desde}
+                    </td>
+                    <td
+                      className={
+                        fila.destacado === true
+                          ? 'px-4 py-3 align-top font-semibold text-texto'
+                          : 'px-4 py-3 align-top text-texto-suave'
+                      }
+                    >
+                      {fila.hasta}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -241,68 +163,21 @@ function EstudiantesPage() {
           </div>
         </section>
 
-        <section id="mesas-de-examen-final" aria-labelledby="titulo-mesas">
-          <h2 id="titulo-mesas" className="text-2xl font-bold text-texto">
-            Mesas de examen final
-          </h2>
-          {/*
-            Anotación del diseño (comentario UX/UI, no es copy visible):
-            "Cronograma por turno (RF-09)." La estructura de ejemplo se publica con datos
-            PENDIENTE hasta que el instituto confirme el cronograma.
-          */}
-          <p className="mt-2 text-texto-suave">Cronograma por turno.</p>
-
-          <div className="mt-6 overflow-x-auto rounded-xl border border-borde-suave bg-white">
-            <table className="w-full border-collapse text-left text-sm">
-              <caption className="sr-only">Cronograma de mesas de examen final</caption>
-              <thead className="bg-fondo">
-                <tr>
-                  <th scope="col" className="px-4 py-3 font-semibold text-texto">
-                    Turno
-                  </th>
-                  <th scope="col" className="px-4 py-3 font-semibold text-texto">
-                    Carrera
-                  </th>
-                  <th scope="col" className="px-4 py-3 font-semibold text-texto">
-                    Fecha
-                  </th>
-                  <th scope="col" className="px-4 py-3 font-semibold text-texto">
-                    Modalidad
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {MESAS_EXAMEN.map((fila) => (
-                  <tr key={fila.id} className="border-t border-borde-suave">
-                    <th scope="row" className="px-4 py-3 align-top font-medium text-texto">
-                      {fila.turno}
-                    </th>
-                    <td className="px-4 py-3 align-top text-texto-suave">{fila.carrera}</td>
-                    <td className="px-4 py-3 align-top text-texto-suave">{fila.fecha}</td>
-                    <td className="px-4 py-3 align-top text-texto-suave">{fila.modalidad}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
         <section aria-labelledby="titulo-faq">
           <div className="flex flex-wrap items-baseline justify-between gap-3">
             <h2 id="titulo-faq" className="text-2xl font-bold text-texto">
-              Preguntas frecuentes de estudiantes
+              Preguntas frecuentes de alumnos
             </h2>
             <Button variante="fantasma" tamano="sm" href="/faq">
               Ver todas las preguntas
             </Button>
           </div>
           {/*
-            Anotación del diseño (comentario UX/UI, no es copy visible):
-            "FAQ específica (RF-14). Respuestas oficiales PENDIENTES." Las respuestas se muestran
-            como mensaje de proceso desde la T7.
+            Devolución de Edith §6: las preguntas reemplazan las tarjetas de trámites. Las
+            respuestas sin confirmación institucional muestran el mensaje de proceso.
           */}
           <div className="mt-6">
-            <FaqAcordeon items={faqEstudiantes} mostrarCategoria={false} />
+            <FaqAcordeon items={faqAlumnos} mostrarCategoria={false} />
           </div>
         </section>
       </div>

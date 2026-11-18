@@ -4,7 +4,7 @@ import type { FaqItem } from '../../types/domain/sitio.types';
 
 const etiquetasCategoria: Record<FaqItem['categoria'], string> = {
   ingresantes: 'Ingresantes',
-  estudiantes: 'Estudiantes',
+  estudiantes: 'Alumnos',
   docentes: 'Docentes',
   institucional: 'Institucional',
 };

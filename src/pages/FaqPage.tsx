@@ -9,12 +9,13 @@ import { mockFaqs } from '../constants/mock-data';
 
 /**
  * Segmentos del export `10 · Preguntas frecuentes (segmentada)`. El diseño muestra tres
- * pestañas (Ingresantes / Estudiantes / Docentes); las FAQ institucionales no tienen pestaña y
- * quedan accesibles solo desde el buscador global del header.
+ * pestañas por perfil; la de estudiantes actuales usa el nombre del menú (Mapa del Sitio V3):
+ * Ingresantes / Alumnos / Docentes. Las FAQ institucionales no tienen pestaña y quedan
+ * accesibles solo desde el buscador global del header.
  */
 const SEGMENTOS = [
   { id: 'ingresantes', etiqueta: 'Ingresantes' },
-  { id: 'estudiantes', etiqueta: 'Estudiantes' },
+  { id: 'estudiantes', etiqueta: 'Alumnos' },
   { id: 'docentes', etiqueta: 'Docentes' },
 ] as const;
 
@@ -51,14 +52,15 @@ function FaqPage() {
       {/*
         Anotación del diseño (no renderizar): la bajada original es "Respuestas por perfil:
         ingresantes, estudiantes y docentes (RF-06 · RF-14 · I3). Accesible desde Home, pie de
-        página y cada sección." Las refs y la nota de dónde se enlaza son de UX/UI.
+        página y cada sección." Las refs y la nota de dónde se enlaza son de UX/UI. El perfil
+        "estudiantes" se publica como "Alumnos" (Mapa del Sitio V3).
       */}
       <EncabezadoPagina
         breadcrumb={[{ etiqueta: 'Inicio', href: '/' }, { etiqueta: 'Preguntas frecuentes' }]}
         eyebrow="Preguntas frecuentes"
         seccion="ambar"
         titulo="Preguntas frecuentes"
-        descripcion="Respuestas por perfil: ingresantes, estudiantes y docentes."
+        descripcion="Respuestas por perfil: ingresantes, alumnos y docentes."
       />
 
       <section aria-labelledby="titulo-faq" className="mx-auto max-w-3xl px-4 py-12">

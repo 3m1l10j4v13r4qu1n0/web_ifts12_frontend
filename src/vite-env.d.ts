@@ -34,6 +34,22 @@ interface ImportMetaEnv {
    * Default: `true` en desarrollo y test, `false` en producción.
    */
   readonly VITE_CONTACTO_HABILITADO?: string;
+
+  /**
+   * URL oficial de la preinscripción del GCBA (Agencia de Aprendizaje a lo Largo de la Vida).
+   *
+   * Sin valor hasta que el instituto la entregue: la sección Ingresantes y los botones
+   * "Inscripción GCBA" del header y del pie muestran el enlace como pendiente (RN-10).
+   */
+  readonly VITE_INSCRIPCION_URL?: string;
+
+  /**
+   * URL del instructivo paso a paso de la preinscripción (marcado `[INSERTAR]` por Edith).
+   *
+   * Sin valor hasta que el instituto lo entregue; la sección Ingresantes lo muestra como
+   * pendiente (RN-10).
+   */
+  readonly VITE_INSCRIPCION_INSTRUCTIVO_URL?: string;
 }
 
 interface ImportMeta {
