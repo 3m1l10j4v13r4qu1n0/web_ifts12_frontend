@@ -23,13 +23,15 @@ Fase 10 cerrada (19/10/2026) · próxima fase a definir
 _(Fase 10 = **alineación del frontend a los exports Desktop 1440 del avance de diseño**,
 página por página (tareas T1–T16), cerrada con tag `v1.11.0`. No hay Fase 11 definida todavía.)_
 
-**Situación 16/11/2026:** la devolución de Edith quedó especificada en Capa 1 —Mapa del
-Sitio V3 y HU-03…HU-06— con **HU-03 (navegación) y HU-04 (horarios y Tutoría) ya
-implementadas y verificadas**; HU-05 (Ingresantes y Alumnos) y HU-06 (fichas de carrera)
-siguen pendientes. La rama de integración TEST
-`fix/integracion-test-20261031` (base `d1afcf8`) es la base y el destino de trabajo; `main` y
-`develop` siguen congeladas hasta el cierre de **0000079** (ramas) y **0000075** (QA). El
-push al remoto `infra` está bloqueado por el host caído en Tailscale.
+**Situación 18/11/2026:** la devolución de Edith quedó especificada en Capa 1 —Mapa del
+Sitio V3 y HU-03…HU-06— y las **cuatro HUs ya están implementadas y verificadas** sobre
+`fix/integracion-test-20261031`: navegación V3 (HU-03), horarios y Tutoría (HU-04),
+Ingresantes y Alumnos (HU-05, commit `84e6998`) y fichas de carrera (HU-06, commit
+`aa3cf28`). `main` y `develop` siguen congeladas hasta el cierre de **0000079** (ramas) y
+**0000075** (QA). El push al remoto `infra` sigue bloqueado por el host caído en Tailscale.
+Lo que resta de la devolución es contenido ⏳ del instituto (presentaciones, resoluciones,
+modalidad de Gestión Parlamentaria, enlaces de preinscripción y textos de Docentes/Novedades/
+Contacto, dueño 0000099), no estructura.
 
 _(Detalle en "Qué está construido" y en
 `docs/02_technical/ticket_0000073_correcciones_integracion_test.md`.)_
@@ -92,11 +94,10 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
 ## Qué está construido
 
 - SPA React 19 + Vite + TypeScript strict + Tailwind v4 con `npm run lint · build · test` en verde
-  (**244 tests** en 32 archivos, verificado 23/10/2026; antes 243).
-- Home navegable con el **menú de 9 ítems de la V2** (Inicio, Carreras, Ingresantes, Estudiantes,
-  Tutorías, Docentes, Institucional, Noticias y Contacto) y buscador global en el header. La
-  navegación vigente es el **Mapa del Sitio V3** (7 pestañas: Inicio, Instituto, Carreras,
-  Ingresantes, Alumnos, Tutoría y FAQ), **todavía no implementada en `src/`**. Portada con
+  (**289 tests** en 37 archivos, verificado 18/11/2026).
+- Home navegable con el **menú de 7 pestañas del Mapa del Sitio V3** (Inicio, Instituto,
+  Carreras, Ingresantes, Alumnos, Tutoría y FAQ), buscador global en el header y los 3 accesos
+  externos; las rutas históricas se conservan (V3 §15). Portada con
   carrusel institucional, footer con datos, columnas, formulario e isologotipos, secciones de
   Carreras, Ingresantes, Estudiantes, Tutorías, Docentes, Institucional, Noticias, FAQ y
   Contacto, más rutas de detalle `/carreras/:id` y `/noticias/:id` y 404. La **portada de la Home siempre se muestra** (título +
@@ -158,17 +159,29 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   pendientes ⏳ con dueño. Los tickets que no son funcionalidad (ronda QA 0000075, ramas
   0000079 y el bug responsive 0000087) quedaron en
   `docs/02_technical/tickets_operativos_ronda_test_2026_11.md`.
-- **HU-03 y HU-04 implementadas (16/11/2026)** sobre `fix/integracion-test-20261031`:
-  menú de 7 pestañas con FAQ como pestaña (las rutas `/institucional`, `/estudiantes` y
-  `/tutorias` no migran; Docentes, Novedades y Contacto salen del menú y Novedades y
-  Contacto se alcanzan desde el pie), títulos Instituto / Alumnos / Tutoría, y horarios de
-  atención en dos franjas (9:00–13:00 y 18:30–22:30) en barra superior, pie, Contacto y
-  Tutoría. Tutoría ya no tiene tabla de turnos ni formulario: el canal es
-  `clara.moroni@bue.edu.ar` con el asunto «Sitio Web - Tutorías - Tu Nombre y Apellido»; el
-  asunto «Tutorías» salió del formulario de Contacto y su FAQ tiene la respuesta oficial.
-  El buscador usa `SECCIONES_BUSCABLES`, que suma Docentes, Novedades y Contacto al menú.
-  Tests: 280 en 37 archivos. **HU-05 (Ingresantes y Alumnos) y HU-06 (fichas de carrera)
-  siguen sin implementar.**
+- **HU-03 a HU-06 implementadas (16–18/11/2026)** sobre `fix/integracion-test-20261031`:
+  - **HU-03 (navegación):** menú de 7 pestañas con FAQ como pestaña (las rutas
+    `/institucional`, `/estudiantes` y `/tutorias` no migran; Docentes, Novedades y Contacto
+    salen del menú y Novedades y Contacto se alcanzan desde el pie), títulos Instituto /
+    Alumnos / Tutoría y horarios de atención en dos franjas (9:00–13:00 y 18:30–22:30) en
+    barra superior, pie, Contacto y Tutoría. El buscador usa `SECCIONES_BUSCABLES`, que suma
+    Docentes, Novedades y Contacto al menú.
+  - **HU-04 (Tutoría):** sin tabla de turnos ni formulario; el canal es
+    `clara.moroni@bue.edu.ar` con el asunto «Sitio Web - Tutorías - Tu Nombre y Apellido». El
+    asunto «Tutorías» salió del formulario de Contacto y su FAQ tiene la respuesta oficial.
+  - **HU-05 (Ingresantes y Alumnos, `84e6998`):** Ingresantes pierde el listado de carreras,
+    los bloques Modalidad/Horarios/Equivalencias/Pases y la tabla de Fechas clave; explica la
+    preinscripción del GCBA con tres preguntas validadas y deja el enlace y el instructivo
+    pendientes (`VITE_INSCRIPCION_URL`, `VITE_INSCRIPCION_INSTRUCTIVO_URL`). Alumnos invierte
+    el orden: calendario primero con las mesas de examen integradas y destacadas, y después
+    las diez preguntas desplegables de Edith. La pestaña de FAQ pasa a «Alumnos».
+  - **HU-06 (fichas de carrera, `aa3cf28`):** se elimina el apartado Programas y su enlace del
+    índice; el turno, el horario y la modalidad salen de cada carrera
+    (`src/constants/cursadaCarreras.ts`): vespertino 18:30–22:30 en AP, Políticas Culturales,
+    Análisis de Sistemas y Ciencia de Datos e IA, y matutino 9:00–13:00 en Gestión
+    Parlamentaria (modalidad pendiente). La resolución conserva su número y solo enlaza el
+    PDF cuando el instituto lo valida. Materias y correlatividades usa el texto definitivo.
+  Tests: **289 en 37 archivos**. Lo que resta es contenido ⏳ del instituto, no estructura.
 - **Correcciones de UX/UI y Frontend** especificadas en Capa 1
   (`docs/01_global/correcciones_ux_ui_frontend.md`, 08/10/2026): 9 bloqueantes (B1–B9), 12
   importantes (I1–I12) y 7 mejoras (M1–M7) de la auditoría UX/UI del 07/10, cada una con criterio
@@ -548,17 +561,28 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   reemplaza al V2 (que queda como entregable fechado en el Drive, sin editar): 7 pestañas
   (Inicio, Instituto, Carreras, Ingresantes, Alumnos, Tutoría y FAQ) + buscador + 3 accesos
   externos. Docentes, Novedades y Contacto quedan ⏳ con dueño en el ticket 0000099. RN-07,
-  RN-08 y RN-14 se actualizaron; el código de `src/` sigue con el menú de 9 ítems de la V2
-  hasta que se implementen las HUs de la devolución de Edith.
+  RN-08 y RN-14 se actualizaron. **Implementado en `src/` (18/11/2026):** el menú ya es el de
+  la V3 y HU-03…HU-06 están cerradas.
+- **HU-05: el buscador no usa el menú como único índice (18/11/2026):** `SECCIONES_BUSCABLES`
+  mantiene Docentes, Novedades y Contacto aunque no sean pestaña, para no perder acceso a
+  páginas que siguen publicadas (V3 §15). La FAQ de estudiantes actuales se publica como
+  «Alumnos» (etiqueta visible y `etiquetasCategoria`), pero el id interno sigue siendo
+  `estudiantes` para no migrar datos ni rutas.
+- **HU-06: turno, horario y modalidad por carrera, no un literal fijo (18/11/2026):** hasta que
+  el backend los exponga (0000080) viven en `src/constants/cursadaCarreras.ts`, indexados por
+  slug. Gestión Parlamentaria es la única matutina (9:00–13:00) y su modalidad queda ⏳; las
+  otras cuatro son vespertinas (18:30–22:30) e híbridas. El PDF de la resolución se enlaza
+  solo cuando el instituto lo valida (0000096).
 
 ## Bloqueos abiertos (no resolver sin fuente)
 
-- **15 decisiones de la devolución de Edith (13/11/2026)** → Docentes en el pie vs pestaña,
+- **Contenidos ⏳ de la devolución de Edith (13/11/2026)** → Docentes en el pie vs pestaña,
   listado de Novedades, formulario de contacto, categoría Docentes en FAQ, Becas/Boleto,
   Enlaces de interés, Eventos de Tutoría en la v1, modalidad de Gestión Parlamentaria, correos
-  docentes, formato de los regímenes y ubicación del título de validez. El prototipo de Claude
-  eligió una opción por su cuenta; falta confirmación escrita del instituto antes de tocar
-  `src/`. **Dueño: Análisis + UX/UI.** Tabla completa en
+  docentes, formato de los regímenes y ubicación del título de validez. La estructura ya quedó
+  especificada en HU-03…HU-06 y el Mapa V3, e implementada; lo que sigue bloqueado es el
+  **contenido** que el instituto todavía no entregó, que se muestra con mensaje de proceso.
+  **Dueño: Análisis + UX/UI.** Tabla completa en
   `docs/06_audits/audit_2026-11-13-prototipo-claude-ux-ui.md`, §6.
 - **URL del backend en el entorno de testing (P9)** → bloquean el build de despliegue. `.env.example`
   lo tiene marcado con `@TODO`; hoy solo hay `localhost:5000`.
@@ -603,7 +627,7 @@ Detalle con dueño y qué se necesita de vuelta en
 
 ## Verificación
 
-- Frontend: `npm run lint` · `npm run build` · `npm run test` (280 tests en 37 archivos).
+- Frontend: `npm run lint` · `npm run build` · `npm run test` (289 tests en 37 archivos).
 - Sistema documental: `logsayer check` · `logsayer process check` · `logsayer memory index`.
 - **Mapa del Sitio V3 (13/11/2026):** creado en Capa 1
   (`docs/01_global/mapa_sitio_ifts12_v3.md`) con la devolución de Edith y los tickets
@@ -620,10 +644,16 @@ Detalle con dueño y qué se necesita de vuelta en
   regenerado (54 documentos); `logsayer check` y `logsayer process check` en verde.
 - **Implementación de HU-03 y HU-04 (16/11/2026):** lint, build y 280 tests en verde
   (37 archivos). Nuevos: `src/constants/tutorias.ts`, `src/__tests__/navegacion-v3.test.tsx`
-  y `src/__tests__/horarios-atencion.test.tsx`. Queda con el literal viejo
-  «exclusivamente nocturno» `IngresantesPage.tsx` (HU-05) y `CarreraDetallePage.tsx` más la
-  bajada de `CarrerasPage.tsx` (HU-06). Los contenidos ⏳ de Tutoría (texto de presentación,
-  imagen, material de apoyo y eventos) siguen como mensaje de proceso.
+  y `src/__tests__/horarios-atencion.test.tsx`. El literal viejo «exclusivamente nocturno»
+  que quedaba en `IngresantesPage.tsx` (HU-05) y en `CarreraDetallePage.tsx` más la bajada de
+  `CarrerasPage.tsx` (HU-06) se resolvió en la implementación siguiente. Los contenidos ⏳ de
+  Tutoría (texto de presentación, imagen, material de apoyo y eventos) siguen como mensaje de
+  proceso.
+- **Implementación de HU-05 y HU-06 (18/11/2026):** lint, build y 289 tests en verde
+  (37 archivos), verificado con `84e6998` (Ingresantes y Alumnos) y `aa3cf28` (fichas). Nuevo
+  `src/constants/cursadaCarreras.ts`; se eliminó el apartado Programas de
+  `ContenidoAcademico.tsx`. Sin backend local no hubo smoke con datos reales: los estados de
+  carga/error se cubren en tests y los contenidos ⏳ siguen como mensaje de proceso.
 - **Auditoría del prototipo de Claude (13/11/2026):** 31 tickets y 14 secciones de la
   devolución cruzados contra el artefacto archivado, medido en Firefox a 1440/1024/768/375.
   Resultado: 10 ✅, 15 🟡, 1 🔵, 5 ⏳ en tickets; 12 hallazgos PROTO-01…PROTO-12. Informe en

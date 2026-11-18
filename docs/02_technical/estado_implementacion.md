@@ -9,8 +9,9 @@ Fecha: 2026-09-30 · Estado: **OBSOLETO — no usar como estado vigente (actuali
 > Este archivo se conserva como foto histórica; se corrige abajo solo lo que la auditoría
 > marcó como afirmación falsa.
 >
-> Última actualización de contenido: 2026-11-16 (HU-03 y HU-04 implementadas: menú de 7
-> pestañas, nombres Instituto/Alumnos/Tutoría y horarios en dos franjas; falta HU-05 y HU-06).
+> Última actualización de contenido: 2026-11-18 (HU-05 y HU-06 implementadas: Ingresantes y
+> Alumnos reorganizados, fichas de carrera sin Programas y con turno por carrera; quedan solo
+> contenidos ⏳ del instituto).
 > Anterior: 2026-09-21 (Ajuste Mapa V2: header con accesos externos, footer V2, hero con
 > carrusel, secciones con mocks y rutas de detalle).
 > Este archivo es una FOTO del presente, no un historial. Para el historial de cambios ver `docs/logbooks/logbook_legado_01.md`.
@@ -73,9 +74,14 @@ Novedades y Contacto quedan ⏳ con dueño en el ticket 0000099. **Implementado 
 dicen Instituto / Alumnos / Tutoría. Las rutas no migran (V3 §15). El buscador indexa
 `SECCIONES_BUSCABLES` (menú + Docentes, Novedades y Contacto, que siguen publicadas sin ser
 pestaña). Los horarios de atención son las dos franjas (9:00–13:00 y 18:30–22:30) en la barra
-superior, el pie, Contacto y Tutoría. Pendiente: el literal «exclusivamente nocturno» en
-`IngresantesPage.tsx` (HU-05) y en `CarreraDetallePage.tsx` más la bajada de `CarrerasPage.tsx`
-(HU-06).
+superior, el pie, Contacto y Tutoría. **Implementado el 18/11/2026 (HU-05 y HU-06):**
+Ingresantes explica solo la preinscripción del GCBA (tres preguntas validadas, enlaces
+pendientes) y Alumnos muestra el calendario con las mesas integradas y las diez preguntas de
+Edith; las fichas de carrera ya no tienen Programas, el turno y la modalidad salen de cada
+carrera (`cursadaCarreras.ts`: vespertino 18:30–22:30 y matutino 9:00–13:00 en Gestión
+Parlamentaria) y la resolución solo enlaza el PDF cuando el instituto lo valida. El literal
+«exclusivamente nocturno» ya no se renderiza. Pendiente: contenidos institucionales ⏳
+(presentaciones, números de resolución, modalidad de Gestión Parlamentaria y PDFs).
 
 ## 2. Arquitectura
 
@@ -95,9 +101,8 @@ superior, el pie, Contacto y Tutoría. Pendiente: el literal «exclusivamente no
   (`BuscadorGlobal`, índice local de mocks) + barra superior de accesos externos
   (Moodle/SIU/Inscripción, atenuados sin URL) + accesos destacados y rápidos en la Home +
   footer con columnas, formulario e isologotipos.
-  _Estado del código:_ todavía muestra el menú de 9 ítems de la V2 (Inicio, Carreras,
-  Ingresantes, Estudiantes, Tutorías, Docentes, Institucional, Novedades, Contacto); la
-  migración a la V3 es parte de las HUs de la devolución de Edith.
+  _Estado del código:_ ya muestra el menú de 7 pestañas de la V3 (HU-03) y las rutas se
+  conservan (§15); Docentes, Novedades y Contacto siguen publicadas fuera del menú.
 
 ## 3. Entidades / Modelos de dominio
 
