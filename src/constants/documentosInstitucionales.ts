@@ -1,5 +1,14 @@
-/** Copias de los originales de Drive compartidos por IFTS12. Trazabilidad en deploy/fuentes.json. */
-export const DOCUMENTOS_CARRERAS: Record<string, { archivo: string; duracion?: string }> = {
+/**
+ * Copias de los originales de Drive compartidos por IFTS12. Trazabilidad en deploy/fuentes.json.
+ *
+ * `resolucion` es el PDF de la Resolución de aprobación. Se agrega solo cuando el instituto
+ * entrega y valida el archivo (ticket 0000096): mientras falte, la ficha muestra el número y
+ * el mensaje de proceso, sin enlazar un PDF inexistente.
+ */
+export const DOCUMENTOS_CARRERAS: Record<
+  string,
+  { archivo: string; duracion?: string; resolucion?: string }
+> = {
   'analisis-de-sistemas': { archivo: '/documentos/plan-as.pdf', duracion: '5 cuatrimestres' },
   'ciencia-de-datos-e-inteligencia-artificial': {
     archivo: '/documentos/plan-cdia.pdf',

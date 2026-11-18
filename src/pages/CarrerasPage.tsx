@@ -3,7 +3,10 @@ import EncabezadoPagina from '../components/layout/EncabezadoPagina';
 import AvisoCarga from '../components/ui/AvisoCarga';
 import AvisoError from '../components/ui/AvisoError';
 import CardCarrera from '../components/ui/CardCarrera';
+import { cursadaDeCarrera } from '../constants/cursadaCarreras';
 import { useCarreras } from '../hooks/useCarreras';
+
+const PENDIENTE = 'PENDIENTE';
 
 function CarrerasPage() {
   const { carreras, total, cargando, error, recargar } = useCarreras();
@@ -14,7 +17,7 @@ function CarrerasPage() {
     !cargando && error === null && total > 0
       ? `Oferta académica del IFTS N.º 12: ${total} ${
           total === 1 ? 'carrera' : 'carreras'
-        } en turno exclusivamente nocturno. Ingresá a cada carrera para ver plan de estudios, correlatividades, programas, resoluciones y cuerpo docente.`
+        }. Ingresá a cada carrera para ver turno, modalidad, plan de estudios, correlatividades, resoluciones y cuerpo docente.`
       : undefined;
 
   return (
@@ -61,9 +64,9 @@ function CarrerasPage() {
       </section>
 
       {/*
-        Resumen por carrera (diseño Desktop 1440). El turno es siempre nocturno (RN-07). La
-        modalidad no existe en el apispec y los horarios tampoco, así que se marcan PENDIENTE
-        con mensaje de proceso, sin inventar.
+        Resumen por carrera (diseño Desktop 1440). El turno, el horario y la modalidad salen
+        del dato de cada carrera (V3 §4); si falta alguno se marca PENDIENTE con mensaje de
+        proceso, sin inventar.
       */}
       <section aria-labelledby="titulo-turnos" className="border-y border-borde-suave bg-fondo">
         <div className="mx-auto max-w-contenido px-4 py-14">
@@ -108,24 +111,33 @@ function CarrerasPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {carreras.map((carrera) => (
-                    <tr key={carrera.id} className="border-t border-borde-suave">
-                      <th scope="row" className="px-4 py-3 align-top font-medium text-texto">
-                        {carrera.nombre}
-                      </th>
-                      <td className="px-4 py-3 align-top text-texto-suave">Nocturno</td>
-                      <td className="px-4 py-3 align-top text-texto-suave">PENDIENTE</td>
-                      <td className="px-4 py-3 align-top text-texto-suave">PENDIENTE</td>
-                      <td className="px-4 py-3 align-top">
-                        <Link
-                          to={`/carreras/${carrera.id}`}
-                          className="font-medium text-acento-700 hover:underline"
-                        >
-                          Ver ficha
-                        </Link>
-                      </td>
-                    </tr>
-                  ))}
+                  {carreras.map((carrera) => {
+                    const cursada = cursadaDeCarrera(carrera.id);
+                    return (
+                      <tr key={carrera.id} className="border-t border-borde-suave">
+                        <th scope="row" className="px-4 py-3 align-top font-medium text-texto">
+                          {carrera.nombre}
+                        </th>
+                        <td className="px-4 py-3 align-top text-texto-suave">
+                          {cursada?.turno ?? PENDIENTE}
+                        </td>
+                        <td className="px-4 py-3 align-top text-texto-suave">
+                          {cursada?.modalidad ?? PENDIENTE}
+                        </td>
+                        <td className="px-4 py-3 align-top text-texto-suave">
+                          {cursada?.horario ?? PENDIENTE}
+                        </td>
+                        <td className="px-4 py-3 align-top">
+                          <Link
+                            to={`/carreras/${carrera.id}`}
+                            className="font-medium text-acento-700 hover:underline"
+                          >
+                            Ver ficha
+                          </Link>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

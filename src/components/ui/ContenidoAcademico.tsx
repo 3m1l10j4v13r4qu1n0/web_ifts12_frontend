@@ -14,6 +14,12 @@ export default function ContenidoAcademico({ slug }: { slug: string }) {
     <>
       <section id="materias-y-correlatividades" className="scroll-mt-52">
         <h2 className="text-2xl font-bold">Materias y correlatividades</h2>
+        {/* Texto definitivo de la devolución de Edith §4 (Mapa del Sitio V3 §4). */}
+        <p className="mt-2 text-sm text-texto-suave">
+          A continuación encontrarás el listado de asignaturas de la carrera y el año/cuatrimestre
+          al cual pertenecen. Para detalles sobre el régimen de correlatividades asociado, podés
+          revisar atentamente el plan de estudios.
+        </p>
         {consulta.isError || materias.isError ? (
           <p role="alert">
             No se pudo consultar la información académica. Volvé a cargar la página.
@@ -46,30 +52,6 @@ export default function ContenidoAcademico({ slug }: { slug: string }) {
             Las materias se publican cuando estén cargadas. Podés consultar el documento del plan de
             estudios.
           </p>
-        )}
-        <p className="mt-3 text-sm text-texto-suave">
-          Para consultar las correlatividades, revisá la documentación de la carrera.
-        </p>
-      </section>
-      <section id="programas" className="scroll-mt-52">
-        <h2 className="text-2xl font-bold">Programas</h2>
-        <ul className="mt-4 space-y-3">
-          {detalles
-            .filter((item) => item.programa_url && /^(https?:\/\/|\/)/.test(item.programa_url))
-            .map((item) => (
-              <li key={item.id}>
-                <a
-                  className="text-acento-700 underline"
-                  href={item.programa_url ?? ''}
-                  rel="noopener noreferrer"
-                >
-                  {item.nombre}
-                </a>
-              </li>
-            ))}
-        </ul>
-        {!detalles.some((item) => item.programa_url) && (
-          <p className="mt-4">Los programas individuales se publican cuando estén disponibles.</p>
         )}
       </section>
       <section id="cuerpo-docente" className="scroll-mt-52">

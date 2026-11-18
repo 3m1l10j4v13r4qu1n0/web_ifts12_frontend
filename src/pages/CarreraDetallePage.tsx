@@ -6,6 +6,7 @@ import Breadcrumb from '../components/ui/Breadcrumb';
 import Button from '../components/ui/Button';
 import ContenidoAcademico from '../components/ui/ContenidoAcademico';
 import Eyebrow from '../components/ui/Eyebrow';
+import { cursadaDeCarrera } from '../constants/cursadaCarreras';
 import { DOCUMENTOS_CARRERAS } from '../constants/documentosInstitucionales';
 import { ENLACES } from '../constants/enlaces';
 import { useCarreras } from '../hooks/useCarreras';
@@ -13,16 +14,12 @@ import PaginaNoEncontrada from './PaginaNoEncontrada';
 
 const PENDIENTE = 'PENDIENTE';
 
-/** Turno único del instituto (RF-22 / RN-07), igual que en el footer y en Carreras. */
-const TURNO = 'Exclusivamente nocturno';
-
 /** Índice "En esta carrera" del diseño Desktop 1440 (anclas a los bloques de la ficha). */
 const ANCLAS_ESTA_CARRERA = [
   { id: 'presentacion', etiqueta: 'Presentación' },
   { id: 'modalidad-y-horarios', etiqueta: 'Modalidad y horarios' },
   { id: 'plan-de-estudios', etiqueta: 'Plan de estudios' },
   { id: 'materias-y-correlatividades', etiqueta: 'Materias y correlatividades' },
-  { id: 'programas', etiqueta: 'Programas' },
   { id: 'resoluciones', etiqueta: 'Resoluciones' },
   { id: 'cuerpo-docente', etiqueta: 'Cuerpo docente' },
 ] as const;
@@ -83,9 +80,13 @@ function CarreraDetallePage() {
 
   const documento = DOCUMENTOS_CARRERAS[carrera.id];
   const otrasCarreras = carreras.filter((item) => item.id !== carrera.id);
-  // `modalidad` no existe en el apispec (BE-N02): se muestra PENDIENTE con mensaje de
-  // proceso, sin inventar el dato desde el nombre del plan.
-  const modalidad = PENDIENTE;
+  // Turno, horario y modalidad salen del dato de esa carrera (V3 §4; devolución de Edith §4).
+  // Mientras el backend no los exponga (0000080) viven en `CURSADA_CARRERAS`; si faltan, la
+  // ficha no inventa y degrada a PENDIENTE.
+  const cursada = cursadaDeCarrera(carrera.id);
+  const turno = cursada !== undefined ? `${cursada.turno} (${cursada.horario})` : PENDIENTE;
+  const modalidad = cursada?.modalidad ?? PENDIENTE;
+  const horario = cursada?.horario ?? PENDIENTE;
   const duracion =
     carrera.duracionAnios !== undefined
       ? `${carrera.duracionAnios} ${carrera.duracionAnios === 1 ? 'año' : 'años'}`
@@ -171,7 +172,7 @@ function CarreraDetallePage() {
               </div>
               <div className="grid grid-cols-1 gap-1 px-5 py-4 sm:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] sm:gap-4">
                 <dt className="text-sm font-medium text-texto-suave">Turno</dt>
-                <dd className="text-sm text-texto">{TURNO}</dd>
+                <dd className="text-sm text-texto">{turno}</dd>
               </div>
               <div className="grid grid-cols-1 gap-1 px-5 py-4 sm:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] sm:gap-4">
                 <dt className="text-sm font-medium text-texto-suave">Modalidad</dt>
@@ -189,21 +190,26 @@ function CarreraDetallePage() {
               Modalidad y horarios
             </h2>
             {/*
-              El turno es el institucional (RF-22 / RN-07). La modalidad y los horarios no
-              existen en el apispec del 22/10/2026 (BE-N02), así que quedan PENDIENTE con
-              mensaje de proceso: no se inventan desde el nombre del plan.
+              Turno, horario y modalidad por carrera (V3 §4; devolución de Edith §4). Si la
+              modalidad no está confirmada (Gestión Parlamentaria), se muestra PENDIENTE con
+              mensaje de proceso en lugar de inventar el dato.
             */}
             <ul className="mt-4 flex flex-wrap gap-3">
               <li className="rounded-full border border-borde-suave bg-white px-4 py-2 text-sm text-texto">
-                Turno: exclusivamente nocturno
+                Turno: {cursada?.turno ?? PENDIENTE}
               </li>
               <li className="rounded-full border border-borde-suave bg-white px-4 py-2 text-sm text-texto">
                 Modalidad: {modalidad}
               </li>
               <li className="rounded-full border border-borde-suave bg-white px-4 py-2 text-sm text-texto-suave">
-                Horarios: {PENDIENTE}
+                Horario: {horario}
               </li>
             </ul>
+            {cursada?.modalidad === undefined && (
+              <p className="mt-3 text-sm text-texto-suave">
+                La modalidad de esta carrera se publica cuando el instituto la confirme.
+              </p>
+            )}
           </section>
 
           <section
@@ -264,17 +270,34 @@ function CarreraDetallePage() {
             {/*
               Anotación del diseño (comentario UX/UI, no es copy visible):
               "Resolución de aprobación · PENDIENTE / Archivo oficial PENDIENTE · PDF" +
-              botón "Descargar". El número de resolución sale del plan vigente
-              (`CarreraPlanSummary.resolucion`); el PDF todavía no existe.
+              botón "Descargar". El número sale del plan vigente; el PDF se enlaza solo cuando
+              el instituto valida el archivo (ticket 0000096). Mientras falte se mantiene el
+              mensaje de proceso y no se enlaza un documento inexistente.
             */}
             <div className={estilosCajaAccion}>
               <div>
                 <p className="font-medium text-texto">Resolución de aprobación</p>
                 <p className="mt-1 text-sm text-texto-suave">{carrera.resolucion ?? PENDIENTE}</p>
+                {documento?.resolucion === undefined && (
+                  <p className="mt-1 text-sm text-texto-suave">
+                    La descarga de la resolución se publica cuando el instituto valide el archivo.
+                  </p>
+                )}
               </div>
-              <Button variante="secundario" disabled>
-                Descargar
-              </Button>
+              {documento?.resolucion !== undefined ? (
+                <a
+                  className="inline-flex min-h-11 items-center rounded-md border border-borde px-4 text-sm font-medium text-acento-700"
+                  href={documento.resolucion}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Descargar resolución (PDF)
+                </a>
+              ) : (
+                <Button variante="secundario" disabled>
+                  Descargar
+                </Button>
+              )}
             </div>
           </section>
         </div>

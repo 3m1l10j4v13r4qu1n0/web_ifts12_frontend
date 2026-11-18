@@ -187,6 +187,7 @@ function HomePage() {
           {/*
             Anotación del diseño (comentario UX/UI, no es copy visible):
             "Todas en turno exclusivamente nocturno. Modalidad y horarios por carrera: PENDIENTE."
+            El Mapa del Sitio V3 §4 la reemplaza: cada tarjeta muestra el turno de su carrera.
           */}
           {cargandoCarreras ? (
             <AvisoCarga que="las carreras" variante="grilla" />
