@@ -137,7 +137,10 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   `/admin`. _Histórico:_ la excepción del 20/10/2026 había reintroducido un menú de cuenta con
   ícono de persona en la top bar. **Decisión 22/10/2026 (UX/UI, #0040/I12): se quita el ícono
   de persona y el menú de cuenta; el panel queda accesible solo por URL directa
-  `/admin/login`.** `POST /api/auth/logout` y `/auth/me` no existen → logout local.
+  `/admin/login`.** **Enmienda 19/11/2026 (HU-07, D0.1): se trae el botón «Administración» en el
+  pie**, así que el panel vuelve a tener acceso visible además de la URL directa; se implementa
+  en la ficha D3 (pie) y con eso cierra ART-16. Hasta entonces el código sigue sin el botón.
+  `POST /api/auth/logout` y `/auth/me` no existen → logout local.
   El CRUD del panel sigue sin backend (UI-only); RF-24 (roles) pendiente → mensaje de proceso.
   Smoke en Firefox con backend caído (toggle y chrome ok); credenciales reales pendientes de
   backend local (Flask sin instalar). Detalle en bitácora 20/10/2026.
@@ -186,12 +189,14 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   README, fichas D0–D6 y plan de pruebas en `docs/04_user_stories/HU-07/`; regla de proceso en
   `.opencode/rules/capa-decorativa.md`; referencia visual (18 CSS + `mediciones.tsv`, sin las 58
   capturas, que quedan en el Drive) en `documentacion/referencia_visual_v2/`; y auditoría del
-  artefacto en Capa 4 (`docs/06_audits/audit_2026-11-18-artefacto-web.md`). D0.1 sigue con 10
-  decisiones ⏳, así que **no se portó nada a `src/`** y no se editó
-  `figma_v2_contrato_visual.md` (la HU lo reemplaza en piel cuando se implemente).
+  artefacto en Capa 4 (`docs/06_audits/audit_2026-11-18-artefacto-web.md`). **D0.1 cerrada el
+  19/11** con las 10 decisiones del usuario, volcadas en la enmienda «Piel visual v2 (HU-07)» de
+  `docs/01_global/figma_v2_contrato_visual.md`; D0.2 también hecha (referencia verificada contra
+  el artefacto y las 58 capturas). **No se portó nada a `src/`**: D0.3 y D0.4 siguen pendientes.
   Rama: `feature/hu-07-capa-decorativa`. Auditoría del 19/11 actualizada con la fila HU-07.
-  En piel visual prevalece lo que pide la HU (decisión del usuario del 18/11) sobre el contrato
-  visual y la regla 90/10; el `no cumple` del informe es por falta de código, no por contradicción.
+  En piel visual prevalece lo que pide la HU (decisiones del usuario del 18–19/11) sobre el
+  contrato visual y la regla 90/10; el `no cumple` del informe es por falta de código, no por
+  contradicción.
 - **Correcciones de UX/UI y Frontend** especificadas en Capa 1
   (`docs/01_global/correcciones_ux_ui_frontend.md`, 08/10/2026): 9 bloqueantes (B1–B9), 12
   importantes (I1–I12) y 7 mejoras (M1–M7) de la auditoría UX/UI del 07/10, cada una con criterio
