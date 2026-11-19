@@ -680,6 +680,7 @@ Detalle con dueño y qué se necesita de vuelta en
 
 ## HUs cerradas desde la última auditoría
 
-4 — HU-03 (navegación V3), HU-04 (horarios y Tutoría), HU-05 (Ingresantes y Alumnos, `84e6998`)
-y HU-06 (fichas de carrera, `aa3cf28`), implementadas y verificadas el 16–18/11/2026. Umbral de
-auditoría alcanzado: el usuario decidió no correrla en esta sesión y dejarla pendiente.
+0 — auditoría semántica de HU-01…HU-06 cerrada el 19/11/2026 en
+`docs/06_audits/audit_2026-11-19.md` (3 `cumple`, 3 `parcial`, sin omisiones); contador reiniciado
+con `logsayer audit reset`. Los hallazgos abiertos (AF-A1…AF-A5, UX-A1, BE-A1, BE-A2) siguen en
+el informe.
