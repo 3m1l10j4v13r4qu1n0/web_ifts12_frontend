@@ -1,0 +1,41 @@
+/* ── líneas 4581–4620 del @layer components del build v2 ── */
+.ola-capa {
+  will-change: transform;
+  animation: 18s linear infinite ola-desplazar;
+}
+.ola-capa-lenta {
+  animation-duration: 28s;
+  animation-direction: reverse;
+}
+.entrada-suave {
+  animation: entrada-suave 0.6s var(--ease-suave) both;
+}
+.zoom-lento {
+  animation: 9s ease-out both zoom-lento;
+}
+.resplandor-flotante {
+  animation: 9s ease-in-out infinite flotar;
+}
+.revelar {
+  opacity: 0;
+  transition:
+    opacity 0.6s var(--ease-suave),
+    transform 0.6s var(--ease-suave);
+  transform: translateY(18px);
+}
+.revelar.revelar-visible {
+  opacity: 1;
+  transform: none;
+}
+.tarjeta-elevable {
+  transition:
+    transform 0.25s var(--ease-suave),
+    box-shadow 0.25s var(--ease-suave),
+    border-color 0.25s var(--ease-suave);
+}
+.tarjeta-elevable:hover,
+.tarjeta-elevable:focus-within {
+  box-shadow: var(--shadow-elevada);
+  transform: translateY(-3px);
+}
+

@@ -1,0 +1,106 @@
+/* ── líneas 2567–2661 del @layer components del build v2 ── */
+.tut {
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 40px;
+  display: grid;
+}
+@media (width<=900px) {
+  .tut {
+    grid-template-columns: 1fr;
+  }
+}
+.tut .pic {
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 30px 60px -30px #0b2c5e8c;
+}
+.tut .pic img {
+  aspect-ratio: 306/260;
+  object-fit: cover;
+  width: 100%;
+}
+.mailbox {
+  background: linear-gradient(150deg, var(--teal), var(--navy));
+  color: #fff;
+  border-radius: 26px;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+}
+.mailbox h3,
+.mailbox .h3 {
+  color: #fff;
+  margin-bottom: 10px;
+  font-size: 26px;
+  font-weight: 800;
+}
+.mailbox p {
+  color: #d6ebf7;
+  margin-bottom: 10px;
+}
+.mailbox .addr {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0;
+  display: flex;
+}
+.mailbox .addr b {
+  font-family: var(--mono);
+  background: #ffffff1f;
+  border: 1px solid #ffffff4d;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: clamp(15px, 1.6vw, 19px);
+}
+.mailbox .subj {
+  font-family: var(--mono);
+  color: var(--navy);
+  background: #fff;
+  border-radius: 12px;
+  margin: 6px 0 14px;
+  padding: 10px 14px;
+  font-size: 14px;
+  display: inline-block;
+}
+.copy {
+  color: var(--navy);
+  transition: transform 0.3s var(--ease);
+  background: #fff;
+  border-radius: 999px;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  font-size: 14px;
+  font-weight: 700;
+  display: inline-flex;
+}
+.copy:hover {
+  transform: translateY(-2px);
+}
+.mailbox .orbx {
+  background: radial-gradient(circle at 30% 30%, #ffffff80, #ffffff0d 65%);
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+  position: absolute;
+  top: -50px;
+  right: -50px;
+}
+.res {
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 14px;
+  display: grid;
+}
+
+/* ── líneas 4573–4580 del @layer components del build v2 ── */
+.lc .lc-detalle {
+  opacity: 0.92;
+  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  display: block;
+  position: relative;
+}

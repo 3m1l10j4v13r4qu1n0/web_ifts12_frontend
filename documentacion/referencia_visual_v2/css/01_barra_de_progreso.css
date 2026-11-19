@@ -1,0 +1,12 @@
+/* ── líneas 151–161 del @layer components del build v2 ── */
+.progress {
+  z-index: 80;
+  transform-origin: 0;
+  background: linear-gradient(90deg, var(--navy), var(--blue), var(--celeste));
+  width: 100%;
+  height: 3px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: scaleX(0);
+}

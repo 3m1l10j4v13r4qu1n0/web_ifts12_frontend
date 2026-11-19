@@ -1,0 +1,334 @@
+/* ── líneas 701–884 del @layer components del build v2 ── */
+.btn {
+  --bg: var(--navy);
+  --fg: #fff;
+  background: var(--bg);
+  height: 54px;
+  color: var(--fg);
+  isolation: isolate;
+  transition:
+    transform 0.4s var(--ease),
+    box-shadow 0.4s;
+  white-space: nowrap;
+  border-radius: 999px;
+  align-items: center;
+  gap: 12px;
+  padding: 0 24px;
+  font-size: 16px;
+  font-weight: 700;
+  display: inline-flex;
+  position: relative;
+  overflow: hidden;
+}
+.btn:before {
+  content: "";
+  background: linear-gradient(100deg, var(--blue), var(--celeste));
+  border-radius: inherit;
+  transition: transform 0.55s var(--ease);
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  transform: translate(-101%);
+}
+.btn:hover:before {
+  transform: none;
+}
+.btn:hover {
+  box-shadow: 0 16px 36px -14px #2f61d6b3;
+}
+.btn .ar {
+  width: 30px;
+  height: 30px;
+  color: var(--navy);
+  transition: transform 0.45s var(--ease);
+  background: #fff;
+  border-radius: 50%;
+  place-items: center;
+  display: grid;
+}
+.btn:hover .ar {
+  transform: rotate(-45deg);
+}
+.btn.ghost {
+  --bg: #fff;
+  --fg: var(--navy);
+  border: 1.5px solid var(--line);
+}
+.btn.ghost:hover {
+  color: #fff;
+}
+.btn.ghost .ar {
+  background: var(--navy);
+  color: #fff;
+}
+.btn.sm {
+  height: 44px;
+  padding: 0 18px;
+  font-size: 15px;
+}
+.btn.sm .ar {
+  width: 24px;
+  height: 24px;
+}
+.lnk {
+  color: var(--c, var(--blue));
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  display: inline-flex;
+  position: relative;
+}
+.lnk:after {
+  content: "";
+  transform-origin: 100%;
+  width: 100%;
+  height: 2px;
+  transition: transform 0.45s var(--ease);
+  background: currentColor;
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  transform: scaleX(0);
+}
+.lnk:hover:after {
+  transform-origin: 0;
+  transform: scaleX(1);
+}
+.lnk svg {
+  transition: transform 0.35s var(--ease);
+}
+.lnk:hover svg {
+  transform: translate(4px);
+}
+.chip {
+  border: 1px solid var(--line);
+  color: var(--navy);
+  background: #fff;
+  border-radius: 999px;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 13px;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+}
+.chip i {
+  background: var(--c, var(--celeste));
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+}
+.tbd {
+  font-family: var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8a5a00;
+  white-space: nowrap;
+  background: #fff6dc;
+  border: 1px dashed #e9b949;
+  border-radius: 999px;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 9px;
+  font-size: 11px;
+  display: inline-flex;
+}
+.tbd:before {
+  content: "";
+  background: #e9a400;
+  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+  animation: 1.6s infinite blink;
+}
+@keyframes blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+[data-r] {
+  opacity: 0;
+  transition:
+    opacity 0.9s var(--ease),
+    transform 1s var(--ease);
+  transition-delay: var(--d, 0s);
+  transform: translateY(34px);
+}
+[data-r="l"] {
+  transform: translate(-40px);
+}
+[data-r="r"] {
+  transform: translate(40px);
+}
+[data-r="s"] {
+  transform: scale(0.94);
+}
+[data-r].in {
+  opacity: 1;
+  transform: none;
+}
+.sw {
+  vertical-align: top;
+  margin-bottom: -0.1em;
+  padding-bottom: 0.1em;
+  display: inline-block;
+  overflow: hidden;
+}
+.sw > span {
+  transition: transform 1s var(--ease);
+  transition-delay: var(--d, 0s);
+  display: inline-block;
+  transform: translateY(105%);
+}
+.split.in .sw > span {
+  transform: none;
+}
+
+/* ── líneas 923–970 del @layer components del build v2 ── */
+.sphere {
+  pointer-events: none;
+  border-radius: 50%;
+  position: absolute;
+}
+.sphere.a {
+  background: radial-gradient(
+    circle at 30% 28%,
+    #fff 0,
+    #bfe7f7 18%,
+    var(--celeste) 52%,
+    var(--teal) 80%,
+    var(--navy2)
+  );
+  box-shadow: 0 30px 60px -20px #1d7aa38c;
+}
+.sphere.b {
+  background: radial-gradient(
+    circle at 32% 30%,
+    #fff 0,
+    #f4fbff 40%,
+    #cfe8f5 75%,
+    #a9d3ea
+  );
+  box-shadow: 0 30px 60px -24px #0b2c5e59;
+}
+.sphere.c {
+  background: radial-gradient(
+    circle at 30% 30%,
+    #e8fff5 0,
+    var(--mint) 25%,
+    #5cc8a3 60%,
+    var(--aqua)
+  );
+  box-shadow: 0 24px 50px -20px #1e8a7e80;
+}
+.dashring {
+  pointer-events: none;
+  border: 2.5px dashed #4aa3d48c;
+  border-radius: 50%;
+  animation: 40s linear infinite spin;
+  position: absolute;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── líneas 3525–3563 del @layer components del build v2 ── */
+.btn,
+.lnk {
+  max-width: 100%;
+}
+.btn {
+  white-space: normal;
+  text-align: left;
+  height: auto;
+  min-height: 54px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.btn.sm {
+  height: auto;
+  min-height: 44px;
+}
+.skip {
+  z-index: 200;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-weight: 700;
+  position: absolute;
+  top: -60px;
+  left: 12px;
+}
+.skip:focus {
+  top: 12px;
+}
+:focus-visible {
+  outline: 3px solid var(--celeste);
+  outline-offset: 3px;
+}
+.btn[disabled],
+button[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ── líneas 3742–3797 del @layer components del build v2 ── */
+.eyebrow,
+.lnk,
+.fq .cat,
+.cuat,
+.cd-sec h2 i,
+.ncard .bd small,
+.news .n .cat,
+.ev-card .bd small {
+  color: var(--c, var(--teal));
+}
+@supports (color: color-mix(in lab, red, red)) {
+  .eyebrow,
+  .lnk,
+  .fq .cat,
+  .cuat,
+  .cd-sec h2 i,
+  .ncard .bd small,
+  .news .n .cat,
+  .ev-card .bd small {
+    color: color-mix(in srgb, var(--c, var(--teal)) 62%, #0b2c5e);
+  }
+}
+.rtable thead th {
+  color: var(--teal);
+}
+@supports (color: color-mix(in lab, red, red)) {
+  .rtable thead th {
+    color: color-mix(in srgb, var(--teal) 68%, #0b2c5e);
+  }
+}
+.brand .wm b em {
+  color: #2f8cc0;
+}
+.pp-et {
+  color: #1b7f54;
+  font-weight: 700;
+}
+.phero .eyebrow,
+.hero .eyebrow {
+  color: var(--c, var(--teal));
+}
+@supports (color: color-mix(in lab, red, red)) {
+  .phero .eyebrow,
+  .hero .eyebrow {
+    color: color-mix(in srgb, var(--c, var(--teal)) 62%, #0b2c5e);
+  }
+}
+#pie .lnk,
+#pie .eyebrow,
+.mailbox .eyebrow,
+.mailbox .lnk,
+.cardlink .eyebrow,
+.cardlink .lnk,
+.abox.dark .lnk {
+  color: var(--c, var(--cel2));
+}

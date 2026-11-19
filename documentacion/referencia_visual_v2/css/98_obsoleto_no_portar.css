@@ -1,0 +1,263 @@
+/* ── líneas 162–264 del @layer components del build v2 ── */
+.wipe {
+  z-index: 95;
+  pointer-events: none;
+  visibility: hidden;
+  position: fixed;
+  inset: 0;
+  transform: translateY(105%);
+}
+.wipe.in,
+.wipe.out {
+  visibility: visible;
+}
+.wipe svg {
+  width: 100%;
+  height: 120px;
+  position: absolute;
+  top: -118px;
+  left: 0;
+}
+.wipe .body {
+  background: linear-gradient(180deg, var(--blue), var(--navy));
+  position: absolute;
+  inset: 0;
+}
+.wipe.in {
+  animation: wipein 0.55s var(--ease2) forwards;
+}
+.wipe.out {
+  animation: wipeout 0.6s var(--ease2) forwards;
+}
+@keyframes wipein {
+  0% {
+    transform: translateY(105%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes wipeout {
+  0% {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-120%);
+  }
+}
+#loader {
+  z-index: 100;
+  background: linear-gradient(160deg, #fff, var(--ice2));
+  place-items: center;
+  transition:
+    opacity 0.7s 0.1s,
+    visibility 0.7s 0.1s;
+  display: grid;
+  position: fixed;
+  inset: 0;
+}
+#loader.out {
+  opacity: 0;
+  visibility: hidden;
+}
+.ld {
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  display: flex;
+}
+.ld .orb {
+  background: radial-gradient(
+    circle at 32% 30%,
+    #fff 0,
+    var(--cel2) 30%,
+    var(--teal) 75%,
+    var(--navy)
+  );
+  width: 90px;
+  height: 90px;
+  animation:
+    orbin 1s var(--ease) both,
+    float 3s ease-in-out 1s infinite;
+  border-radius: 50%;
+  box-shadow: 0 20px 50px -10px #1d7aa399;
+}
+.ld b {
+  font-family: var(--display);
+  letter-spacing: -0.04em;
+  color: var(--navy);
+  animation: fadeup 0.8s var(--ease) 0.25s both;
+  font-size: 42px;
+  font-weight: 800;
+}
+.ld b em {
+  color: var(--celeste);
+  font-style: normal;
+}
+.ld small {
+  font-family: var(--mono);
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  text-transform: uppercase;
+  animation: fadeup 0.8s var(--ease) 0.4s both;
+  font-size: 11px;
+}
+
+/* ── líneas 885–922 del @layer components del build v2 ── */
+.waves {
+  pointer-events: none;
+  height: 170px;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+.waves .w {
+  width: 200%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.waves .w svg {
+  flex: none;
+  width: 50%;
+  height: 100%;
+}
+.waves .w1 {
+  animation: 22s linear infinite wv;
+}
+.waves .w2 {
+  opacity: 0.8;
+  animation: 15s linear infinite reverse wv;
+}
+.waves .w3 {
+  opacity: 0.9;
+  animation: 30s linear infinite wv;
+}
+@keyframes wv {
+  to {
+    transform: translate(-50%);
+  }
+}
+
+/* ── líneas 2662–2735 del @layer components del build v2 ── */
+.ev {
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.ev-track {
+  transition: transform 0.7s var(--ease);
+  gap: 16px;
+  display: flex;
+}
+.ev-card {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 22px;
+  flex-direction: column;
+  flex: 0 0 calc(33.3333% - 10.6667px);
+  display: flex;
+  overflow: hidden;
+}
+@media (width<=900px) {
+  .ev-card {
+    flex-basis: calc(50% - 8px);
+  }
+}
+@media (width<=560px) {
+  .ev-card {
+    flex-basis: 100%;
+  }
+}
+.ev-card .ph {
+  aspect-ratio: 16/10;
+  background: linear-gradient(140deg, var(--c), var(--navy));
+  position: relative;
+  overflow: hidden;
+}
+.ev-card .ph img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.ev-card .bd {
+  padding: 18px 20px 22px;
+}
+.ev-card .bd small {
+  font-family: var(--mono);
+  letter-spacing: 0.14em;
+  color: var(--c);
+  text-transform: uppercase;
+  font-size: 11px;
+}
+.ev-card .bd h4 {
+  margin: 6px 0;
+  font-size: 19px;
+  font-weight: 700;
+}
+.ev-ctrl {
+  gap: 8px;
+  display: flex;
+}
+.ev-ctrl button {
+  border: 1px solid var(--line);
+  width: 46px;
+  height: 46px;
+  color: var(--navy);
+  transition: all 0.3s var(--ease);
+  background: #fff;
+  border-radius: 50%;
+  place-items: center;
+  display: grid;
+}
+.ev-ctrl button:hover {
+  background: var(--navy);
+  color: #fff;
+}
+
+/* ── líneas 3127–3167 del @layer components del build v2 ── */
+.fld {
+  position: relative;
+}
+.fld input,
+.fld textarea,
+.fld select {
+  border: 1px solid var(--line);
+  width: 100%;
+  font: inherit;
+  color: var(--ink);
+  resize: vertical;
+  background: #fff;
+  border-radius: 14px;
+  outline: none;
+  padding: 22px 16px 9px;
+  font-size: 15.5px;
+  transition: border-color 0.25s;
+}
+.fld label {
+  color: var(--muted);
+  pointer-events: none;
+  transition: all 0.25s var(--ease);
+  font-size: 15px;
+  position: absolute;
+  top: 15px;
+  left: 17px;
+}
+.fld input:focus,
+.fld textarea:focus {
+  border-color: var(--celeste);
+}
+.fld input:focus + label,
+.fld input:not(:placeholder-shown) + label,
+.fld textarea:focus + label,
+.fld textarea:not(:placeholder-shown) + label {
+  color: var(--teal);
+  font-size: 11px;
+  font-family: var(--mono);
+  letter-spacing: 0.05em;
+  top: 6px;
+}

@@ -1,0 +1,287 @@
+/* ── líneas 4148–4433 del @layer components del build v2 ── */
+.telon {
+  z-index: 95;
+  pointer-events: none;
+  visibility: hidden;
+  position: fixed;
+  inset: 0;
+  transform: translateY(calc(100% + 150px));
+}
+.telon-portada,
+.telon-baja {
+  visibility: visible;
+}
+.telon-portada {
+  transform: translateY(0);
+}
+.telon-baja {
+  animation: telon-baja 1s var(--ease2) forwards;
+  transform: translateY(0);
+}
+.telon-pie {
+  color: #0b2c5e;
+  width: 100%;
+  height: 140px;
+  position: absolute;
+  bottom: -138px;
+  left: 0;
+  transform: scale(-1);
+}
+.telon-cuerpo {
+  background: linear-gradient(
+    #2f61d6 0%,
+    #1a4fb0 32%,
+    #123d80 68%,
+    #0b2c5e 100%
+  );
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+@keyframes telon-baja {
+  0% {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - 150px));
+  }
+}
+.telon-logos {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  inset: 0;
+}
+.telon-logos:before {
+  content: "";
+  opacity: 0;
+  background: radial-gradient(closest-side, #8fd0f06b, #4aa3d429 55%, #0000);
+  width: min(1100px, 120vw);
+  height: 620px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.telon-encendido:before {
+  animation:
+    1.6s ease-out 0.1s forwards telon-luz,
+    3.2s ease-in-out 1.7s infinite telon-respira;
+}
+.telon-fila {
+  align-items: center;
+  gap: 40px;
+  padding: 18px 26px;
+  display: flex;
+  position: relative;
+}
+.telon-marca {
+  opacity: 0;
+  align-items: center;
+  gap: 18px;
+  display: flex;
+}
+.telon-encendido .telon-marca {
+  animation: telon-aparece 1.1s var(--ease2) 0.15s forwards;
+}
+.telon-escudo {
+  background: #fff;
+  border-radius: 50%;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  display: grid;
+  box-shadow:
+    0 0 0 6px #ffffff1f,
+    0 0 46px #8fd0f0bf;
+}
+.telon-escudo img {
+  width: 58px;
+  height: auto;
+}
+.telon-nombre {
+  font-family: var(--display);
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-shadow: 0 0 28px #8fd0f0b3;
+  font-size: 58px;
+  font-weight: 800;
+  line-height: 1;
+}
+.telon-nombre b {
+  color: #8fd0f0;
+}
+.telon-separador {
+  background: linear-gradient(#0000, #cfe8f5e6, #0000);
+  width: 1px;
+  height: 86px;
+  transform: scaleY(0);
+}
+.telon-encendido .telon-separador {
+  animation: telon-separa 0.9s var(--ease2) 0.6s forwards;
+}
+.telon-upcn {
+  opacity: 0;
+  filter: drop-shadow(0 0 22px #8fd0f0a6);
+  width: auto;
+  height: 66px;
+}
+.telon-encendido .telon-upcn {
+  animation: telon-aparece-upcn 1.1s var(--ease2) 0.8s forwards;
+}
+.telon-lema {
+  font-family: var(--mono);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #cfe8f5;
+  opacity: 0;
+  margin: 22px 0 0;
+  font-size: 12px;
+  position: relative;
+}
+.telon-encendido .telon-lema {
+  animation: telon-aparece 1.1s var(--ease2) 1.25s forwards;
+}
+@keyframes telon-aparece {
+  0% {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    filter: blur();
+    transform: none;
+  }
+}
+@keyframes telon-aparece-upcn {
+  0% {
+    opacity: 0;
+    filter: blur(6px) drop-shadow(0 0 22px #8fd0f0a6);
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    filter: blur() drop-shadow(0 0 22px #8fd0f0a6);
+    transform: none;
+  }
+}
+@keyframes telon-separa {
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes telon-luz {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes telon-respira {
+  0%,
+  to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.72;
+  }
+}
+.telon-trazos {
+  opacity: 0.75;
+  width: 100%;
+  height: 150px;
+  position: absolute;
+  bottom: 9%;
+  left: 0;
+}
+.telon-trazos path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1px;
+  animation: telon-traza 2.2s var(--ease2) forwards;
+}
+@keyframes telon-traza {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@media (width<=640px) {
+  .telon-fila {
+    flex-direction: column;
+    gap: 22px;
+  }
+  .telon-separador {
+    background: linear-gradient(90deg, #0000, #cfe8f5e6, #0000);
+    width: 120px;
+    height: 1px;
+    transform: scaleX(0);
+  }
+  @keyframes telon-separa {
+    to {
+      transform: scaleX(1);
+    }
+  }
+  .telon-escudo {
+    width: 76px;
+    height: 76px;
+  }
+  .telon-escudo img {
+    width: 46px;
+  }
+  .telon-nombre {
+    font-size: 46px;
+  }
+  .telon-upcn {
+    height: 52px;
+  }
+  .telon-lema {
+    letter-spacing: 0.24em;
+    text-align: center;
+    padding: 0 24px;
+    font-size: 10.5px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .telon {
+    display: none;
+  }
+}
+.caricia {
+  z-index: 94;
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+}
+.caricia svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.caricia-trazo {
+  stroke-dasharray: 0.55 2;
+  stroke-dashoffset: 0.55px;
+  opacity: 0;
+  filter: drop-shadow(0 0 5px #8fd0f08c);
+  animation: 2.3s cubic-bezier(0.45, 0, 0.25, 1) both caricia;
+}
+@keyframes caricia {
+  0% {
+    stroke-dashoffset: 0.55px;
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  70% {
+    opacity: 0.42;
+  }
+  to {
+    stroke-dashoffset: -1px;
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .caricia {
+    display: none;
+  }
+}
