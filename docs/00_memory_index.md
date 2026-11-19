@@ -38,6 +38,9 @@ project_state.md                                                     · nivel 0 
 04_user_stories/HU-05/hu_05_pruebas.md                               · nivel 2 · borrador · 2026-11-16 · hu-05, hu, pruebas
 04_user_stories/HU-06/README.md                                      · nivel 2 · borrador · 2026-11-16 · hu-06
 04_user_stories/HU-06/hu_06_pruebas.md                               · nivel 2 · borrador · 2026-11-16 · hu-06, hu, pruebas
+04_user_stories/HU-07/README.md                                      · nivel 2 · borrador · 2026-11-19 · hu-07
+04_user_stories/HU-07/hu_07_fichas.md                                · nivel 2 · borrador · 2026-11-19 · hu-07, hu, fichas
+04_user_stories/HU-07/hu_07_pruebas.md                               · nivel 2 · borrador · 2026-11-19 · hu-07, hu, pruebas
 03_process/definicion_listo.md                                       · nivel 3 · borrador · 2026-09-18 · definicion, listo
 05_agile_methodology/metodoKanban.md                                 · nivel 3 · — · — · metodokanban
 06_audits/audit_2026-09-09-infraestructura.md                        · nivel 3 · — · — · audit, infraestructura
@@ -50,6 +53,10 @@ project_state.md                                                     · nivel 0 
 06_audits/audit_2026-10-22-backend.md                                · nivel 3 · — · — · audit, backend
 06_audits/audit_2026-10-22-ux-ui.md                                  · nivel 3 · — · — · audit, ux, ui
 06_audits/audit_2026-11-13-prototipo-claude-ux-ui.md                 · nivel 3 · — · — · audit, prototipo, claude, ux, ui
+06_audits/audit_2026-11-18-artefacto-web.md                          · nivel 3 · — · — · audit, artefacto, web
+06_audits/audit_2026-11-18-backend-swagger.md                        · nivel 3 · — · — · audit, backend, swagger
+06_audits/audit_2026-11-19.md                                        · nivel 3 · — · — · audit
+06_audits/audit_2026-11-19.prompt.md                                 · nivel 3 · — · — · audit, prompt
 logbooks/00_index.md                                                 · nivel 3 · — · —
 logbooks/logbook_fase-10_01.md                                       · nivel 3 · — · — · logbook, fase
 logbooks/logbook_fase-7_01.md                                        · nivel 3 · — · — · logbook, fase
