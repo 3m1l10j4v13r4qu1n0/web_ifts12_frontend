@@ -1,6 +1,6 @@
 # HU-07: Fichas de implementación — Capa decorativa v2
 
-Fecha: 2026-11-19 · Estado: borrador (fases D0 y D1 detalladas; D2 a D6 en índice)
+Fecha: 2026-11-19 · Estado: borrador (fase D0 completada; D1 detallada; D2 a D6 en índice)
 
 ## Resumen
 
@@ -25,7 +25,7 @@ Las fichas de D2 en adelante se detallan al cerrar D1, con lo que se aprenda en 
 | D0.1 | Decisiones de diseño y enmienda del contrato visual | D0 | — | hecha (19/11) | — |
 | D0.2 | Referencia visual dentro del repo | D0 | — | hecha (19/11) | — |
 | D0.3 | Mapa de clases del build a componentes del repo | D0 | D0.2 | hecha (19/11) | — |
-| D0.4 | Línea base del sitio actual | D0 | — | pendiente | — |
+| D0.4 | Línea base del sitio actual | D0 | — | hecha (19/11) | — |
 | D1.1 | Paleta en el `@theme` | D1 | D0.1 | pendiente | — |
 | D1.2 | Tipografías | D1 | D0.1 | pendiente | — |
 | D1.3 | Forma y movimiento (radios, sombras, curvas, «reducir movimiento») | D1 | D1.1 | pendiente | — |
@@ -179,6 +179,33 @@ No se agregan filas al Anexo A (solo propuestas). Clases detectadas en
      dejarlo en `scripts/` para reutilizarlo en cada PR.
 - **Listo cuando:** existen los `.txt` de todas las rutas, las capturas y la tabla de pesos
   en esta ficha.
+- **Estado (19/11/2026):** completado. Captura realizada sobre la rama
+  `feature/hu-07-capa-decorativa` (base `fix/integracion-test-20261031`, sin cambios en `src/`)
+  con `npm run dev` y automatización vía `firefox-devtools` (navegación, `innerText` de
+  `header`/`main`/`footer` y capturas de viewport). No se creó script adicional en `scripts/`.
+
+#### Tabla de pesos del build (`npm run build`, 19/11/2026)
+
+| Archivo (`dist/`) | Tamaño | Gzip | Nota |
+|---|---:|---:|---|
+| `index.html` | 1,07 kB | 0,58 kB | — |
+| `assets/index-BvfqfUPy.css` | 39,82 kB | 8,00 kB | — |
+| `assets/index-Cxxr-Gx3.js` | 543,76 kB | 158,47 kB | Aviso de chunk > 500 kB (preexistente). |
+
+Build: Vite v8.3.5, 2194 módulos, `✓ built in 582ms`.
+
+#### Artefactos de línea base
+
+- **Texto visible (14 rutas, `hu_07_pruebas.md` §3):** `documentacion/referencia_visual_v2/linea_base/`
+  → `inicio.txt`, `institucional.txt`, `carreras.txt`, `carrera-analisis-de-sistemas.txt`,
+  `carrera-gestion-parlamentaria.txt`, `ingresantes.txt`, `estudiantes.txt`, `tutorias.txt`,
+  `docentes.txt`, `noticias.txt`, `faq.txt`, `contacto.txt`, `buscar-carreras.txt`, `404.txt`.
+  Formato: secciones `=== HEADER ===`, `=== MAIN ===`, `=== FOOTER ===` (captura a 1440 px).
+- **Capturas «antes» (14 rutas × 1440 y 375 px, 28 PNG):**
+  `documentacion/driveFrontend/referencia_visual_v2/linea_base/<ruta>-1440.png` y
+  `<ruta>-375.png` (ruta en Drive, no versionada). Páginas con consumo de API sin backend muestran
+  sus estados de carga reales al momento de la captura (p.ej. carreras/novedades/fichas), lo que
+  forma parte del «antes».
 
 ---
 

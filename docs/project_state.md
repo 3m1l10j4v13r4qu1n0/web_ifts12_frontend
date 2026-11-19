@@ -196,7 +196,10 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   `docs/04_user_stories/HU-07/hu_07_fichas.md` con las 31 piezas mapeadas a componentes reales de
   `src/` (`ruta:línea`, existencia y ficha corregidas), utilidades de `99_ya_en_el_repo.css`
   verificadas como no portadas/no usadas (incl. `ola-capa`) y propuestas de nombres para clases
-  fuera del Anexo A. **No se portó nada a `src/`**: queda pendiente **D0.4** (línea base).
+  fuera del Anexo A. **D0.4 completada (19/11):** línea base «antes» (build JS/CSS anotado, 14
+  `.txt` de `header/main/footer` en `documentacion/referencia_visual_v2/linea_base/` y 28 capturas
+  1440/375 en `documentacion/driveFrontend/referencia_visual_v2/linea_base/`, sin versionar).
+  **Fase D0 completa; D1–D6 pendientes. No se portó nada a `src/`.**
   Rama: `feature/hu-07-capa-decorativa`. Auditoría del 19/11 actualizada con la fila HU-07.
   En piel visual prevalece lo que pide la HU (decisiones del usuario del 18–19/11) sobre el
   contrato visual y la regla 90/10; el `no cumple` del informe es por falta de código, no por
