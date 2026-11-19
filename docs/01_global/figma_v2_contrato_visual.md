@@ -88,3 +88,39 @@ correcciones B1–B9 / I1–I12 / M1–M7, wireframes HTML y el estado real del 
 - 2026-10-09: auditoría del Figma viejo y plan del v2 (fuentes a considerar).
 - 2026-10-13: publicado el Figma v2; este documento lo registra como contrato visual
   vigente y absorbe el plan (plan ejecutado).
+
+## Enmienda 2026-11-19 — Piel visual v2 (HU-07)
+
+El Figma v2 sigue siendo la referencia de **estructura, breakpoints (768/1024), estados y
+componentes**. La **piel** (paleta, tipografías, sombras, radios y movimiento) pasa a ser la
+del artefacto «IFTS N.º 12 · Vista previa v2» (versión `1795021175-002d`, 18/11/2026),
+aprobada por el usuario el 19/11/2026. Reemplaza la regla de familia única Source Sans 3 y la
+regla de acento único 90/10. La especificación vive en `docs/04_user_stories/HU-07/` y la
+referencia extraída en `documentacion/referencia_visual_v2/`.
+
+Decisiones tomadas por el usuario el 19/11/2026 (ficha D0.1):
+
+1. **Tipografías:** Plus Jakarta Sans en títulos, Source Sans 3 en texto y JetBrains Mono en
+   etiquetas.
+2. **Paleta:** marino y azul del artefacto como acentos; celeste y verde agua solo decorativos,
+   con los límites de contraste de CA-07-03 y los valores del Anexo B.1.
+3. **Color por carrera y por página:** sí, con los valores del Anexo B.3.
+4. **Telón:** una vez por sesión, solo en Inicio y con duración máxima de 2,5 s (CA-07-06).
+5. **Ondas:** se quitan; la decoración usa líneas rectas (CA-07-09).
+6. **Esferas:** son enlaces a destinos fijos, con prioridad sobre la decoración y sin rotación
+   automática (WCAG 2.2.2).
+7. **Insignia UPCN flotante en la portada:** se quita porque choca con CA-07-01 (ART-10); el
+   logo de UPCN en el pie se mantiene.
+8. **Buscador:** ventana flotante con Ctrl+K, reutilizando `BuscadorGlobal` y el enlace a
+   `/buscar`.
+9. **Fuentes:** archivos propios en `public/fonts`, sin dependencias npm de ejecución
+   (CA-07-10).
+10. **Botón «Administración» en el pie:** se trae. Enmiende la decisión 22/10 (I12) de panel
+    solo por URL y queda registrado como excepción a CA-07-01; se implementa en la ficha D3
+    (pie), con lo que ART-16 deja de estar abierto.
+
+Esta enmienda no autoriza otros cambios de contenido (CA-07-01) ni modifica las reglas de
+proceso (`integracion-test.md`, `flujo-git.md`, `versionado-fases.md`).
+
+IFTS N.º 12. (2026, 18 de noviembre). *IFTS N.º 12 · Vista previa v2* [Artefacto web, versión
+`1795021175-002d`]. https://claude.ai/artifact/DtCfnn3GdmtYkCLbix8mPb
