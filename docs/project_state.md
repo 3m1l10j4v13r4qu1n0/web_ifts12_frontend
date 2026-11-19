@@ -600,6 +600,13 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   Queda alinearlo en el backend cuando toque (BE-E01–BE-E06).
 - **Plazos vencidos (P5):** Swagger (~22/09) y DTOs (~29/09) no llegaron. El frontend compensó
   con DTOs derivados del código, pero no es una entrega de Backend.
+- **Swagger del backend inválido (18/11/2026)** → el ZIP `IFTS12_Backend_2026-11-16` trae las 36
+  rutas / 92 operaciones, pero el spec que publica `/apidocs/` no pasa un validador Swagger: 42 de
+  45 escrituras sin `body`, 5 endpoints ausentes (`auth/login`, `contacto`, `health` ×2,
+  `archivos/{id}/info`) y 184 respuestas sin esquema. Contrato de referencia mientras tanto: el
+  spec curado `documentacion/driveFrontend/04_backend/swagger_ifts12_backend_2026-11-16.json`
+  (válido, 92 operaciones). Informe: `docs/06_audits/audit_2026-11-18-backend-swagger.md`.
+  **Dueño: Grupo 4.**
 - URLs oficiales de Moodle, inscripción y SIU (IFTS/Dirección) → bloquean `enlaces.ts`. Los accesos
   se muestran atenuados.
 - `/api/contacto`: el endpoint existe (`P3` resuelta) pero el formulario sigue validando en local
