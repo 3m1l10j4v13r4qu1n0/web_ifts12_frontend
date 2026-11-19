@@ -182,6 +182,13 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
     Parlamentaria (modalidad pendiente). La resolución conserva su número y solo enlaza el
     PDF cuando el instituto lo valida. Materias y correlatividades usa el texto definitivo.
   Tests: **289 en 37 archivos**. Lo que resta es contenido ⏳ del instituto, no estructura.
+- **HU-07 (capa decorativa) especificada, sin implementar (19/11/2026):** HU paraguas con
+  README, fichas D0–D6 y plan de pruebas en `docs/04_user_stories/HU-07/`; regla de proceso en
+  `.opencode/rules/capa-decorativa.md`; referencia visual (18 CSS + `mediciones.tsv`, sin las 58
+  capturas, que quedan en el Drive) en `documentacion/referencia_visual_v2/`; y auditoría del
+  artefacto en Capa 4 (`docs/06_audits/audit_2026-11-18-artefacto-web.md`). D0.1 sigue con 10
+  decisiones ⏳, así que **no se portó nada a `src/`** ni se cambió el contrato visual vigente.
+  Rama: `feature/hu-07-capa-decorativa`. Auditoría del 19/11 actualizada con la fila HU-07.
 - **Correcciones de UX/UI y Frontend** especificadas en Capa 1
   (`docs/01_global/correcciones_ux_ui_frontend.md`, 08/10/2026): 9 bloqueantes (B1–B9), 12
   importantes (I1–I12) y 7 mejoras (M1–M7) de la auditoría UX/UI del 07/10, cada una con criterio
