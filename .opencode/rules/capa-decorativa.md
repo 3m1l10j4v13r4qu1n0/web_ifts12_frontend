@@ -4,6 +4,12 @@
 > D0 a D6 de `docs/04_user_stories/HU-07/hu_07_fichas.md`). Se suma a
 > `integracion-test.md`, `flujo-git.md` y `versionado-fases.md`; si algo choca, mandan
 > esas tres.
+>
+> **Precedencia visual:** en piel (colores, tipografías, sombras, radios y movimiento), lo que
+> pide HU-07 y sus fichas prevalece sobre `docs/01_global/figma_v2_contrato_visual.md` y sobre
+> la regla 90/10: es la decisión del usuario del 18/11 (sección «Reemplaza» del README de la
+> HU). Las tres reglas de proceso citadas arriba siguen mandando **en proceso**; esto no las
+> modifica.
 
 ## 1. Al empezar una ficha
 
