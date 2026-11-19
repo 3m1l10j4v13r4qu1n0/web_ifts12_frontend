@@ -192,7 +192,11 @@ al contrato `docs/01_global/figma_v2_contrato_visual.md`. El plan vive en
   artefacto en Capa 4 (`docs/06_audits/audit_2026-11-18-artefacto-web.md`). **D0.1 cerrada el
   19/11** con las 10 decisiones del usuario, volcadas en la enmienda «Piel visual v2 (HU-07)» de
   `docs/01_global/figma_v2_contrato_visual.md`; D0.2 también hecha (referencia verificada contra
-  el artefacto y las 58 capturas). **No se portó nada a `src/`**: D0.3 y D0.4 siguen pendientes.
+  el artefacto y las 58 capturas). **D0.3 completada (19/11):** Anexo A de
+  `docs/04_user_stories/HU-07/hu_07_fichas.md` con las 31 piezas mapeadas a componentes reales de
+  `src/` (`ruta:línea`, existencia y ficha corregidas), utilidades de `99_ya_en_el_repo.css`
+  verificadas como no portadas/no usadas (incl. `ola-capa`) y propuestas de nombres para clases
+  fuera del Anexo A. **No se portó nada a `src/`**: queda pendiente **D0.4** (línea base).
   Rama: `feature/hu-07-capa-decorativa`. Auditoría del 19/11 actualizada con la fila HU-07.
   En piel visual prevalece lo que pide la HU (decisiones del usuario del 18–19/11) sobre el
   contrato visual y la regla 90/10; el `no cumple` del informe es por falta de código, no por

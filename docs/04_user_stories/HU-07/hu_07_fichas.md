@@ -24,7 +24,7 @@ Las fichas de D2 en adelante se detallan al cerrar D1, con lo que se aprenda en 
 |---|---|---|---|---|---|
 | D0.1 | Decisiones de diseño y enmienda del contrato visual | D0 | — | hecha (19/11) | — |
 | D0.2 | Referencia visual dentro del repo | D0 | — | hecha (19/11) | — |
-| D0.3 | Mapa de clases del build a componentes del repo | D0 | D0.2 | pendiente | — |
+| D0.3 | Mapa de clases del build a componentes del repo | D0 | D0.2 | hecha (19/11) | — |
 | D0.4 | Línea base del sitio actual | D0 | — | pendiente | — |
 | D1.1 | Paleta en el `@theme` | D1 | D0.1 | pendiente | — |
 | D1.2 | Tipografías | D1 | D0.1 | pendiente | — |
@@ -110,6 +110,59 @@ texto del contrato (regla de fuente única).
      corresponde a las olas viejas: anotar si se usa en algún componente.
   4. Si aparece una clase del build sin nombre en la regla (§4), proponer el nombre.
 - **Listo cuando:** el Anexo A no tiene celdas «?» y cada fila tiene ficha asignada.
+- **Estado (19/11/2026):** completado. El Anexo A tiene las 31 filas con componente real
+  (`ruta:línea` verificada), existencia real (`sí`/`parcial`/`no`) y ficha corregida. Se
+  documentan utilidades de `99_ya_en_el_repo.css` y propuestas de nombres para clases fuera
+  del Anexo A. No se tocó `src/`.
+
+#### Utilidades ya en el repo (`documentacion/referencia_visual_v2/css/99_ya_en_el_repo.css`)
+
+Fuente: `99_ya_en_el_repo.css:2-41` (`ola-capa`, `ola-capa-lenta`, `entrada-suave`,
+`zoom-lento`, `resplandor-flotante`, `revelar`/`revelar-visible`, `tarjeta-elevable`).
+
+| Utilidad | ¿Existe en `src/styles/index.css` u otro archivo de `src/`? | Evidencia |
+|---|---|---|
+| `ola-capa` | No | No aparece en `src/styles/index.css:1-105` ni en búsquedas en `src/`. |
+| `ola-capa-lenta` | No | Ídem. |
+| `entrada-suave` | No | Ídem. |
+| `zoom-lento` | No | Ídem. |
+| `resplandor-flotante` | No | Ídem. |
+| `revelar` / `revelar-visible` | No | Ídem (sin coincidencias de `revelar`). |
+| `tarjeta-elevable` | No | Ídem (sin coincidencias de `tarjeta-elevable`). |
+
+- **`ola-capa` en componentes:** no se usa en ningún componente de `src/` (búsquedas de
+  `ola-capa`, `ola-capa-lenta` y `wave` sin usos de esa utilidad). Coincidencias de `ola`/`svg`
+  encontradas son no relacionadas (`src/utils/mensajeDeConsulta.ts:14`,
+  `src/pages/IngresantesPage.tsx:17`, `src/styles/index.css:12`,
+  `src/components/ui/ModalBaja.tsx:16`, `src/components/ui/ModuloNoDisponible.tsx:23`).
+  Coherente con D0.1 (quitar ondas): ninguna utilidad del 99 está portada ni usada.
+
+#### Propuestas de nombres para clases del build no mapeadas en el Anexo A
+
+No se agregan filas al Anexo A (solo propuestas). Clases detectadas en
+`documentacion/referencia_visual_v2/css/`:
+
+| Clase del build (archivo) | ¿Equivalente hoy en `src/`? | Nombre en español propuesto | Ficha sugerida | Nota |
+|---|---|---|---|---|
+| `.skip` (`03_primitivas.css:254,265`) | No encontrado | `EnlaceSaltarContenido` | D3 | Accesibilidad; si no existe, no se agrega en D1.5 (cambio de estructura). |
+| `.sr` (`10_estados_formularios_tablas.css:60`) | Parcial (patrón `sr-only` de Tailwind en varios archivos) | `SoloLectoresPantalla` (utilidad/clase global) | D1/D2 | Útil si se portan utilidades de accesibilidad del build. |
+| `.it` (`02_header_menu_buscador.css:149,152,165,169`) | Parcial (ítems en `src/components/layout/NavMenu.tsx:18-32`) | `ItemMenuNavegacion` | D3 | Subpieza del menú; hoy cubierta por `NavMenu`. |
+| `.tag` (`04_inicio.css:162,186`) | Parcial (metadatos de slide en `src/components/ui/CarruselInstitucional.tsx:206-210`) | `EtiquetaDestacado` | D4 | Etiqueta visual del hero/slide. |
+| `.cat` (`04_inicio.css:609`, `06_faq.css:105`, `03_primitivas.css:281,285`) | Parcial (`Badge`/filtros/tabs existentes) | `EtiquetaCategoria` | D4/D5 | Ya resuelto con `Badge`, filtros y tabs. |
+| `.ph` (`04_inicio.css:581,587,593,596,623`) | Parcial (imagen en `CardNoticia`/`CarruselInstitucional`) | `ContenedorImagenNovedad` | D4/D5 | Contenedor de media integrado en componentes. |
+| `.dm` (`10_estados_formularios_tablas.css:131,136,142,147`, `07_ficha_carrera_y_calendario.css:431`) | Parcial (pares dato/valor en `<dl>` de `CarreraDetallePage.tsx:160-181`) | `ParDatoValor` | D5 | Patrón de metadatos responsive. |
+| `.orbx` (`08_tutoria_y_docentes.css:83`, `05_paginas_internas.css:220,230`) | No encontrado | `BloqueIconoDecorativo` | D2/D5 | Adorno/ícono decorativo, no portado. |
+| `.addr` / `.subj` (`08_tutoria_y_docentes.css:43,50,58`) | Parcial (contenido en `src/pages/TutoriasPage.tsx:63-79`) | `DatoContactoTutorias` / `AsuntoCorreoTutorias` | D5 | Subpiezas del bloque `.mailbox` (fila de Tutoría). |
+| `.glare` (`04_inicio.css:463,476`) | No encontrado | `BrilloTarjeta` (efecto decorativo) | D2/D4 | Efecto visual de `.cc`, no portado. |
+
+#### Hallazgos del relevamiento
+
+- **Ruta corregida:** `.sbtn/.so/.sbox/.sres` → componente real `src/components/layout/BuscadorGlobal.tsx:10` (no `components/ui/...`).
+- **`.mega` no implementado:** `NavMenu` (`src/components/layout/NavMenu.tsx:15-36`) es plano; no hay mega-menú.
+- **`[data-r]`, `.split`:** sin equivalente de revelado en `src/` (no hay `data-r`, `revelar` ni `useAparicion`; `split` solo en `src/utils/fecha.ts:11`). Marcado como `no`.
+- **Rutas:** la ruta real es `/estudiantes` (`src/routes/AppRouter.tsx:28`), aunque la etiqueta de menú sea «Alumnos».
+- **Piezas inline/parciales:** `.campus`, `.cal`, `.tut/.mailbox/.copy`, `.subnav/.bloque/.bh`, `.cd-hero/.facts/.toc/.plan/.yr/.mat/.dl` existen como contenido/secciones repartidas, no como componentes dedicados con esas clases.
+- **`.apto`:** sin sección/bloque “Apto Médico” en `src/pages/DocentesPage.tsx` ni en `src/`.
 
 ### D0.4 · Línea base del sitio actual
 
@@ -265,41 +318,43 @@ texto del contrato (regla de fuente única).
 
 ---
 
-## Anexo A · Mapa de clases del build a componentes del repo (completar en D0.3)
+## Anexo A · Mapa de clases del build a componentes del repo (completado en D0.3)
 
-| Pieza del build (archivo CSS) | Componente probable en `src/` | ¿Existe? | Ficha |
-|---|---|---|---|
-| `.topbar` (02) | `components/layout/Header.tsx` (barra superior) | ? | D3 |
-| `header.main`, `.hbar`, `.brand` (02) | `components/layout/Header.tsx` | ? | D3 |
-| `.nav`, `.mega` (02) | `components/layout/NavMenu.tsx` | ? | D3 |
-| `.mmenu`, `.burger` (02) | `components/layout/MobileMenu.tsx` | ? | D3 |
-| `.sbtn`, `.so`, `.sbox`, `.sres` (02) | `components/ui/BuscadorGlobal.tsx` | ? | D3 |
-| `.progress` (01) | nuevo `components/ui/deco/BarraProgreso.tsx` | no | D3 |
-| `.totop` (10) | nuevo `components/ui/deco/VolverArriba.tsx` | no | D3 |
-| `footer`, `.fgrid`, `.fcols`, `.fbot`, `.fform` (09) | `components/layout/Footer.tsx` + `FormularioConsulta` | ? | D3 |
-| `.mapa-once`, `.mo-*` (09) | nuevo `components/ui/deco/MapaBarrio.tsx` | ? | D3 |
-| `.btn` (03) | `components/ui/Button.tsx` | sí | D2 |
-| `.lnk` (03) | nuevo `enlace-animado` o variante de enlace | ? | D2 |
-| `.chip`, `.tbd` (03) | `components/ui/Badge.tsx` | sí | D2 |
-| `.eyebrow` (00) | `components/ui/Eyebrow.tsx` | sí | D2 |
-| `[data-r]`, `.split` (03) | utilidad `revelar` + hook nuevo `useAparicion` | parcial | D2 |
-| `.lineas`, `.lf-*` (12) | nuevo `components/ui/deco/Lineas.tsx` | no | D2 |
-| `.esferas`, `.esfera*` (12) | nuevo `components/ui/deco/Esferas.tsx` | no | D2 |
-| `.hero`, `.feat`, `.fs`, `.fbar`, `.fnav` (04) | `pages/HomePage.tsx` + `CarruselInstitucional` | ? | D4 |
-| `.quick`, `.q` (04) | `components/ui/AccesosRapidos.tsx` | sí | D4 |
-| `.cgrid`, `.cc` (04) | `components/ui/CardCarrera.tsx` | sí | D4 |
-| `.news`, `.ncard` (04, 10) | `components/ui/CardNoticia.tsx` | sí | D4, D5 |
-| `.campus` (04) | sección de Inicio | ? | D4 |
-| `.telon*` (13) | nuevo `components/ui/deco/Telon.tsx` | no | D4 |
-| `.phero`, `.crumbs` (05) | `components/layout/EncabezadoPagina.tsx` + `Breadcrumb` | sí | D5 |
-| `.subnav`, `.bloque`, `.bh` (05) | `InstitucionalPage`, `EstudiantesPage` | ? | D5 |
-| `.faq`, `.fq`, `.ftabs` (06) | `components/ui/FaqAcordeon.tsx`, `FaqPage` | sí | D5 |
-| `.cd-hero`, `.facts`, `.toc`, `.plan`, `.yr`, `.mat`, `.dl` (07) | `CarreraDetallePage`, `ContenidoAcademico` | sí | D5 |
-| `.cal` (07) | calendario de `EstudiantesPage` | ? | D5 |
-| `.tut`, `.mailbox`, `.copy` (08) | `TutoriasPage` | sí | D5 |
-| `.apto` (90) | `DocentesPage` (Apto Médico) | ? | D5 |
-| `.rtable`, `.empty`, `.alerta`, `.pager`, `.form` (10) | `TablaAdmin`/tablas, `Estado`, `Paginacion`, `FormField` | sí | D5 |
-| `.toast` (10) | `components/ui/Toast.tsx` | sí | D5 |
+Relevamiento verificado (19/11/2026) con evidencia `ruta:línea` en `src/`. Sin cambios de código.
+
+| Pieza del build (archivo CSS) | Componente REAL en `src/` (ruta:línea) | ¿Existe? | Ficha | Nota corta si corrigió algo |
+|---|---|---:|---|---|
+| `.topbar` (02) | `src/components/layout/Header.tsx:21-49` (`<header>` sticky; barra superior `bg-slate-900` con `UBICACION_HEADER` y `ACCESOS_EXTERNOS`) | parcial | D3 | No es componente dedicado: la “topbar” vive dentro de `Header`. |
+| `header.main`, `.hbar`, `.brand` (02) | `src/components/layout/Header.tsx:21` (`<header>`), `:51-63` (bloque de marca/logos `Link to="/"` con `logoCABA.png` e `IFTS12.jpg`), `:81-88` (barra de navegación) | parcial | D3 | No hay clases `.hbar/.brand` ni componente separado; la estructura de cabecera está integrada en `Header`. |
+| `.nav`, `.mega` (02) | `src/components/layout/NavMenu.tsx:15-36` (lista `<ul>` de `NavLink`), usado en `src/components/layout/Header.tsx:86` | parcial | D3 | `.nav` tiene equivalente funcional (menú horizontal). **No hay `.mega`** ni mega-menú desplegable en `src/` (solo ítems planos). |
+| `.mmenu`, `.burger` (02) | Burger: `src/components/layout/Header.tsx:69-78` (botón `Menu`, `aria-controls="menu-principal-mobile"`). Menú móvil: `src/components/layout/MobileMenu.tsx:18`, `:105-136` (`dialog`/`nav`, portal, `NavMenu` + `BuscadorGlobal`) | parcial | D3 | Repartido: el botón “burger” está en `Header` y el panel móvil es `MobileMenu` (componente dedicado). No hay clases `.mmenu/.burger`. |
+| `.sbtn`, `.so`, `.sbox`, `.sres` (02) | `src/components/layout/BuscadorGlobal.tsx:10`, `:54-67` (`input type="search" role="combobox"`), `:70-108` (panel de resultados/sugerencias + enlace “Ver todos los resultados”). Uso: `src/components/layout/Header.tsx:66`, `src/components/layout/MobileMenu.tsx:131` | sí | D3 | **Corrección de ruta:** el componente probable decía `components/ui/BuscadorGlobal.tsx`; en realidad está en `src/components/layout/BuscadorGlobal.tsx`. No hay clases `.sbtn/.so/.sbox/.sres`, pero el componente dedicado existe. |
+| `.progress` (01) | No encontrado en `src/` (búsqueda sin coincidencias de `progress` de barra/UI en componentes/páginas) | no | D3 | Correcto: no existe `BarraProgreso` ni equivalente. |
+| `.totop` (10) | No encontrado en `src/` (búsqueda sin coincidencias de `totop`) | no | D3 | Correcto: no existe `VolverArriba` ni equivalente. |
+| `footer`, `.fgrid`, `.fcols`, `.fbot`, `.fform` (09) | `src/components/layout/Footer.tsx:82` (`<footer>`), `:84-124` (grid/columnas de enlaces), `:127` (renderiza `FormularioConsulta`), `:149-166` (bloque inferior). Formulario: `src/components/ui/FormularioConsulta.tsx:35`, `:119-286` | parcial | D3 | `Footer` y `FormularioConsulta` existen como componentes dedicados; la estructura/semántica de clases `.fgrid/.fcols/.fbot/.fform` del build no está implementada como tal (usa Tailwind). |
+| `.mapa-once`, `.mo-*` (09) | No encontrado en `src/` (búsqueda sin coincidencias de `mapa-once`/`mo-`) | no | D3 | Correcto: no existe `MapaBarrio` ni equivalente. |
+| `.btn` (03) | `src/components/ui/Button.tsx:9-17` (props/variantes), `:36-74` (render botón/enlace, variantes `primario/secundario/fantasma/enlace`, estados) | sí | D2 | Correcto. Componente dedicado con variantes; sin clase CSS `.btn`. |
+| `.lnk` (03) | Variante de enlace en `src/components/ui/Button.tsx:27`, `:33`, `:49-66` (`variante="enlace"` / `href`) + enlaces inline ad-hoc en páginas/componentes | parcial | D2 | No hay componente `enlace-animado` nuevo ni clase `.lnk`. El equivalente real hoy es la variante `enlace` de `Button` (y enlaces comunes). |
+| `.chip`, `.tbd` (03) | `src/components/ui/Badge.tsx:4-17`, `:22-34` (etiqueta/chip con tonos) | parcial | D2 | `.chip`/badge tiene equivalente dedicado (`Badge`). `.tbd` (estado “a confirmar” visual del build) no aparece como componente/clase específica en `src/`. |
+| `.eyebrow` (00) | `src/components/ui/Eyebrow.tsx:4-18`, `:26-36` | sí | D2 | Correcto. |
+| `[data-r]`, `.split` (03) | No encontrado como patrón de aparición/reveal en `src/` (no hay `data-r`, `revelar`, `useAparicion`). Única coincidencia textual de `split`: `src/utils/fecha.ts:11` (`iso.split('-')`, no relacionado) | no | D2 | **Corrección:** la tabla lo marcaba “parcial”; no hay utilidad de revelado ni hook de aparición equivalente en `src/`. |
+| `.lineas`, `.lf-*` (12) | No encontrado en `src/` (búsqueda sin coincidencias de `lineas`/`lf-`) | no | D2 | Correcto. |
+| `.esferas`, `.esfera*` (12) | No encontrado en `src/` (búsqueda sin coincidencias de `esferas`/`esfera`) | no | D2 | Correcto. |
+| `.hero`, `.feat`, `.fs`, `.fbar`, `.fnav` (04) | Portada/carrusel: `src/pages/HomePage.tsx:81-93` (`CarruselInstitucional`), `src/components/ui/CarruselInstitucional.tsx:146`, `:179-305` (sección hero `aria-label="Novedades destacadas"`, slide actual, controles anterior/siguiente `:243-260`, indicadores `:263-281`, pausa/reanudar opcional `:225-241`). Home arma slides en `src/pages/HomePage.tsx:28-30,52-74` | parcial | D4 | Existe componente dedicado `CarruselInstitucional` usado en `HomePage`; no reproduce literalmente `.feat/.fs/.fbar/.fnav` del build (autoplay/progreso visual distintos). |
+| `.quick`, `.q` (04) | `src/components/ui/AccesosRapidos.tsx:5-11`, `:9-65` (lista de accesos). Uso en Home: `src/pages/HomePage.tsx:214-220` | sí | D4 | Correcto. Componente dedicado. |
+| `.cgrid`, `.cc` (04) | Tarjeta: `src/components/ui/CardCarrera.tsx:5-30`. Grilla/listado en `src/pages/HomePage.tsx:200-207` y páginas de carreras (`src/pages/CarrerasPage.tsx`) | sí | D4 | Correcto (equivalente por componente + grilla contenedora). |
+| `.news`, `.ncard` (04, 10) | Tarjeta: `src/components/ui/CardNoticia.tsx:6-48`. Listados en `src/pages/HomePage.tsx:148-153`, `src/pages/NoticiasPage.tsx:234-245` | sí | D4, D5 | Correcto. |
+| `.campus` (04) | Sección inline en Home: `src/pages/HomePage.tsx:95-113` (`aria-label="Acceso al campus virtual"`, CTA a `ENLACES.moodle`) | parcial | D4 | Existe como bloque/sección de contenido, no como componente dedicado ni clase `.campus`. |
+| `.telon*` (13) | No encontrado en `src/` (búsqueda sin coincidencias de `telon`) | no | D4 | Correcto. |
+| `.phero`, `.crumbs` (05) | `src/components/layout/EncabezadoPagina.tsx:5-13`, `:20-44` (banda de encabezado, breadcrumb opcional, eyebrow, H1, descripción). `src/components/ui/Breadcrumb.tsx:4-10`, `:14-43`. Usos: p.ej. `src/pages/CarrerasPage.tsx:25`, `src/pages/NoticiasPage.tsx:116,135`, `src/pages/FaqPage.tsx:58`, `src/pages/InstitucionalPage.tsx:71`, `src/pages/EstudiantesPage.tsx:67`, `src/pages/DocentesPage.tsx:55`, `src/pages/TutoriasPage.tsx:8`, `src/pages/IngresantesPage.tsx:42`, `src/pages/ContactoPage.tsx:38` | sí | D5 | Correcto como equivalentes funcionales dedicados (`EncabezadoPagina`/`Breadcrumb`), sin clases `.phero/.crumbs`. |
+| `.subnav`, `.bloque`, `.bh` (05) | Estructura de secciones/bloques en páginas internas: `src/pages/InstitucionalPage.tsx:84-223` (`<section>` + bloques), `src/pages/EstudiantesPage.tsx:88-182`, `src/pages/IngresantesPage.tsx:68-137`, `src/pages/DocentesPage.tsx:69-201`, `src/pages/TutoriasPage.tsx:23-105` | parcial | D5 | No hay subnavegación interna `.subnav` ni componentes/patrón `.bloque/.bh` dedicados en `src/` (búsqueda sin clases); sí hay secciones de contenido equivalentes. |
+| `.faq`, `.fq`, `.ftabs` (06) | Acordeón: `src/components/ui/FaqAcordeon.tsx:16-23`, `:21-75`. Página con tabs/filtro: `src/pages/FaqPage.tsx:16-20` (segmentos), `:71` (`<Tabs ...>`), `:86` (`<FaqAcordeon ...>`). Componente de pestañas en repo: `src/components/ui/Tabs.tsx` | sí | D5 | Equivalente funcional: `FaqAcordeon` + `Tabs` (ftabs) + `FaqPage`. Sin clases `.faq/.fq/.ftabs`. |
+| `.cd-hero`, `.facts`, `.toc`, `.plan`, `.yr`, `.mat`, `.dl` (07) | Detalle: `src/pages/CarreraDetallePage.tsx:97-118` (hero/encabezado de ficha), `:122-149` (presentación), `:160-181` (“Datos oficiales” tipo ficha/facts en `<dl>`), `:215-258` (plan de estudios/descarga), `:347-366` (TOC lateral “En esta carrera”). Académico: `src/components/ui/ContenidoAcademico.tsx:15-55` (materias en tabla), `:57-72` (cuerpo docente) | parcial | D5 | No hay clases/componentes homónimos; la ficha existe repartida entre `CarreraDetallePage` y `ContenidoAcademico` con estructura equivalente parcial. |
+| `.cal` (07) | Calendario en `src/pages/EstudiantesPage.tsx:14-62` (datos), `:88-164` (sección + `<table>` “Calendario académico” con filas destacadas) | parcial | D5 | Existe como contenido/tabla dentro de la página, no como componente dedicado `.cal`. |
+| `.tut`, `.mailbox`, `.copy` (08) | `src/pages/TutoriasPage.tsx:23-50` (presentación), `:56-88` (contacto con equipo, correo `ENLACE_CORREO_TUTORIAS`), `:96-104` (datos institucionales) | parcial | D5 | Contenido presente en la página, pero sin estructura/componentes `.tut/.mailbox/.copy` ni acción de copiado. |
+| `.apto` (90) | No encontrado en `src/pages/DocentesPage.tsx` ni en `src/` (búsqueda “Apto Médico/apto” sin coincidencias funcionales en UI) | no | D5 | No hay sección/bloque “Apto Médico” implementado. |
+| `.rtable`, `.empty`, `.alerta`, `.pager`, `.form` (10) | Tabla admin: `src/components/ui/TablaAdmin.tsx:26-63`. Vacío/error/carga/alertas de estado: `src/components/ui/Estado.tsx:23-98`, `:113-138`. Paginación: `src/components/ui/Paginacion.tsx:11-60`. Formularios/campos: `src/components/ui/FormField.tsx:27-118` y usos (p.ej. `src/pages/AdminCrudPanel.tsx:138-187`, `src/pages/AdminLoginPage.tsx:121-143`) | sí | D5 | Componentes dedicados equivalentes a la intención (`TablaAdmin`, `Estado`, `Paginacion`, `FormField`), sin clases `.rtable/.empty/.alerta/.pager/.form`. |
+| `.toast` (10) | `src/components/ui/Toast.tsx:6-18`, `:24-50` | sí | D5 | Correcto. |
 
 ## Anexo B · Valores extraídos del artefacto
 
