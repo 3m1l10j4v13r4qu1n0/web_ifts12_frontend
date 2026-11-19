@@ -22,8 +22,8 @@ Las fichas de D2 en adelante se detallan al cerrar D1, con lo que se aprenda en 
 
 | ID | Ficha | Fase | Depende de | Estado | Rama / PR |
 |---|---|---|---|---|---|
-| D0.1 | Decisiones de diseño y enmienda del contrato visual | D0 | — | pendiente | — |
-| D0.2 | Referencia visual dentro del repo | D0 | — | pendiente | — |
+| D0.1 | Decisiones de diseño y enmienda del contrato visual | D0 | — | hecha (19/11) | — |
+| D0.2 | Referencia visual dentro del repo | D0 | — | hecha (19/11) | — |
 | D0.3 | Mapa de clases del build a componentes del repo | D0 | D0.2 | pendiente | — |
 | D0.4 | Línea base del sitio actual | D0 | — | pendiente | — |
 | D1.1 | Paleta en el `@theme` | D1 | D0.1 | pendiente | — |
@@ -50,31 +50,29 @@ Las fichas de D2 en adelante se detallan al cerrar D1, con lo que se aprenda en 
   ficha (completar la columna «Decisión»).
 - **Quién decide:** el usuario. OpenCode redacta; no elige.
 
-**Decisiones a tomar** (la recomendación es una propuesta, no una decisión):
+**Decisiones** (tomadas por el usuario el 19/11/2026; la recomendación era una propuesta, no
+una decisión):
 
 | # | Tema | Opciones | Recomendación | Decisión |
 |---|---|---|---|---|
-| 1 | Tipografías (ART-08) | Tres familias del artefacto / Source Sans 3 sola | Tres familias: es el diseño aprobado | ⏳ |
-| 2 | Paleta | Marino, azul y celestes del artefacto / acento único actual | Paleta del artefacto, con los límites de contraste de D1.1 | ⏳ |
-| 3 | Color por carrera y por página | Sí (como el artefacto) / un solo color | Sí, con los valores del Anexo B | ⏳ |
-| 4 | Telón: frecuencia | En cada visita a Inicio / una vez por sesión | Una vez por sesión: quien vuelve a Inicio no espera de nuevo | ⏳ |
-| 5 | Ondas que quedan en el artefacto | El borde inferior del telón y la onda al pie de cada tarjeta de carrera son curvas | Cambiar ambas por líneas rectas o quitarlas (Edith pidió líneas) | ⏳ |
-| 6 | Esferas de la portada | Son **enlaces** que rotan entre destacados (turno de una carrera, modalidad, Tutoría, última novedad) / esferas solo decorativas | Enlaces **sin rotación automática** (cada esfera fija a un destino), porque la rotación sin botón de pausa choca con WCAG 2.2.2 y suma enlaces nuevos (excepción a CA-07-01) | ⏳ |
-| 7 | Insignia UPCN flotante en la portada | Mantener / quitar | Mantener, sin texto agregado (el logo ya está en el pie) | ⏳ |
-| 8 | Buscador | Ventana flotante con Ctrl+K (artefacto) / desplegable actual | Ventana flotante que reusa la lógica de `BuscadorGlobal` y el enlace a `/buscar` | ⏳ |
-| 9 | Fuentes | Google Fonts (artefacto) / archivos propios en `public/fonts` | Archivos propios: no depende de un tercero, no expone datos de visitantes y anda aunque Google esté bloqueado | ⏳ |
-| 10 | Botón «Administración» en el pie del artefacto | — | No se trae: rige I12 (panel solo por URL), ART-16 | ⏳ |
+| 1 | Tipografías (ART-08) | Tres familias del artefacto / Source Sans 3 sola | Tres familias: es el diseño aprobado | **Tres familias** (confirma lo que ya dice el README): Plus Jakarta Sans en títulos, Source Sans 3 en texto y JetBrains Mono en etiquetas. |
+| 2 | Paleta | Marino, azul y celestes del artefacto / acento único actual | Paleta del artefacto, con los límites de contraste de D1.1 | **Paleta del artefacto**, con los límites de contraste de CA-07-03 y los valores del Anexo B.1. |
+| 3 | Color por carrera y por página | Sí (como el artefacto) / un solo color | Sí, con los valores del Anexo B | **Sí**, con los valores del Anexo B.3. |
+| 4 | Telón: frecuencia | En cada visita a Inicio / una vez por sesión | Una vez por sesión: quien vuelve a Inicio no espera de nuevo | **Una vez por sesión** (decisión del usuario, 19/11/2026). Siempre solo en Inicio y ≤ 2,5 s (CA-07-06). |
+| 5 | Ondas que quedan en el artefacto | El borde inferior del telón y la onda al pie de cada tarjeta de carrera son curvas | Cambiar ambas por líneas rectas o quitarlas (Edith pidió líneas) | **Quitar** (decisión del usuario, 19/11/2026): ni curva al pie del telón ni onda al pie de las tarjetas; se reemplazan por líneas rectas (CA-07-09). |
+| 6 | Esferas de la portada | Son **enlaces** que rotan entre destacados (turno de una carrera, modalidad, Tutoría, última novedad) / esferas solo decorativas | Enlaces **sin rotación automática** (cada esfera fija a un destino), porque la rotación sin botón de pausa choca con WCAG 2.2.2 y suma enlaces nuevos (excepción a CA-07-01) | **Enlaces con prioridad sobre la decoración** (decisión del usuario, 19/11/2026): cada esfera apunta a un destino fijo, sin rotación automática. |
+| 7 | Insignia UPCN flotante en la portada | Mantener / quitar | Mantener, sin texto agregado (el logo ya está en el pie) | **Quitar** (decisión condicionada del usuario, 19/11/2026): se cumple «si choca con CA-07-01», porque hoy UPCN solo está en el pie (`src/components/layout/Footer.tsx:77`) y la insignia en la Home sería contenido nuevo (ART-10). El logo del pie se mantiene. |
+| 8 | Buscador | Ventana flotante con Ctrl+K (artefacto) / desplegable actual | Ventana flotante que reusa la lógica de `BuscadorGlobal` y el enlace a `/buscar` | **Reutilizar la lógica actual** (decisión del usuario, 19/11/2026): ventana flotante con Ctrl+K sobre `BuscadorGlobal`, no la del build. |
+| 9 | Fuentes | Google Fonts (artefacto) / archivos propios en `public/fonts` | Archivos propios: no depende de un tercero, no expone datos de visitantes y anda aunque Google esté bloqueado | **Archivos propios en `public/fonts`** (decisión del usuario, 19/11/2026), sin dependencias npm de ejecución (CA-07-10). |
+| 10 | Botón «Administración» en el pie del artefacto | — | No se trae: rige I12 (panel solo por URL), ART-16 | **Traerlo igual** (decisión del usuario, 19/11/2026): enmiende la decisión 22/10 (I12) de panel solo por URL. Se implementa en D3 (pie) y queda registrado como excepción a CA-07-01. |
 
-**Texto propuesto para el contrato** (OpenCode lo adapta a las decisiones tomadas):
+**Decisiones registradas el 19/11/2026 por el usuario.** Las filas 1 a 3 confirman lo que el
+README ya daba por decidido; las demás son decisiones nuevas. La fila 10 enmiende la decisión
+22/10 (I12) y por eso ART-16 deja de estar abierto cuando se implemente el pie.
 
-> ## Enmienda 2026-11-19 — Piel visual v2 (HU-07)
->
-> El Figma v2 sigue siendo la referencia de **estructura, breakpoints (768/1024), estados y
-> componentes**. La **piel** (paleta, tipografías, sombras, radios y movimiento) pasa a ser la
-> del artefacto «IFTS N.º 12 · Vista previa v2» (versión `1795021175-002d`), aprobada por el
-> usuario el `<fecha>`. Reemplaza la regla de familia única Source Sans 3 y la de acento único
-> 90/10. Decisiones: `<lista de la tabla de D0.1>`. Referencia extraída en
-> `documentacion/referencia_visual_v2/`. Especificación: `docs/04_user_stories/HU-07/`.
+**Enmienda aplicada:** `docs/01_global/figma_v2_contrato_visual.md`, sección «Enmienda
+2026-11-19 — Piel visual v2 (HU-07)», con las 10 decisiones de arriba. No se duplica acá el
+texto del contrato (regla de fuente única).
 
 - **Listo cuando:** la tabla tiene las 10 decisiones tomadas, la enmienda está en el contrato
   con fecha, y `logsayer check` y `logsayer memory index` corren en verde.

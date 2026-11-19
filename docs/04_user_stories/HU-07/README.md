@@ -72,8 +72,9 @@ Para que la auditoría no lea estos cambios como desvíos:
   (líneas, esferas, anillos, brillos, telón) recibe foco ni se anuncia: lleva
   `aria-hidden="true"` y no está en el orden de tabulación.
 - **CA-07-06 · Telón de entrada.** Dado que entro al sitio por Inicio, cuando se carga la
-  página, entonces el telón dura **2,5 s o menos** y después el contenido queda usable. Si
-  entro por un enlace directo a otra ruta, entonces el telón **no** aparece.
+  página, entonces el telón aparece **una vez por sesión**, dura **2,5 s o menos** y después el
+  contenido queda usable. Si entro por un enlace directo a otra ruta, entonces el telón **no**
+  aparece.
 - **CA-07-07 · Medidas del contrato.** Dado que el contrato fija medidas, cuando mido a
   1440, 1024, 768 y 375 px, entonces:
   - el H1 mide como máximo 48 px en escritorio y 32 px en celular;
@@ -101,8 +102,7 @@ Para que la auditoría no lea estos cambios como desvíos:
 
 - ⏳ Visto bueno del instituto (Edith) sobre la paleta y el telón; la decisión de diseño es
   del usuario y queda registrada en la ficha D0.1.
-- ⏳ Decidir si el telón aparece **una vez por sesión** o en cada visita a Inicio
-  (ficha D0.1).
+- ✅ Frecuencia del telón decidida el 19/11/2026: **una vez por sesión** (ficha D0.1).
 - ⏳ Realineación del Figma v2 con la piel nueva, por UX/UI (no bloquea el código).
 
 ## Specification by Example
